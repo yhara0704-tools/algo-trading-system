@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ALGO TRADING TERMINAL</title>
+  <link rel="stylesheet" href="/static/css/terminal.css">
+  <!-- Chart.js + date adapter -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.6/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3.0.0/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+</head>
+<body>
+<div id="app">
+
+  <!-- ── HEADER ─────────────────────────────────────────────────────────── -->
+  <header id="header">
+    <div id="logo">▶ ALGO TERMINAL<span class="blink">_</span></div>
+
+    <div id="ticker-tape">
+      <div id="ticker-inner">
+        <span class="ticker-item">
+          <span class="ticker-sym">BTC</span>
+          <span class="ticker-price">—</span>
+        </span>
+      </div>
+    </div>
+
+    <div id="conn-status" class="conn-status connecting">○ CONNECTING</div>
+  </header>
+
+  <!-- ── LEFT: WATCHLIST ────────────────────────────────────────────────── -->
+  <aside id="left-panel">
+    <div class="panel-title">WATCHLIST</div>
+    <div id="watchlist"></div>
+  </aside>
+
+  <!-- ── MAIN PANEL ─────────────────────────────────────────────────────── -->
+  <main id="main-panel">
+
+    <!-- Quote bar -->
+    <div id="quote-bar">
+      <span id="quote-symbol">BTC-USD</span>
+      <span id="quote-price" data-price="0">—</span>
+      <span id="quote-change" class="quote-change">—</span>
+
+      <div style="flex:1"></div>
+
+      <div class="quote-stat">
+        <span class="label">BID</span>
+        <span class="value" id="quote-bid">—</span>
+      </div>
+      <div class="quote-stat">
+        <span class="label">ASK</span>
+        <span class="value" id="quote-ask">—</span>
+      </div>
+      <div class="quote-stat">
+        <span class="label">24H VOL</span>
+        <span class="value" id="quote-vol">—</span>
+      </div>
+      <div class="quote-stat">
+        <span class="label">SOURCE</span>
+        <span class="value" style="color:#4a6a4a">COINBASE</span>
+      </div>
+    </div>
+
+    <!-- Chart area -->
+    <div id="chart-area">
+      <div id="chart-controls">
+        <span style="color:#4a6a4a;font-size:10px;margin-right:4px;">INTERVAL:</span>
+        <button class="ctrl-btn" data-interval="1m">1m</button>
+        <button class="ctrl-btn active" data-interval="5m">5m</button>
+        <button class="ctrl-btn" data-interval="15m">15m</button>
+        <button class="ctrl-btn" data-interval="1h">1h</button>
+        <button class="ctrl-btn" data-interval="1d">1D</button>
+      </div>
+      <canvas id="main-chart"></canvas>
+    </div>
+
+    <!-- Spread panel -->
+    <div id="spread-panel">
+
+      <!-- Spread chart -->
+      <div class="spread-section">
+        <div class="panel-title">COINBASE vs POLYMARKET 5-MIN SPREAD</div>
+        <canvas id="spread-chart"></canvas>
+      </div>
+
+      <!-- Spread stats -->
+      <div class="spread-section">
+        <div class="panel-title">SPREAD ANALYSIS</div>
+
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+          <span id="signal-badge" class="signal-badge signal-neutral">● NEUTRAL 0%</span>
+        </div>
+
+        <div class="spread-stats">
+          <div class="stat-row">
+            <span class="stat-label">Coinbase Spot</span>
+            <span class="stat-value" id="stat-coinbase">—</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">PM Implied</span>
+            <span class="stat-value" id="stat-implied">—</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Spread $</span>
+            <span class="stat-value" id="stat-spread-usd">—</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Spread %</span>
+            <span class="stat-value" id="stat-spread-pct">—</span>
+          </div>
+        </div>
+
+        <div style="margin-top:6px;font-size:10px;color:#4a6a4a;line-height:1.6;">
+          Signal: LONG when PM predicts ABOVE spot (spread &lt; -0.3%)<br>
+          Signal: SHORT when PM predicts BELOW spot (spread &gt; +0.3%)
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ── RIGHT PANEL ─────────────────────────────────────────────────────── -->
+  <aside id="right-panel">
+
+    <!-- Polymarket BTC prediction markets -->
+    <div id="polymarket-panel">
+      <div class="panel-title">POLYMARKET — BTC PREDICTIONS</div>
+      <div id="pm-list">
+        <div class="pm-market" style="color:#4a6a4a;font-size:10px;">Loading...</div>
+      </div>
+    </div>
+
+    <!-- Event log -->
+    <div id="log-panel">
+      <div class="panel-title">EVENT LOG</div>
+      <div id="log-list"></div>
+    </div>
+
+  </aside>
+
+  <!-- ── FOOTER ──────────────────────────────────────────────────────────── -->
+  <footer id="footer">
+    <span>ALGO TRADING TERMINAL v1.0</span>
+    <span class="sep">|</span>
+    <span id="footer-clock">—</span>
+    <span class="sep">|</span>
+    <span>FEEDS: COINBASE WS + POLYMARKET + YFINANCE</span>
+    <span class="sep">|</span>
+    <span>ASSETS: CRYPTO / FX / FUTURES / JP STOCKS</span>
+    <div style="flex:1"></div>
+    <span style="color:#4a6a4a">NOT FINANCIAL ADVICE</span>
+  </footer>
+
+</div>
+
+<script src="/static/js/app.js"></script>
+</body>
+</html>
