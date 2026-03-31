@@ -248,12 +248,12 @@ async def _btc_fast_loop() -> None:
                         summary["best_daily_jpy"], summary["best_strategy"])
         except Exception as exc:
             logger.error("BTC loop error: %s", exc)
-        await asyncio.sleep(10 * 60)  # 10分ごと
+        await asyncio.sleep(30 * 60)  # 30分ごと（JP優先のため緩和）
 
 
 async def _jp_slow_loop() -> None:
-    """JP株スクリーニング + バックテストのスローサイクル — 起動2分後に開始、以降60分ごと。
-    yfinanceが遅いため、JP株は頻繁に回しても意味が薄い。
+    """JP株スクリーニング + バックテストのサイクル — 起動2分後に開始、以降15分ごと。
+    J-Quants有料プラン（5分足）により高頻度化。
     期間ローテーション: 14→30→60 日
     """
     await asyncio.sleep(2 * 60)  # 2分後に開始（BTCが先に動いてから）
@@ -276,7 +276,7 @@ async def _jp_slow_loop() -> None:
             get_kb().save()
         except Exception as exc:
             logger.error("JP loop error: %s", exc)
-        await asyncio.sleep(60 * 60)  # 60分ごと
+        await asyncio.sleep(15 * 60)  # 15分ごと（J-Quants有料プラン）
 
 
 def _build_lab_summary(results: list[dict], pdca: dict) -> dict:

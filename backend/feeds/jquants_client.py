@@ -80,6 +80,43 @@ async def get_daily_quotes_df(symbol: str, days: int = 60):
         return None
 
 
+async def get_5min_quotes_df(symbol: str, days: int = 30):
+    """5分足OHLCVをpandas DataFrameで返す。
+
+    Returns:
+        DataFrame with columns: open, high, low, close, volume
+        index: DatetimeIndex (Asia/Tokyo)
+    """
+    import asyncio
+    import pandas as pd
+    from datetime import date, timedelta
+
+    code = _normalize_code(symbol)
+    loop = asyncio.get_event_loop()
+
+    def _fetch():
+        cli = _get_client()
+        today = date.today()
+        from_date = (today - timedelta(days=days)).strftime("%Y%m%d")
+        to_date = today.strftime("%Y%m%d")
+        df = cli.get_eq_bars_5minute(code=code, from_yyyymmdd=from_date, to_yyyymmdd=to_date)
+        if df is None or df.empty:
+            return None
+        df = df.rename(columns={"O": "open", "H": "high", "L": "low", "C": "close", "Vo": "volume"})
+        df["datetime"] = pd.to_datetime(df["Date"].astype(str) + " " + df["Time"].astype(str))
+        df = df.set_index("datetime")
+        df.index = df.index.tz_localize("Asia/Tokyo")
+        return df[["open", "high", "low", "close", "volume"]].sort_index()
+
+    try:
+        async with _get_semaphore():
+            await asyncio.sleep(0.2)
+            return await loop.run_in_executor(None, _fetch)
+    except Exception as e:
+        logger.warning("J-Quants 5min fetch failed for %s: %s", symbol, e)
+        return None
+
+
 async def get_stock_list() -> list[dict]:
     """上場銘柄マスタを返す。"""
     import asyncio

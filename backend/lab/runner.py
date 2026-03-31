@@ -189,6 +189,14 @@ def _yf_fetch(symbol: str, interval: str, days: int) -> pd.DataFrame | None:
 async def fetch_ohlcv(symbol: str, interval: str, days: int) -> pd.DataFrame:
     if symbol in _SYMBOL_MAP or symbol.endswith("-USD"):
         return await _fetch_binance_ohlcv(symbol, interval, days)
+    # JP株: J-Quants有料プランで5分足取得（yfinanceフォールバック付き）
+    if interval == "5m":
+        from backend.feeds.jquants_client import get_5min_quotes_df, is_available
+        if is_available():
+            df = await get_5min_quotes_df(symbol, days=days)
+            if df is not None and not df.empty:
+                return df
+            logger.warning("J-Quants 5min empty for %s, falling back to yfinance", symbol)
     return await _fetch_yfinance_ohlcv(symbol, interval, days)
 
 
