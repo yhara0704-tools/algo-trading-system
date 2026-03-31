@@ -61,6 +61,7 @@ class BacktestResult:
     gross_loss_jpy:    float = 0.0   # 総損失（負けトレード合計、負値）JPY/日
     avg_win_jpy:       float = 0.0   # 平均利益/トレード (JPY)
     avg_loss_jpy:      float = 0.0   # 平均損失/トレード (JPY, 負値)
+    days_tested:       int   = 0     # バックテスト期間（日数）
     score:             float = 0.0   # composite score for PDCA ranking
     # サブセッション統計: [{day, slot_end, reason, pnl_pct}]
     subsession_stats:  list  = field(default_factory=list)
@@ -313,6 +314,7 @@ def _compute_metrics(result: BacktestResult, starting_cash: float,
 
     # Daily P&L
     days = max((df.index[-1] - df.index[0]).days, 1)
+    result.days_tested = days
     total_pnl_usd = sum(pnls)
     result.daily_pnl_usd = total_pnl_usd / days
     result.daily_pnl_jpy = result.daily_pnl_usd * usd_jpy
