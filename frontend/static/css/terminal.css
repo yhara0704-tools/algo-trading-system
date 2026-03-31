@@ -256,9 +256,80 @@ body::before {
 #right-panel {
   border-left: 1px solid var(--bg-border);
   display: grid;
-  grid-template-rows: 1fr 1fr;
+  grid-template-rows: auto 1fr 1fr;
   overflow: hidden;
 }
+
+/* ── Trading Panel ── */
+#trading-panel {
+  border-bottom: 1px solid var(--bg-border);
+  overflow-y: auto;
+  padding-bottom: 4px;
+}
+#account-summary {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  padding: 4px 10px;
+  gap: 4px;
+  margin-bottom: 2px;
+}
+.trade-stat-row { display: flex; flex-direction: column; }
+.trade-label { font-size: 9px; color: var(--text-dim); letter-spacing: 1px; }
+.trade-value { font-size: 12px; color: var(--text); }
+.trade-value.up   { color: var(--green); }
+.trade-value.down { color: var(--red); }
+
+#order-entry {
+  padding: 4px 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 2px;
+}
+#trade-symbol-label { color: var(--green); font-size: 11px; min-width: 58px; }
+#trade-qty {
+  width: 72px;
+  background: var(--bg-panel);
+  border: 1px solid var(--bg-border);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 11px;
+  padding: 2px 4px;
+}
+#trade-qty:focus { outline: none; border-color: var(--green-dim); }
+#order-btns { display: flex; gap: 4px; }
+.trade-btn {
+  font-family: var(--font);
+  font-size: 11px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  padding: 3px 10px;
+  border: 1px solid;
+  cursor: pointer;
+  transition: background 0.1s;
+}
+.trade-buy  { color: var(--green); border-color: var(--green); background: rgba(0,255,65,0.08); }
+.trade-sell { color: var(--red);   border-color: var(--red);   background: rgba(255,51,51,0.08); }
+.trade-buy:hover  { background: rgba(0,255,65,0.22); }
+.trade-sell:hover { background: rgba(255,51,51,0.22); }
+.trade-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.position-row, .order-row {
+  padding: 2px 10px;
+  font-size: 10px;
+  border-bottom: 1px solid var(--bg-border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 4px;
+}
+.pos-sym { color: var(--green); font-weight: bold; min-width: 55px; }
+.pos-qty { color: var(--text-dim); }
+.pos-pnl.up   { color: var(--green); }
+.pos-pnl.down { color: var(--red); }
+.ord-buy  { color: var(--green); }
+.ord-sell { color: var(--red); }
+.ord-dim  { color: var(--text-dim); }
 
 /* ── Order book style spread table ── */
 #polymarket-panel, #log-panel {

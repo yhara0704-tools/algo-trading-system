@@ -26,6 +26,11 @@ const state = {
     spread: null,
   },
   chartInterval: '5m',
+  trading: {
+    account:   { cash: 100000, equity: 100000, starting_cash: 100000 },
+    positions: [],
+    orders:    [],
+  },
 };
 
 // ── Catalogue (from server, cached) ───────────────────────────────────────────
@@ -67,24 +72,14 @@ function connectWS() {
 
 function handleMessage(msg) {
   switch (msg.type) {
-    case 'init':
-      handleInit(msg);
-      break;
-    case 'tick':
-      handleTick(msg);
-      break;
-    case 'spread':
-      handleSpread(msg);
-      break;
-    case 'polymarket':
-      handlePolymarket(msg);
-      break;
-    case 'ping':
-      // silently handle keep-alive
-      break;
-    case 'ohlcv':
-      handleOhlcv(msg);
-      break;
+    case 'init':        handleInit(msg); break;
+    case 'tick':        handleTick(msg); break;
+    case 'spread':      handleSpread(msg); break;
+    case 'polymarket':  handlePolymarket(msg); break;
+    case 'ohlcv':       handleOhlcv(msg); break;
+    case 'trade_update': handleTradeUpdate(msg); break;
+    case 'lab_report':   handleLabReport(msg); break;
+    case 'ping': break;
   }
 }
 
@@ -145,7 +140,8 @@ async function loadCatalogue() {
 
 async function loadOhlcv(symbol) {
   const interval = state.chartInterval;
-  const period = interval === '1m' ? '1d' : interval === '5m' ? '5d' : '1mo';
+  const periodMap = { '1m': '1d', '5m': '5d', '15m': '1mo', '1h': '1mo', '1d': '1mo' };
+  const period = periodMap[interval] || '5d';
   try {
     const res = await fetch(`${API}/ohlcv/${encodeURIComponent(symbol)}?period=${period}&interval=${interval}`);
     const data = await res.json();
@@ -347,105 +343,116 @@ function updateTickerTape(data) {
   `;
 }
 
-// ── Render: Main chart (Chart.js candlestick) ─────────────────────────────────
+// ── Render: Main chart (Lightweight Charts candlestick) ───────────────────────
 function renderMainChart() {
-  const canvas = document.getElementById('main-chart');
-  if (!canvas) return;
+  const container = document.getElementById('main-chart');
+  if (!container) return;
 
   const candles = state.candles;
   if (!candles.length) return;
 
+  // Destroy previous chart
   if (state.charts.main) {
-    state.charts.main.destroy();
+    state.charts.main.remove();
+    state.charts.main = null;
+    container.innerHTML = '';
   }
 
-  const labels = candles.map(c => new Date(c.time));
-  const closes = candles.map(c => c.close);
-  const highs  = candles.map(c => c.high);
-  const lows   = candles.map(c => c.low);
-  const opens  = candles.map(c => c.open);
-  const volumes = candles.map(c => c.volume || 0);
-
-  // Color each candle
-  const candleColors = candles.map(c => c.close >= c.open ? '#00ff41' : '#ff3333');
-  const candleColorsDim = candles.map(c => c.close >= c.open ? '#005510' : '#550000');
-
-  state.charts.main = new Chart(canvas, {
-    type: 'bar',
-    data: {
-      labels,
-      datasets: [
-        {
-          label: 'Close',
-          data: closes,
-          type: 'line',
-          borderColor: '#00cc33',
-          borderWidth: 1.5,
-          pointRadius: 0,
-          tension: 0.1,
-          yAxisID: 'y',
-          order: 0,
-        },
-        {
-          label: 'Volume',
-          data: volumes,
-          backgroundColor: candles.map(c => c.close >= c.open ? 'rgba(0,255,65,0.15)' : 'rgba(255,51,51,0.15)'),
-          yAxisID: 'y2',
-          order: 1,
-        }
-      ],
+  const chart = LightweightCharts.createChart(container, {
+    width:  container.clientWidth,
+    height: container.clientHeight || 320,
+    layout: {
+      background: { color: '#0d1410' },
+      textColor:  '#4a6a4a',
+      fontFamily: 'Courier New',
+      fontSize:   11,
     },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      animation: false,
-      interaction: { intersect: false, mode: 'index' },
-      plugins: {
-        legend: { display: false },
-        tooltip: {
-          backgroundColor: '#0d1410',
-          borderColor: '#1a2e1a',
-          borderWidth: 1,
-          titleColor: '#00ff41',
-          bodyColor: '#c0e0c0',
-          callbacks: {
-            title: (items) => new Date(items[0].parsed.x).toLocaleString('ja-JP'),
-            label: (item) => {
-              const i = item.dataIndex;
-              const c = candles[i];
-              if (!c) return '';
-              return [
-                `O: ${fmtPrice(c.open)}`,
-                `H: ${fmtPrice(c.high)}`,
-                `L: ${fmtPrice(c.low)}`,
-                `C: ${fmtPrice(c.close)}`,
-                `V: ${fmtVolume(c.volume || 0)}`,
-              ];
-            }
-          }
-        }
-      },
-      scales: {
-        x: {
-          type: 'time',
-          time: { displayFormats: { minute: 'HH:mm', hour: 'MM/dd HH:mm' } },
-          ticks: { color: '#4a6a4a', maxTicksLimit: 8, font: { family: 'Courier New', size: 10 } },
-          grid:  { color: '#0d1a0d', borderColor: '#1a2e1a' },
-        },
-        y: {
-          position: 'right',
-          ticks: { color: '#4a6a4a', font: { family: 'Courier New', size: 10 },
-            callback: v => fmtPrice(v) },
-          grid: { color: '#0d1a0d', borderColor: '#1a2e1a' },
-        },
-        y2: {
-          position: 'left',
-          display: false,
-          max: Math.max(...volumes) * 4,
-        }
-      }
-    }
+    grid: {
+      vertLines: { color: '#0d1a0d' },
+      horzLines: { color: '#0d1a0d' },
+    },
+    crosshair: {
+      mode: LightweightCharts.CrosshairMode.Normal,
+      vertLine: { color: '#4a6a4a', labelBackgroundColor: '#1a2e1a' },
+      horzLine: { color: '#4a6a4a', labelBackgroundColor: '#1a2e1a' },
+    },
+    rightPriceScale: {
+      borderColor: '#1a2e1a',
+      textColor:   '#4a6a4a',
+    },
+    timeScale: {
+      borderColor:     '#1a2e1a',
+      timeVisible:     true,
+      secondsVisible:  false,
+    },
   });
+
+  const candleSeries = chart.addCandlestickSeries({
+    upColor:          '#00ff41',
+    downColor:        '#ff3333',
+    borderUpColor:    '#00ff41',
+    borderDownColor:  '#ff3333',
+    wickUpColor:      '#00cc33',
+    wickDownColor:    '#cc2200',
+  });
+
+  // Lightweight Charts needs time in seconds (Unix), sorted ascending
+  const ohlcData = candles
+    .map(c => ({
+      time:  Math.floor(c.time / 1000),
+      open:  c.open,
+      high:  c.high,
+      low:   c.low,
+      close: c.close,
+    }))
+    .sort((a, b) => a.time - b.time);
+
+  candleSeries.setData(ohlcData);
+
+  // Volume histogram
+  const volSeries = chart.addHistogramSeries({
+    color:       'rgba(0,255,65,0.2)',
+    priceFormat: { type: 'volume' },
+    priceScaleId: 'vol',
+  });
+  chart.priceScale('vol').applyOptions({ scaleMargins: { top: 0.85, bottom: 0 } });
+
+  const volData = candles
+    .map(c => ({
+      time:  Math.floor(c.time / 1000),
+      value: c.volume || 0,
+      color: c.close >= c.open ? 'rgba(0,255,65,0.25)' : 'rgba(255,51,51,0.25)',
+    }))
+    .sort((a, b) => a.time - b.time);
+
+  volSeries.setData(volData);
+
+  // Set initial visible range based on interval
+  const visibleBars = { '1m': 120, '5m': 288, '15m': 192, '1h': 168, '1d': 30 };
+  const bars = visibleBars[state.chartInterval] || 288;
+  const lastTime = ohlcData[ohlcData.length - 1]?.time;
+  const intervalSec = { '1m': 60, '5m': 300, '15m': 900, '1h': 3600, '1d': 86400 };
+  const sec = intervalSec[state.chartInterval] || 300;
+  if (lastTime) {
+    chart.timeScale().setVisibleRange({
+      from: lastTime - bars * sec,
+      to:   lastTime + sec * 2,
+    });
+  } else {
+    chart.timeScale().fitContent();
+  }
+
+  // Resize observer
+  const ro = new ResizeObserver(() => {
+    chart.applyOptions({
+      width:  container.clientWidth,
+      height: container.clientHeight,
+    });
+  });
+  ro.observe(container);
+
+  state.charts.main = chart;
+  state.charts._mainRo = ro;
 }
 
 // ── Render: Spread chart ───────────────────────────────────────────────────────
@@ -573,6 +580,115 @@ function renderPolymarkets() {
   }
 }
 
+// ── Trading ────────────────────────────────────────────────────────────────────
+function handleLabReport(msg) {
+  const best = msg.best_strategy || '—';
+  const jpy  = msg.best_daily_jpy || 0;
+  const sign = jpy >= 0 ? '+' : '';
+  log('signal', `[LAB] バックテスト完了 — 最優秀: ${best} ${sign}${Math.round(jpy).toLocaleString()}円/日`);
+  (msg.strategies || []).forEach(s => {
+    if (s.status === 'done') {
+      const j = Math.round(s.daily_pnl_jpy || 0);
+      log('info', `  ${s.name}: ${j >= 0 ? '+' : ''}${j.toLocaleString()}円/日 勝率${(s.win_rate||0).toFixed(1)}%`);
+    }
+  });
+}
+
+function handleTradeUpdate(msg) {
+  if (msg.account) state.trading.account = msg.account;
+  refreshTrading();
+}
+
+async function placeOrder(side) {
+  const sym = state.selectedSymbol;
+  const qty = parseFloat(document.getElementById('trade-qty').value);
+  if (!qty || qty <= 0) return;
+
+  const btnBuy  = document.getElementById('btn-buy');
+  const btnSell = document.getElementById('btn-sell');
+  btnBuy.disabled = btnSell.disabled = true;
+
+  try {
+    const res = await fetch(`${API}/trading/order`, {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body:    JSON.stringify({ symbol: sym, side, qty }),
+    });
+    const order = await res.json();
+    if (order.status === 'filled') {
+      log('signal', `FILLED ${side.toUpperCase()} ${order.qty} ${sym} @ $${fmtPrice(order.fill_price)}`);
+    } else {
+      log('warn', `REJECTED: ${order.note || 'unknown reason'}`);
+    }
+    await refreshTrading();
+  } catch (e) {
+    log('error', `Order error: ${e.message}`);
+  } finally {
+    btnBuy.disabled = btnSell.disabled = false;
+  }
+}
+
+async function refreshTrading() {
+  try {
+    const [accRes, posRes, ordRes] = await Promise.all([
+      fetch(`${API}/trading/account`),
+      fetch(`${API}/trading/positions`),
+      fetch(`${API}/trading/orders?limit=20`),
+    ]);
+    state.trading.account   = await accRes.json();
+    state.trading.positions = (await posRes.json()).positions;
+    state.trading.orders    = (await ordRes.json()).orders;
+    renderTradingPanel();
+  } catch (e) {}
+}
+
+function renderTradingPanel() {
+  const { cash, equity, starting_cash } = state.trading.account;
+  const totalUpnl = (state.trading.positions || [])
+    .reduce((s, p) => s + (p.unrealized_pnl || 0), 0);
+  const totalPnl = equity - starting_cash;
+
+  document.getElementById('trade-cash').textContent   = '$' + fmt(cash);
+  document.getElementById('trade-equity').textContent = '$' + fmt(equity);
+
+  const upnlEl = document.getElementById('trade-upnl');
+  upnlEl.textContent  = (totalUpnl >= 0 ? '+$' : '-$') + fmt(Math.abs(totalUpnl));
+  upnlEl.className    = 'trade-value ' + (totalUpnl >= 0 ? 'up' : 'down');
+
+  // Positions
+  const posPanel = document.getElementById('positions-list');
+  posPanel.innerHTML = '';
+  if (!state.trading.positions?.length) {
+    posPanel.innerHTML = '<div class="position-row ord-dim">No open positions</div>';
+  }
+  for (const p of (state.trading.positions || [])) {
+    const pnl = p.unrealized_pnl || 0;
+    const div = document.createElement('div');
+    div.className = 'position-row';
+    div.innerHTML =
+      `<span class="pos-sym">${p.symbol.replace(/-USD$/, '')}</span>` +
+      `<span class="pos-qty">${p.qty.toFixed(4)}</span>` +
+      `<span class="ord-dim">avg $${fmtPrice(p.avg_price)}</span>` +
+      `<span class="pos-pnl ${pnl >= 0 ? 'up' : 'down'}">${pnl >= 0 ? '+' : ''}$${fmt(pnl)}</span>`;
+    posPanel.appendChild(div);
+  }
+
+  // Orders
+  const ordPanel = document.getElementById('orders-list');
+  ordPanel.innerHTML = '';
+  for (const o of (state.trading.orders || []).slice(0, 8)) {
+    const div = document.createElement('div');
+    div.className = 'order-row';
+    div.innerHTML =
+      `<span class="ord-${o.side}">${o.side.toUpperCase()}</span>` +
+      `<span class="ord-dim">${o.symbol.replace(/-USD$/, '')}</span>` +
+      `<span>${(o.qty || 0).toFixed(4)}</span>` +
+      `<span class="ord-dim">$${fmtPrice(o.fill_price)}</span>` +
+      `<span class="${o.status === 'filled' ? 'up' : 'down'}">${o.status}</span>`;
+    ordPanel.appendChild(div);
+  }
+}
+
 // ── Select symbol ──────────────────────────────────────────────────────────────
 function selectSymbol(sym) {
   state.selectedSymbol = sym;
@@ -661,18 +777,19 @@ function startClock() {
 document.addEventListener('DOMContentLoaded', async () => {
   startClock();
 
-  // Interval buttons
-  document.querySelectorAll('.ctrl-btn[data-interval]').forEach(btn => {
-    btn.addEventListener('click', () => setChartInterval(btn.dataset.interval));
-  });
+  // Trading buttons
+  document.getElementById('btn-buy') .addEventListener('click', () => placeOrder('buy'));
+  document.getElementById('btn-sell').addEventListener('click', () => placeOrder('sell'));
 
   // Initial data load
   await loadCatalogue();
   connectWS();
+  await refreshTrading();
 
   // Periodic refreshes
   setInterval(loadSpreadHistory, 30_000);
-  setInterval(loadPolymarkets, 60_000);
+  setInterval(loadPolymarkets,   60_000);
+  setInterval(refreshTrading,    15_000);
   setInterval(() => {
     const el = document.getElementById('client-count');
     if (el) el.textContent = '1';  // self

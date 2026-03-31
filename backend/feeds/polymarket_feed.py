@@ -58,15 +58,16 @@ class PolymarketFeed:
         try:
             resp = await client.get(
                 f"{_GAMMA_BASE}/markets",
-                params={"active": "true", "closed": "false", "tag_slug": "crypto", "limit": 100},
+                params={"active": "true", "closed": "false", "limit": 100},
             )
             resp.raise_for_status()
             all_markets = resp.json()
+            logger.debug("Polymarket raw response type: %s, len: %s", type(all_markets), len(all_markets) if isinstance(all_markets, list) else "N/A")
             btc_markets = [
                 m for m in all_markets
                 if isinstance(m, dict)
-                and "BTC" in m.get("question", "").upper()
-                and m.get("active") is True
+                and ("BTC" in m.get("question", "").upper() or "BITCOIN" in m.get("question", "").upper())
+                and m.get("active")
             ]
             self._markets = btc_markets[:20]
             logger.info("Polymarket: found %d BTC markets", len(self._markets))

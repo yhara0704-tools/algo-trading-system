@@ -61,12 +61,13 @@ async def get_ohlcv(
 ):
     """OHLCV candle data."""
     sym = symbol.upper()
-    # For Coinbase crypto, use in-memory ring buffer
-    if _coinbase_feed and sym in ("BTC-USD", "ETH-USD", "SOL-USD"):
-        candles = _coinbase_feed.get_ohlcv(sym, minutes=60)
+    # For crypto: always use Binance REST API for full historical data
+    if _coinbase_feed and sym in ("BTC-USD", "ETH-USD", "SOL-USD", "XRP-USD"):
+        candles = await _coinbase_feed.get_ohlcv(sym, period=period, interval=interval)
         if candles:
-            return {"symbol": sym, "candles": candles, "source": "coinbase"}
-    # yfinance for everything else
+            return {"symbol": sym, "candles": candles, "source": "binance"}
+        # fallthrough if Binance fails
+    # yfinance for everything else (FX, futures, stocks)
     if _multi_feed:
         candles = await asyncio.get_event_loop().run_in_executor(
             None, lambda: _multi_feed.get_ohlcv(sym, period=period, interval=interval)

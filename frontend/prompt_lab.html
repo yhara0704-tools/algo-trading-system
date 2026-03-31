@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PROMPT LAB — ALGO TERMINAL</title>
+  <link rel="stylesheet" href="/static/css/terminal.css">
+  <link rel="stylesheet" href="/static/css/lab.css">
+  <style>
+    #plab-header { display:flex; align-items:center; gap:16px; padding:10px 16px; border-bottom:1px solid #1a2a1a; background:#040f04; }
+    #plab-logo   { font-size:15px; color:#00ff41; font-weight:700; letter-spacing:2px; flex:1; text-align:center; }
+    #plab-grid   { display:grid; grid-template-columns:280px 1fr; gap:12px; padding:12px; height:calc(100vh - 80px); overflow:hidden; }
+    #agent-list  { overflow-y:auto; display:flex; flex-direction:column; gap:8px; }
+    #detail-panel{ overflow-y:auto; display:flex; flex-direction:column; gap:10px; }
+    .agent-card  { background:#080f08; border:1px solid #1a2a1a; border-radius:4px; padding:10px 12px; cursor:pointer; transition:border-color .15s; }
+    .agent-card:hover, .agent-card.active { border-color:#00ff41; }
+    .agent-card-name  { color:#00ff41; font-size:12px; font-weight:700; }
+    .agent-card-model { color:#4a6a4a; font-size:10px; margin-top:2px; }
+    .score-bar-wrap   { margin-top:6px; background:#0a1a0a; border-radius:2px; height:4px; }
+    .score-bar        { height:4px; background:#00ff41; border-radius:2px; transition:width .4s; }
+    .score-label      { font-size:10px; color:#4a6a4a; margin-top:3px; display:flex; justify-content:space-between; }
+    .badge-running    { background:#ff9900; color:#000; font-size:9px; padding:1px 5px; border-radius:2px; }
+    .badge-promoted   { background:#00ff41; color:#000; font-size:9px; padding:1px 5px; border-radius:2px; }
+    .section-box      { background:#080f08; border:1px solid #1a2a1a; border-radius:4px; padding:12px 14px; }
+    .section-box h3   { color:#4a6a4a; font-size:10px; letter-spacing:2px; margin:0 0 8px; }
+    .prompt-text      { color:#00c020; font-size:11px; line-height:1.6; white-space:pre-wrap; font-family:monospace; max-height:200px; overflow-y:auto; background:#040f04; padding:8px; border-radius:3px; }
+    .criteria-list    { list-style:none; padding:0; margin:0; }
+    .criteria-list li { font-size:11px; color:#6aaa6a; padding:2px 0; }
+    .criteria-list li::before { content:"✓ "; color:#4a6a4a; }
+    #run-all-btn      { background:#003000; border:1px solid #00ff41; color:#00ff41; font-size:11px; padding:6px 16px; border-radius:3px; cursor:pointer; letter-spacing:1px; }
+    #run-all-btn:hover{ background:#00ff41; color:#000; }
+    .run-agent-btn    { background:transparent; border:1px solid #4a6a4a; color:#4a6a4a; font-size:10px; padding:3px 10px; border-radius:2px; cursor:pointer; }
+    .run-agent-btn:hover{ border-color:#00ff41; color:#00ff41; }
+    #history-table    { width:100%; border-collapse:collapse; font-size:11px; }
+    #history-table th { color:#4a6a4a; text-align:left; padding:4px 8px; border-bottom:1px solid #1a2a1a; font-weight:normal; letter-spacing:1px; }
+    #history-table td { color:#6aaa6a; padding:4px 8px; border-bottom:1px solid #0a1a0a; }
+    .promoted-row td  { color:#00ff41; }
+    .comment-cell     { color:#4a6a4a; font-size:10px; max-width:200px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+    #status-bar       { display:flex; gap:16px; padding:6px 12px; background:#040f04; border-bottom:1px solid #1a2a1a; font-size:10px; color:#4a6a4a; }
+    .back-link        { color:#4a6a4a; text-decoration:none; font-size:11px; }
+    .back-link:hover  { color:#00ff41; }
+  </style>
+</head>
+<body>
+<div id="lab-app">
+
+  <header id="plab-header">
+    <a href="/" class="back-link">◀ TERMINAL</a>
+    <a href="/lab" class="back-link">⚗ LAB</a>
+    <div id="plab-logo">🔬 PROMPT LAB</div>
+    <button id="run-all-btn">▶ OPTIMIZE ALL</button>
+  </header>
+
+  <div id="status-bar">
+    <span>ANTHROPIC API: <span id="api-status" style="color:#ff4444">—</span></span>
+    <span>|</span>
+    <span>LAST RUN: <span id="last-run-time">—</span></span>
+    <span>|</span>
+    <span>NEXT AUTO: <span id="next-run-time">6h後（起動1h後に初回）</span></span>
+  </div>
+
+  <div id="plab-grid">
+
+    <!-- Left: agent cards -->
+    <div id="agent-list"></div>
+
+    <!-- Right: detail -->
+    <div id="detail-panel">
+      <div class="section-box" id="detail-header-box">
+        <h3>エージェント詳細</h3>
+        <div id="detail-name" style="color:#00ff41;font-size:14px;font-weight:700;">—</div>
+        <div id="detail-desc" style="color:#4a6a4a;font-size:11px;margin-top:4px;">—</div>
+        <div style="margin-top:8px;display:flex;gap:8px;align-items:center;">
+          <span id="detail-model" style="color:#6aaa6a;font-size:11px;">—</span>
+          <span id="detail-version" style="color:#4a6a4a;font-size:11px;"></span>
+          <button class="run-agent-btn" id="run-agent-btn" style="display:none;">▶ OPTIMIZE</button>
+        </div>
+      </div>
+
+      <div class="section-box">
+        <h3>SYSTEM PROMPT (本番)</h3>
+        <div class="prompt-text" id="detail-prompt">エージェントを選択してください</div>
+      </div>
+
+      <div class="section-box">
+        <h3>合格基準</h3>
+        <ul class="criteria-list" id="detail-criteria"></ul>
+      </div>
+
+      <div class="section-box">
+        <h3>最適化履歴</h3>
+        <div style="overflow-x:auto;">
+          <table id="history-table">
+            <thead>
+              <tr>
+                <th>時刻</th>
+                <th>初期スコア</th>
+                <th>最終スコア</th>
+                <th>昇格</th>
+                <th>バージョン</th>
+                <th>コメント</th>
+              </tr>
+            </thead>
+            <tbody id="history-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+const API = '/api/prompt-lab';
+let agents = [];
+let selectedRole = null;
+let history = [];
+
+async function fetchAgents() {
+  try {
+    const r = await fetch(`${API}/agents`);
+    agents = await r.json();
+    renderAgentList();
+    document.getElementById('api-status').textContent = 'OK';
+    document.getElementById('api-status').style.color = '#00ff41';
+    if (selectedRole) renderDetail(selectedRole);
+  } catch(e) {
+    document.getElementById('api-status').textContent = 'ERROR';
+  }
+}
+
+async function fetchHistory(role) {
+  const url = role ? `${API}/history?role=${role}` : `${API}/history`;
+  const r = await fetch(url);
+  history = await r.json();
+  renderHistory();
+}
+
+function renderAgentList() {
+  const el = document.getElementById('agent-list');
+  el.innerHTML = '';
+  for (const a of agents) {
+    const card = document.createElement('div');
+    card.className = 'agent-card' + (a.role === selectedRole ? ' active' : '');
+    card.dataset.role = a.role;
+    const pct = Math.round(a.score * 100);
+    card.innerHTML = `
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <div class="agent-card-name">${a.name}</div>
+        <div>
+          ${a.is_running ? '<span class="badge-running">RUNNING</span>' : ''}
+          ${a.promoted ? '<span class="badge-promoted">PROMOTED</span>' : ''}
+        </div>
+      </div>
+      <div class="agent-card-model">${a.model} · v${a.version}</div>
+      <div class="score-bar-wrap"><div class="score-bar" style="width:${pct}%"></div></div>
+      <div class="score-label">
+        <span>スコア</span>
+        <span>${pct > 0 ? pct + '%' : '未評価'}</span>
+      </div>`;
+    card.addEventListener('click', () => selectAgent(a.role));
+    el.appendChild(card);
+  }
+}
+
+function selectAgent(role) {
+  selectedRole = role;
+  renderAgentList();
+  renderDetail(role);
+  fetchHistory(role);
+}
+
+function renderDetail(role) {
+  const a = agents.find(x => x.role === role);
+  if (!a) return;
+
+  document.getElementById('detail-name').textContent    = a.name;
+  document.getElementById('detail-desc').textContent    = a.description;
+  document.getElementById('detail-model').textContent   = a.model;
+  document.getElementById('detail-version').textContent = `v${a.version}  score:${Math.round(a.score*100)}%`;
+  document.getElementById('detail-prompt').textContent  = a.system_prompt;
+
+  const ul = document.getElementById('detail-criteria');
+  ul.innerHTML = a.pass_criteria.map(c => `<li>${c}</li>`).join('');
+
+  const btn = document.getElementById('run-agent-btn');
+  btn.style.display = 'inline-block';
+  btn.textContent = a.is_running ? '⟳ RUNNING...' : '▶ OPTIMIZE';
+  btn.disabled    = a.is_running;
+  btn.dataset.role = role;
+}
+
+function renderHistory() {
+  const tbody = document.getElementById('history-tbody');
+  tbody.innerHTML = '';
+  const sorted = [...history].reverse();
+  for (const h of sorted.slice(0, 30)) {
+    const tr = document.createElement('tr');
+    if (h.promoted) tr.className = 'promoted-row';
+    const dt = new Date(h.timestamp * 1000).toLocaleString('ja-JP');
+    const delta = h.final_score - h.initial_score;
+    const sign  = delta >= 0 ? '+' : '';
+    tr.innerHTML = `
+      <td>${dt}</td>
+      <td>${Math.round(h.initial_score*100)}%</td>
+      <td>${Math.round(h.final_score*100)}% <span style="color:${delta>=0?'#00ff41':'#ff4444'}">(${sign}${Math.round(delta*100)}%)</span></td>
+      <td>${h.promoted ? '✓ YES' : '—'}</td>
+      <td>v${h.version}</td>
+      <td class="comment-cell">${(h.candidates[h.candidates.length-1]||{}).comment||'—'}</td>`;
+    tbody.appendChild(tr);
+  }
+  if (sorted.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="6" style="color:#4a6a4a;text-align:center;padding:20px;">まだ最適化実行なし</td></tr>';
+  }
+}
+
+// Run All
+document.getElementById('run-all-btn').addEventListener('click', async () => {
+  const btn = document.getElementById('run-all-btn');
+  btn.textContent = '⟳ RUNNING...';
+  btn.disabled = true;
+  await fetch(`${API}/run`, {method:'POST'});
+  document.getElementById('last-run-time').textContent = new Date().toLocaleTimeString('ja-JP');
+  setTimeout(() => { btn.textContent = '▶ OPTIMIZE ALL'; btn.disabled = false; }, 3000);
+  // Poll for completion
+  pollStatus();
+});
+
+// Run Agent
+document.getElementById('run-agent-btn').addEventListener('click', async (e) => {
+  const role = e.target.dataset.role;
+  if (!role) return;
+  await fetch(`${API}/run/${role}`, {method:'POST'});
+  pollStatus();
+});
+
+async function pollStatus() {
+  // Refresh every 5s for 5 minutes
+  let ticks = 60;
+  const interval = setInterval(async () => {
+    await fetchAgents();
+    ticks--;
+    const allDone = agents.every(a => !a.is_running);
+    if (allDone || ticks <= 0) {
+      clearInterval(interval);
+      if (selectedRole) fetchHistory(selectedRole);
+    }
+  }, 5000);
+}
+
+// Initial load
+fetchAgents();
+setInterval(fetchAgents, 15000);
+</script>
+</body>
+</html>

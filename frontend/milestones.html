@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>資金マイルストーン — Algo Trading</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #0d1117; color: #e6edf3; font-family: 'Segoe UI', sans-serif; padding: 20px; }
+  h1 { font-size: 1.4rem; margin-bottom: 4px; color: #58a6ff; }
+  .subtitle { font-size: 0.8rem; color: #8b949e; margin-bottom: 20px; }
+
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
+  .card { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 16px; }
+  .card h2 { font-size: 0.9rem; color: #8b949e; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+
+  .chart-wrap { position: relative; height: 300px; }
+  .chart-wrap-tall { position: relative; height: 420px; }
+
+  /* Milestone progress bars */
+  .milestone { margin-bottom: 12px; }
+  .milestone-header { display: flex; justify-content: space-between; font-size: 0.82rem; margin-bottom: 4px; }
+  .milestone-name { color: #58a6ff; font-weight: 600; }
+  .milestone-target { color: #8b949e; }
+  .bar-bg { background: #21262d; border-radius: 4px; height: 8px; overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 4px; transition: width 0.6s ease; }
+  .bar-fill.reached { background: #3fb950; }
+  .bar-fill.progress { background: #58a6ff; }
+  .bar-fill.far { background: #6e7681; }
+  .milestone-desc { font-size: 0.75rem; color: #6e7681; margin-top: 3px; }
+
+  /* Strategy table */
+  table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
+  th { color: #8b949e; font-weight: 500; padding: 6px 8px; text-align: left; border-bottom: 1px solid #21262d; }
+  td { padding: 5px 8px; border-bottom: 1px solid #21262d; }
+  tr:last-child td { border-bottom: none; }
+  .pos { color: #3fb950; } .neg { color: #f85149; } .neu { color: #8b949e; }
+  .tag { font-size: 0.7rem; padding: 2px 6px; border-radius: 10px; }
+  .tag-green { background: #1a3a2a; color: #3fb950; }
+  .tag-red   { background: #3a1a1a; color: #f85149; }
+  .tag-gray  { background: #21262d; color: #8b949e; }
+
+  /* Summary boxes */
+  .summary-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 20px; }
+  .summary-box { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 14px; text-align: center; }
+  .summary-box .label { font-size: 0.72rem; color: #8b949e; margin-bottom: 6px; }
+  .summary-box .value { font-size: 1.3rem; font-weight: 700; }
+  .summary-box .value.pos { color: #3fb950; }
+  .summary-box .value.neg { color: #f85149; }
+  .summary-box .value.neu { color: #58a6ff; }
+
+  .full-width { grid-column: 1 / -1; }
+  .last-updated { font-size: 0.72rem; color: #6e7681; text-align: right; margin-top: 8px; }
+
+  nav { display: flex; gap: 12px; margin-bottom: 20px; font-size: 0.85rem; }
+  nav a { color: #8b949e; text-decoration: none; padding: 4px 8px; border-radius: 4px; }
+  nav a:hover { color: #e6edf3; background: #21262d; }
+</style>
+</head>
+<body>
+<h1>資金マイルストーン</h1>
+<p class="subtitle">元本複利・追加入金なし | バックテスト検証履歴</p>
+
+<nav>
+  <a href="/">ダッシュボード</a>
+  <a href="/lab">Lab</a>
+  <a href="/milestones" style="color:#58a6ff">マイルストーン</a>
+  <a href="/prompt-lab">Prompt Lab</a>
+</nav>
+
+<!-- Summary boxes -->
+<div class="summary-grid" id="summaryBoxes">
+  <div class="summary-box"><div class="label">現在の資産</div><div class="value neu" id="currentCapital">—</div></div>
+  <div class="summary-box"><div class="label">初期資金</div><div class="value neu" id="initialCapital">—</div></div>
+  <div class="summary-box"><div class="label">次のマイルストーン</div><div class="value neu" id="nextMilestone">—</div></div>
+  <div class="summary-box"><div class="label">最良戦略（直近）</div><div class="value neu" id="bestStrategy">—</div></div>
+</div>
+
+<div class="grid">
+  <!-- Milestone progress -->
+  <div class="card">
+    <h2>マイルストーン達成状況</h2>
+    <div id="milestoneList">読込中...</div>
+  </div>
+
+  <!-- Capital growth chart -->
+  <div class="card">
+    <h2>資産推移（マイルストーン目標 vs 戦略実績）</h2>
+    <div class="chart-wrap">
+      <canvas id="capitalChart"></canvas>
+    </div>
+  </div>
+
+  <!-- Strategy equity curves (full width) -->
+  <div class="card full-width">
+    <h2>戦略別 資産曲線（直近バックテスト）</h2>
+    <div class="chart-wrap-tall">
+      <canvas id="equityChart"></canvas>
+    </div>
+  </div>
+
+  <!-- Strategy performance table -->
+  <div class="card full-width">
+    <h2>戦略パフォーマンス履歴</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>戦略名</th>
+          <th>時間足</th>
+          <th>取引数</th>
+          <th>勝率</th>
+          <th>日次PnL</th>
+          <th>PF</th>
+          <th>MDD</th>
+          <th>評価</th>
+        </tr>
+      </thead>
+      <tbody id="strategyTable">
+        <tr><td colspan="8" style="text-align:center;color:#6e7681">読込中...</td></tr>
+      </tbody>
+    </table>
+    <div class="last-updated" id="lastUpdated"></div>
+  </div>
+</div>
+
+<script>
+// ── Chart.js defaults ──────────────────────────────────────────────────────
+Chart.defaults.color = '#8b949e';
+Chart.defaults.borderColor = '#21262d';
+
+const PALETTE = [
+  '#58a6ff','#3fb950','#f0883e','#d2a8ff','#ffa657',
+  '#79c0ff','#56d364','#ff7b72','#b3d9ff','#e3b341'
+];
+
+let capitalChart = null;
+let equityChart  = null;
+
+// ── Milestone progress ─────────────────────────────────────────────────────
+function renderMilestones(plan, currentCapital) {
+  const container = document.getElementById('milestoneList');
+  const initial   = plan.initial_capital_jpy;
+  const milestones = plan.milestones;
+  let html = '';
+
+  for (const m of milestones) {
+    const pct     = Math.min((currentCapital - initial) / (m.target_jpy - initial) * 100, 100);
+    const reached = currentCapital >= m.target_jpy;
+    const fillClass = reached ? 'reached' : (pct > 10 ? 'progress' : 'far');
+    const pctStr  = reached ? '達成済み' : `${Math.max(0,pct).toFixed(1)}%`;
+
+    html += `
+      <div class="milestone">
+        <div class="milestone-header">
+          <span class="milestone-name">${m.name}: ${(m.target_jpy/10000).toFixed(0)}万円</span>
+          <span class="milestone-target">${pctStr} | 日次目標 ${m.daily_pnl_jpy.toLocaleString()}円</span>
+        </div>
+        <div class="bar-bg"><div class="bar-fill ${fillClass}" style="width:${Math.max(0,pct)}%"></div></div>
+        <div class="milestone-desc">${m.description}</div>
+      </div>`;
+  }
+  container.innerHTML = html;
+}
+
+// ── Capital growth projection chart ───────────────────────────────────────
+function buildCapitalChart(plan, strategies, dbHistory) {
+  const initial   = plan.initial_capital_jpy;
+  const totalDays = Math.max(365, dbHistory.length + 30);
+  const labels    = Array.from({length: totalDays + 1}, (_, i) =>
+    i === 0 ? '開始' : (i % 30 === 0 ? `${i}日` : ''));
+
+  const dailyRate  = 0.005;
+  const targetLine = Array.from({length: totalDays + 1}, (_, i) => initial * Math.pow(1 + dailyRate, i));
+  const conservLine = Array.from({length: totalDays + 1}, (_, i) => initial * Math.pow(1 + 0.002, i));
+
+  const datasets = [
+    {
+      label: '目標（0.5%/日複利）',
+      data: targetLine,
+      borderColor: '#3fb950',
+      borderDash: [6, 3],
+      borderWidth: 2,
+      pointRadius: 0,
+      fill: false,
+    },
+    {
+      label: '保守的（0.2%/日複利）',
+      data: conservLine,
+      borderColor: '#6e7681',
+      borderDash: [3, 3],
+      borderWidth: 1,
+      pointRadius: 0,
+      fill: false,
+    },
+  ];
+
+  // 実績曲線（DBの日次最良PnLを複利で積み上げ）
+  if (dbHistory.length > 0) {
+    let equity = initial;
+    const actualData = [initial];
+    for (const row of dbHistory) {
+      equity += (row.best_pnl || 0);
+      actualData.push(equity);
+    }
+    datasets.push({
+      label: '実績（最良戦略複利）',
+      data: actualData,
+      borderColor: '#f0883e',
+      borderWidth: 2.5,
+      pointRadius: 3,
+      fill: false,
+    });
+  }
+
+  if (capitalChart) capitalChart.destroy();
+  capitalChart = new Chart(document.getElementById('capitalChart'), {
+    type: 'line',
+    data: { labels, datasets },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      animation: false,
+      plugins: {
+        legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 11 } } },
+        tooltip: {
+          callbacks: {
+            label: ctx => `${ctx.dataset.label}: ¥${Math.round(ctx.raw).toLocaleString()}`,
+          }
+        }
+      },
+      scales: {
+        x: { ticks: { maxTicksLimit: 13, font: { size: 10 } } },
+        y: {
+          ticks: {
+            callback: v => `¥${(v/10000).toFixed(0)}万`,
+            font: { size: 10 },
+          }
+        }
+      }
+    }
+  });
+}
+
+// ── Strategy equity curves ─────────────────────────────────────────────────
+function buildEquityChart(results) {
+  if (!results || results.length === 0) return;
+
+  // Show top 8 strategies by score
+  const sorted = [...results]
+    .filter(r => r.equity_curve && r.equity_curve.length > 1)
+    .sort((a, b) => (b.score || 0) - (a.score || 0))
+    .slice(0, 8);
+
+  if (sorted.length === 0) return;
+
+  const maxLen = Math.max(...sorted.map(r => r.equity_curve.length));
+  const labels = Array.from({length: maxLen}, (_, i) => i);
+
+  const datasets = sorted.map((r, idx) => ({
+    label: r.strategy_name,
+    data: r.equity_curve,
+    borderColor: PALETTE[idx % PALETTE.length],
+    borderWidth: 1.5,
+    pointRadius: 0,
+    fill: false,
+    tension: 0.1,
+  }));
+
+  // Reference line at initial capital
+  const initial = sorted[0].equity_curve[0];
+  datasets.unshift({
+    label: '初期資金',
+    data: Array(maxLen).fill(initial),
+    borderColor: '#30363d',
+    borderDash: [4, 4],
+    borderWidth: 1,
+    pointRadius: 0,
+    fill: false,
+  });
+
+  if (equityChart) equityChart.destroy();
+  equityChart = new Chart(document.getElementById('equityChart'), {
+    type: 'line',
+    data: { labels, datasets },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      animation: false,
+      plugins: {
+        legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 10 } } },
+        tooltip: {
+          callbacks: {
+            label: ctx => `${ctx.dataset.label}: ¥${Math.round(ctx.raw).toLocaleString()}`
+          }
+        }
+      },
+      scales: {
+        x: { display: false },
+        y: {
+          ticks: {
+            callback: v => `¥${Math.round(v).toLocaleString()}`,
+            font: { size: 10 },
+          }
+        }
+      }
+    }
+  });
+}
+
+// ── Strategy table ─────────────────────────────────────────────────────────
+function renderStrategyTable(results) {
+  const tbody = document.getElementById('strategyTable');
+  if (!results || results.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="8" style="text-align:center;color:#6e7681">データなし</td></tr>';
+    return;
+  }
+
+  const sorted = [...results].sort((a, b) => (b.score||0) - (a.score||0));
+  let html = '';
+  for (const r of sorted) {
+    const wr   = r.win_rate || 0;
+    const dpnl = r.daily_pnl_jpy || 0;
+    const pf   = r.profit_factor || 0;
+    const mdd  = r.max_drawdown_pct || 0;
+
+    // Evaluate
+    let tag, tagClass;
+    if (dpnl >= 1000 && wr >= 50) {
+      tag = '◎ 有望'; tagClass = 'tag-green';
+    } else if (dpnl >= 0) {
+      tag = '△ 様子見'; tagClass = 'tag-gray';
+    } else {
+      tag = '✗ 要改善'; tagClass = 'tag-red';
+    }
+
+    html += `<tr>
+      <td>${r.strategy_name}</td>
+      <td>${r.interval || '—'}</td>
+      <td>${r.num_trades || 0}</td>
+      <td class="${wr>=55?'pos':wr>=45?'neu':'neg'}">${wr.toFixed(1)}%</td>
+      <td class="${dpnl>=0?'pos':'neg'}">${dpnl>=0?'+':''}${Math.round(dpnl).toLocaleString()}円</td>
+      <td class="${pf>=1.2?'pos':pf>=1?'neu':'neg'}">${pf.toFixed(2)}</td>
+      <td class="${mdd>=-5?'pos':mdd>=-10?'neu':'neg'}">${mdd.toFixed(2)}%</td>
+      <td><span class="tag ${tagClass}">${tag}</span></td>
+    </tr>`;
+  }
+  tbody.innerHTML = html;
+}
+
+// ── Main load ──────────────────────────────────────────────────────────────
+async function load() {
+  try {
+    const [planRes, resultsRes, curveRes] = await Promise.all([
+      fetch('/api/lab/capital-plan'),
+      fetch('/api/lab/results'),
+      fetch('/api/lab/history/milestone-curve'),
+    ]);
+    const plan    = await planRes.json();
+    const data    = await resultsRes.json();
+    const results = data.results || [];
+    const curve   = await curveRes.json();
+
+    // Compute current capital from best performing strategy equity
+    const done = results.filter(r => r.equity_curve && r.equity_curve.length > 0);
+    const bestResult = done.length > 0
+      ? done.reduce((a, b) => (b.score||0) > (a.score||0) ? b : a)
+      : null;
+
+    const currentCapital = bestResult
+      ? bestResult.equity_curve[bestResult.equity_curve.length - 1]
+      : plan.initial_capital_jpy;
+
+    // Summary boxes
+    document.getElementById('currentCapital').textContent =
+      `¥${Math.round(currentCapital).toLocaleString()}`;
+    document.getElementById('initialCapital').textContent =
+      `¥${plan.initial_capital_jpy.toLocaleString()}`;
+
+    const nextM = plan.milestones.find(m => currentCapital < m.target_jpy);
+    document.getElementById('nextMilestone').textContent =
+      nextM ? `${nextM.name}: ¥${(nextM.target_jpy/10000).toFixed(0)}万` : '全達成！';
+
+    document.getElementById('bestStrategy').textContent =
+      bestResult ? bestResult.strategy_name : '—';
+
+    // Render
+    renderMilestones(plan, currentCapital);
+    buildCapitalChart(plan, results, curve.history || []);
+    buildEquityChart(results);
+    renderStrategyTable(results);
+
+    document.getElementById('lastUpdated').textContent =
+      `最終更新: ${new Date().toLocaleTimeString('ja-JP')}`;
+
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+load();
+setInterval(load, 30_000);
+</script>
+</body>
+</html>
