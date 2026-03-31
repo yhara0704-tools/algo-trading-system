@@ -117,6 +117,16 @@ class SessionSummary:
     def gross_loss(self) -> float:
         return sum(t.pnl for t in self.all_trades if t.pnl <= 0)
 
+    @property
+    def avg_win(self) -> float:
+        wins = [t.pnl for t in self.all_trades if t.pnl > 0]
+        return float(sum(wins) / len(wins)) if wins else 0.0
+
+    @property
+    def avg_loss(self) -> float:
+        losses = [t.pnl for t in self.all_trades if t.pnl <= 0]
+        return float(sum(losses) / len(losses)) if losses else 0.0
+
 
 class JPLiveRunner:
     """場中リアルタイム・ペーパートレードエンジン."""
@@ -216,6 +226,8 @@ class JPLiveRunner:
             "total_pnl":      s.total_pnl,
             "gross_profit":   s.gross_profit,
             "gross_loss":     s.gross_loss,
+            "avg_win":        s.avg_win,
+            "avg_loss":       s.avg_loss,
             "num_trades":     len(s.all_trades),
             "win_rate":       s.win_rate,
             "in_cooldown":    in_cooldown,
@@ -479,6 +491,12 @@ class JPLiveRunner:
             f"📊 JP株ペーパー取引 {s.date}",
             f"損益合計: {s.total_pnl:+,.0f}円"
             f"（利益{s.gross_profit:+,.0f}円 / 損失{s.gross_loss:+,.0f}円）",
+            (
+                f"平均利益 {s.avg_win:+,.0f}円/回、平均損失 {s.avg_loss:+,.0f}円/回"
+                f" → R:R = {abs(s.avg_win / s.avg_loss):.2f}"
+                if s.avg_loss != 0 else
+                f"平均利益 {s.avg_win:+,.0f}円/回、平均損失 {s.avg_loss:+,.0f}円/回"
+            ),
             f"取引数: {len(all_trades)}件 / 勝率: {s.win_rate*100:.0f}%",
             f"サブセッション数: {len(s.subsessions)}",
         ]

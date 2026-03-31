@@ -335,19 +335,29 @@ class LabRunner:
             lines.append(f"検証戦略数: {len(done)}")
             lines.append(f"プラス戦略: {len(positive)}/{len(done)}")
             lines.append(f"【最良】{best['strategy_name']}")
+            _baw = best.get('avg_win_jpy', 0); _bal = best.get('avg_loss_jpy', 0)
+            _brr = abs(_baw / _bal) if _bal != 0 else 0
             lines.append(
                 f"  日次 {best.get('daily_pnl_jpy',0):+,.0f}円"
                 f"（利益{best.get('gross_profit_jpy',0):+,.0f}円"
                 f" / 損失{best.get('gross_loss_jpy',0):+,.0f}円）"
                 f" 勝率{best.get('win_rate',0):.1f}%"
             )
+            lines.append(
+                f"  平均利益 {_baw:+,.0f}円/回、平均損失 {_bal:+,.0f}円/回 → R:R = {_brr:.2f}"
+            )
             if worst != best:
                 lines.append(f"【最悪】{worst['strategy_name']}")
+                _waw = worst.get('avg_win_jpy', 0); _wal = worst.get('avg_loss_jpy', 0)
+                _wrr = abs(_waw / _wal) if _wal != 0 else 0
                 lines.append(
                     f"  日次 {worst.get('daily_pnl_jpy',0):+,.0f}円"
                     f"（利益{worst.get('gross_profit_jpy',0):+,.0f}円"
                     f" / 損失{worst.get('gross_loss_jpy',0):+,.0f}円）"
                     f" 勝率{worst.get('win_rate',0):.1f}%"
+                )
+                lines.append(
+                    f"  平均利益 {_waw:+,.0f}円/回、平均損失 {_wal:+,.0f}円/回 → R:R = {_wrr:.2f}"
                 )
         else:
             lines.append("検証結果なし")
@@ -365,6 +375,9 @@ class LabRunner:
                 f" / 損失{jp_session.get('gross_loss',0):+,.0f}円）"
                 f" {jp_session['num_trades']}件"
             )
+            _jaw = jp_session.get('avg_win', 0); _jal = jp_session.get('avg_loss', 0)
+            _jrr = abs(_jaw / _jal) if _jal != 0 else 0
+            lines.append(f"  平均利益 {_jaw:+,.0f}円/回、平均損失 {_jal:+,.0f}円/回 → R:R = {_jrr:.2f}")
             lines.append(f"  サブセッション: {len(jp_session.get('subsessions',[]))}回")
 
         return "\n".join(lines)
@@ -610,11 +623,14 @@ class LabRunner:
         best  = max(valid, key=lambda r: r.get("score", 0)) if valid else {}
 
         title = f"🎉 Stage {cleared} 達成！"
+        _paw = best.get('avg_win_jpy', 0); _pal = best.get('avg_loss_jpy', 0)
+        _prr = abs(_paw / _pal) if _pal != 0 else 0
         msg   = (
             f"{goal.description}\n"
             f"最優秀戦略: {best.get('strategy_name', '—')}\n"
             f"日次損益: {best.get('daily_pnl_jpy', 0):+,.0f}円/日"
             f"（利益{best.get('gross_profit_jpy',0):+,.0f}円 / 損失{best.get('gross_loss_jpy',0):+,.0f}円）\n"
+            f"平均利益 {_paw:+,.0f}円/回、平均損失 {_pal:+,.0f}円/回 → R:R = {_prr:.2f}\n"
             f"勝率: {best.get('win_rate', 0):.1f}%\n"
             f"→ 次の目標 Stage {new_stage}: "
             f"{PDCA_STAGES[min(new_stage-1, len(PDCA_STAGES)-1)].daily_pnl_jpy:,.0f}円/日"

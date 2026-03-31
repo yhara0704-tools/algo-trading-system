@@ -59,6 +59,8 @@ class BacktestResult:
     daily_pnl_usd:     float = 0.0
     gross_profit_jpy:  float = 0.0   # 総利益（勝ちトレード合計）JPY/日
     gross_loss_jpy:    float = 0.0   # 総損失（負けトレード合計、負値）JPY/日
+    avg_win_jpy:       float = 0.0   # 平均利益/トレード (JPY)
+    avg_loss_jpy:      float = 0.0   # 平均損失/トレード (JPY, 負値)
     score:             float = 0.0   # composite score for PDCA ranking
     # サブセッション統計: [{day, slot_end, reason, pnl_pct}]
     subsession_stats:  list  = field(default_factory=list)
@@ -316,6 +318,8 @@ def _compute_metrics(result: BacktestResult, starting_cash: float,
     result.daily_pnl_jpy = result.daily_pnl_usd * usd_jpy
     result.gross_profit_jpy = (sum(wins)   * usd_jpy) / days
     result.gross_loss_jpy   = (sum(losses) * usd_jpy) / days
+    result.avg_win_jpy  = float(np.mean(wins))   * usd_jpy if wins   else 0.0
+    result.avg_loss_jpy = float(np.mean(losses)) * usd_jpy if losses else 0.0
 
     # Sharpe (annualized, using daily returns)
     if len(result.equity_curve) > 2:
