@@ -186,18 +186,40 @@ def _yf_fetch(symbol: str, interval: str, days: int) -> pd.DataFrame | None:
     return df[["open","high","low","close","volume"]]
 
 
+_ohlcv_cache: dict[str, tuple[float, pd.DataFrame]] = {}  # key → (timestamp, df)
+
+def _cache_ttl(symbol: str) -> float:
+    """JP株は場中(9-15時JST)5分、それ以外30分。BTCは対象外。"""
+    import datetime
+    now = datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=9)))
+    if 9 <= now.hour < 15:
+        return 5 * 60
+    return 30 * 60
+
+
 async def fetch_ohlcv(symbol: str, interval: str, days: int) -> pd.DataFrame:
     if symbol in _SYMBOL_MAP or symbol.endswith("-USD"):
         return await _fetch_binance_ohlcv(symbol, interval, days)
-    # JP株: J-Quants有料プランで5分足取得（yfinanceフォールバック付き）
+    # JP株: キャッシュ確認
+    cache_key = f"{symbol}:{interval}:{days}"
+    cached = _ohlcv_cache.get(cache_key)
+    if cached:
+        ts, df = cached
+        if time.time() - ts < _cache_ttl(symbol):
+            return df
+    # J-Quants有料プランで5分足取得（yfinanceフォールバック付き）
     if interval == "5m":
         from backend.feeds.jquants_client import get_5min_quotes_df, is_available
         if is_available():
             df = await get_5min_quotes_df(symbol, days=days)
             if df is not None and not df.empty:
+                _ohlcv_cache[cache_key] = (time.time(), df)
                 return df
             logger.warning("J-Quants 5min empty for %s, falling back to yfinance", symbol)
-    return await _fetch_yfinance_ohlcv(symbol, interval, days)
+    df = await _fetch_yfinance_ohlcv(symbol, interval, days)
+    if not df.empty:
+        _ohlcv_cache[cache_key] = (time.time(), df)
+    return df
 
 
 # ── 戦略ファクトリ ─────────────────────────────────────────────────────────────
