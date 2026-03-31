@@ -1,0 +1,27 @@
+[Unit]
+Description=Algo Trading Terminal
+After=network-online.target
+Wants=network-online.target
+# bull_system と独立して動作（依存関係なし）
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/root/algo-trading-system
+EnvironmentFile=/root/algo-trading-system/.env
+ExecStart=/root/algo-trading-system/.venv/bin/uvicorn backend.main:app \
+    --host 127.0.0.1 \
+    --port 8001 \
+    --workers 1 \
+    --log-level info
+Restart=on-failure
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=algo-trading
+
+# メモリ上限（bull_system と競合しないよう制限）
+MemoryMax=1G
+
+[Install]
+WantedBy=multi-user.target
