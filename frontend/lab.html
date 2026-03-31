@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>STRATEGY LAB — ALGO TERMINAL</title>
+  <link rel="stylesheet" href="/static/css/terminal.css">
+  <link rel="stylesheet" href="/static/css/lab.css">
+  <script src="https://cdn.jsdelivr.net/npm/lightweight-charts@4.1.3/dist/lightweight-charts.standalone.production.js"></script>
+</head>
+<body>
+<div id="lab-app">
+
+  <!-- Header -->
+  <header id="lab-header">
+    <a href="/" class="back-link">◀ TERMINAL</a>
+    <div id="lab-logo">⚗ STRATEGY LAB</div>
+    <div id="pdca-badge">PDCA STAGE <span id="pdca-stage">1</span></div>
+  </header>
+
+  <!-- PDCA Goal bar -->
+  <div id="pdca-bar">
+    <div id="pdca-goal-text">Loading...</div>
+    <div id="pdca-next-action">—</div>
+  </div>
+
+  <!-- Main grid -->
+  <div id="lab-grid">
+
+    <!-- Left: Strategy list -->
+    <div id="strategy-panel">
+      <div class="lab-section-title">
+        STRATEGY ROOMS
+        <button id="btn-run-all" class="lab-btn lab-btn-primary">▶ RUN ALL</button>
+      </div>
+      <div id="strategy-list"></div>
+    </div>
+
+    <!-- Center: Results -->
+    <div id="results-panel">
+      <div class="lab-section-title">
+        BACKTEST RESULTS
+        <span id="results-period-label" style="font-size:10px;color:#4a6a4a;margin-left:8px;">30日間</span>
+      </div>
+      <div id="results-table-wrap">
+        <table id="results-table">
+          <thead>
+            <tr>
+              <th>戦略</th>
+              <th>勝率</th>
+              <th>PF</th>
+              <th>取引数</th>
+              <th>最大DD</th>
+              <th>Sharpe</th>
+              <th>日次損益</th>
+              <th>総損益</th>
+              <th>スコア</th>
+            </tr>
+          </thead>
+          <tbody id="results-tbody"></tbody>
+        </table>
+      </div>
+
+      <!-- Equity curve -->
+      <div class="lab-section-title" style="margin-top:12px">
+        EQUITY CURVE — <span id="eq-strategy-name">—</span>
+      </div>
+      <div id="equity-chart"></div>
+
+      <!-- Stats detail (gross profit / avg win / R:R / overfitting) -->
+      <div class="lab-section-title" style="margin-top:12px">
+        STATS DETAIL — <span id="stats-strategy-name" style="color:#4a6a4a;">—</span>
+      </div>
+      <div id="stats-detail"></div>
+
+      <!-- Trade list -->
+      <div class="lab-section-title" style="margin-top:12px">
+        TRADE LOG — <span id="trade-count">0 trades</span>
+      </div>
+      <div id="trade-list"></div>
+    </div>
+
+    <!-- Right: PDCA detail -->
+    <div id="pdca-panel">
+      <div class="lab-section-title">PDCA ステージ</div>
+      <div id="pdca-stages-list"></div>
+
+      <div class="lab-section-title" style="margin-top:12px">設定</div>
+      <div class="pdca-settings">
+        <label>バックテスト期間
+          <select id="days-select">
+            <option value="7">7日間</option>
+            <option value="14">14日間</option>
+            <option value="30" selected>30日間</option>
+            <option value="60">60日間</option>
+            <option value="90">90日間</option>
+          </select>
+        </label>
+        <label>USD/JPY
+          <input id="usd-jpy-input" type="number" value="150" min="100" max="200" step="1">
+        </label>
+      </div>
+
+      <div class="lab-section-title" style="margin-top:12px">地合い判定</div>
+      <div id="regime-panel"></div>
+
+      <div class="lab-section-title" style="margin-top:12px">
+        相場別強弱
+        <button id="btn-regime-analysis" class="lab-btn" style="font-size:9px;padding:1px 6px;" onclick="runRegimeAnalysisAll()">↺ 更新</button>
+      </div>
+      <div id="regime-analysis-panel"><div style="padding:6px 10px;font-size:10px;color:#4a6a4a;">未取得 (毎朝9:15自動更新)</div></div>
+
+      <div class="lab-section-title" style="margin-top:12px">時間帯パターン — <span id="tp-symbol-label" style="color:#4a6a4a;">銘柄選択</span></div>
+      <div id="time-pattern-panel"><div style="padding:6px 10px;font-size:10px;color:#4a6a4a;">戦略を選択してください</div></div>
+
+      <div class="lab-section-title" style="margin-top:12px">JP株 選定結果</div>
+      <div id="screen-list"></div>
+
+      <div class="lab-section-title" style="margin-top:12px">RUNNING</div>
+      <div id="running-list"><span style="color:#4a6a4a;font-size:10px;">—</span></div>
+    </div>
+
+  </div>
+
+</div>
+
+<script src="/static/js/lab.js"></script>
+</body>
+</html>

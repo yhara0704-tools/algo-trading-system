@@ -452,6 +452,7 @@ class LabRunner:
                 "8306.T": dict(ema_fast=5, ema_slow=13, tp_pct=0.005, sl_pct=0.003, allow_short=True),
                 "6758.T": dict(ema_fast=3, ema_slow=8,  tp_pct=0.005, sl_pct=0.003, allow_short=True),
                 "6098.T": dict(ema_fast=3, ema_slow=5,  tp_pct=0.005, sl_pct=0.003, allow_short=True),
+                "6954.T": dict(ema_fast=3, ema_slow=8,  tp_pct=0.005, sl_pct=0.003, allow_short=True),
             }
             params = _BEST.get(symbol, dict(ema_fast=3, ema_slow=8, tp_pct=0.004, sl_pct=0.002, allow_short=True))
             name = symbol.replace(".T", "")
