@@ -524,7 +524,23 @@ function renderReadiness(data) {
   const blocking = data.blocking_count || 0;
   const recoColor = ready ? '#00ff41' : blocking <= 2 ? '#ffcc00' : '#ff3333';
 
+  // 連続日数カウンター（バックテスト vs ペーパー）
+  const btDays    = data.consecutive_bt_days    ?? '—';
+  const paperDays = data.consecutive_paper_days ?? '—';
+  const btColor   = btDays    >= 5 ? '#00ff41' : btDays    >= 3 ? '#ffcc00' : '#ff3333';
+  const ppColor   = paperDays >= 3 ? '#00ff41' : paperDays >= 1 ? '#ffcc00' : '#4a6a4a';
+
   let html = `<div class="readiness-summary" style="color:${recoColor}">${reco}</div>`;
+  html += `<div class="readiness-counters">
+    <div class="readiness-counter">
+      <div class="rc-label">BT連続+</div>
+      <div class="rc-value" style="color:${btColor}">${btDays}日</div>
+    </div>
+    <div class="readiness-counter">
+      <div class="rc-label">ペーパー連続+</div>
+      <div class="rc-value" style="color:${ppColor}">${paperDays}日</div>
+    </div>
+  </div>`;
 
   for (const c of (data.checklist || [])) {
     const icon  = c.pass ? '✓' : (c.critical ? '✗' : '△');

@@ -881,23 +881,41 @@ class LabRunner:
     def check_live_readiness(self) -> dict:
         """本番移行チェックリストを生成して返す。
         Stage 1 目標 (1,000円/日・勝率52%・DD-8%以内) を基準とする。
-        """
-        from backend.storage.db import get_daily_best_pnl
 
-        # 直近14日分の日別最良PnL
-        history = get_daily_best_pnl(days=14)
+        ブロッキング条件はバックテスト連続プラス日数のみ。
+        ペーパートレード連続日数は参考値として並走表示。
+        """
+        from backend.storage.db import get_daily_best_pnl, get_paper_pnl_daily
+
+        # ── バックテスト 連続プラス日数（直近30日） ────────────────────────────
+        history     = get_daily_best_pnl(days=30)
         sorted_days = sorted(history, key=lambda x: x["date"])
 
-        # 連続プラス日数（末尾から）
-        consecutive_positive = 0
+        consecutive_bt = 0
         for day in reversed(sorted_days):
             if day["best_pnl_jpy"] > 0:
-                consecutive_positive += 1
+                consecutive_bt += 1
             else:
                 break
 
         total_positive = sum(1 for d in sorted_days if d["best_pnl_jpy"] > 0)
         total_days     = len(sorted_days)
+
+        # ── ペーパートレード 連続プラス日数（並走・参考値） ────────────────────
+        paper_history = get_paper_pnl_daily(days=30)
+        # 取引があった日（pnl != 0）のみカウント対象
+        paper_trading_days = sorted(
+            [d for d in paper_history if d["pnl_jpy"] != 0],
+            key=lambda x: x["date"]
+        )
+        consecutive_paper = 0
+        for day in reversed(paper_trading_days):
+            if day["pnl_jpy"] > 0:
+                consecutive_paper += 1
+            else:
+                break
+        paper_total_pos = sum(1 for d in paper_trading_days if d["pnl_jpy"] > 0)
+        paper_total     = len(paper_trading_days)
 
         # 直近バックテスト結果
         valid = [r for r in self.get_results()
@@ -920,10 +938,17 @@ class LabRunner:
 
         checklist = [
             {
-                "item":  f"連続プラス日数 ≥ 5日",
-                "pass":  consecutive_positive >= 5,
-                "value": f"{consecutive_positive}日 (直近{total_days}日中{total_positive}日+)",
+                "item":  "バックテスト連続プラス日数 ≥ 5日",
+                "pass":  consecutive_bt >= 5,
+                "value": f"{consecutive_bt}日 (直近{total_days}日中{total_positive}日+)",
                 "critical": True,
+            },
+            {
+                "item":  "ペーパー連続プラス日数（参考）",
+                "pass":  consecutive_paper >= 3,
+                "value": (f"{consecutive_paper}日 ({paper_total_pos}/{paper_total}日+)"
+                          if paper_total > 0 else "蓄積中..."),
+                "critical": False,
             },
             {
                 "item":  f"日次損益 ≥ {goal.daily_pnl_jpy:,.0f}円/日",
@@ -981,13 +1006,14 @@ class LabRunner:
             recommendation = f"⛔ {len(blocking)}項目未達成 — 継続検証"
 
         return {
-            "overall_ready":            ready,
-            "checklist":                checklist,
-            "blocking_count":           len(blocking),
-            "warning_count":            len(warnings),
-            "consecutive_positive_days": consecutive_positive,
-            "total_positive_days":       total_positive,
-            "total_days_checked":        total_days,
+            "overall_ready":              ready,
+            "checklist":                  checklist,
+            "blocking_count":             len(blocking),
+            "warning_count":              len(warnings),
+            "consecutive_bt_days":        consecutive_bt,
+            "consecutive_paper_days":     consecutive_paper,
+            "total_positive_days":        total_positive,
+            "total_days_checked":         total_days,
             "recommendation":           recommendation,
             "best_strategy":            best.get("strategy_name", "—"),
         }

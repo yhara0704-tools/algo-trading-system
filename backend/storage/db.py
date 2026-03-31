@@ -306,6 +306,21 @@ def get_daily_best_pnl(days: int = 14) -> list[dict]:
     return [dict(r) for r in rows]
 
 
+def get_paper_pnl_daily(days: int = 30) -> list[dict]:
+    """直近N日間のペーパートレード日別PnLを返す（daily_summaries.jp_session_pnl）。
+    取引がなかった日（0円）は除外する。
+    """
+    since = (datetime.now() - timedelta(days=days)).strftime("%Y-%m-%d")
+    with _tx() as conn:
+        rows = conn.execute("""
+            SELECT date, jp_session_pnl AS pnl_jpy
+            FROM daily_summaries
+            WHERE date >= ?
+            ORDER BY date ASC
+        """, (since,)).fetchall()
+    return [dict(r) for r in rows]
+
+
 def get_milestone_progress() -> dict:
     """日付別の最良スコア戦略 daily_pnl_jpy を返す（マイルストーン曲線用）。"""
     with _tx() as conn:

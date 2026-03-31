@@ -354,3 +354,28 @@ html, body { overflow: auto; }
   flex-shrink: 0;
   line-height: 1.4;
 }
+
+/* 連続日数カウンター */
+.readiness-counters {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid #0d1a0d;
+  margin-bottom: 2px;
+}
+.readiness-counter {
+  flex: 1;
+  padding: 6px 8px;
+  text-align: center;
+  border-right: 1px solid #0d1a0d;
+}
+.readiness-counter:last-child { border-right: none; }
+.rc-label {
+  font-size: 8px;
+  color: var(--text-dim);
+  margin-bottom: 2px;
+}
+.rc-value {
+  font-size: 18px;
+  font-weight: bold;
+  letter-spacing: -1px;
+}
