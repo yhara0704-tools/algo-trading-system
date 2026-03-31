@@ -320,3 +320,37 @@ html, body { overflow: auto; }
 .tp-bar { height: 6px; border-radius: 1px; }
 .tp-atr { color: var(--text-dim); width: 36px; text-align: right; }
 .tp-n   { color: #2a4a2a; width: 28px; text-align: right; }
+
+/* Live readiness checklist */
+#readiness-panel {
+  padding: 6px 0;
+}
+.readiness-summary {
+  font-size: 10px;
+  font-weight: bold;
+  padding: 4px 10px 6px;
+  border-bottom: 1px solid #0d1a0d;
+  letter-spacing: 0.3px;
+}
+.readiness-row {
+  display: flex;
+  align-items: flex-start;
+  padding: 2px 8px;
+  font-size: 9px;
+  gap: 4px;
+  border-bottom: 1px solid #080e08;
+}
+.readiness-item {
+  flex: 1;
+  color: var(--text-dim);
+  line-height: 1.4;
+}
+.readiness-item.readiness-fail { color: #cc2200; }
+.readiness-item.readiness-warn { color: #cc8800; }
+.readiness-value {
+  font-size: 8px;
+  text-align: right;
+  min-width: 60px;
+  flex-shrink: 0;
+  line-height: 1.4;
+}

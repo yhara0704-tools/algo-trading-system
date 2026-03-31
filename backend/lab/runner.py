@@ -40,6 +40,8 @@ from backend.analysis.strategy_knowledge import get_kb, analyze_failure
 from backend.analysis.overfitting_guard import OverfittingGuard
 from backend.analysis.regime_matcher import get_matcher
 from backend.analysis.regime_backtest import RegimeBacktester, RegimeBacktestReport
+from backend.storage import best_params as bp_store
+from backend.storage.db import get_daily_best_pnl
 
 logger = logging.getLogger(__name__)
 
@@ -213,25 +215,10 @@ def get_jp_strategies(screen_results: list[ScreenResult],
     selected = [r for r in screen_results if r.selected]
     pattern_store = get_pattern_store() if use_time_patterns else None
 
-    # 銘柄別最適パラメータ（1340通り総当たり検証結果）
-    # Scalp1m: EMA(fast,slow) / TP / SL / ATR_min / allow_short
-    # allow_short: 空売り側がプラスの銘柄のみTrue（貸株料年1.1%込み試算）
-    _BEST_SCALP1M: dict[str, dict] = {
-        "2413.T":  dict(ema_fast=3, ema_slow=8,  tp_pct=0.004, sl_pct=0.002, atr_min_pct=0.001, allow_short=True),   # M3     短売+2400円/日
-        "3697.T":  dict(ema_fast=3, ema_slow=5,  tp_pct=0.005, sl_pct=0.003, atr_min_pct=0.001, allow_short=True),   # SHIFT  短売+4486円/日
-        "7267.T":  dict(ema_fast=3, ema_slow=8,  tp_pct=0.005, sl_pct=0.003, atr_min_pct=0.001, allow_short=True),   # Honda  短売+364円/日
-        "6645.T":  dict(ema_fast=3, ema_slow=8,  tp_pct=0.003, sl_pct=0.002, atr_min_pct=0.001, allow_short=True),   # Omron  短売+314円/日
-        "4568.T":  dict(ema_fast=5, ema_slow=10, tp_pct=0.005, sl_pct=0.003, atr_min_pct=0.001, allow_short=True),   # DaiichiSankyo 短売+643円/日
-        "9432.T":  dict(ema_fast=3, ema_slow=8,  tp_pct=0.005, sl_pct=0.003, atr_min_pct=0.001, allow_short=False),  # NTT    短売-229円/日 → OFF
-        "7203.T":  dict(ema_fast=3, ema_slow=5,  tp_pct=0.005, sl_pct=0.003, atr_min_pct=0.001, allow_short=True),   # Toyota 短売+243円/日
-        "9433.T":  dict(ema_fast=3, ema_slow=5,  tp_pct=0.004, sl_pct=0.002, atr_min_pct=0.001, allow_short=False),  # KDDI   短売-793円/日 → OFF
-        "8306.T":  dict(ema_fast=5, ema_slow=13, tp_pct=0.005, sl_pct=0.003, atr_min_pct=0.001, allow_short=True),   # MUFG   短売+329円/日
-    }
-    # デフォルト（未登録銘柄用）
-    _DEFAULT_SCALP1M = dict(ema_fast=3, ema_slow=8, tp_pct=0.004, sl_pct=0.002, atr_min_pct=0.001, allow_short=True)
-
+    # 銘柄別最適パラメータ — best_params.json から読み込む（単一ソース）
+    # allow_short はファイルに保存済みのため手動変更不要
     for r in selected:
-        params = _BEST_SCALP1M.get(r.symbol, _DEFAULT_SCALP1M)
+        params = bp_store.get_params(r.symbol)
 
         # ── 主力: 最適Scalp1m（総当たり検証で選ばれたパラメータ） ──────────────
         scalp1m = JPScalp(r.symbol, r.name, morning_only=True, interval="1m", **params)
@@ -438,23 +425,8 @@ class LabRunner:
             else:
                 raise ValueError(f"Unknown strategy: {strategy_id}")
         else:
-            # symbol から直接戦略を生成（最適パラメータを使用）
-            from backend.strategies.jp_stock.jp_scalp import JPScalp
-            _BEST = {
-                "2413.T": dict(ema_fast=3, ema_slow=8,  tp_pct=0.004, sl_pct=0.002, allow_short=True),
-                "3697.T": dict(ema_fast=3, ema_slow=5,  tp_pct=0.005, sl_pct=0.003, allow_short=True),
-                "7267.T": dict(ema_fast=3, ema_slow=8,  tp_pct=0.005, sl_pct=0.003, allow_short=True),
-                "6645.T": dict(ema_fast=3, ema_slow=8,  tp_pct=0.003, sl_pct=0.002, allow_short=True),
-                "4568.T": dict(ema_fast=5, ema_slow=10, tp_pct=0.005, sl_pct=0.003, allow_short=True),
-                "9432.T": dict(ema_fast=3, ema_slow=8,  tp_pct=0.005, sl_pct=0.003, allow_short=False),
-                "7203.T": dict(ema_fast=3, ema_slow=5,  tp_pct=0.005, sl_pct=0.003, allow_short=True),
-                "9433.T": dict(ema_fast=3, ema_slow=5,  tp_pct=0.004, sl_pct=0.002, allow_short=False),
-                "8306.T": dict(ema_fast=5, ema_slow=13, tp_pct=0.005, sl_pct=0.003, allow_short=True),
-                "6758.T": dict(ema_fast=3, ema_slow=8,  tp_pct=0.005, sl_pct=0.003, allow_short=True),
-                "6098.T": dict(ema_fast=3, ema_slow=5,  tp_pct=0.005, sl_pct=0.003, allow_short=True),
-                "6954.T": dict(ema_fast=3, ema_slow=8,  tp_pct=0.005, sl_pct=0.003, allow_short=True),
-            }
-            params = _BEST.get(symbol, dict(ema_fast=3, ema_slow=8, tp_pct=0.004, sl_pct=0.002, allow_short=True))
+            # symbol から直接戦略を生成（best_params.json の最新パラメータを使用）
+            params = bp_store.get_params(symbol)
             name = symbol.replace(".T", "")
             strategy = JPScalp(symbol, name, interval="5m", **params)
 
@@ -886,6 +858,143 @@ class LabRunner:
             )
 
         self._pdca.last_updated = str(pd.Timestamp.now("Asia/Tokyo"))[:19]
+
+        # PDCA完了後にベストパラメータ自動更新を試みる（JP株スキャルのみ）
+        for r in valid:
+            if not r.get("symbol", "").endswith(".T"):
+                continue
+            ovf = r.get("overfitting", {})
+            is_robust = ovf.get("is_robust", True) if ovf else True
+            updated = bp_store.try_update(
+                symbol        = r["symbol"],
+                params        = r.get("params", {}),
+                score         = r.get("score", 0),
+                daily_pnl_jpy = r.get("daily_pnl_jpy", 0),
+                win_rate      = r.get("win_rate", 0),
+                is_robust     = is_robust,
+                num_trades    = r.get("num_trades", 0),
+                days_tested   = r.get("days_tested", 0),
+            )
+            if updated:
+                logger.info("パラメータ自動更新: %s", r["symbol"])
+
+    def check_live_readiness(self) -> dict:
+        """本番移行チェックリストを生成して返す。
+        Stage 1 目標 (1,000円/日・勝率52%・DD-8%以内) を基準とする。
+        """
+        from backend.storage.db import get_daily_best_pnl
+
+        # 直近14日分の日別最良PnL
+        history = get_daily_best_pnl(days=14)
+        sorted_days = sorted(history, key=lambda x: x["date"])
+
+        # 連続プラス日数（末尾から）
+        consecutive_positive = 0
+        for day in reversed(sorted_days):
+            if day["best_pnl_jpy"] > 0:
+                consecutive_positive += 1
+            else:
+                break
+
+        total_positive = sum(1 for d in sorted_days if d["best_pnl_jpy"] > 0)
+        total_days     = len(sorted_days)
+
+        # 直近バックテスト結果
+        valid = [r for r in self.get_results()
+                 if r.get("status") == "done" and r.get("num_trades", 0) >= 5
+                 and r.get("symbol", "").endswith(".T")]
+        best = max(valid, key=lambda r: r.get("score", 0)) if valid else {}
+
+        win_rate   = best.get("win_rate", 0)
+        max_dd     = best.get("max_drawdown_pct", -999)
+        daily_pnl  = best.get("daily_pnl_jpy", 0)
+        pf         = best.get("profit_factor", 0)
+        avg_win    = best.get("avg_win_jpy", 0)
+        avg_loss   = best.get("avg_loss_jpy", 0)
+        rr         = abs(avg_win / avg_loss) if avg_loss != 0 else 0
+        ovf        = best.get("overfitting", {})
+        is_robust  = ovf.get("is_robust", True) if ovf else (len(valid) == 0 or True)
+        screened   = len(self._pdca.screen_results) > 0
+
+        goal = PDCA_STAGES[0]  # Stage 1 基準
+
+        checklist = [
+            {
+                "item":  f"連続プラス日数 ≥ 5日",
+                "pass":  consecutive_positive >= 5,
+                "value": f"{consecutive_positive}日 (直近{total_days}日中{total_positive}日+)",
+                "critical": True,
+            },
+            {
+                "item":  f"日次損益 ≥ {goal.daily_pnl_jpy:,.0f}円/日",
+                "pass":  daily_pnl >= goal.daily_pnl_jpy,
+                "value": f"{daily_pnl:+,.0f}円/日",
+                "critical": True,
+            },
+            {
+                "item":  f"勝率 ≥ {goal.win_rate}%",
+                "pass":  win_rate >= goal.win_rate,
+                "value": f"{win_rate:.1f}%",
+                "critical": True,
+            },
+            {
+                "item":  f"最大DD ≥ {goal.max_drawdown}%",
+                "pass":  max_dd >= goal.max_drawdown,
+                "value": f"{max_dd:.1f}%",
+                "critical": True,
+            },
+            {
+                "item":  "プロフィットファクター ≥ 1.2",
+                "pass":  pf >= 1.2,
+                "value": f"{pf:.2f}",
+                "critical": False,
+            },
+            {
+                "item":  "R:R ≥ 1.0",
+                "pass":  rr >= 1.0,
+                "value": f"{rr:.2f}",
+                "critical": False,
+            },
+            {
+                "item":  "過学習チェック: 問題なし",
+                "pass":  is_robust,
+                "value": "✓ 合格" if is_robust else "⚠ 過学習疑い",
+                "critical": True,
+            },
+            {
+                "item":  "銘柄スクリーニング稼働中",
+                "pass":  screened,
+                "value": f"{len(self._pdca.screen_results)}銘柄選定済み" if screened else "未実行",
+                "critical": False,
+            },
+        ]
+
+        blocking   = [c for c in checklist if not c["pass"] and c["critical"]]
+        warnings   = [c for c in checklist if not c["pass"] and not c["critical"]]
+        ready      = len(blocking) == 0
+
+        if ready:
+            recommendation = "✅ 本番移行可能 — ただし少額（1銘柄）から開始を推奨"
+        elif len(blocking) <= 2:
+            recommendation = f"⚠ あと{len(blocking)}項目 — もう少し"
+        else:
+            recommendation = f"⛔ {len(blocking)}項目未達成 — 継続検証"
+
+        return {
+            "overall_ready":            ready,
+            "checklist":                checklist,
+            "blocking_count":           len(blocking),
+            "warning_count":            len(warnings),
+            "consecutive_positive_days": consecutive_positive,
+            "total_positive_days":       total_positive,
+            "total_days_checked":        total_days,
+            "recommendation":           recommendation,
+            "best_strategy":            best.get("strategy_name", "—"),
+        }
+
+    def get_best_params(self) -> dict:
+        """best_params.json の全エントリーを返す（UI表示用）。"""
+        return bp_store.get_all()
 
     def _result_to_dict(self, r: BacktestResult) -> dict:
         d = dataclasses.asdict(r)

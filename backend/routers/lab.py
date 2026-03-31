@@ -219,6 +219,33 @@ async def get_jquants_status():
         return {"status": "error", "message": str(e)}
 
 
+@router.get("/live-readiness")
+def get_live_readiness():
+    """本番移行チェックリストを返す。"""
+    if not _runner:
+        raise HTTPException(503, "Lab not ready")
+    return _runner.check_live_readiness()
+
+
+@router.get("/best-params")
+def get_best_params():
+    """銘柄別最適パラメータ一覧を返す。"""
+    if not _runner:
+        raise HTTPException(503, "Lab not ready")
+    return {"best_params": _runner.get_best_params()}
+
+
+@router.put("/best-params/{symbol}")
+def set_best_params(symbol: str, body: dict):
+    """銘柄のパラメータを手動上書きする。
+    body: {"ema_fast": 3, "ema_slow": 5, "tp_pct": 0.005, "sl_pct": 0.003,
+           "atr_min_pct": 0.001, "allow_short": true}
+    """
+    from backend.storage.best_params import manual_set
+    manual_set(symbol, body)
+    return {"status": "ok", "symbol": symbol, "params": body}
+
+
 @router.get("/capital-plan")
 def get_capital_plan():
     """資金計画・マイルストーン一覧を返す。"""

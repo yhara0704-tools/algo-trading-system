@@ -9,7 +9,7 @@ let pollingTimer = null;
 // ── Init ──────────────────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', async () => {
   document.getElementById('btn-run-all').addEventListener('click', runAll);
-  await Promise.all([loadStrategies(), loadResults(), loadPdca(), loadRegime(), loadRegimeAnalysis()]);
+  await Promise.all([loadStrategies(), loadResults(), loadPdca(), loadRegime(), loadRegimeAnalysis(), loadReadiness()]);
   startPolling();
   connectWS();
 });
@@ -50,8 +50,8 @@ function showToast(text) {
 function startPolling() {
   if (pollingTimer) clearInterval(pollingTimer);
   pollingTimer = setInterval(async () => {
-    await Promise.all([loadResults(), loadPdca(), loadRegime(), loadRegimeAnalysis()]);
-  }, 10000);
+    await Promise.all([loadResults(), loadPdca(), loadRegime(), loadRegimeAnalysis(), loadReadiness()]);
+  }, 15000);
 }
 
 // ── API calls ──────────────────────────────────────────────────────────────────
@@ -84,6 +84,14 @@ async function loadRegime() {
     const res  = await fetch(`${API}/lab/regime`);
     const data = await res.json();
     renderRegime(data.regime || {});
+  } catch (e) {}
+}
+
+async function loadReadiness() {
+  try {
+    const res  = await fetch(`${API}/lab/live-readiness`);
+    const data = await res.json();
+    renderReadiness(data);
   } catch (e) {}
 }
 
@@ -504,6 +512,37 @@ function renderTimePatterns(data) {
     `;
     panel.appendChild(row);
   }
+}
+
+// ── Live Readiness checklist ──────────────────────────────────────────────────
+function renderReadiness(data) {
+  const panel = document.getElementById('readiness-panel');
+  if (!panel) return;
+
+  const ready    = data.overall_ready;
+  const reco     = data.recommendation || '—';
+  const blocking = data.blocking_count || 0;
+  const recoColor = ready ? '#00ff41' : blocking <= 2 ? '#ffcc00' : '#ff3333';
+
+  let html = `<div class="readiness-summary" style="color:${recoColor}">${reco}</div>`;
+
+  for (const c of (data.checklist || [])) {
+    const icon  = c.pass ? '✓' : (c.critical ? '✗' : '△');
+    const color = c.pass ? '#00aa22' : (c.critical ? '#ff3333' : '#ffaa00');
+    html += `<div class="readiness-row">
+      <span style="color:${color};width:14px;display:inline-block">${icon}</span>
+      <span class="readiness-item ${c.pass ? '' : (c.critical ? 'readiness-fail' : 'readiness-warn')}">${c.item}</span>
+      <span class="readiness-value" style="color:${c.pass ? '#4a6a4a' : color}">${c.value}</span>
+    </div>`;
+  }
+
+  if (data.best_strategy && data.best_strategy !== '—') {
+    html += `<div style="padding:4px 8px;font-size:9px;color:#4a6a4a;border-top:1px solid #0d1a0d;margin-top:2px">
+      最優秀: ${data.best_strategy}
+    </div>`;
+  }
+
+  panel.innerHTML = html;
 }
 
 // ── Screen results ────────────────────────────────────────────────────────────
