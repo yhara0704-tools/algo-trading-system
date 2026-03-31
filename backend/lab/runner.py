@@ -158,7 +158,7 @@ async def _fetch_binance_ohlcv(symbol: str, interval: str, days: int) -> pd.Data
 
 
 async def _fetch_yfinance_ohlcv(symbol: str, interval: str, days: int) -> pd.DataFrame:
-    loop = asyncio.get_event_loop()
+    loop = asyncio.get_running_loop()
     try:
         df = await asyncio.wait_for(
             loop.run_in_executor(None, lambda: _yf_fetch(symbol, interval, days)),
@@ -684,7 +684,7 @@ class LabRunner:
             # 時間帯パターン記録（JP株のみ）
             if strategy.meta.symbol.endswith(".T"):
                 try:
-                    loop = asyncio.get_event_loop()
+                    loop = asyncio.get_running_loop()
                     await loop.run_in_executor(
                         self._executor,
                         lambda: get_pattern_store().record_from_df(strategy.meta.symbol, df)
@@ -714,7 +714,7 @@ class LabRunner:
             # limit_slip_pct=0.003: 次足始値が指値から0.3%以上離れたら見送り
             s_fee  = 0.0 if is_jp else 0.001   # BTC(Binance)は0.1%taker
             s_slip = 0.003 if is_jp else 0.0   # JP株のみ指値スルー判定を適用
-            loop   = asyncio.get_event_loop()
+            loop   = asyncio.get_running_loop()
             result = await loop.run_in_executor(
                 self._executor,
                 lambda: run_backtest(

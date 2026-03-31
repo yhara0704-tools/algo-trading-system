@@ -219,8 +219,37 @@ class RegimeMatcher:
         return selected
 
     async def _fetch_daily(self, symbol: str, days: int) -> pd.DataFrame | None:
-        """日足データを取得する（yfinance経由）。"""
-        loop = asyncio.get_event_loop()
+        """日足データを取得する（J-Quants → yfinance フォールバック）。"""
+        # J-Quants優先（JP株のみ）
+        if symbol.endswith(".T"):
+            try:
+                from backend.feeds.jquants_client import get_daily_quotes_df, is_available
+                if is_available():
+                    df = await asyncio.wait_for(
+                        get_daily_quotes_df(symbol, days=max(days, 60)),
+                        timeout=30,
+                    )
+                    if df is not None and not df.empty:
+                        needed = {"open", "high", "low", "close", "volume"}
+                        if "adj_close" in df.columns:
+                            src = {c: c.replace("adj_", "") for c in df.columns if c.startswith("adj_")}
+                            df2 = df.rename(columns=src)
+                        else:
+                            df2 = df
+                        if needed.issubset(df2.columns):
+                            idx = pd.to_datetime(df2.index)
+                            if idx.tz is None:
+                                idx = idx.tz_localize("Asia/Tokyo", ambiguous="infer", nonexistent="shift_forward")
+                            else:
+                                idx = idx.tz_convert("Asia/Tokyo")
+                            df2 = df2.copy()
+                            df2.index = idx
+                            return df2[list(needed)].tail(days)
+            except Exception as e:
+                logger.debug("J-Quants daily fetch失敗 %s: %s", symbol, e)
+
+        # yfinance フォールバック
+        loop = asyncio.get_running_loop()
         try:
             return await asyncio.wait_for(
                 loop.run_in_executor(None, lambda: self._yf_daily(symbol, days)),

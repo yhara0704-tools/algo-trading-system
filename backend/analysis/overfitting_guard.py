@@ -96,6 +96,7 @@ class OverfittingGuard:
             if wf.oos_ratio < self.min_oos_ratio:
                 warnings.append(f"OOS/IS比低下: {wf.oos_ratio:.2f} < {self.min_oos_ratio}")
                 penalty -= 10
+                report.is_robust = False
 
         # ── 2. パラメータ安定性 ────────────────────────────────────────────
         rb = self._robustness_check(strategy, df, bt_kwargs)

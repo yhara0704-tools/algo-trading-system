@@ -487,7 +487,7 @@ class RegimeBacktester:
                 logger.debug("J-Quants daily fetch failed %s: %s", symbol, e)
 
         # yfinance フォールバック
-        loop = asyncio.get_event_loop()
+        loop = asyncio.get_running_loop()
         try:
             return await asyncio.wait_for(
                 loop.run_in_executor(None, lambda: _yf_daily(symbol, days)),
@@ -498,11 +498,11 @@ class RegimeBacktester:
 
     @staticmethod
     async def _fetch_5m(symbol: str) -> pd.DataFrame | None:
-        loop = asyncio.get_event_loop()
+        loop = asyncio.get_running_loop()
         for period in ("60d", "30d", "14d"):
             try:
                 result = await asyncio.wait_for(
-                    asyncio.get_event_loop().run_in_executor(
+                    loop.run_in_executor(
                         None, lambda p=period: _yf_5m(symbol, p)
                     ),
                     timeout=25,
