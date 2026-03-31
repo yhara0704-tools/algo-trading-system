@@ -335,10 +335,20 @@ class LabRunner:
             lines.append(f"検証戦略数: {len(done)}")
             lines.append(f"プラス戦略: {len(positive)}/{len(done)}")
             lines.append(f"【最良】{best['strategy_name']}")
-            lines.append(f"  日次 {best.get('daily_pnl_jpy',0):+,.0f}円 / 勝率 {best.get('win_rate',0):.1f}%")
+            lines.append(
+                f"  日次 {best.get('daily_pnl_jpy',0):+,.0f}円"
+                f"（利益{best.get('gross_profit_jpy',0):+,.0f}円"
+                f" / 損失{best.get('gross_loss_jpy',0):+,.0f}円）"
+                f" 勝率{best.get('win_rate',0):.1f}%"
+            )
             if worst != best:
                 lines.append(f"【最悪】{worst['strategy_name']}")
-                lines.append(f"  日次 {worst.get('daily_pnl_jpy',0):+,.0f}円 / 勝率 {worst.get('win_rate',0):.1f}%")
+                lines.append(
+                    f"  日次 {worst.get('daily_pnl_jpy',0):+,.0f}円"
+                    f"（利益{worst.get('gross_profit_jpy',0):+,.0f}円"
+                    f" / 損失{worst.get('gross_loss_jpy',0):+,.0f}円）"
+                    f" 勝率{worst.get('win_rate',0):.1f}%"
+                )
         else:
             lines.append("検証結果なし")
 
@@ -349,7 +359,12 @@ class LabRunner:
         if jp_session and jp_session.get("num_trades", 0) > 0:
             lines.append("")
             lines.append(f"【JP株リアル】{jp_session['date']}")
-            lines.append(f"  損益 {jp_session['total_pnl']:+,.0f}円 / {jp_session['num_trades']}件")
+            lines.append(
+                f"  損益 {jp_session['total_pnl']:+,.0f}円"
+                f"（利益{jp_session.get('gross_profit',0):+,.0f}円"
+                f" / 損失{jp_session.get('gross_loss',0):+,.0f}円）"
+                f" {jp_session['num_trades']}件"
+            )
             lines.append(f"  サブセッション: {len(jp_session.get('subsessions',[]))}回")
 
         return "\n".join(lines)
@@ -598,7 +613,8 @@ class LabRunner:
         msg   = (
             f"{goal.description}\n"
             f"最優秀戦略: {best.get('strategy_name', '—')}\n"
-            f"日次損益: {best.get('daily_pnl_jpy', 0):+,.0f}円/日\n"
+            f"日次損益: {best.get('daily_pnl_jpy', 0):+,.0f}円/日"
+            f"（利益{best.get('gross_profit_jpy',0):+,.0f}円 / 損失{best.get('gross_loss_jpy',0):+,.0f}円）\n"
             f"勝率: {best.get('win_rate', 0):.1f}%\n"
             f"→ 次の目標 Stage {new_stage}: "
             f"{PDCA_STAGES[min(new_stage-1, len(PDCA_STAGES)-1)].daily_pnl_jpy:,.0f}円/日"
