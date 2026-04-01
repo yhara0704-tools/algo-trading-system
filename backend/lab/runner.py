@@ -326,6 +326,10 @@ class LabRunner:
         self._effective_capital: float = JP_CAPITAL_JPY
         # 自動分析
         self._last_analysis: str = ""
+        # フルレバ移行判定
+        self._full_leverage_ready_cycles: int = 0   # 条件を満たし続けたサイクル数
+        self._full_leverage_notified:     bool = False  # 通知済みフラグ
+        _FULL_LEVERAGE_REQUIRED_CYCLES = 5  # 5サイクル連続で条件を満たしたら通知
 
     def get_results(self) -> list[dict]:
         snapshot = list(self._results.values())  # 辞書変更と競合しないようコピー
@@ -486,6 +490,44 @@ class LabRunner:
         if self._compounding and self._compounded_capital != JP_CAPITAL_JPY:
             lines.append("")
             lines.append(f"💰 複利資金: {self._compounded_capital:,.0f}円")
+
+        # ── フルレバ移行判定 ──────────────────────────────────────────────────
+        rr_best = abs(best.get('avg_win_jpy', 0) / best.get('avg_loss_jpy', -1)) if best.get('avg_loss_jpy') else 0
+        full_lev_ready = (
+            best['win_rate'] >= 55
+            and rr_best >= 1.5
+            and best.get('max_drawdown_pct', -999) >= -5
+            and best['daily_pnl_jpy'] > 0
+        )
+        if full_lev_ready:
+            self._full_leverage_ready_cycles += 1
+        else:
+            self._full_leverage_ready_cycles = 0  # 条件を外れたらリセット
+
+        _REQUIRED = 5
+        if self._full_leverage_ready_cycles >= _REQUIRED and not self._full_leverage_notified:
+            self._full_leverage_notified = True
+            lines.append("")
+            lines.append(f"🚀 【フルレバ移行検討】{_REQUIRED}サイクル連続で条件達成")
+            lines.append(f"   勝率{best['win_rate']:.1f}% / R:R{rr_best:.2f} / DD{best.get('max_drawdown_pct',0):.1f}%")
+            lines.append(f"   → position_pct 0.33→0.50 への引き上げを推奨")
+            try:
+                from backend.notify import push
+                push(
+                    title="🚀 フルレバ移行の準備が整いました",
+                    message=(
+                        f"{_REQUIRED}サイクル連続で安定条件達成。\n"
+                        f"最優秀: {best['strategy_name']}\n"
+                        f"勝率{best['win_rate']:.1f}% / R:R{rr_best:.2f} / DD{best.get('max_drawdown_pct',0):.1f}%\n"
+                        f"→ position_pct 0.33→0.50 への引き上げを検討してください。"
+                    ),
+                    priority=1,
+                )
+            except Exception as exc:
+                logger.warning("Full-leverage notify failed: %s", exc)
+        elif self._full_leverage_ready_cycles > 0:
+            lines.append("")
+            lines.append(f"📈 フルレバ条件: {self._full_leverage_ready_cycles}/{_REQUIRED}サイクル達成中")
 
         self._last_analysis = "\n".join(lines)
         return self._last_analysis
