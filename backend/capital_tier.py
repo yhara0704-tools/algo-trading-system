@@ -75,12 +75,12 @@ TIERS: list[CapitalTier] = [
         capital_min     = 300_000,
         capital_max     = 1_000_000,
         margin          = 3.3,
-        position_pct    = 0.50,   # 買付余力の50%（1ポジ = 99万×50% = 49.5万）
-        max_concurrent  = 2,      # 同時2銘柄まで（99万÷49.5万=2）
+        position_pct    = 0.33,   # 買付余力の33%（1ポジ = 99万×33% ≒ 32.7万 ≈ 実質1倍）
+        max_concurrent  = 3,      # 同時3銘柄（4銘柄目のチャンスに備えて余力を残す）
         allowed_symbols = None,   # スクリーナーに任せる
-        excluded_symbols= ["4369.T"],  # TriChem: 上限20万円 < 49.5万ポジ → 除外
+        excluded_symbols= ["4369.T"],  # TriChem: 上限20万円 < 32.7万ポジ → 除外
         daily_target_jpy= 1_000,
-        note            = "M3・SHIFT・Honda・Omronが主力。同時2銘柄。",
+        note            = "1ポジ≒実質1倍レバ。3銘柄分散で余力を常に確保。集中したい時はロット増しで対応。",
     ),
     CapitalTier(
         name            = "T2: 安定稼働",

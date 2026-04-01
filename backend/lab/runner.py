@@ -57,7 +57,7 @@ INITIAL_CAPITAL_JPY: float = 300_000.0      # 総資金 30万円（松井証券 
 BTC_CAPITAL_JPY:     float = 100_000.0      # BTC用  10万円
 JP_CAPITAL_JPY:      float = 300_000.0      # JP株用 30万円（松井一日信用・手数料/金利完全0円）
 USD_JPY_RATE:        float = 150.0
-POSITION_PCT:        float = 0.5            # 1トレードに資金の50%まで
+POSITION_PCT:        float = 0.33           # 1トレードに買付余力の33%（≒実質1倍レバ/ポジ、3銘柄同時保有前提）
 
 # 信用倍率（松井証券 一日信用）: 委託保証金率30% → 最大3.3倍
 MARGIN_RATIO: float = 3.3
@@ -67,7 +67,7 @@ JP_MAX_POSITION_JPY: float = JP_CAPITAL_JPY * MARGIN_RATIO   # 99万円
 # 1単元(100株)が買える最大株価
 # JP_MAX_POSITION_JPY × POSITION_PCT / 100株
 LOT_SIZE: int = 100   # JP株の最低売買単位（100株）
-MAX_STOCK_PRICE: float = JP_MAX_POSITION_JPY * POSITION_PCT / LOT_SIZE  # 4,950円/株
+MAX_STOCK_PRICE: float = JP_MAX_POSITION_JPY * POSITION_PCT / LOT_SIZE  # 3,267円/株（99万×33%÷100株）
 
 BTC_CAPITAL_USD: float = BTC_CAPITAL_JPY / USD_JPY_RATE   # ≈ 667 USD
 
