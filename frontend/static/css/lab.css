@@ -379,3 +379,21 @@ html, body { overflow: auto; }
   font-weight: bold;
   letter-spacing: -1px;
 }
+
+/* ── Results tab filter ── */
+.tab-btn {
+  background: none;
+  border: 1px solid #1a3a1a;
+  color: var(--text-dim);
+  font-family: 'Courier New', monospace;
+  font-size: 9px;
+  padding: 2px 8px;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+}
+.tab-btn.active {
+  border-color: var(--green);
+  color: var(--green);
+  background: #0a1a0a;
+}
+.tab-btn:hover { border-color: #2a5a2a; color: #aaa; }

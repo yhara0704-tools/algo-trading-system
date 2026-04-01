@@ -5,6 +5,7 @@ let equityChart = null;
 let selectedStrategyId = null;
 let allResults = {};
 let pollingTimer = null;
+let resultsTab = 'jp'; // デフォルトはJP株
 
 // ── Init ──────────────────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', async () => {
@@ -181,11 +182,25 @@ function updateStrategyStatuses(running) {
   });
 }
 
+// ── Tab filter ────────────────────────────────────────────────────────────────
+function setResultsTab(tab) {
+  resultsTab = tab;
+  ['jp', 'btc', 'all'].forEach(t => {
+    document.getElementById(`tab-${t}`)?.classList.toggle('active', t === tab);
+  });
+  renderResultsTable(Object.values(allResults));
+}
+
 // ── Render: Results table ──────────────────────────────────────────────────────
 function renderResultsTable(results) {
   if (!results.length) return;
+  const filtered = results.filter(r => {
+    if (resultsTab === 'jp')  return r.symbol?.endsWith('.T');
+    if (resultsTab === 'btc') return !r.symbol?.endsWith('.T');
+    return true;
+  });
   const tbody = document.getElementById('results-tbody');
-  const sorted = [...results].sort((a, b) => b.score - a.score);
+  const sorted = [...filtered].sort((a, b) => b.score - a.score);
   tbody.innerHTML = '';
   for (const r of sorted) {
     const tr = document.createElement('tr');
