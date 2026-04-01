@@ -272,6 +272,9 @@ async def _jp_slow_loop() -> None:
             logger.info("JP cycle #%d done. Stage=%d Best=%.0f円/日 [%s]",
                         cycle, pdca["current_stage"],
                         summary["best_daily_jpy"], summary["best_strategy"])
+            # 自動分析をブロードキャスト
+            analysis = lab_runner.generate_analysis(results)
+            await manager.broadcast({"type": "analysis_update", "text": analysis})
             # 知識ベース保存
             from backend.analysis.strategy_knowledge import get_kb
             get_kb().save()

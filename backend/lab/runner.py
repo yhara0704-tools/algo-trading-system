@@ -320,6 +320,12 @@ class LabRunner:
         self._cycle_total:     int = 0   # 現サイクルの戦略総数
         self._cycle_done:      int = 0   # 現サイクルの完了数
         self._on_strategy_done = None    # コールバック: strategy_done イベント送信用
+        # 資金モード
+        self._compounding: bool = False
+        self._compounded_capital: float = JP_CAPITAL_JPY  # 300_000
+        self._effective_capital: float = JP_CAPITAL_JPY
+        # 自動分析
+        self._last_analysis: str = ""
 
     def get_results(self) -> list[dict]:
         snapshot = list(self._results.values())  # 辞書変更と競合しないようコピー
@@ -423,6 +429,66 @@ class LabRunner:
             "all_stages":     [dataclasses.asdict(s) for s in PDCA_STAGES],
             "screen_results": self._pdca.screen_results,
         }
+
+    def get_settings(self) -> dict:
+        return {"compounding": self._compounding, "compounded_capital": self._compounded_capital}
+
+    def set_compounding(self, enabled: bool) -> None:
+        self._compounding = enabled
+        if not enabled:
+            self._compounded_capital = JP_CAPITAL_JPY
+            self._effective_capital  = JP_CAPITAL_JPY
+
+    def get_analysis(self) -> str:
+        return self._last_analysis
+
+    def generate_analysis(self, results: list[dict]) -> str:
+        """バックテスト結果を分析して日本語テキストを生成する。"""
+        jp_done = [r for r in results if r.get("status") == "done"
+                   and r.get("symbol", "").endswith(".T") and r.get("num_trades", 0) > 0]
+        if not jp_done:
+            return "JP株の有効なバックテスト結果がありません。"
+
+        jp_sorted = sorted(jp_done, key=lambda r: r.get("score", 0), reverse=True)
+        best  = jp_sorted[0]
+        worst = jp_sorted[-1]
+
+        lines = []
+        lines.append(f"【サイクル #{self._pdca.run_count} 分析】")
+        lines.append("")
+        lines.append(f"✅ 最優秀: {best['strategy_name']}")
+        lines.append(f"   日次損益 {best['daily_pnl_jpy']:+,.0f}円 | 勝率 {best['win_rate']:.1f}% | R:R {abs(best.get('avg_win_jpy',0)/best.get('avg_loss_jpy',-1)):.2f} | PF {best['profit_factor']:.2f}")
+
+        good = []
+        if best['win_rate'] >= 55: good.append("勝率が高い")
+        if best['profit_factor'] >= 1.5: good.append("PFが良好")
+        rr_best = abs(best.get('avg_win_jpy', 0) / best.get('avg_loss_jpy', -1)) if best.get('avg_loss_jpy') else 0
+        if rr_best >= 1.5: good.append(f"R:R={rr_best:.2f}で損小利大")
+        if best.get('max_drawdown_pct', 0) > -5: good.append("DDが小さい")
+        if good:
+            lines.append(f"   良い点: {' / '.join(good)}")
+
+        lines.append("")
+        lines.append(f"⚠ 最低: {worst['strategy_name']}")
+        lines.append(f"   日次損益 {worst['daily_pnl_jpy']:+,.0f}円 | 勝率 {worst['win_rate']:.1f}% | PF {worst['profit_factor']:.2f}")
+
+        bad = []
+        if worst['win_rate'] < 45: bad.append("勝率が低い")
+        if worst['profit_factor'] < 1.0: bad.append("損益比が逆転")
+        if worst.get('max_drawdown_pct', 0) < -10: bad.append("DDが大きい")
+        if worst.get('num_trades', 0) < 5: bad.append("取引数が少なすぎる")
+        if bad:
+            lines.append(f"   悪い点: {' / '.join(bad)}")
+
+        lines.append("")
+        lines.append(f"📋 次のアクション: {self._pdca.next_action}")
+
+        if self._compounding and self._compounded_capital != JP_CAPITAL_JPY:
+            lines.append("")
+            lines.append(f"💰 複利資金: {self._compounded_capital:,.0f}円")
+
+        self._last_analysis = "\n".join(lines)
+        return self._last_analysis
 
     def get_live_jp_strategies(self) -> list[StrategyBase]:
         """最新のスクリーニング結果から JP 株戦略を返す（リアルタイム用）。"""
@@ -619,6 +685,23 @@ class LabRunner:
         logger.info("Lab run #%d complete. Best=%.0fJPY/day Action: %s",
                     self._pdca.run_count, self._pdca.best_daily_jpy,
                     self._pdca.next_action[:60])
+
+        # 複利モード: 最優秀戦略のリターンで資金を更新
+        if self._compounding:
+            valid = [r for r in done if r.get("status") == "done"
+                     and r.get("symbol", "").endswith(".T") and r.get("num_trades", 0) > 0]
+            if valid:
+                best_c = max(valid, key=lambda r: r.get("score", 0))
+                ret_pct = best_c.get("total_return_pct", 0) / 100
+                self._compounded_capital = max(
+                    JP_CAPITAL_JPY, self._compounded_capital * (1 + ret_pct)
+                )
+                self._effective_capital = self._compounded_capital
+
+        # 自動言語化分析
+        analysis = self.generate_analysis(done)
+        logger.info("Analysis:\n%s", analysis)
+
         return done
 
     async def _notify_if_stage_cleared(self, prev_stage: int, results: list[dict]) -> None:
@@ -745,7 +828,7 @@ class LabRunner:
             if is_jp:
                 # 現資金に応じたティアを取得してポジションサイズを決定
                 tier = get_tier(JP_CAPITAL_JPY)
-                s_cash     = JP_CAPITAL_JPY * tier.margin   # buying power
+                s_cash     = self._effective_capital * tier.margin   # buying power
                 s_pos_pct  = tier.position_pct
                 # 銘柄の流動性上限をposition_pctに反映
                 liq_limit  = tier.effective_position(strategy.meta.symbol)

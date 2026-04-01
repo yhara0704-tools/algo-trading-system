@@ -3,6 +3,7 @@ from __future__ import annotations
 
 from fastapi import APIRouter, HTTPException, BackgroundTasks
 from pydantic import BaseModel
+from typing import Optional
 
 from backend.lab.runner import LabRunner, get_btc_strategies, get_jp_strategies
 from backend.analysis.time_pattern import get_store as get_pattern_store
@@ -16,6 +17,51 @@ def inject(runner: LabRunner, jp_live=None) -> None:
     global _runner, _jp_live_runner
     _runner = runner
     _jp_live_runner = jp_live
+
+
+class SettingsIn(BaseModel):
+    compounding: bool
+
+
+@router.get("/settings")
+def get_settings():
+    if not _runner:
+        raise HTTPException(503, "Lab not ready")
+    return _runner.get_settings()
+
+
+@router.post("/settings")
+def update_settings(body: SettingsIn):
+    if not _runner:
+        raise HTTPException(503, "Lab not ready")
+    _runner.set_compounding(body.compounding)
+    return _runner.get_settings()
+
+
+@router.get("/ohlcv/{strategy_id}")
+async def get_ohlcv(strategy_id: str, days: int = 30):
+    if not _runner:
+        raise HTTPException(503, "Lab not ready")
+    r = _runner.get_result(strategy_id)
+    if not r:
+        raise HTTPException(404, "No result")
+    from backend.lab.runner import fetch_ohlcv
+    df = await fetch_ohlcv(r["symbol"], r["interval"], days)
+    if df is None or df.empty:
+        return {"candles": [], "trades": r.get("trades", [])}
+    candles = []
+    for ts, row in df.iterrows():
+        t = int(ts.timestamp())
+        candles.append({"time": t, "open": float(row["open"]), "high": float(row["high"]),
+                        "low": float(row["low"]), "close": float(row["close"])})
+    return {"candles": candles, "trades": r.get("trades", [])}
+
+
+@router.get("/analysis")
+def get_analysis():
+    if not _runner:
+        raise HTTPException(503, "Lab not ready")
+    return {"analysis": _runner.get_analysis()}
 
 
 @router.get("/strategies")

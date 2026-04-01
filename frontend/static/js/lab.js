@@ -10,7 +10,7 @@ let resultsTab = 'jp'; // デフォルトはJP株
 // ── Init ──────────────────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', async () => {
   document.getElementById('btn-run-all').addEventListener('click', runAll);
-  await Promise.all([loadStrategies(), loadResults(), loadPdca(), loadRegime(), loadRegimeAnalysis(), loadReadiness()]);
+  await Promise.all([loadStrategies(), loadResults(), loadPdca(), loadRegime(), loadRegimeAnalysis(), loadReadiness(), loadSettings(), loadAnalysis()]);
   startPolling();
   connectWS();
 });
@@ -27,6 +27,8 @@ function connectWS() {
     } else if (msg.type === 'strategy_done') {
       updateProgress(msg.done, msg.total);
       await loadResults();
+    } else if (msg.type === 'analysis_update') {
+      document.getElementById('analysis-panel').textContent = msg.text;
     }
   };
   ws.onclose = () => setTimeout(connectWS, 5000);
@@ -70,7 +72,7 @@ function showToast(text) {
 function startPolling() {
   if (pollingTimer) clearInterval(pollingTimer);
   pollingTimer = setInterval(async () => {
-    await Promise.all([loadResults(), loadPdca(), loadRegime(), loadRegimeAnalysis(), loadReadiness()]);
+    await Promise.all([loadResults(), loadPdca(), loadRegime(), loadRegimeAnalysis(), loadReadiness(), loadSettings(), loadAnalysis()]);
   }, 15000);
 }
 
@@ -273,6 +275,8 @@ function selectStrategy(id) {
   });
   const r = allResults[id];
   if (!r) return;
+  const days = document.getElementById('days-select')?.value || 30;
+  loadCandleChart(id, days);
   renderEquityCurve(r);
   renderStatsDetail(r);
   renderTradeList(r);
@@ -637,4 +641,101 @@ function fmtHold(bars, interval) {
   const total = Math.round(bars * mins);
   if (total < 60) return total + '分';
   return Math.round(total / 60 * 10) / 10 + '時間';
+}
+
+// ── 資金モード (compounding) ────────────────────────────────────────────────────
+async function setCapitalMode(mode) {
+  await fetch(`${API}/lab/settings`, {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({compounding: mode === 'compound'})
+  });
+  await loadSettings();
+}
+
+async function loadSettings() {
+  try {
+    const res  = await fetch(`${API}/lab/settings`);
+    const data = await res.json();
+    const sel  = document.getElementById('capital-mode-select');
+    const lbl  = document.getElementById('compounded-capital-label');
+    if (sel) sel.value = data.compounding ? 'compound' : 'reset';
+    if (lbl) {
+      lbl.style.display = data.compounding ? 'block' : 'none';
+      if (data.compounding) lbl.textContent = `複利資金: ${Math.round(data.compounded_capital).toLocaleString('ja-JP')}円`;
+    }
+  } catch (e) {}
+}
+
+// ── ローソク足チャート ──────────────────────────────────────────────────────────
+let candleChart = null;
+let candleSeries = null;
+
+async function loadCandleChart(strategyId, days) {
+  const d = document.getElementById('days-select')?.value || days || 30;
+  try {
+    const res  = await fetch(`${API}/lab/ohlcv/${strategyId}?days=${d}`);
+    const data = await res.json();
+    renderCandleChart(data.candles, data.trades, allResults[strategyId]);
+  } catch (e) {}
+}
+
+function renderCandleChart(candles, trades, r) {
+  document.getElementById('candle-strategy-name').textContent = r?.strategy_name || '—';
+  const container = document.getElementById('candle-chart');
+  if (candleChart) { candleChart.remove(); candleChart = null; container.innerHTML = ''; }
+  if (!candles.length) return;
+
+  candleChart = LightweightCharts.createChart(container, {
+    layout: { background: {color: '#060f06'}, textColor: '#4a8a4a' },
+    grid:   { vertLines: {color: '#0d1a0d'}, horzLines: {color: '#0d1a0d'} },
+    timeScale:      { timeVisible: true, borderColor: '#1a3a1a' },
+    rightPriceScale: { borderColor: '#1a3a1a' },
+    width:  container.clientWidth,
+    height: 220,
+  });
+
+  candleSeries = candleChart.addCandlestickSeries({
+    upColor:        '#00ff41', downColor:        '#ff3333',
+    borderUpColor:  '#00ff41', borderDownColor:  '#ff3333',
+    wickUpColor:    '#00aa22', wickDownColor:    '#aa2222',
+  });
+  candleSeries.setData(candles);
+
+  // IN/OUTマーカー
+  const markers = [];
+  for (const t of (trades || [])) {
+    const entryTs = Math.floor(new Date(t.entry_time).getTime() / 1000);
+    const exitTs  = Math.floor(new Date(t.exit_time).getTime()  / 1000);
+    const isLong  = t.side === 'long';
+    const win     = t.pnl >= 0;
+    markers.push({
+      time:     entryTs,
+      position: isLong ? 'belowBar' : 'aboveBar',
+      color:    '#00ff41',
+      shape:    isLong ? 'arrowUp' : 'arrowDown',
+      text:     `IN ${t.entry_price}`,
+      size:     1,
+    });
+    markers.push({
+      time:     exitTs,
+      position: isLong ? 'aboveBar' : 'belowBar',
+      color:    win ? '#00aa22' : '#ff3333',
+      shape:    'circle',
+      text:     `OUT ${win ? '+' : ''}${Math.round(t.pnl)}円`,
+      size:     1,
+    });
+  }
+  markers.sort((a, b) => a.time - b.time);
+  candleSeries.setMarkers(markers);
+  candleChart.timeScale().fitContent();
+}
+
+// ── 自動分析 ────────────────────────────────────────────────────────────────────
+async function loadAnalysis() {
+  try {
+    const res  = await fetch(`${API}/lab/analysis`);
+    const data = await res.json();
+    if (data.analysis) document.getElementById('analysis-panel').textContent = data.analysis;
+  } catch (e) {}
 }

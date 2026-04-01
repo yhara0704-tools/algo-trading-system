@@ -72,6 +72,12 @@
         </table>
       </div>
 
+      <!-- Candlestick + trades -->
+      <div class="lab-section-title" style="margin-top:12px">
+        PRICE CHART — <span id="candle-strategy-name">—</span>
+      </div>
+      <div id="candle-chart" style="height:220px;"></div>
+
       <!-- Equity curve -->
       <div class="lab-section-title" style="margin-top:12px">
         EQUITY CURVE — <span id="eq-strategy-name">—</span>
@@ -110,6 +116,14 @@
         <label>USD/JPY
           <input id="usd-jpy-input" type="number" value="150" min="100" max="200" step="1">
         </label>
+        <label style="margin-top:8px;display:flex;align-items:center;gap:8px;">
+          資金モード
+          <select id="capital-mode-select" onchange="setCapitalMode(this.value)">
+            <option value="reset">毎回リセット (30万)</option>
+            <option value="compound">複利モード</option>
+          </select>
+        </label>
+        <div id="compounded-capital-label" style="display:none;font-size:10px;color:#4a6a4a;padding:2px 0;">複利資金: —</div>
       </div>
 
       <div class="lab-section-title" style="margin-top:12px">地合い判定</div>
@@ -126,6 +140,9 @@
 
       <div class="lab-section-title" style="margin-top:12px">JP株 選定結果</div>
       <div id="screen-list"></div>
+
+      <div class="lab-section-title" style="margin-top:12px">自動分析</div>
+      <div id="analysis-panel" style="padding:8px 10px;font-size:10px;color:#8aaa8a;line-height:1.6;white-space:pre-wrap;">—</div>
 
       <div class="lab-section-title" style="margin-top:12px">
         本番移行チェックリスト
