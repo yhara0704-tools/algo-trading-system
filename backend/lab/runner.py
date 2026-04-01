@@ -330,6 +330,10 @@ class LabRunner:
         self._full_leverage_ready_cycles: int = 0   # 条件を満たし続けたサイクル数
         self._full_leverage_notified:     bool = False  # 通知済みフラグ
         _FULL_LEVERAGE_REQUIRED_CYCLES = 5  # 5サイクル連続で条件を満たしたら通知
+        # 実験フレームワーク
+        from backend.lab.experiment import ExperimentManager
+        self._exp_manager = ExperimentManager()
+        self._exp_position_pct_override: float | None = None
 
     def get_results(self) -> list[dict]:
         snapshot = list(self._results.values())  # 辞書変更と競合しないようコピー
@@ -445,6 +449,9 @@ class LabRunner:
 
     def get_analysis(self) -> str:
         return self._last_analysis
+
+    def get_experiment_status(self) -> dict:
+        return self._exp_manager.get_status()
 
     def generate_analysis(self, results: list[dict]) -> str:
         """バックテスト結果を分析して日本語テキストを生成する。"""
@@ -650,6 +657,15 @@ class LabRunner:
 
     async def run_all(self, days: int = 30, usd_jpy: float = 150.0) -> list[dict]:
         """スクリーニング → BTC + JP + パラメータ探索 を並列バックテスト。"""
+        # 実験フレームワークのオーバーライドを取得
+        exp_overrides = self._exp_manager.get_overrides()
+        exp_pos_pct = exp_overrides.get("position_pct_override")  # Noneなら通常設定を使用
+        exp_avoid_opening = exp_overrides.get("avoid_opening")     # Noneなら通常設定を使用
+        days_override = exp_overrides.get("days_override")
+        # days_overrideがあれば上書き
+        if days_override:
+            days = days_override
+
         self._pdca.run_count += 1
         logger.info("Lab run #%d start", self._pdca.run_count)
 
@@ -709,6 +725,14 @@ class LabRunner:
 
         self._cycle_total = len(all_strats)
         self._cycle_done  = 0
+
+        # 実験オーバーライド: position_pctを一時的に上書き
+        if exp_pos_pct is not None:
+            self._effective_capital = JP_CAPITAL_JPY  # リセット
+            self._exp_position_pct_override = exp_pos_pct
+        else:
+            self._exp_position_pct_override = None
+
         tasks = [self._run_one(s, days=days, usd_jpy=usd_jpy) for s in all_strats]
         raw   = await asyncio.gather(*tasks, return_exceptions=True)
 
@@ -743,6 +767,22 @@ class LabRunner:
         # 自動言語化分析
         analysis = self.generate_analysis(done)
         logger.info("Analysis:\n%s", analysis)
+
+        # 実験フレームワークへ結果を記録
+        exp_event = self._exp_manager.record_cycle(done)
+        if exp_event:
+            if exp_event.get("experiment_done"):
+                logger.info("=== %s 完了 ===\n%s", exp_event["exp_id"], exp_event["conclusion"])
+                try:
+                    push(
+                        title=f"EXP完了: {exp_event['exp_id']} {exp_event['exp_name']}",
+                        message=f"勝者: {exp_event['winner']}\n\n{exp_event['conclusion'][:300]}",
+                        priority=1,
+                    )
+                except Exception:
+                    pass
+            elif exp_event.get("group_done"):
+                logger.info("グループ %s 完了 → 次: %s", exp_event["group_name"], exp_event["next_group"])
 
         return done
 
@@ -876,6 +916,10 @@ class LabRunner:
                 liq_limit  = tier.effective_position(strategy.meta.symbol)
                 max_by_liq = liq_limit / s_cash if s_cash > 0 else s_pos_pct
                 s_pos_pct  = min(s_pos_pct, max_by_liq)
+                # 実験オーバーライドがあれば上書き
+                if self._exp_position_pct_override is not None:
+                    s_pos_pct = self._exp_position_pct_override
+                    s_cash = JP_CAPITAL_JPY * MARGIN_RATIO  # 実験時は常に基本資金で計算
             else:
                 s_cash    = BTC_CAPITAL_USD
                 s_pos_pct = POSITION_PCT

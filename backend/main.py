@@ -275,6 +275,9 @@ async def _jp_slow_loop() -> None:
             # 自動分析をブロードキャスト
             analysis = lab_runner.generate_analysis(results)
             await manager.broadcast({"type": "analysis_update", "text": analysis})
+            # 実験ステータスをブロードキャスト
+            exp_status = lab_runner.get_experiment_status()
+            await manager.broadcast({"type": "experiment_update", **exp_status})
             # 知識ベース保存
             from backend.analysis.strategy_knowledge import get_kb
             get_kb().save()

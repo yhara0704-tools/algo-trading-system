@@ -10,7 +10,7 @@ let resultsTab = 'jp'; // デフォルトはJP株
 // ── Init ──────────────────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', async () => {
   document.getElementById('btn-run-all').addEventListener('click', runAll);
-  await Promise.all([loadStrategies(), loadResults(), loadPdca(), loadRegime(), loadRegimeAnalysis(), loadReadiness(), loadSettings(), loadAnalysis()]);
+  await Promise.all([loadStrategies(), loadResults(), loadPdca(), loadRegime(), loadRegimeAnalysis(), loadReadiness(), loadSettings(), loadAnalysis(), loadExperiment()]);
   startPolling();
   connectWS();
 });
@@ -29,6 +29,8 @@ function connectWS() {
       await loadResults();
     } else if (msg.type === 'analysis_update') {
       document.getElementById('analysis-panel').textContent = msg.text;
+    } else if (msg.type === 'experiment_update') {
+      renderExperiment(msg);
     }
   };
   ws.onclose = () => setTimeout(connectWS, 5000);
@@ -72,7 +74,7 @@ function showToast(text) {
 function startPolling() {
   if (pollingTimer) clearInterval(pollingTimer);
   pollingTimer = setInterval(async () => {
-    await Promise.all([loadResults(), loadPdca(), loadRegime(), loadRegimeAnalysis(), loadReadiness(), loadSettings(), loadAnalysis()]);
+    await Promise.all([loadResults(), loadPdca(), loadRegime(), loadRegimeAnalysis(), loadReadiness(), loadSettings(), loadAnalysis(), loadExperiment()]);
   }, 15000);
 }
 
@@ -752,4 +754,59 @@ async function loadAnalysis() {
     const data = await res.json();
     if (data.analysis) document.getElementById('analysis-panel').textContent = data.analysis;
   } catch (e) {}
+}
+
+// ── 実験フレームワーク ────────────────────────────────────────────────────────────
+function renderExperiment(data) {
+  const panel = document.getElementById('experiment-panel');
+  const badge = document.getElementById('exp-id-badge');
+  if (!panel) return;
+
+  if (data.status === '全実験完了') {
+    badge.textContent = '完了';
+    panel.textContent = '全実験完了。結論は各実験の完了通知を確認してください。';
+    return;
+  }
+
+  badge.textContent = data.exp_id || '';
+
+  const progress = data.cycles_per_group > 0
+    ? `${data.cycle_in_group}/${data.cycles_per_group}`
+    : '';
+
+  let html = `<div style="color:#00ff41;margin-bottom:4px;">${data.exp_name}</div>`;
+  html += `<div style="color:#4a6a4a;margin-bottom:6px;font-size:9px;">${data.hypothesis}</div>`;
+  html += `<div style="margin-bottom:4px;">現在: <span style="color:#fff;">${data.current_group}</span> ${progress}サイクル</div>`;
+  html += `<div style="color:#4a6a4a;font-size:9px;margin-bottom:8px;">${data.current_group_desc || ''}</div>`;
+
+  // グループ別進捗
+  for (const g of (data.groups || [])) {
+    const isCurrent = g.name === data.current_group;
+    const bar = g.cycles_done > 0 ? '█'.repeat(Math.min(g.cycles_done, 10)) : '░'.repeat(10);
+    const color = isCurrent ? '#00ff41' : (g.cycles_done >= data.cycles_per_group ? '#4a8a4a' : '#2a4a2a');
+    html += `<div style="margin-bottom:2px;color:${color};">`;
+    html += `${g.name}: ${bar} ${g.cycles_done}回`;
+    if (g.stats && g.stats.avg_daily_pnl !== undefined) {
+      html += ` | ${g.stats.avg_daily_pnl >= 0 ? '+' : ''}${Math.round(g.stats.avg_daily_pnl)}円/日`;
+    }
+    html += `</div>`;
+  }
+
+  // 完了済み実験
+  if (data.completed_experiments && data.completed_experiments.length > 0) {
+    html += `<div style="margin-top:8px;color:#4a6a4a;font-size:9px;">完了済み実験:</div>`;
+    for (const e of data.completed_experiments) {
+      html += `<div style="color:#4a8a4a;font-size:9px;">✓ ${e.id}: ${e.winner}</div>`;
+    }
+  }
+
+  panel.innerHTML = html;
+}
+
+async function loadExperiment() {
+  try {
+    const res = await fetch(`${API}/lab/experiment`);
+    const data = await res.json();
+    renderExperiment(data);
+  } catch(e) {}
 }

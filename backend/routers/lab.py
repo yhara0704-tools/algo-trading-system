@@ -300,6 +300,13 @@ def set_best_params(symbol: str, body: dict):
     return {"status": "ok", "symbol": symbol, "params": body}
 
 
+@router.get("/experiment")
+def get_experiment():
+    if not _runner:
+        raise HTTPException(503, "Lab not ready")
+    return _runner.get_experiment_status()
+
+
 @router.get("/capital-plan")
 def get_capital_plan():
     """資金計画・マイルストーン一覧を返す。"""
