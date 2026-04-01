@@ -440,11 +440,16 @@ async def _weekly_prune_loop() -> None:
 def _write_bii_daily(today: str, phase: str,
                      pnl_today: float, pnl_cumulative: float,
                      trade_count: int, win_count: int) -> None:
-    """BII連携用日次JSONを /root/algo_shared/daily/YYYY-MM-DD.json に書き込む。"""
+    """BII連携用日次JSONを /root/algo_shared/daily/YYYY-MM-DD.json に書き込む。
+    書き込み前に検閲モジュールでホワイトリスト適用・バリデーション実施。
+    """
     import json, pathlib
+    from backend.bii.censor import sanitize_daily_json
+
     out_dir = pathlib.Path("/root/algo_shared/daily")
     out_dir.mkdir(parents=True, exist_ok=True)
-    payload = {
+
+    raw = {
         "date":               today,
         "phase":              phase,
         "pnl_today_jpy":      round(pnl_today),
@@ -452,9 +457,15 @@ def _write_bii_daily(today: str, phase: str,
         "trade_count":        trade_count,
         "win_count":          win_count,
     }
+    try:
+        payload = sanitize_daily_json(raw)
+    except ValueError as e:
+        logger.error("BII censor blocked daily write: %s", e)
+        return
+
     path = out_dir / f"{today}.json"
     path.write_text(json.dumps(payload, ensure_ascii=False, indent=2))
-    logger.info("BII daily JSON written: %s", path)
+    logger.info("BII daily JSON written (censored): %s", path)
 
 
 async def _evening_summary_loop() -> None:
