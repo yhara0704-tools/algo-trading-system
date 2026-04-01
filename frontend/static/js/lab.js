@@ -295,6 +295,13 @@ function renderEquityCurve(r) {
   const eq = r.equity_curve || [];
   if (eq.length < 2) return;
 
+  // 横軸: start_date〜end_dateを均等分割した実際の日付
+  const t0 = new Date(r.start_date).getTime() / 1000;
+  const t1 = new Date(r.end_date).getTime()   / 1000;
+  const span = t1 - t0;
+  const base = eq[0]; // 縦軸: 0スタートの累積損益
+
+  const isProfit = eq[eq.length - 1] >= base;
   const chart = LightweightCharts.createChart(container, {
     width:  container.clientWidth,
     height: 200,
@@ -302,16 +309,23 @@ function renderEquityCurve(r) {
     grid:       { vertLines: { color: '#0d1a0d' }, horzLines: { color: '#0d1a0d' } },
     rightPriceScale: { borderColor: '#1a2e1a' },
     timeScale:  { borderColor: '#1a2e1a', timeVisible: false },
+    localization: { priceFormatter: v => (v >= 0 ? '+' : '') + Math.round(v).toLocaleString('ja-JP') + '円' },
   });
 
   const series = chart.addLineSeries({
-    color: eq[eq.length - 1] >= eq[0] ? '#00ff41' : '#ff3333',
+    color: isProfit ? '#00ff41' : '#ff3333',
     lineWidth: 1.5,
-    priceFormat: { type: 'price', precision: 0, minMove: 1 },
+    priceFormat: { type: 'custom', formatter: v => (v >= 0 ? '+' : '') + Math.round(v).toLocaleString('ja-JP') + '円', minMove: 1 },
   });
 
-  const step = Math.max(1, Math.floor(86400 / eq.length));
-  const data = eq.map((v, i) => ({ time: 1700000000 + i * step, value: v }));
+  // ゼロラインを基準線として表示
+  chart.addLineSeries({ color: '#1a3a1a', lineWidth: 1, lineStyle: 2 })
+       .setData([{ time: t0, value: 0 }, { time: t1, value: 0 }]);
+
+  const data = eq.map((v, i) => ({
+    time: Math.round(t0 + (span * i) / (eq.length - 1)),
+    value: v - base,
+  }));
   series.setData(data);
   chart.timeScale().fitContent();
   equityChart = chart;
