@@ -437,15 +437,67 @@ async def _weekly_prune_loop() -> None:
             logger.error("Weekly prune error: %s", e)
 
 
+def _write_bii_daily(today: str, phase: str,
+                     pnl_today: float, pnl_cumulative: float,
+                     trade_count: int, win_count: int) -> None:
+    """BII連携用日次JSONを /root/algo_shared/daily/YYYY-MM-DD.json に書き込む。"""
+    import json, pathlib
+    out_dir = pathlib.Path("/root/algo_shared/daily")
+    out_dir.mkdir(parents=True, exist_ok=True)
+    payload = {
+        "date":               today,
+        "phase":              phase,
+        "pnl_today_jpy":      round(pnl_today),
+        "pnl_cumulative_jpy": round(pnl_cumulative),
+        "trade_count":        trade_count,
+        "win_count":          win_count,
+    }
+    path = out_dir / f"{today}.json"
+    path.write_text(json.dumps(payload, ensure_ascii=False, indent=2))
+    logger.info("BII daily JSON written: %s", path)
+
+
 async def _evening_summary_loop() -> None:
     """毎日19:00〜21:00の間にその日の検証結果サマリーをPushoverで送信する。"""
     from backend.notify import push as _push
 
     sent_today: str = ""   # 送信済み日付
+    bii_written_today: str = ""  # BII JSON書き込み済み日付
 
     while True:
         now   = datetime.now(JST)
         today = now.strftime("%Y-%m-%d")
+
+        # 15:30以降・平日・本日未書き込み → BII日次JSON書き込み
+        if (now.hour * 60 + now.minute >= 15 * 60 + 30
+                and now.weekday() < 5
+                and bii_written_today != today):
+            try:
+                results = lab_runner.get_results()
+                jp_done = [r for r in results
+                           if r.get("num_trades", 0) > 0
+                           and r.get("symbol", "").endswith(".T")]
+                jp_session = jp_live_runner.get_session() if jp_live_runner else None
+                # phase判定
+                if jp_session and jp_session.get("num_trades", 0) > 0:
+                    phase = "paper"
+                    pnl_today   = jp_session.get("total_pnl", 0)
+                    trade_count = jp_session.get("num_trades", 0)
+                    win_count   = jp_session.get("win_count", 0)
+                else:
+                    phase = "backtest"
+                    best = max(jp_done, key=lambda r: r.get("score", 0)) if jp_done else {}
+                    pnl_today   = best.get("daily_pnl_jpy", 0)
+                    trade_count = best.get("num_trades", 0)
+                    win_count   = int(trade_count * best.get("win_rate", 0) / 100) if best else 0
+                # 累積損益: DBから取得
+                from backend.storage.db import get_daily_best_pnl
+                history = get_daily_best_pnl(days=365)
+                pnl_cumulative = sum(v for _, v in history) + pnl_today
+                _write_bii_daily(today, phase, pnl_today, pnl_cumulative, trade_count, win_count)
+                bii_written_today = today
+            except Exception as e:
+                logger.error("BII daily write error: %s", e)
 
         # 19:00〜21:00 かつ本日未送信
         if 19 <= now.hour < 21 and sent_today != today:
