@@ -41,11 +41,15 @@
       <div class="lab-section-title">
         BACKTEST RESULTS
         <span id="results-period-label" style="font-size:10px;color:#4a6a4a;margin-left:8px;">30日間</span>
-        <span style="margin-left:auto;display:flex;gap:4px;">
+        <span style="margin-left:auto;display:flex;gap:4px;align-items:center;">
           <button class="tab-btn active" id="tab-jp"  onclick="setResultsTab('jp')">JP株</button>
           <button class="tab-btn"        id="tab-btc" onclick="setResultsTab('btc')">BTC</button>
           <button class="tab-btn"        id="tab-all" onclick="setResultsTab('all')">ALL</button>
         </span>
+      </div>
+      <div id="progress-bar-wrap">
+        <div id="progress-bar-inner"></div>
+        <span id="progress-label"></span>
       </div>
       <div id="results-table-wrap">
         <table id="results-table">

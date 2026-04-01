@@ -52,7 +52,15 @@ def get_results():
     """All completed backtest results."""
     if not _runner:
         raise HTTPException(503, "Lab not ready")
-    return {"results": _runner.get_results(), "running": _runner.get_running()}
+    return {"results": _runner.get_results(), "running": _runner.get_running(),
+            "progress": _runner.get_progress()}
+
+
+@router.get("/progress")
+def get_progress():
+    if not _runner:
+        raise HTTPException(503, "Lab not ready")
+    return _runner.get_progress()
 
 
 @router.get("/results/{strategy_id}")

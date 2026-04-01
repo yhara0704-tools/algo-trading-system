@@ -22,10 +22,29 @@ function connectWS() {
     const msg = JSON.parse(evt.data);
     if (msg.type === 'lab_report') {
       await Promise.all([loadResults(), loadPdca()]);
-      showToast(`✅ バックテスト完了 — 最優秀: ${msg.best_strategy} ${fmtJpy(msg.best_daily_jpy)}/日`);
+      updateProgress(0, 0);
+      showToast(`✅ サイクル完了 — 最優秀: ${msg.best_strategy} ${fmtJpy(msg.best_daily_jpy)}/日`);
+    } else if (msg.type === 'strategy_done') {
+      updateProgress(msg.done, msg.total);
+      await loadResults();
     }
   };
   ws.onclose = () => setTimeout(connectWS, 5000);
+}
+
+function updateProgress(done, total) {
+  const wrap  = document.getElementById('progress-bar-wrap');
+  const inner = document.getElementById('progress-bar-inner');
+  const label = document.getElementById('progress-label');
+  if (!wrap) return;
+  if (!total) {
+    wrap.style.display = 'none';
+    return;
+  }
+  wrap.style.display = 'flex';
+  const pct = Math.round((done / total) * 100);
+  inner.style.width = pct + '%';
+  label.textContent = `${done} / ${total}`;
 }
 
 function showToast(text) {
@@ -67,10 +86,14 @@ async function loadResults() {
   const data = await res.json();
   const results = data.results || [];
   const running = data.running || [];
+  const progress = data.progress || {};
   results.forEach(r => { allResults[r.strategy_id] = r; });
   renderResultsTable(Object.values(allResults));
   renderRunningList(running);
   updateStrategyStatuses(running);
+  if (progress.total > 0 && progress.done < progress.total) {
+    updateProgress(progress.done, progress.total);
+  }
 }
 
 async function loadPdca() {

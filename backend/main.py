@@ -193,6 +193,7 @@ async def startup():
     polymarket.on_tick(_on_polymarket_tick)
     multi_asset.on_tick(_on_multi_tick)
     paper_broker.on_fill(_on_order_fill)
+    lab_runner._on_strategy_done = manager.broadcast
 
     # DB初期化 + 古いRunRecordをSQLiteへ移行
     get_db()

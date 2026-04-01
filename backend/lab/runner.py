@@ -317,6 +317,9 @@ class LabRunner:
         self._notified_stages: set[int] = set()
         self._btc_cycle:  int = 0   # BTC専用サイクルカウンタ
         self._regime_analysis: dict[str, dict] = {}  # symbol → regime report dict
+        self._cycle_total:     int = 0   # 現サイクルの戦略総数
+        self._cycle_done:      int = 0   # 現サイクルの完了数
+        self._on_strategy_done = None    # コールバック: strategy_done イベント送信用
 
     def get_results(self) -> list[dict]:
         snapshot = list(self._results.values())  # 辞書変更と競合しないようコピー
@@ -332,6 +335,9 @@ class LabRunner:
 
     def get_running(self) -> list[str]:
         return list(self._running)
+
+    def get_progress(self) -> dict:
+        return {"total": self._cycle_total, "done": self._cycle_done}
 
     def build_daily_summary(self, jp_session: dict | None = None) -> str:
         """1日の検証結果サマリー文字列を生成（Pushover送信用）。"""
@@ -513,6 +519,8 @@ class LabRunner:
             pass
 
         btc_strats = get_btc_strategies() + self._generate_variants()
+        self._cycle_total = len(btc_strats)
+        self._cycle_done  = 0
         tasks  = [self._run_one(s, days=days, usd_jpy=usd_jpy) for s in btc_strats]
         raw    = await asyncio.gather(*tasks, return_exceptions=True)
         done   = []
@@ -591,6 +599,8 @@ class LabRunner:
         jp_strats  = get_jp_strategies(screen_results, use_time_patterns=use_tp)
         all_strats = btc_strats + jp_strats
 
+        self._cycle_total = len(all_strats)
+        self._cycle_done  = 0
         tasks = [self._run_one(s, days=days, usd_jpy=usd_jpy) for s in all_strats]
         raw   = await asyncio.gather(*tasks, return_exceptions=True)
 
@@ -835,6 +845,17 @@ class LabRunner:
             return {"status": "error", "strategy_id": sid, "error": str(exc)}
         finally:
             self._running.discard(sid)
+            self._cycle_done += 1
+            if self._on_strategy_done:
+                try:
+                    await self._on_strategy_done({
+                        "type": "strategy_done",
+                        "strategy_id": sid,
+                        "done": self._cycle_done,
+                        "total": self._cycle_total,
+                    })
+                except Exception:
+                    pass
 
     def _auto_pdca(self, results: list[dict], usd_jpy: float) -> None:
         """PDCA自動評価 — 最良戦略を特定し次アクションを自動生成。"""
