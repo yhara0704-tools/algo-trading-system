@@ -236,15 +236,21 @@ function renderResultsTable(results) {
       : robust === true
         ? '<span style="color:#00aa22;font-size:8px;">✓OK</span>'
         : '';
+    const avgWin  = r.avg_win_jpy  || 0;
+    const avgLoss = r.avg_loss_jpy || 0;
+    const rr      = avgLoss !== 0 ? Math.abs(avgWin / avgLoss) : 0;
+    const holdMin = fmtHold(r.avg_duration_bars, r.interval);
     tr.innerHTML = `
       <td>${r.strategy_name} ${robustBadge}</td>
       <td class="${r.win_rate >= 55 ? 'td-up' : 'td-dim'}">${r.win_rate.toFixed(1)}%</td>
       <td class="${r.profit_factor >= 1.5 ? 'td-up' : r.profit_factor < 1 ? 'td-down' : 'td-dim'}">${r.profit_factor.toFixed(2)}</td>
       <td class="td-dim">${r.num_trades}</td>
       <td class="${r.max_drawdown_pct > -5 ? 'td-dim' : 'td-down'}">${r.max_drawdown_pct.toFixed(2)}%</td>
-      <td class="${r.sharpe >= 1 ? 'td-up' : 'td-dim'}">${r.sharpe.toFixed(2)}</td>
       <td class="${dailyJpy >= 1000 ? 'td-up' : dailyJpy < 0 ? 'td-down' : 'td-dim'}">${fmtJpy(dailyJpy)}</td>
-      <td class="${totalRet >= 0 ? 'td-up' : 'td-down'}">${totalRet.toFixed(2)}%</td>
+      <td class="${avgWin > 0 ? 'td-up' : 'td-dim'}">${fmtJpy(avgWin)}</td>
+      <td class="${avgLoss < 0 ? 'td-down' : 'td-dim'}">${fmtJpy(avgLoss)}</td>
+      <td class="${rr >= 1.5 ? 'td-up' : rr < 1 ? 'td-down' : 'td-dim'}">${rr.toFixed(2)}</td>
+      <td class="td-dim">${holdMin}</td>
       <td class="${r.score > 20 ? 'td-up' : 'td-dim'}">${r.score.toFixed(1)}</td>
     `;
     tr.addEventListener('click', () => selectStrategy(r.strategy_id));
@@ -623,4 +629,12 @@ function fmtJpy(v) {
   if (v == null) return '—';
   const sign = v >= 0 ? '+' : '';
   return sign + Math.round(v).toLocaleString('ja-JP') + '円';
+}
+
+function fmtHold(bars, interval) {
+  if (!bars) return '—';
+  const mins = {'1m':1,'5m':5,'15m':15,'1h':60}[interval] || 5;
+  const total = Math.round(bars * mins);
+  if (total < 60) return total + '分';
+  return Math.round(total / 60 * 10) / 10 + '時間';
 }
