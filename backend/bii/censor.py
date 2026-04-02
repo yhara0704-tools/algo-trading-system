@@ -33,7 +33,11 @@ DAILY_JSON_WHITELIST: set[str] = {
     "pnl_cumulative_jpy",
     "trade_count",
     "win_count",
+    "symbol",          # 当日実際に取引した銘柄コードのみ（監視リスト不可）
 }
+
+# symbol は取引ゼロ日は省略可能なのでオプション扱い
+_OPTIONAL_FIELDS: set[str] = {"symbol"}
 
 # ── テキストブロックリスト ────────────────────────────────────────────────────
 # (パターン, 置換文字列)
@@ -101,8 +105,9 @@ def sanitize_daily_json(data: dict[str, Any]) -> dict[str, Any]:
     if removed:
         logger.warning("BII censor: removed fields %s", removed)
 
-    # 必須フィールドチェック
-    missing = DAILY_JSON_WHITELIST - set(cleaned.keys())
+    # 必須フィールドチェック（オプションフィールドは除外）
+    required = DAILY_JSON_WHITELIST - _OPTIONAL_FIELDS
+    missing = required - set(cleaned.keys())
     if missing:
         raise ValueError(f"BII daily JSON: 必須フィールドが不足: {missing}")
 
