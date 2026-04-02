@@ -1,0 +1,196 @@
+{
+  "2413.T": {
+    "params": {
+      "ema_fast": 3,
+      "ema_slow": 8,
+      "tp_pct": 0.006,
+      "sl_pct": 0.003,
+      "atr_min_pct": 0.002,
+      "allow_short": true
+    },
+    "score": 17.6,
+    "daily_pnl_jpy": 128.8,
+    "win_rate": 35.0,
+    "last_updated": "2026-04-01",
+    "source": "auto"
+  },
+  "3697.T": {
+    "params": {
+      "ema_fast": 3,
+      "ema_slow": 5,
+      "tp_pct": 0.005,
+      "sl_pct": 0.003,
+      "atr_min_pct": 0.001,
+      "allow_short": true
+    },
+    "score": 0.0,
+    "daily_pnl_jpy": 0.0,
+    "win_rate": 0.0,
+    "last_updated": "2026-04-01",
+    "source": "manual"
+  },
+  "7267.T": {
+    "params": {
+      "ema_fast": 3,
+      "ema_slow": 8,
+      "tp_pct": 0.005,
+      "sl_pct": 0.003,
+      "atr_min_pct": 0.001,
+      "allow_short": true
+    },
+    "score": 0.0,
+    "daily_pnl_jpy": 0.0,
+    "win_rate": 0.0,
+    "last_updated": "2026-04-01",
+    "source": "manual"
+  },
+  "6645.T": {
+    "params": {
+      "ema_fast": 3,
+      "ema_slow": 8,
+      "tp_pct": 0.003,
+      "sl_pct": 0.002,
+      "atr_min_pct": 0.001,
+      "allow_short": true
+    },
+    "score": 0.0,
+    "daily_pnl_jpy": 0.0,
+    "win_rate": 0.0,
+    "last_updated": "2026-04-01",
+    "source": "manual"
+  },
+  "4568.T": {
+    "params": {
+      "ema_fast": 5,
+      "ema_slow": 10,
+      "tp_pct": 0.005,
+      "sl_pct": 0.003,
+      "atr_min_pct": 0.001,
+      "allow_short": true
+    },
+    "score": 0.0,
+    "daily_pnl_jpy": 0.0,
+    "win_rate": 0.0,
+    "last_updated": "2026-04-01",
+    "source": "manual"
+  },
+  "9432.T": {
+    "params": {
+      "ema_fast": 3,
+      "ema_slow": 8,
+      "tp_pct": 0.005,
+      "sl_pct": 0.003,
+      "atr_min_pct": 0.001,
+      "allow_short": false
+    },
+    "score": 0.0,
+    "daily_pnl_jpy": 0.0,
+    "win_rate": 0.0,
+    "last_updated": "2026-04-01",
+    "source": "manual"
+  },
+  "7203.T": {
+    "params": {
+      "ema_fast": 3,
+      "ema_slow": 5,
+      "tp_pct": 0.005,
+      "sl_pct": 0.003,
+      "atr_min_pct": 0.001,
+      "allow_short": true
+    },
+    "score": 0.0,
+    "daily_pnl_jpy": 0.0,
+    "win_rate": 0.0,
+    "last_updated": "2026-04-01",
+    "source": "manual"
+  },
+  "9433.T": {
+    "params": {
+      "ema_fast": 3,
+      "ema_slow": 5,
+      "tp_pct": 0.004,
+      "sl_pct": 0.002,
+      "atr_min_pct": 0.001,
+      "allow_short": false
+    },
+    "score": 0.0,
+    "daily_pnl_jpy": 0.0,
+    "win_rate": 0.0,
+    "last_updated": "2026-04-01",
+    "source": "manual"
+  },
+  "8306.T": {
+    "params": {
+      "ema_fast": 5,
+      "ema_slow": 13,
+      "tp_pct": 0.005,
+      "sl_pct": 0.003,
+      "atr_min_pct": 0.001,
+      "allow_short": true
+    },
+    "score": 0.0,
+    "daily_pnl_jpy": 0.0,
+    "win_rate": 0.0,
+    "last_updated": "2026-04-01",
+    "source": "manual"
+  },
+  "6758.T": {
+    "params": {
+      "ema_fast": 3,
+      "ema_slow": 8,
+      "tp_pct": 0.005,
+      "sl_pct": 0.003,
+      "atr_min_pct": 0.001,
+      "allow_short": true
+    },
+    "score": 0.0,
+    "daily_pnl_jpy": 0.0,
+    "win_rate": 0.0,
+    "last_updated": "2026-04-01",
+    "source": "manual"
+  },
+  "6098.T": {
+    "params": {
+      "ema_fast": 3,
+      "ema_slow": 5,
+      "tp_pct": 0.005,
+      "sl_pct": 0.003,
+      "atr_min_pct": 0.001,
+      "allow_short": true
+    },
+    "score": 0.0,
+    "daily_pnl_jpy": 0.0,
+    "win_rate": 0.0,
+    "last_updated": "2026-04-01",
+    "source": "manual"
+  },
+  "6954.T": {
+    "params": {
+      "ema_fast": 3,
+      "ema_slow": 8,
+      "tp_pct": 0.005,
+      "sl_pct": 0.003,
+      "atr_min_pct": 0.001,
+      "allow_short": true
+    },
+    "score": 0.0,
+    "daily_pnl_jpy": 0.0,
+    "win_rate": 0.0,
+    "last_updated": "2026-04-01",
+    "source": "manual"
+  },
+  "4385.T": {
+    "params": {
+      "ema_fast": 3,
+      "ema_slow": 8,
+      "tp_pct": 0.006,
+      "sl_pct": 0.003,
+      "atr_min_pct": 0.002
+    },
+    "score": 33.12,
+    "daily_pnl_jpy": 649.1,
+    "win_rate": 45.45,
+    "last_updated": "2026-04-01",
+    "source": "auto"
+  }
+}
