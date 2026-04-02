@@ -29,7 +29,7 @@ ASSET_CATALOGUE: dict[str, dict] = {
     "YM=F":     {"name": "DowJones Fut.", "category": "futures", "currency": "USD"},
     "GC=F":     {"name": "Gold Fut.",     "category": "futures", "currency": "USD"},
     "CL=F":     {"name": "Crude Oil Fut.","category": "futures", "currency": "USD"},
-    "NK=F":     {"name": "Nikkei225 Fut.","category": "futures", "currency": "JPY"},
+    # NK=F 除外: yfinance 1.2.0 で取得不可。^N225（日経225指数）で代替済み
     # ── Japanese Stocks ────────────────────────────────────────────────────────
     "7203.T":   {"name": "Toyota",        "category": "jp_stock","currency": "JPY"},
     "6758.T":   {"name": "Sony",          "category": "jp_stock","currency": "JPY"},

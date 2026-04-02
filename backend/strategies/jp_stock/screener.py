@@ -47,7 +47,7 @@ CANDIDATE_POOL: list[dict] = [
     {"symbol": "6501.T",  "name": "Hitachi",          "sector": "電機",   "note": "ITシフト・高ベータ"},
     {"symbol": "2413.T",  "name": "M3",               "sector": "医療IT", "note": "成長株・高ボラ"},
     # ── 高ボラ・新興系 ─────────────────────────────────────────────────────────
-    {"symbol": "6600.T",  "name": "Kioxia",           "sector": "半導体", "note": "2024上場・超ボラ・ちくわ氏愛用"},
+    # {"symbol": "6600.T", "name": "Kioxia", "sector": "半導体", "note": "2024上場・yfinance未対応のため一時除外"},
     {"symbol": "4385.T",  "name": "Mercari",           "sector": "IT",    "note": "高ボラ・出来高���定"},
     {"symbol": "3697.T",  "name": "SHIFT",             "sector": "IT",    "note": "テック成長株・ボラあり"},
     {"symbol": "4369.T",  "name": "Tri Chemical",      "sector": "化学",  "note": "半導体材料・急騰銘柄"},
