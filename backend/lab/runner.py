@@ -33,6 +33,7 @@ from backend.strategies.jp_stock.jp_vwap import JPVwapReversion
 from backend.strategies.jp_stock.jp_momentum_5min import JPMomentum5Min
 from backend.strategies.jp_stock.jp_scalp import JPScalp
 from backend.strategies.jp_stock.jp_breakout import JPBreakout
+from backend.strategies.jp_stock.jp_macd_rci import JPMacdRci
 from backend.market_regime import MarketRegimeDetector
 from backend.notify import push
 from backend.analysis.time_pattern import get_store as get_pattern_store
@@ -41,6 +42,7 @@ from backend.analysis.overfitting_guard import OverfittingGuard
 from backend.analysis.regime_matcher import get_matcher
 from backend.analysis.regime_backtest import RegimeBacktester, RegimeBacktestReport
 from backend.storage import best_params as bp_store
+from backend.storage import macd_rci_params as mrci_store
 from backend.storage.db import get_daily_best_pnl
 
 logger = logging.getLogger(__name__)
@@ -197,10 +199,33 @@ def _cache_ttl(symbol: str) -> float:
     return 30 * 60
 
 
+def _fetch_file_cache(symbol: str, interval: str, days: int) -> pd.DataFrame | None:
+    """ローカルMacからrsyncされたparquetキャッシュを読む。
+    ファイルパス: /root/algo_shared/ohlcv_cache/{symbol}_{interval}.parquet
+    """
+    import pathlib
+    path = pathlib.Path("/root/algo_shared/ohlcv_cache") / f"{symbol.replace('.', '_')}_{interval}.parquet"
+    if not path.exists():
+        return None
+    try:
+        df = pd.read_parquet(path)
+        # days でスライス
+        if days and not df.empty:
+            cutoff = pd.Timestamp.now(tz="Asia/Tokyo") - pd.Timedelta(days=days)
+            df = df[df.index >= cutoff]
+        if df.empty:
+            return None
+        logger.debug("file cache hit: %s", path.name)
+        return df
+    except Exception as e:
+        logger.warning("file cache read error %s: %s", path, e)
+        return None
+
+
 async def fetch_ohlcv(symbol: str, interval: str, days: int) -> pd.DataFrame:
     if symbol in _SYMBOL_MAP or symbol.endswith("-USD"):
         return await _fetch_binance_ohlcv(symbol, interval, days)
-    # JP株: キャッシュ確認
+    # JP株: メモリキャッシュ確認
     cache_key = f"{symbol}:{interval}:{days}"
     cached = _ohlcv_cache.get(cache_key)
     if cached:
@@ -216,6 +241,12 @@ async def fetch_ohlcv(symbol: str, interval: str, days: int) -> pd.DataFrame:
                 _ohlcv_cache[cache_key] = (time.time(), df)
                 return df
             logger.warning("J-Quants 5min empty for %s, falling back to yfinance", symbol)
+    # ファイルキャッシュ（ローカルMac rsync経由）
+    df_file = _fetch_file_cache(symbol, interval, days)
+    if df_file is not None:
+        _ohlcv_cache[cache_key] = (time.time(), df_file)
+        return df_file
+    # yfinanceフォールバック
     df = await _fetch_yfinance_ohlcv(symbol, interval, days)
     if not df.empty:
         _ohlcv_cache[cache_key] = (time.time(), df)
@@ -242,7 +273,8 @@ def get_jp_strategies(screen_results: list[ScreenResult],
     use_time_patterns=True の場合、蓄積済みの時間帯パターンをフィルターに反映する。
     """
     strategies: list[StrategyBase] = []
-    selected = [r for r in screen_results if r.selected]
+    # 株価が高すぎて1ロット(100株)も買えない銘柄を除外
+    selected = [r for r in screen_results if r.selected and r.price <= MAX_STOCK_PRICE]
     pattern_store = get_pattern_store() if use_time_patterns else None
 
     # 銘柄別最適パラメータ — best_params.json から読み込む（単一ソース）
@@ -266,6 +298,11 @@ def get_jp_strategies(screen_results: list[ScreenResult],
         # ── 既存戦略（ORB・VWAP・Breakout）も比較用に残す ─────────────────────
         strategies.append(JPOpeningRangeBreakout(r.symbol, r.name, range_minutes=10, tp_ratio=2.0, sl_ratio=1.0))
         strategies.append(JPBreakout(r.symbol, r.name, interval="5m"))
+        # ── ユーザー手法: MACD×RCI（weekly_optimize.py が週次更新する最適パラメータ） ──
+        _p5m = mrci_store.get_params_5m(r.symbol)
+        _p1m = mrci_store.get_params_1m(r.symbol)
+        strategies.append(JPMacdRci(r.symbol, r.name, interval="5m", **_p5m))
+        strategies.append(JPMacdRci(r.symbol, r.name, interval="1m", **_p1m))
 
         # TriChemのみ Momentum5m が最良だったので追加
         if r.symbol == "4369.T":
@@ -326,10 +363,7 @@ class LabRunner:
         self._effective_capital: float = JP_CAPITAL_JPY
         # 自動分析
         self._last_analysis: str = ""
-        # フルレバ移行判定
-        self._full_leverage_ready_cycles: int = 0   # 条件を満たし続けたサイクル数
-        self._full_leverage_notified:     bool = False  # 通知済みフラグ
-        _FULL_LEVERAGE_REQUIRED_CYCLES = 5  # 5サイクル連続で条件を満たしたら通知
+        # position_pct はスコア比較で随時見直す（現状 POSITION_PCT=0.33 固定）
         # 実験フレームワーク
         from backend.lab.experiment import ExperimentManager
         self._exp_manager = ExperimentManager()
@@ -498,54 +532,27 @@ class LabRunner:
             lines.append("")
             lines.append(f"💰 複利資金: {self._compounded_capital:,.0f}円")
 
-        # ── フルレバ移行判定 ──────────────────────────────────────────────────
-        rr_best = abs(best.get('avg_win_jpy', 0) / best.get('avg_loss_jpy', -1)) if best.get('avg_loss_jpy') else 0
-        full_lev_ready = (
-            best['win_rate'] >= 55
-            and rr_best >= 1.5
-            and best.get('max_drawdown_pct', -999) >= -5
-            and best['daily_pnl_jpy'] > 0
-        )
-        if full_lev_ready:
-            self._full_leverage_ready_cycles += 1
-        else:
-            self._full_leverage_ready_cycles = 0  # 条件を外れたらリセット
-
-        _REQUIRED = 5
-        if self._full_leverage_ready_cycles >= _REQUIRED and not self._full_leverage_notified:
-            self._full_leverage_notified = True
-            lines.append("")
-            lines.append(f"🚀 【フルレバ移行検討】{_REQUIRED}サイクル連続で条件達成")
-            lines.append(f"   勝率{best['win_rate']:.1f}% / R:R{rr_best:.2f} / DD{best.get('max_drawdown_pct',0):.1f}%")
-            lines.append(f"   → position_pct 0.33→0.50 への引き上げを推奨")
-            try:
-                from backend.notify import push
-                push(
-                    title="🚀 フルレバ移行の準備が整いました",
-                    message=(
-                        f"{_REQUIRED}サイクル連続で安定条件達成。\n"
-                        f"最優秀: {best['strategy_name']}\n"
-                        f"勝率{best['win_rate']:.1f}% / R:R{rr_best:.2f} / DD{best.get('max_drawdown_pct',0):.1f}%\n"
-                        f"→ position_pct 0.33→0.50 への引き上げを検討してください。"
-                    ),
-                    priority=1,
-                )
-            except Exception as exc:
-                logger.warning("Full-leverage notify failed: %s", exc)
-        elif self._full_leverage_ready_cycles > 0:
-            lines.append("")
-            lines.append(f"📈 フルレバ条件: {self._full_leverage_ready_cycles}/{_REQUIRED}サイクル達成中")
+        # position_pct=0.33 固定。スコア比較で見直す場合は手動変更。
 
         self._last_analysis = "\n".join(lines)
         return self._last_analysis
 
     def get_live_jp_strategies(self) -> list[StrategyBase]:
-        """最新のスクリーニング結果から JP 株戦略を返す（リアルタイム用）。"""
+        """最新のスクリーニング結果から JP 株戦略を返す（リアルタイム用）。
+        Robust確定済み銘柄のみを対象にして未検証銘柄での損失を防ぐ。
+        Robust銘柄が0件の場合は全銘柄を対象にする（初期フェーズ）。
+        """
         cached = getattr(self, "_cached_screen", [])
         if not cached:
             return []
         use_tp = self._pdca.run_count > 1
-        return get_jp_strategies(cached, use_time_patterns=use_tp)
+        from backend.storage.macd_rci_params import is_robust as mrci_is_robust
+        robust = [r for r in cached if mrci_is_robust(r.symbol)]
+        live_screen = robust if robust else cached
+        if len(robust) < len(cached):
+            logger.info("JP live: Robust銘柄 %d/%d 件に絞ってライブ実行",
+                        len(robust), len(cached))
+        return get_jp_strategies(live_screen, use_time_patterns=use_tp)
 
     def get_knowledge(self) -> list[dict]:
         """全戦略の知識ベース（地合い別実績・洞察）を返す。"""
@@ -675,7 +682,7 @@ class LabRunner:
             try:
                 screen_results, pts_results = await asyncio.gather(
                     asyncio.wait_for(screen_stocks(top_n=5, capital_jpy=JP_CAPITAL_JPY, margin=MARGIN_RATIO), timeout=120),
-                    asyncio.wait_for(pts_screen(top_n=3), timeout=120),
+                    asyncio.wait_for(pts_screen(top_n=5, max_price=MAX_STOCK_PRICE), timeout=120),
                     return_exceptions=True,
                 )
                 if isinstance(screen_results, Exception):
@@ -940,6 +947,7 @@ class LabRunner:
                     lot_size=s_lot_size,
                     limit_slip_pct=s_slip,
                     short_borrow_fee_annual=0.011 if is_jp else 0.0,
+                    eod_close_time=(15, 20) if is_jp else None,  # JP株1日信用: 15:25クロージングオークション前クローズ
                 )
             )
             self._results[sid] = result
@@ -953,6 +961,7 @@ class LabRunner:
                         position_pct=s_pos_pct, usd_jpy=s_usd_jpy,
                         lot_size=s_lot_size, limit_slip_pct=s_slip,
                         short_borrow_fee_annual=0.011,
+                        eod_close_time=(15, 20),  # JP株1日信用: 15:25クロージングオークション前クローズ
                     )
                     guard  = OverfittingGuard()
                     report = await loop.run_in_executor(
