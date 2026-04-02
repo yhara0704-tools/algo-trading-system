@@ -36,6 +36,7 @@ from backend.routers import lab as lab_router
 from backend.routers import trading as trading_router
 from backend.routers import prompt_lab as prompt_lab_router
 from backend.routers import social as social_router
+from backend.routers import bii as bii_router
 from backend.ws_manager import ConnectionManager
 
 load_dotenv()
@@ -91,6 +92,11 @@ async def prompt_lab_page():
 @app.get("/milestones")
 async def milestones_page():
     return FileResponse(str(_FRONTEND / "milestones.html"))
+
+
+@app.get("/bii")
+async def bii_page():
+    return FileResponse(str(_FRONTEND / "bii.html"))
 
 
 # ── WebSocket hub ──────────────────────────────────────────────────────────────
@@ -176,6 +182,8 @@ app.include_router(lab_router.router)
 prompt_lab_router.inject(prompt_optimizer)
 app.include_router(prompt_lab_router.router)
 app.include_router(social_router.router)
+bii_router.inject(lab_runner)
+app.include_router(bii_router.router)
 
 
 # ── Lifecycle ──────────────────────────────────────────────────────────────────
@@ -439,9 +447,11 @@ async def _weekly_prune_loop() -> None:
 
 def _write_bii_daily(today: str, phase: str,
                      pnl_today: float, pnl_cumulative: float,
-                     trade_count: int, win_count: int) -> None:
+                     trade_count: int, win_count: int,
+                     symbol: str = "") -> None:
     """BII連携用日次JSONを /root/algo_shared/daily/YYYY-MM-DD.json に書き込む。
     書き込み前に検閲モジュールでホワイトリスト適用・バリデーション実施。
+    symbol: 当日実際に取引した銘柄コード（監視リスト不可、空文字なら省略）
     """
     import json, pathlib
     from backend.bii.censor import sanitize_daily_json
@@ -457,6 +467,8 @@ def _write_bii_daily(today: str, phase: str,
         "trade_count":        trade_count,
         "win_count":          win_count,
     }
+    if symbol:
+        raw["symbol"] = symbol
     try:
         payload = sanitize_daily_json(raw)
     except ValueError as e:
@@ -490,23 +502,29 @@ async def _evening_summary_loop() -> None:
                            and r.get("symbol", "").endswith(".T")]
                 jp_session = jp_live_runner.get_session() if jp_live_runner else None
                 # phase判定
+                traded_symbol = ""
                 if jp_session and jp_session.get("num_trades", 0) > 0:
                     phase = "paper"
-                    pnl_today   = jp_session.get("total_pnl", 0)
-                    trade_count = jp_session.get("num_trades", 0)
-                    win_count   = jp_session.get("win_count", 0)
+                    pnl_today     = jp_session.get("total_pnl", 0)
+                    trade_count   = jp_session.get("num_trades", 0)
+                    win_count     = jp_session.get("win_count", 0)
+                    traded_symbol = jp_session.get("symbol", "")
                 else:
                     phase = "backtest"
                     best = max(jp_done, key=lambda r: r.get("score", 0)) if jp_done else {}
-                    pnl_today   = best.get("daily_pnl_jpy", 0)
-                    trade_count = best.get("num_trades", 0)
-                    win_count   = int(trade_count * best.get("win_rate", 0) / 100) if best else 0
+                    pnl_today     = best.get("daily_pnl_jpy", 0)
+                    trade_count   = best.get("num_trades", 0)
+                    win_count     = int(trade_count * best.get("win_rate", 0) / 100) if best else 0
+                    traded_symbol = best.get("symbol", "")
                 # 累積損益: DBから取得
                 from backend.storage.db import get_daily_best_pnl
                 history = get_daily_best_pnl(days=365)
                 pnl_cumulative = sum(v for _, v in history) + pnl_today
-                _write_bii_daily(today, phase, pnl_today, pnl_cumulative, trade_count, win_count)
+                _write_bii_daily(today, phase, pnl_today, pnl_cumulative, trade_count, win_count, traded_symbol)
                 bii_written_today = today
+                # スクリーンショット自動生成（playwright 未インストール時はスキップ）
+                from backend.bii.screenshot import capture as _bii_capture
+                asyncio.create_task(_bii_capture(today))
             except Exception as e:
                 logger.error("BII daily write error: %s", e)
 

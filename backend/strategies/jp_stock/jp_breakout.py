@@ -62,12 +62,14 @@ class JPBreakout(StrategyBase):
         d["vol_ma"]      = d["volume"].rolling(20).mean()
         d["vol_confirm"] = d["volume"] > d["vol_ma"] * 1.3
 
-        # ── 時間帯フィルター（前場のみ: 9:10〜11:30） ────────────────────────
+        # ── 時間帯フィルター（前場: 9:10〜11:30、後場: 12:30〜14:25） ──────────
         idx      = d.index
         time_min = pd.Series(idx.hour * 60 + idx.minute, index=d.index)
-        d["in_session"] = (time_min >= 9 * 60 + 10) & (time_min <= 11 * 60 + 30)
-        d["force_exit"] = time_min >= 11 * 60 + 30
-        d.loc[d["force_exit"], "signal"] = -1
+        am_session = (time_min >= 9 * 60 + 10) & (time_min <= 11 * 60 + 30)
+        pm_session = (time_min >= 12 * 60 + 30) & (time_min <= 15 * 60 + 25)
+        d["in_session"] = am_session | pm_session
+        # 昼休み中はエントリー不可・ポジション保有は継続（EODは engine に委譲）
+        d["lunch_break"] = (time_min > 11 * 60 + 30) & (time_min < 12 * 60 + 30)
 
         # ── エントリー ────────────────────────────────────────────────────────
         entry_mask = (
@@ -75,7 +77,6 @@ class JPBreakout(StrategyBase):
             & d["low_rising"]
             & d["vol_confirm"]
             & d["in_session"]
-            & ~d["force_exit"]
         )
         if self.avoid_slots:
             time_str = pd.Series(idx.strftime("%H:%M"), index=d.index)
@@ -85,8 +86,8 @@ class JPBreakout(StrategyBase):
         d.loc[entry_mask, "stop_loss"]   = d.loc[entry_mask, "close"] * (1 - self.sl_pct)
         d.loc[entry_mask, "take_profit"] = d.loc[entry_mask, "close"] * (1 + self.tp_pct)
 
-        # ── エグジット: 高値ブレイクの失敗（close が recent_high を下回る） ──
-        reversal = (d["close"] < d["recent_high"]) & ~d["force_exit"]
+        # ── エグジット: 高値ブレイクの失敗（セッション中のみ） ──────────────
+        reversal = (d["close"] < d["recent_high"]) & d["in_session"]
         d.loc[reversal & (d["signal"] == 0), "signal"] = -1
 
         return d

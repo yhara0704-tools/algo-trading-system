@@ -80,6 +80,8 @@ def run_backtest(
     lot_size:              int   = 1,        # 最低売買単位（JP株=100, BTC=1）
     limit_slip_pct:        float = 0.003,    # 指値スルー判定: 次足始値が指値からこれ以上離れたらスキップ
     short_borrow_fee_annual: float = 0.011,  # 空売り貸株料（松井一日信用 年率1.1%）
+    eod_close_time: tuple[int, int] | None = None,  # JP株1日信用の強制クローズ時刻 e.g. (14, 25)
+    gate = None,  # AgentGate インスタンス（None = ゲートなし）
 ) -> BacktestResult:
     """Run backtest. df must have DatetimeIndex and OHLCV columns.
 
@@ -95,6 +97,10 @@ def run_backtest(
     """
 
     sig_df = strategy.generate_signals(df)
+
+    # エージェントゲート（オプション）: run_backtest の gate 引数で渡す
+    if gate is not None:
+        sig_df = gate.apply(sig_df)
 
     result = BacktestResult(
         strategy_id=strategy.meta.id,
@@ -165,22 +171,32 @@ def run_backtest(
             exit_price  = None
             exit_reason = None
 
+            # EOD強制クローズ（JP株1日信用対応）
+            if eod_close_time is not None and exit_price is None:
+                bar_h = ts_dt.hour
+                bar_m = ts_dt.minute
+                if (bar_h > eod_close_time[0] or
+                        (bar_h == eod_close_time[0] and bar_m >= eod_close_time[1])):
+                    exit_price, exit_reason = price, "eod_close"
+
             if side == "long":
                 # ロング: 安値がSL以下 → 損切 / 高値がTP以上 → 利確
-                if not np.isnan(sl) and row["low"] <= sl:
-                    exit_price, exit_reason = sl, "stop_loss"
-                elif not np.isnan(tp) and row["high"] >= tp:
-                    exit_price, exit_reason = tp, "take_profit"
-                elif prev["signal"] in (-1, -2):   # 売りシグナル or 強制決済
-                    exit_price, exit_reason = price, "signal"
+                if exit_price is None:
+                    if not np.isnan(sl) and row["low"] <= sl:
+                        exit_price, exit_reason = sl, "stop_loss"
+                    elif not np.isnan(tp) and row["high"] >= tp:
+                        exit_price, exit_reason = tp, "take_profit"
+                    elif prev["signal"] in (-1, -2):   # 売りシグナル or 強制決済
+                        exit_price, exit_reason = price, "signal"
             else:  # short
                 # ショート: 高値がSL以上 → 損切 / 安値がTP以下 → 利確
-                if not np.isnan(sl) and row["high"] >= sl:
-                    exit_price, exit_reason = sl, "stop_loss"
-                elif not np.isnan(tp) and row["low"] <= tp:
-                    exit_price, exit_reason = tp, "take_profit"
-                elif prev["signal"] in (1, -1):    # 買いシグナル or 強制決済
-                    exit_price, exit_reason = price, "signal"
+                if exit_price is None:
+                    if not np.isnan(sl) and row["high"] >= sl:
+                        exit_price, exit_reason = sl, "stop_loss"
+                    elif not np.isnan(tp) and row["low"] <= tp:
+                        exit_price, exit_reason = tp, "take_profit"
+                    elif prev["signal"] in (1, -1):    # 買いシグナル or 強制決済
+                        exit_price, exit_reason = price, "signal"
 
             if exit_price is not None:
                 if side == "long":
@@ -212,6 +228,36 @@ def run_backtest(
                     duration_bars = i - position["entry_bar"],
                 ))
                 position = None
+
+        # --- Pyramid: 保有中にsignal=2が来たら追加買い ---
+        max_pyramid = getattr(strategy.meta, "max_pyramid", 0)
+        if (max_pyramid > 0
+                and position is not None
+                and position["side"] == "long"
+                and position.get("pyramid_count", 0) < max_pyramid
+                and prev["signal"] == 2
+                and resume_after_ts is None):
+            add_price = row["open"]
+            add_net   = add_price * (1 + fee_pct)
+            add_raw   = (equity * position_pct) / add_price
+            if lot_size > 1:
+                add_qty = int(add_raw // lot_size) * lot_size
+            else:
+                add_qty = add_raw
+            if (lot_size <= 1 and add_qty > 0) or (lot_size > 1 and add_qty >= lot_size):
+                old_qty = position["qty"]
+                new_qty = old_qty + add_qty
+                # 加重平均エントリーコスト
+                position["entry_net"] = (
+                    position["entry_net"] * old_qty + add_net * add_qty
+                ) / new_qty
+                position["qty"]           = new_qty
+                position["pyramid_count"] = position.get("pyramid_count", 0) + 1
+                # SLをブレークイーブン（加重平均コスト）に引き上げて初回エントリーを保護
+                if not np.isnan(position.get("stop_loss") or np.nan):
+                    position["stop_loss"] = max(
+                        position["stop_loss"], position["entry_net"]
+                    )
 
         # --- Check for entry (クールダウン中はエントリーしない) ---
         # signal=1: 買いエントリー  signal=-2: 売りエントリー

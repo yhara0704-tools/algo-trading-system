@@ -14,6 +14,7 @@ class StrategyMeta:
     interval: str      # "1m", "5m", "15m", "1h"
     description: str   = ""
     params: dict       = field(default_factory=dict)
+    max_pyramid: int   = 0   # ピラミッドの最大追加回数 (0=無効, signal=2で追加買い)
 
 
 class StrategyBase(ABC):

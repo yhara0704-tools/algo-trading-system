@@ -93,13 +93,27 @@ async def run_all(days: int = 30, usd_jpy: float = 150.0):
     return {"results": results}
 
 
+def _sanitize(obj):
+    """inf / -inf / NaN を JSON 安全な値に変換する。"""
+    import math
+    if isinstance(obj, float):
+        if math.isnan(obj) or math.isinf(obj):
+            return None
+        return obj
+    if isinstance(obj, dict):
+        return {k: _sanitize(v) for k, v in obj.items()}
+    if isinstance(obj, list):
+        return [_sanitize(v) for v in obj]
+    return obj
+
+
 @router.get("/results")
 def get_results():
     """All completed backtest results."""
     if not _runner:
         raise HTTPException(503, "Lab not ready")
-    return {"results": _runner.get_results(), "running": _runner.get_running(),
-            "progress": _runner.get_progress()}
+    return _sanitize({"results": _runner.get_results(), "running": _runner.get_running(),
+                       "progress": _runner.get_progress()})
 
 
 @router.get("/progress")
