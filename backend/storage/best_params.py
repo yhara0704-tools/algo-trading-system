@@ -88,17 +88,21 @@ def _init_if_empty() -> None:
 # ── Public API ────────────────────────────────────────────────────────────────
 
 def get_params(symbol: str) -> dict:
-    """銘柄の最新パラメータを返す。ファイル未設定時はデフォルトを返す。"""
+    """銘柄の最新パラメータを返す。ファイル未設定時はデフォルトを返す。
+    ファイルに不足キーがある場合もデフォルト値で補完する。
+    """
+    _fallback = dict(ema_fast=3, ema_slow=8, tp_pct=0.004, sl_pct=0.002,
+                     atr_min_pct=0.001, allow_short=True)
     _init_if_empty()
     with _lock:
         data = _load_raw()
     entry = data.get(symbol)
     if entry:
-        return dict(entry["params"])
-    return dict(_DEFAULTS.get(symbol, dict(
-        ema_fast=3, ema_slow=8, tp_pct=0.004, sl_pct=0.002,
-        atr_min_pct=0.001, allow_short=True,
-    )))
+        # 不足キーをフォールバックで補完（PDCAが部分更新した場合に対応）
+        params = dict(_DEFAULTS.get(symbol, _fallback))
+        params.update(entry["params"])
+        return params
+    return dict(_DEFAULTS.get(symbol, _fallback))
 
 
 def get_all() -> dict:
