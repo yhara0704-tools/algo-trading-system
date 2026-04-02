@@ -4,8 +4,7 @@
 複数の市場コンテキスト条件でフィルタリングする。
 
 必須条件（両方 OK でなければ見送り）:
-  A: トレンド方向一致  — trend_strict=True: SMA5>SMA20かつclose>SMA5
-                         trend_strict=False: close>SMA20のみ（デフォルト）
+  A: トレンド方向一致  — SMA20/SMA5 の位置関係
   B: 最低出来高確保   — 出来高が直近平均の 50% 以上（流動性チェック）
 
 加点条件（必須数をクリアすれば OK）:
@@ -15,11 +14,6 @@
   F: ローソク足シグナル — 最終足に逆方向の強いシグナルがない
 
 設定デフォルト: A AND B AND (C or D or E or F のうち 1 つ以上)
-
-trend_strict=False（推奨）:
-  5分足スキャルプはシグナルがSMAクロスより先に発火するため、
-  strict モードではほぼ全シグナルが弾かれる。
-  close>SMA20 の緩和条件がスキャルプ手法に適合する。
 """
 from __future__ import annotations
 
@@ -82,9 +76,6 @@ class AgentGate:
         time_end: tuple[int, int] = (14, 45),
         momentum_bars: int = 3,
         additive_needed: int = 1,
-        trend_strict: bool = False,
-        mandatory_a: bool = True,
-        mandatory_b: bool = True,
     ):
         self.sma_fast = sma_fast
         self.sma_slow = sma_slow
@@ -95,9 +86,6 @@ class AgentGate:
         self.time_end = dtime(*time_end)
         self.momentum_bars = momentum_bars
         self.additive_needed = additive_needed
-        self.trend_strict = trend_strict   # True=SMA5>SMA20かつclose>SMA5 / False=close>SMA20のみ
-        self.mandatory_a = mandatory_a     # False=Aを加点扱いにする
-        self.mandatory_b = mandatory_b     # False=Bを加点扱いにする
 
     def precompute(self, df: pd.DataFrame) -> pd.DataFrame:
         """ゲート判定に必要な列を事前計算して付与する。
@@ -138,22 +126,13 @@ class AgentGate:
         vol_ma   = float(row.get("_vol_ma", np.nan))
 
         # ── 必須条件 A: トレンド方向一致 ─────────────────────────────────────
+        # 条件A: 緩和版（close > SMA20のみ）
         if np.isnan(sma_slow):
             a_trend = False
-        elif self.trend_strict:
-            # 厳格モード: SMAクロスオーバー + close位置の両方を確認
-            if np.isnan(sma_fast):
-                a_trend = False
-            elif is_long:
-                a_trend = close > sma_fast and sma_fast > sma_slow
-            else:
-                a_trend = close < sma_fast and sma_fast < sma_slow
+        elif is_long:
+            a_trend = close > sma_slow
         else:
-            # 緩和モード（デフォルト）: close が SMA20 のどちら側かだけ見る
-            if is_long:
-                a_trend = close > sma_slow
-            else:
-                a_trend = close < sma_slow
+            a_trend = close < sma_slow
 
         # ── 必須条件 B: 最低出来高 ────────────────────────────────────────────
         if np.isnan(vol_ma) or vol_ma == 0:
@@ -216,25 +195,14 @@ class AgentGate:
             f_candle = True
 
         # ── ゲート判定 ────────────────────────────────────────────────────────
-        # mandatory_a/b=False の場合、A/B を加点条件として扱う
-        additive_pool = [c_volume_spike, d_time_window, e_momentum, f_candle]
-        if not self.mandatory_a:
-            additive_pool.append(a_trend)
-        if not self.mandatory_b:
-            additive_pool.append(b_volume_min)
-        additive_score = sum(additive_pool)
-
-        mandatory_ok = True
-        if self.mandatory_a:
-            mandatory_ok = mandatory_ok and a_trend
-        if self.mandatory_b:
-            mandatory_ok = mandatory_ok and b_volume_min
-        additive_ok = additive_score >= self.additive_needed
-        go          = mandatory_ok and additive_ok
+        additive_score = sum([c_volume_spike, d_time_window, e_momentum, f_candle])
+        mandatory_ok   = a_trend and b_volume_min
+        additive_ok    = additive_score >= self.additive_needed
+        go             = mandatory_ok and additive_ok
 
         parts = []
-        if self.mandatory_a and not a_trend:      parts.append("A(trend)NG")
-        if self.mandatory_b and not b_volume_min: parts.append("B(vol_min)NG")
+        if not a_trend:      parts.append("A(trend)NG")
+        if not b_volume_min: parts.append("B(vol_min)NG")
         if not additive_ok:  parts.append(f"additive={additive_score}/{self.additive_needed}NG")
         reason = "GO" if go else " / ".join(parts)
 
