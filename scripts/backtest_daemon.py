@@ -183,7 +183,7 @@ async def task_quick_scan(sym: str, name: str) -> dict | None:
 
 # ── タスク: 6手法横断比較 ─────────────────────────────────────────────────────
 
-async def task_multi_strategy(sym: str, name: str) -> None:
+async def task_multi_strategy(sym: str, name: str) -> list[str]:
     try:
         df = await fetch_ohlcv(sym, "5m", FETCH_DAYS)
         if df.empty or len(df) < MIN_BARS:
@@ -229,8 +229,11 @@ async def task_multi_strategy(sym: str, name: str) -> None:
             fit[sym]["best_robust"] = best[1]["robust"]
 
         _save_fit(fit)
+        robust_hits = [k for k, v in strats.items() if v.get("robust")]
+        return [f"{name}({sym}):{k}" for k in robust_hits] if robust_hits else [f"{name}({sym}):NG"]
     except Exception as e:
         logger.warning("  [MS] %s: 全体エラー %s", sym, e)
+        return [f"{name}({sym}):error"]
 
 
 # ── タスク: グリッドサーチ ────────────────────────────────────────────────────
@@ -391,10 +394,13 @@ async def execute_hypothesis(hyp: dict) -> None:
         elif hyp_type == "multi_symbol_group":
             # 銘柄グループ × 全手法
             symbols = hyp.get("symbols", [])
+            ms_results = []
             for sym in symbols:
                 name = next((c["name"] for c in PTS_CANDIDATE_POOL if c["symbol"] == sym), sym)
-                await task_multi_strategy(sym, name)
-            _mark_hypothesis(hyp_id, "done", f"{symbols} 全手法比較完了")
+                hits = await task_multi_strategy(sym, name)
+                ms_results.extend(hits or [])
+            summary = " | ".join(ms_results) if ms_results else "データなし"
+            _mark_hypothesis(hyp_id, "done", summary)
 
         else:
             # 未対応タイプは skip
