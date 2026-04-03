@@ -87,7 +87,6 @@ def get_recent_errors(minutes: int = 60) -> list[str]:
         seen: set[str] = set()
         unique: list[str] = []
         for l in lines:
-            # タイムスタンプ部分を除いてdedup
             key = l[24:] if len(l) > 24 else l
             if key not in seen:
                 seen.add(key)
@@ -95,6 +94,74 @@ def get_recent_errors(minutes: int = 60) -> list[str]:
         return unique[:10]  # 最大10件
     except Exception:
         return []
+
+
+def count_yfinance_errors(minutes: int = 60) -> int:
+    """直近N分のyfinanceエラー件数（重複込み）を返す。"""
+    try:
+        out = subprocess.check_output(
+            ["journalctl", "-u", "algo-trading.service",
+             "--since", f"{minutes} minutes ago", "--no-pager"],
+            stderr=subprocess.DEVNULL, text=True
+        )
+        return sum(1 for l in out.splitlines() if "yfinance" in l and "ERROR" in l)
+    except Exception:
+        return 0
+
+
+# ── 自動修復: yfinance ─────────────────────────────────────────────────────────
+_YFINANCE_TARGET = "1.2.0"
+_REMEDIATION_LOG = Path("/tmp/algo_auto_remediation.log")
+
+
+def _log_remediation(msg: str) -> None:
+    ts = datetime.now(JST).strftime("%Y-%m-%d %H:%M:%S")
+    with open(_REMEDIATION_LOG, "a") as f:
+        f.write(f"{ts} {msg}\n")
+    logger.info(msg)
+
+
+def check_and_fix_yfinance() -> str | None:
+    """yfinanceエラーが多発していたら最新版に上げてサービス再起動。
+    修復を実施した場合はその内容を返す（通知用）。何もしなければNone。
+    """
+    yf_errors = count_yfinance_errors(minutes=65)
+    if yf_errors < 10:
+        return None
+
+    # 現在のバージョン確認
+    try:
+        installed = subprocess.check_output(
+            [str(BASE_DIR / ".venv/bin/pip"), "show", "yfinance"],
+            stderr=subprocess.DEVNULL, text=True
+        )
+        current = next(
+            (l.split(":", 1)[1].strip() for l in installed.splitlines() if l.startswith("Version")),
+            "unknown"
+        )
+    except Exception:
+        current = "unknown"
+
+    if current == _YFINANCE_TARGET:
+        # 最新版なのにエラー多発 → 再起動だけ試みる
+        _log_remediation(f"yfinance {current} already latest but {yf_errors} errors — restarting service")
+        subprocess.run(["systemctl", "restart", "algo-trading.service"], check=False)
+        return f"yfinance {current} 最新版だがエラー多発({yf_errors}件) → サービス再起動"
+
+    # アップグレード実施
+    _log_remediation(f"yfinance upgrade {current} → {_YFINANCE_TARGET} ({yf_errors} errors detected)")
+    try:
+        subprocess.run(
+            [str(BASE_DIR / ".venv/bin/pip"), "install", f"yfinance=={_YFINANCE_TARGET}", "--quiet"],
+            check=True, timeout=120
+        )
+        subprocess.run(["systemctl", "restart", "algo-trading.service"], check=False)
+        subprocess.run(["systemctl", "restart", "backtest-daemon.service"], check=False)
+        _log_remediation(f"yfinance upgraded to {_YFINANCE_TARGET} and services restarted")
+        return f"yfinance {current}→{_YFINANCE_TARGET} 自動アップグレード＆再起動完了 ({yf_errors}件のエラーを検知)"
+    except Exception as e:
+        _log_remediation(f"yfinance upgrade failed: {e}")
+        return f"yfinance アップグレード失敗: {e}"
 
 
 # ── Robust銘柄チェック ──────────────────────────────────────────────────────────
@@ -247,23 +314,31 @@ def run_afternoon() -> None:
 
 # ── モード: hourly ─────────────────────────────────────────────────────────────
 def run_hourly() -> None:
+    # 1. yfinance自動修復（エラー多発時）
+    remediation = check_and_fix_yfinance()
+
+    # 2. サービス状態確認
     services = check_services()
     dead = [s for s, st in services.items() if st != "active"]
     errors = get_recent_errors(minutes=65)
 
-    # どちらも問題なければ通知しない
-    if not dead and not errors:
+    # 問題なく修復もなければ通知しない
+    if not dead and not errors and not remediation:
         logger.info("Hourly check: all OK")
         return
 
     lines = []
+    if remediation:
+        lines.append(f"🔧 自動修復: {remediation}")
     if dead:
         lines.append(f"🚨 停止サービス: {', '.join(dead)}")
     if errors:
         lines.append(f"⚠️ エラー {len(errors)}件:")
         lines += [f"  {e[-70:]}" for e in errors[:5]]
 
-    push("🚨 VPS異常検知", "\n".join(lines), priority=1)
+    priority = 1 if dead else 0
+    push("🔧 VPS自動修復" if remediation and not dead else "🚨 VPS異常検知",
+         "\n".join(lines), priority=priority)
 
 
 # ── エントリーポイント ──────────────────────────────────────────────────────────
