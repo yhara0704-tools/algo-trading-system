@@ -41,6 +41,7 @@ PARAMS_FILE    = DATA_DIR / "macd_rci_params.json"
 POOL_RESULT    = DATA_DIR / "scan_full_pool_result.json"
 HYPOTHESES     = DATA_DIR / "lab_hypotheses.json"
 LAB_LOG        = DATA_DIR / "lab_log.json"
+INSIGHTS_FILE  = DATA_DIR / "trading_insights.json"
 
 # 実装済み戦略一覧（デーモンが解釈できるもの）
 AVAILABLE_STRATEGIES = [
@@ -85,6 +86,12 @@ def _load_results() -> dict:
         except Exception:
             pass
 
+    if INSIGHTS_FILE.exists():
+        try:
+            out["trading_insights"] = json.loads(INSIGHTS_FILE.read_text())
+        except Exception:
+            pass
+
     return out
 
 
@@ -126,6 +133,13 @@ def _build_prompt(results: dict) -> str:
         + ", ".join(f"{r['name']}({r.get('is_daily', 0):+,.0f}円)" for r in sorted(positive, key=lambda x: -x.get("is_daily", 0))[:10])
     )
 
+    # 先人の知恵・実践インサイト
+    insight_lines = []
+    for ins in (results.get("trading_insights") or []):
+        insight_lines.append(f"### {ins['title']} ({ins['date']})")
+        insight_lines.append(ins["body"])
+        insight_lines.append("応用方向: " + " / ".join(ins.get("hypothesis_directions", [])))
+
     # 既存仮説（消化済み・未消化）
     existing = []
     if HYPOTHESES.exists():
@@ -158,6 +172,9 @@ def _build_prompt(results: dict) -> str:
 
 ## 全銘柄スキャンサマリー（MACD×RCIデフォルト）
 {pool_summary}
+
+## 先人の知恵・実践インサイト（仮説生成の参考にすること）
+{chr(10).join(insight_lines) if insight_lines else "  なし"}
 
 ## 既に生成済みの仮説（直近10件）
 {chr(10).join(existing) if existing else "  なし"}
