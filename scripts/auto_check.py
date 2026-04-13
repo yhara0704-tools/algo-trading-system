@@ -31,7 +31,7 @@ BASE_DIR = Path(__file__).parent.parent
 DB_PATH = BASE_DIR / "data" / "algo_trading.db"
 MACD_PARAMS = BASE_DIR / "data" / "macd_rci_params.json"
 BEST_PARAMS  = BASE_DIR / "data" / "best_params.json"
-BII_DAILY_DIR = Path("/root/algo_shared/daily")
+BII_DAILY_DIR = BASE_DIR / "algo_shared" / "daily"
 LOG_LINES = 200  # journalctlで取得する行数
 
 PUSHOVER_URL = "https://api.pushover.net/1/messages.json"

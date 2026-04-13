@@ -79,6 +79,8 @@ _TEXT_BLOCKLIST: list[tuple[re.Pattern, str]] = [
     # ファイルパス
     (re.compile(r"/root/algo[-_]?trading[-_]?system\S*", re.I), "[パス]"),
     (re.compile(r"/root/algo_shared\S*", re.I),                  "[パス]"),
+    (re.compile(r"/Users/\w+/algo[-_]?trading[-_]?system\S*", re.I), "[パス]"),
+    (re.compile(r"/Users/\w+/algo_shared\S*", re.I),                  "[パス]"),
 ]
 
 # ── フェーズの許可値 ─────────────────────────────────────────────────────────

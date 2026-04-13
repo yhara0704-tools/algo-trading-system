@@ -1,0 +1,119 @@
+{
+  "09:00": {
+    "hour": 9,
+    "minute": 0,
+    "n": 70200,
+    "atr_sum": 35931.4181418267,
+    "up_count": 38273,
+    "down_count": 31927,
+    "high_vol_count": 27115
+  },
+  "09:30": {
+    "hour": 9,
+    "minute": 30,
+    "n": 70200,
+    "atr_sum": 19447.403118543712,
+    "up_count": 38232,
+    "down_count": 31968,
+    "high_vol_count": 5714
+  },
+  "10:00": {
+    "hour": 10,
+    "minute": 0,
+    "n": 70200,
+    "atr_sum": 16075.967257042425,
+    "up_count": 41741,
+    "down_count": 28459,
+    "high_vol_count": 1338
+  },
+  "10:30": {
+    "hour": 10,
+    "minute": 30,
+    "n": 70200,
+    "atr_sum": 12536.012059306737,
+    "up_count": 35706,
+    "down_count": 34494,
+    "high_vol_count": 468
+  },
+  "11:00": {
+    "hour": 11,
+    "minute": 0,
+    "n": 70200,
+    "atr_sum": 12104.544959070176,
+    "up_count": 42154,
+    "down_count": 28046,
+    "high_vol_count": 312
+  },
+  "11:30": {
+    "hour": 11,
+    "minute": 30,
+    "n": 11700,
+    "atr_sum": 0.0,
+    "up_count": 11700,
+    "down_count": 0,
+    "high_vol_count": 0
+  },
+  "12:30": {
+    "hour": 12,
+    "minute": 30,
+    "n": 70200,
+    "atr_sum": 14903.688734067911,
+    "up_count": 38426,
+    "down_count": 31774,
+    "high_vol_count": 4599
+  },
+  "13:00": {
+    "hour": 13,
+    "minute": 0,
+    "n": 70200,
+    "atr_sum": 9388.84924049114,
+    "up_count": 36235,
+    "down_count": 33965,
+    "high_vol_count": 0
+  },
+  "13:30": {
+    "hour": 13,
+    "minute": 30,
+    "n": 70200,
+    "atr_sum": 8652.614370072604,
+    "up_count": 41108,
+    "down_count": 29092,
+    "high_vol_count": 0
+  },
+  "14:00": {
+    "hour": 14,
+    "minute": 0,
+    "n": 70200,
+    "atr_sum": 9044.322544811035,
+    "up_count": 34678,
+    "down_count": 35522,
+    "high_vol_count": 446
+  },
+  "14:30": {
+    "hour": 14,
+    "minute": 30,
+    "n": 70200,
+    "atr_sum": 9232.242745919648,
+    "up_count": 38618,
+    "down_count": 31582,
+    "high_vol_count": 0
+  },
+  "15:00": {
+    "hour": 15,
+    "minute": 0,
+    "n": 58500,
+    "atr_sum": 12566.902602406813,
+    "up_count": 34555,
+    "down_count": 23945,
+    "high_vol_count": 1462
+  },
+  "15:30": {
+    "hour": 15,
+    "minute": 30,
+    "n": 11700,
+    "atr_sum": 0.0,
+    "up_count": 11700,
+    "down_count": 0,
+    "high_vol_count": 0
+  }
+}

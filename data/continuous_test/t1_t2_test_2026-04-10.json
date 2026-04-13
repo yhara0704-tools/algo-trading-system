@@ -1,0 +1,522 @@
+{
+  "test_date": "2026-04-10",
+  "start_capital": 300000.0,
+  "target_capital": 1000000.0,
+  "final_capital": 340500.15030000004,
+  "reached_target": false,
+  "days_to_target": 0,
+  "max_drawdown_pct": 8.772407601705817,
+  "max_drawdown_jpy": 30194.64015000005,
+  "bankrupt": false,
+  "win_days": 22,
+  "loss_days": 22,
+  "wait_days": 16,
+  "strategies": [
+    {
+      "name": "MacdRci",
+      "symbol": "9468.T",
+      "oos_pnl": 878.4799397435903,
+      "sensitivity": 0.9964189542121797
+    },
+    {
+      "name": "MacdRci",
+      "symbol": "2432.T",
+      "oos_pnl": 875.5333012195056,
+      "sensitivity": 0.9980620420842826
+    },
+    {
+      "name": "MacdRci",
+      "symbol": "4911.T",
+      "oos_pnl": 862.1509975609703,
+      "sensitivity": 0.9990478708949432
+    },
+    {
+      "name": "MacdRci",
+      "symbol": "2413.T",
+      "oos_pnl": 657.7597560975679,
+      "sensitivity": 0.9988687279229097
+    }
+  ],
+  "daily": [
+    {
+      "date": "2026-01-13",
+      "regime": "trending_down",
+      "traded": true,
+      "pnl": -3100,
+      "cumulative": 296900,
+      "trades": 3
+    },
+    {
+      "date": "2026-01-14",
+      "regime": "trending_down",
+      "traded": true,
+      "pnl": 7978,
+      "cumulative": 304878,
+      "trades": 3
+    },
+    {
+      "date": "2026-01-15",
+      "regime": "trending_down",
+      "traded": true,
+      "pnl": 2900,
+      "cumulative": 307778,
+      "trades": 3
+    },
+    {
+      "date": "2026-01-16",
+      "regime": "trending_down",
+      "traded": true,
+      "pnl": -1000,
+      "cumulative": 306778,
+      "trades": 3
+    },
+    {
+      "date": "2026-01-19",
+      "regime": "trending_down",
+      "traded": true,
+      "pnl": -654,
+      "cumulative": 306124,
+      "trades": 3
+    },
+    {
+      "date": "2026-01-20",
+      "regime": "trending_down",
+      "traded": true,
+      "pnl": 3300,
+      "cumulative": 309424,
+      "trades": 3
+    },
+    {
+      "date": "2026-01-21",
+      "regime": "trending_down",
+      "traded": true,
+      "pnl": -550,
+      "cumulative": 308874,
+      "trades": 3
+    },
+    {
+      "date": "2026-01-22",
+      "regime": "trending_down",
+      "traded": true,
+      "pnl": 3600,
+      "cumulative": 312474,
+      "trades": 3
+    },
+    {
+      "date": "2026-01-23",
+      "regime": "trending_down",
+      "traded": true,
+      "pnl": 1850,
+      "cumulative": 314324,
+      "trades": 3
+    },
+    {
+      "date": "2026-01-26",
+      "regime": "ranging",
+      "traded": false,
+      "pnl": 0,
+      "cumulative": 314324,
+      "trades": 0
+    },
+    {
+      "date": "2026-01-27",
+      "regime": "trending_down",
+      "traded": true,
+      "pnl": -1850,
+      "cumulative": 312474,
+      "trades": 3
+    },
+    {
+      "date": "2026-01-28",
+      "regime": "ranging",
+      "traded": false,
+      "pnl": 0,
+      "cumulative": 312474,
+      "trades": 0
+    },
+    {
+      "date": "2026-01-29",
+      "regime": "trending_down",
+      "traded": true,
+      "pnl": -1950,
+      "cumulative": 310524,
+      "trades": 3
+    },
+    {
+      "date": "2026-01-30",
+      "regime": "trending_up",
+      "traded": false,
+      "pnl": 0,
+      "cumulative": 310524,
+      "trades": 0
+    },
+    {
+      "date": "2026-02-02",
+      "regime": "trending_down",
+      "traded": true,
+      "pnl": 2555,
+      "cumulative": 313078,
+      "trades": 3
+    },
+    {
+      "date": "2026-02-03",
+      "regime": "trending_down",
+      "traded": true,
+      "pnl": 160,
+      "cumulative": 313239,
+      "trades": 3
+    },
+    {
+      "date": "2026-02-04",
+      "regime": "ranging",
+      "traded": false,
+      "pnl": 0,
+      "cumulative": 313239,
+      "trades": 0
+    },
+    {
+      "date": "2026-02-05",
+      "regime": "ranging",
+      "traded": false,
+      "pnl": 0,
+      "cumulative": 313239,
+      "trades": 0
+    },
+    {
+      "date": "2026-02-06",
+      "regime": "trending_down",
+      "traded": true,
+      "pnl": -8310,
+      "cumulative": 304929,
+      "trades": 3
+    },
+    {
+      "date": "2026-02-09",
+      "regime": "ranging",
+      "traded": false,
+      "pnl": 0,
+      "cumulative": 304929,
+      "trades": 0
+    },
+    {
+      "date": "2026-02-10",
+      "regime": "trending_down",
+      "traded": true,
+      "pnl": 13312,
+      "cumulative": 318241,
+      "trades": 3
+    },
+    {
+      "date": "2026-02-12",
+      "regime": "trending_down",
+      "traded": true,
+      "pnl": -1671,
+      "cumulative": 316570,
+      "trades": 3
+    },
+    {
+      "date": "2026-02-13",
+      "regime": "trending_down",
+      "traded": true,
+      "pnl": -5050,
+      "cumulative": 311520,
+      "trades": 3
+    },
+    {
+      "date": "2026-02-16",
+      "regime": "trending_down",
+      "traded": true,
+      "pnl": 4650,
+      "cumulative": 316170,
+      "trades": 3
+    },
+    {
+      "date": "2026-02-17",
+      "regime": "trending_down",
+      "traded": true,
+      "pnl": -6650,
+      "cumulative": 309520,
+      "trades": 3
+    },
+    {
+      "date": "2026-02-18",
+      "regime": "trending_down",
+      "traded": true,
+      "pnl": -11400,
+      "cumulative": 298120,
+      "trades": 3
+    },
+    {
+      "date": "2026-02-19",
+      "regime": "trending_down",
+      "traded": true,
+      "pnl": -9750,
+      "cumulative": 288370,
+      "trades": 3
+    },
+    {
+      "date": "2026-02-20",
+      "regime": "trending_down",
+      "traded": true,
+      "pnl": -324,
+      "cumulative": 288047,
+      "trades": 3
+    },
+    {
+      "date": "2026-02-24",
+      "regime": "ranging",
+      "traded": false,
+      "pnl": 0,
+      "cumulative": 288047,
+      "trades": 0
+    },
+    {
+      "date": "2026-02-25",
+      "regime": "trending_down",
+      "traded": true,
+      "pnl": 7800,
+      "cumulative": 295847,
+      "trades": 3
+    },
+    {
+      "date": "2026-02-26",
+      "regime": "trending_down",
+      "traded": true,
+      "pnl": 27750,
+      "cumulative": 323597,
+      "trades": 3
+    },
+    {
+      "date": "2026-02-27",
+      "regime": "trending_down",
+      "traded": true,
+      "pnl": 8700,
+      "cumulative": 332297,
+      "trades": 3
+    },
+    {
+      "date": "2026-03-02",
+      "regime": "ranging",
+      "traded": false,
+      "pnl": 0,
+      "cumulative": 332297,
+      "trades": 0
+    },
+    {
+      "date": "2026-03-03",
+      "regime": "trending_down",
+      "traded": true,
+      "pnl": -600,
+      "cumulative": 331697,
+      "trades": 3
+    },
+    {
+      "date": "2026-03-04",
+      "regime": "ranging",
+      "traded": false,
+      "pnl": 0,
+      "cumulative": 331697,
+      "trades": 0
+    },
+    {
+      "date": "2026-03-05",
+      "regime": "trending_down",
+      "traded": true,
+      "pnl": -2921,
+      "cumulative": 328776,
+      "trades": 3
+    },
+    {
+      "date": "2026-03-06",
+      "regime": "trending_down",
+      "traded": true,
+      "pnl": 3200,
+      "cumulative": 331976,
+      "trades": 3
+    },
+    {
+      "date": "2026-03-09",
+      "regime": "trending_down",
+      "traded": true,
+      "pnl": -6150,
+      "cumulative": 325826,
+      "trades": 3
+    },
+    {
+      "date": "2026-03-10",
+      "regime": "trending_down",
+      "traded": true,
+      "pnl": -4438,
+      "cumulative": 321388,
+      "trades": 3
+    },
+    {
+      "date": "2026-03-11",
+      "regime": "trending_down",
+      "traded": true,
+      "pnl": 847,
+      "cumulative": 322235,
+      "trades": 3
+    },
+    {
+      "date": "2026-03-12",
+      "regime": "ranging",
+      "traded": false,
+      "pnl": 0,
+      "cumulative": 322235,
+      "trades": 0
+    },
+    {
+      "date": "2026-03-13",
+      "regime": "trending_down",
+      "traded": true,
+      "pnl": 3536,
+      "cumulative": 325772,
+      "trades": 3
+    },
+    {
+      "date": "2026-03-16",
+      "regime": "trending_down",
+      "traded": true,
+      "pnl": -513,
+      "cumulative": 325259,
+      "trades": 3
+    },
+    {
+      "date": "2026-03-17",
+      "regime": "trending_down",
+      "traded": true,
+      "pnl": -2300,
+      "cumulative": 322959,
+      "trades": 3
+    },
+    {
+      "date": "2026-03-18",
+      "regime": "trending_down",
+      "traded": true,
+      "pnl": -6750,
+      "cumulative": 316209,
+      "trades": 3
+    },
+    {
+      "date": "2026-03-19",
+      "regime": "ranging",
+      "traded": false,
+      "pnl": 0,
+      "cumulative": 316209,
+      "trades": 0
+    },
+    {
+      "date": "2026-03-23",
+      "regime": "trending_down",
+      "traded": true,
+      "pnl": 8150,
+      "cumulative": 324359,
+      "trades": 3
+    },
+    {
+      "date": "2026-03-24",
+      "regime": "ranging",
+      "traded": false,
+      "pnl": 0,
+      "cumulative": 324359,
+      "trades": 0
+    },
+    {
+      "date": "2026-03-25",
+      "regime": "trending_down",
+      "traded": true,
+      "pnl": 2490,
+      "cumulative": 326849,
+      "trades": 3
+    },
+    {
+      "date": "2026-03-26",
+      "regime": "trending_down",
+      "traded": true,
+      "pnl": 2791,
+      "cumulative": 329640,
+      "trades": 3
+    },
+    {
+      "date": "2026-03-27",
+      "regime": "trending_down",
+      "traded": true,
+      "pnl": 6950,
+      "cumulative": 336590,
+      "trades": 3
+    },
+    {
+      "date": "2026-03-30",
+      "regime": "trending_down",
+      "traded": true,
+      "pnl": -1550,
+      "cumulative": 335040,
+      "trades": 3
+    },
+    {
+      "date": "2026-03-31",
+      "regime": "ranging",
+      "traded": false,
+      "pnl": 0,
+      "cumulative": 335040,
+      "trades": 0
+    },
+    {
+      "date": "2026-04-01",
+      "regime": "trending_down",
+      "traded": true,
+      "pnl": 4700,
+      "cumulative": 339740,
+      "trades": 2
+    },
+    {
+      "date": "2026-04-02",
+      "regime": "ranging",
+      "traded": false,
+      "pnl": 0,
+      "cumulative": 339740,
+      "trades": 0
+    },
+    {
+      "date": "2026-04-03",
+      "regime": "ranging",
+      "traded": false,
+      "pnl": 0,
+      "cumulative": 339740,
+      "trades": 0
+    },
+    {
+      "date": "2026-04-06",
+      "regime": "ranging",
+      "traded": false,
+      "pnl": 0,
+      "cumulative": 339740,
+      "trades": 0
+    },
+    {
+      "date": "2026-04-07",
+      "regime": "trending_down",
+      "traded": true,
+      "pnl": 1211,
+      "cumulative": 340950,
+      "trades": 2
+    },
+    {
+      "date": "2026-04-08",
+      "regime": "trending_down",
+      "traded": true,
+      "pnl": 3250,
+      "cumulative": 344200,
+      "trades": 2
+    },
+    {
+      "date": "2026-04-09",
+      "regime": "trending_down",
+      "traded": true,
+      "pnl": -3700,
+      "cumulative": 340500,
+      "trades": 2
+    }
+  ]
+}

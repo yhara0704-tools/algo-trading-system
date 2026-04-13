@@ -8,3 +8,6 @@ __pycache__/
 data/*.db
 data/*.db-shm
 data/*.db-wal
+
+# キャッシュ・ランタイム（リポジトリに含めない）
+data/tob_research/_api_cache.json

@@ -79,7 +79,8 @@ def run_backtest(
     subsession_cooldown_min: int = 30,       # ルール発動後の再開待ち時間（分）
     lot_size:              int   = 1,        # 最低売買単位（JP株=100, BTC=1）
     limit_slip_pct:        float = 0.003,    # 指値スルー判定: 次足始値が指値からこれ以上離れたらスキップ
-    short_borrow_fee_annual: float = 0.011,  # 空売り貸株料（松井一日信用 年率1.1%）
+    short_borrow_fee_annual: float = 0.0,    # デイトレ信用 貸株料0%（通常銘柄）
+    short_premium_daily_pct: float = 0.0,   # プレミアム料（前日終値×%/日、0=なし）
     eod_close_time: tuple[int, int] | None = None,  # JP株1日信用の強制クローズ時刻 e.g. (14, 25)
     gate = None,  # AgentGate インスタンス（None = ゲートなし）
 ) -> BacktestResult:
@@ -203,14 +204,16 @@ def run_backtest(
                     exit_net = exit_price * (1 - fee_pct)
                     pnl      = (exit_net - position["entry_net"]) * position["qty"]
                     pnl_pct  = (exit_net / position["entry_net"] - 1) * 100
-                else:  # short: 売値 - 買戻し値 - 貸株料
+                else:  # short: 売値 - 買戻し値 - 貸株料 - プレミアム料
                     exit_net = exit_price * (1 + fee_pct)
                     # 貸株料: 保有時間（バー数）から日数換算して年率から按分
                     hold_bars   = i - position["entry_bar"]
                     bars_per_day = {"1m": 390, "5m": 78}.get(strategy.meta.interval, 78)
-                    hold_days   = hold_bars / bars_per_day
+                    hold_days   = max(hold_bars / bars_per_day, 1/bars_per_day)  # 最低1バー分
                     borrow_cost = position["entry_net"] * position["qty"] * (short_borrow_fee_annual * hold_days / 365)
-                    pnl         = (position["entry_net"] - exit_net) * position["qty"] - borrow_cost
+                    # プレミアム料: 日割り（デイトレでも1日分かかる）
+                    premium_cost = position["entry_net"] * position["qty"] * short_premium_daily_pct if short_premium_daily_pct > 0 else 0
+                    pnl         = (position["entry_net"] - exit_net) * position["qty"] - borrow_cost - premium_cost
                     pnl_pct     = (position["entry_net"] / exit_net - 1) * 100
                 equity  += pnl
 
@@ -229,17 +232,19 @@ def run_backtest(
                 ))
                 position = None
 
-        # --- Pyramid: 保有中にsignal=2が来たら追加買い ---
+        # --- Pyramid: 保有中にsignal=2が来たら追加（ロング・ショート両対応） ---
         max_pyramid = getattr(strategy.meta, "max_pyramid", 0)
         if (max_pyramid > 0
                 and position is not None
-                and position["side"] == "long"
                 and position.get("pyramid_count", 0) < max_pyramid
                 and prev["signal"] == 2
                 and resume_after_ts is None):
             add_price = row["open"]
-            add_net   = add_price * (1 + fee_pct)
-            add_raw   = (equity * position_pct) / add_price
+            if position["side"] == "long":
+                add_net = add_price * (1 + fee_pct)
+            else:
+                add_net = add_price * (1 - fee_pct)
+            add_raw = (equity * position_pct) / add_price
             if lot_size > 1:
                 add_qty = int(add_raw // lot_size) * lot_size
             else:
@@ -253,11 +258,16 @@ def run_backtest(
                 ) / new_qty
                 position["qty"]           = new_qty
                 position["pyramid_count"] = position.get("pyramid_count", 0) + 1
-                # SLをブレークイーブン（加重平均コスト）に引き上げて初回エントリーを保護
+                # SLをブレークイーブンに引き上げて初回エントリーを保護
                 if not np.isnan(position.get("stop_loss") or np.nan):
-                    position["stop_loss"] = max(
-                        position["stop_loss"], position["entry_net"]
-                    )
+                    if position["side"] == "long":
+                        position["stop_loss"] = max(
+                            position["stop_loss"], position["entry_net"]
+                        )
+                    else:  # short: SLを引き下げ（コスト以下にはしない）
+                        position["stop_loss"] = min(
+                            position["stop_loss"], position["entry_net"]
+                        )
 
         # --- Check for entry (クールダウン中はエントリーしない) ---
         # signal=1: 買いエントリー  signal=-2: 売りエントリー
@@ -277,7 +287,16 @@ def run_backtest(
             else:
                 entry_net = entry_price * (1 - fee_pct)   # 売り建て: 売値から手数料引く
 
-            qty_raw = (equity * position_pct) / entry_price
+            if entry_price != entry_price or entry_price <= 0:  # NaN or invalid
+                continue
+            # 動的ロット倍率（戦略からlot_multiplier列が提供されていれば使用）
+            lot_mult = float(prev.get("lot_multiplier", 1.0)) if "lot_multiplier" in prev.index else 1.0
+            if lot_mult != lot_mult or lot_mult <= 0:  # NaN guard
+                lot_mult = 1.0
+            effective_pct = min(position_pct * lot_mult, 0.95)  # 余力の95%を超えない
+            qty_raw = (equity * effective_pct) / entry_price
+            if qty_raw != qty_raw:  # NaN guard
+                continue
             if lot_size > 1:
                 qty = int(qty_raw // lot_size) * lot_size
                 if qty < lot_size:

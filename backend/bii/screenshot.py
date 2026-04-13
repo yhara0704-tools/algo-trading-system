@@ -13,7 +13,7 @@ from datetime import datetime, timezone, timedelta
 logger = logging.getLogger(__name__)
 JST = timezone(timedelta(hours=9))
 
-_OUT_DIR = pathlib.Path("/root/algo_shared/screenshots")
+_OUT_DIR = pathlib.Path(__file__).resolve().parent.parent.parent / "algo_shared" / "screenshots"
 
 
 async def capture(date: str | None = None,

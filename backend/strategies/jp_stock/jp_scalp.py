@@ -104,13 +104,14 @@ class JPScalp(StrategyBase):
         idx      = d.index
         time_min = pd.Series(idx.hour * 60 + idx.minute, index=d.index)
 
-        # 前場のみ(9:10-11:30) or 全日(9:10-14:30) — ちくわ氏スタイル推奨
+        # 前場のみ(9:10-11:30) or 全日(9:10-14:50)
+        # Scalpは短時間決済なので大引け間際でもOK（他手法は14:30締切）
         if self.morning_only:
             d["in_session"] = (time_min >= 9 * 60 + 10) & (time_min <= 11 * 60 + 30)
             d["force_exit"] = time_min >= 11 * 60 + 30
         else:
-            d["in_session"] = (time_min >= 9 * 60 + 10) & (time_min <= 14 * 60 + 30)
-            d["force_exit"] = time_min >= 14 * 60 + 30
+            d["in_session"] = (time_min >= 9 * 60 + 10) & (time_min <= 14 * 60 + 50)
+            d["force_exit"] = time_min >= 14 * 60 + 50
 
         # 強制決済マーク
         d.loc[d["force_exit"], "signal"] = -1

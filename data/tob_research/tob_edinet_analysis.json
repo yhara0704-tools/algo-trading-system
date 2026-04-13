@@ -1,0 +1,1156 @@
+{
+  "generated_at": "2026-04-08T21:50:21.502515",
+  "total_cases": 23,
+  "cases_with_filings": 13,
+  "cases_with_amendments": 13,
+  "cases_with_multi_filers": 10,
+  "results": [
+    {
+      "sec_code": "4581",
+      "name": "大正製薬HD",
+      "tob_date": "2023-11-24",
+      "tob_type": "MBO",
+      "lookback_months": 6,
+      "total_filings": 0,
+      "amendment_count": 0,
+      "change_report_count": 0,
+      "new_report_count": 0,
+      "unique_filers": [],
+      "filer_count": 0,
+      "has_amendment": false,
+      "has_old_amendment": false,
+      "filings": []
+    },
+    {
+      "sec_code": "9783",
+      "name": "ベネッセHD",
+      "tob_date": "2024-01-30",
+      "tob_type": "MBO",
+      "lookback_months": 6,
+      "total_filings": 9,
+      "amendment_count": 3,
+      "change_report_count": 7,
+      "new_report_count": 1,
+      "unique_filers": [
+        "公益財団法人福武財団",
+        "ＪＰモルガン証券株式会社",
+        "福武　總一郎"
+      ],
+      "filer_count": 3,
+      "has_amendment": true,
+      "has_old_amendment": true,
+      "filings": [
+        {
+          "date": "2023-11-10",
+          "docID": "S100S80F",
+          "docDescription": "変更報告書",
+          "filerName": "福武　總一郎",
+          "issuerEdinetCode": "E04939",
+          "amendmentFlag": "0",
+          "parentDocID": null,
+          "formCode": "010002"
+        },
+        {
+          "date": "2023-11-15",
+          "docID": "S100S9BJ",
+          "docDescription": "変更報告書",
+          "filerName": "福武　總一郎",
+          "issuerEdinetCode": "E04939",
+          "amendmentFlag": "0",
+          "parentDocID": null,
+          "formCode": "010002"
+        },
+        {
+          "date": "2024-01-05",
+          "docID": "S100SKFL",
+          "docDescription": "変更報告書",
+          "filerName": "公益財団法人福武財団",
+          "issuerEdinetCode": "E04939",
+          "amendmentFlag": "0",
+          "parentDocID": "S100I873",
+          "formCode": "010002"
+        },
+        {
+          "date": "2024-01-05",
+          "docID": "S100SKF0",
+          "docDescription": "大量保有報告書（特例対象株券等）",
+          "filerName": "ＪＰモルガン証券株式会社",
+          "issuerEdinetCode": "E04939",
+          "amendmentFlag": "0",
+          "parentDocID": null,
+          "formCode": "030000"
+        },
+        {
+          "date": "2024-01-25",
+          "docID": "S100SNZN",
+          "docDescription": "変更報告書",
+          "filerName": "公益財団法人福武財団",
+          "issuerEdinetCode": "E04939",
+          "amendmentFlag": "0",
+          "parentDocID": "S100I873",
+          "formCode": "010002"
+        },
+        {
+          "date": "2024-01-26",
+          "docID": "S100SNQV",
+          "docDescription": "大量保有報告書",
+          "filerName": "福武　總一郎",
+          "issuerEdinetCode": "E04939",
+          "amendmentFlag": "0",
+          "parentDocID": null,
+          "formCode": "010000"
+        },
+        {
+          "date": "2024-01-26",
+          "docID": "S100SNQV",
+          "docDescription": "変更報告書",
+          "filerName": "福武　總一郎",
+          "issuerEdinetCode": "E04939",
+          "amendmentFlag": "0",
+          "parentDocID": null,
+          "formCode": "010002"
+        },
+        {
+          "date": "2024-01-29",
+          "docID": "S100SOM3",
+          "docDescription": "変更報告書",
+          "filerName": "福武　總一郎",
+          "issuerEdinetCode": "E04939",
+          "amendmentFlag": "0",
+          "parentDocID": null,
+          "formCode": "010002"
+        },
+        {
+          "date": "2024-01-30",
+          "docID": "S100SOWY",
+          "docDescription": "訂正報告書（大量保有報告書・変更報告書）",
+          "filerName": "公益財団法人福武財団",
+          "issuerEdinetCode": "E04939",
+          "amendmentFlag": "0",
+          "parentDocID": "S100SNZN",
+          "formCode": "090001"
+        }
+      ]
+    },
+    {
+      "sec_code": "2899",
+      "name": "永谷園HD",
+      "tob_date": "2024-06-03",
+      "tob_type": "MBO",
+      "lookback_months": 6,
+      "total_filings": 0,
+      "amendment_count": 0,
+      "change_report_count": 0,
+      "new_report_count": 0,
+      "unique_filers": [],
+      "filer_count": 0,
+      "has_amendment": false,
+      "has_old_amendment": false,
+      "filings": []
+    },
+    {
+      "sec_code": "9058",
+      "name": "トランコム",
+      "tob_date": "2024-09-17",
+      "tob_type": "MBO",
+      "lookback_months": 6,
+      "total_filings": 9,
+      "amendment_count": 2,
+      "change_report_count": 9,
+      "new_report_count": 0,
+      "unique_filers": [
+        "ＦＭＲ　ＬＬＣ",
+        "ＮＩＰＰＯＮ　ＡＣＴＩＶＥ　ＶＡＬＵＥ　ＦＵＮＤ　ＰＬＣ"
+      ],
+      "filer_count": 2,
+      "has_amendment": true,
+      "has_old_amendment": true,
+      "filings": [
+        {
+          "date": "2024-05-23",
+          "docID": "S100TH1Y",
+          "docDescription": "変更報告書",
+          "filerName": "ＮＩＰＰＯＮ　ＡＣＴＩＶＥ　ＶＡＬＵＥ　ＦＵＮＤ　ＰＬＣ",
+          "issuerEdinetCode": "E04208",
+          "amendmentFlag": "0",
+          "parentDocID": null,
+          "formCode": "010002"
+        },
+        {
+          "date": "2024-07-17",
+          "docID": "S100U1E8",
+          "docDescription": "変更報告書",
+          "filerName": "ＮＩＰＰＯＮ　ＡＣＴＩＶＥ　ＶＡＬＵＥ　ＦＵＮＤ　ＰＬＣ",
+          "issuerEdinetCode": "E04208",
+          "amendmentFlag": "0",
+          "parentDocID": null,
+          "formCode": "010002"
+        },
+        {
+          "date": "2024-07-18",
+          "docID": "S100U26D",
+          "docDescription": "変更報告書",
+          "filerName": "ＦＭＲ　ＬＬＣ",
+          "issuerEdinetCode": "E04208",
+          "amendmentFlag": "0",
+          "parentDocID": null,
+          "formCode": "010002"
+        },
+        {
+          "date": "2024-07-18",
+          "docID": "S100U25R",
+          "docDescription": "変更報告書",
+          "filerName": "ＮＩＰＰＯＮ　ＡＣＴＩＶＥ　ＶＡＬＵＥ　ＦＵＮＤ　ＰＬＣ",
+          "issuerEdinetCode": "E04208",
+          "amendmentFlag": "0",
+          "parentDocID": null,
+          "formCode": "010002"
+        },
+        {
+          "date": "2024-07-19",
+          "docID": "S100U2H0",
+          "docDescription": "変更報告書",
+          "filerName": "ＮＩＰＰＯＮ　ＡＣＴＩＶＥ　ＶＡＬＵＥ　ＦＵＮＤ　ＰＬＣ",
+          "issuerEdinetCode": "E04208",
+          "amendmentFlag": "0",
+          "parentDocID": null,
+          "formCode": "010002"
+        },
+        {
+          "date": "2024-07-22",
+          "docID": "S100U2PT",
+          "docDescription": "変更報告書（特例対象株券等）",
+          "filerName": "ＦＭＲ　ＬＬＣ",
+          "issuerEdinetCode": "E04208",
+          "amendmentFlag": "0",
+          "parentDocID": "S100U26D",
+          "formCode": "030002"
+        },
+        {
+          "date": "2024-08-08",
+          "docID": "S100U5S8",
+          "docDescription": "変更報告書",
+          "filerName": "ＮＩＰＰＯＮ　ＡＣＴＩＶＥ　ＶＡＬＵＥ　ＦＵＮＤ　ＰＬＣ",
+          "issuerEdinetCode": "E04208",
+          "amendmentFlag": "0",
+          "parentDocID": null,
+          "formCode": "010002"
+        },
+        {
+          "date": "2024-08-22",
+          "docID": "S100U9D0",
+          "docDescription": "変更報告書（特例対象株券等）",
+          "filerName": "ＦＭＲ　ＬＬＣ",
+          "issuerEdinetCode": "E04208",
+          "amendmentFlag": "0",
+          "parentDocID": "S100U26D",
+          "formCode": "030002"
+        },
+        {
+          "date": "2024-08-23",
+          "docID": "S100U98S",
+          "docDescription": "変更報告書",
+          "filerName": "ＮＩＰＰＯＮ　ＡＣＴＩＶＥ　ＶＡＬＵＥ　ＦＵＮＤ　ＰＬＣ",
+          "issuerEdinetCode": "E04208",
+          "amendmentFlag": "0",
+          "parentDocID": null,
+          "formCode": "010002"
+        }
+      ]
+    },
+    {
+      "sec_code": "6640",
+      "name": "I-PEX",
+      "tob_date": "2024-11-07",
+      "tob_type": "MBO",
+      "lookback_months": 6,
+      "total_filings": 2,
+      "amendment_count": 1,
+      "change_report_count": 2,
+      "new_report_count": 0,
+      "unique_filers": [
+        "三井住友トラスト・アセットマネジメント株式会社",
+        "ＤＭＣ株式会社"
+      ],
+      "filer_count": 2,
+      "has_amendment": true,
+      "has_old_amendment": true,
+      "filings": [
+        {
+          "date": "2024-07-04",
+          "docID": "S100TYWW",
+          "docDescription": "変更報告書（特例対象株券等）",
+          "filerName": "三井住友トラスト・アセットマネジメント株式会社",
+          "issuerEdinetCode": "E01876",
+          "amendmentFlag": "0",
+          "parentDocID": "S100SPS3",
+          "formCode": "030002"
+        },
+        {
+          "date": "2024-08-26",
+          "docID": "S100U9CO",
+          "docDescription": "変更報告書",
+          "filerName": "ＤＭＣ株式会社",
+          "issuerEdinetCode": "E01876",
+          "amendmentFlag": "0",
+          "parentDocID": null,
+          "formCode": "010002"
+        }
+      ]
+    },
+    {
+      "sec_code": "4384",
+      "name": "ラクスル",
+      "tob_date": "2025-12-11",
+      "tob_type": "MBO",
+      "lookback_months": 6,
+      "total_filings": 12,
+      "amendment_count": 7,
+      "change_report_count": 10,
+      "new_report_count": 0,
+      "unique_filers": [
+        "野村アセットマネジメント株式会社",
+        "野村證券株式会社",
+        "アセットマネジメントＯｎｅ株式会社",
+        "フィデリティ投信株式会社",
+        "ベイリー・ギフォード・アンド・カンパニー",
+        "三井住友トラスト・アセットマネジメント株式会社"
+      ],
+      "filer_count": 6,
+      "has_amendment": true,
+      "has_old_amendment": true,
+      "filings": [
+        {
+          "date": "2025-06-19",
+          "docID": "S100VYDQ",
+          "docDescription": "変更報告書（特例対象株券等）",
+          "filerName": "三井住友トラスト・アセットマネジメント株式会社",
+          "issuerEdinetCode": "E33966",
+          "amendmentFlag": "0",
+          "parentDocID": "S100J5U5",
+          "formCode": "030002"
+        },
+        {
+          "date": "2025-06-20",
+          "docID": "S100VYTK",
+          "docDescription": "変更報告書（特例対象株券等）",
+          "filerName": "ベイリー・ギフォード・アンド・カンパニー",
+          "issuerEdinetCode": "E33966",
+          "amendmentFlag": "0",
+          "parentDocID": null,
+          "formCode": "030002"
+        },
+        {
+          "date": "2025-07-04",
+          "docID": "S100WAWC",
+          "docDescription": "大量保有報告書（特例対象株券等）",
+          "filerName": "野村アセットマネジメント株式会社",
+          "issuerEdinetCode": "E33966",
+          "amendmentFlag": "0",
+          "parentDocID": null,
+          "formCode": "030000"
+        },
+        {
+          "date": "2025-08-06",
+          "docID": "S100WGQV",
+          "docDescription": "変更報告書（特例対象株券等）",
+          "filerName": "野村證券株式会社",
+          "issuerEdinetCode": "E33966",
+          "amendmentFlag": "0",
+          "parentDocID": null,
+          "formCode": "030002"
+        },
+        {
+          "date": "2025-09-04",
+          "docID": "S100WMST",
+          "docDescription": "変更報告書（特例対象株券等）",
+          "filerName": "野村證券株式会社",
+          "issuerEdinetCode": "E33966",
+          "amendmentFlag": "0",
+          "parentDocID": "S100WGQV",
+          "formCode": "030002"
+        },
+        {
+          "date": "2025-09-19",
+          "docID": "S100WPMA",
+          "docDescription": "大量保有報告書（特例対象株券等）",
+          "filerName": "野村證券株式会社",
+          "issuerEdinetCode": "E33966",
+          "amendmentFlag": "0",
+          "parentDocID": null,
+          "formCode": "030000"
+        },
+        {
+          "date": "2025-09-22",
+          "docID": "S100WPTP",
+          "docDescription": "変更報告書（特例対象株券等）",
+          "filerName": "フィデリティ投信株式会社",
+          "issuerEdinetCode": "E33966",
+          "amendmentFlag": "0",
+          "parentDocID": "S100LLLM",
+          "formCode": "030002"
+        },
+        {
+          "date": "2025-10-07",
+          "docID": "S100WTMP",
+          "docDescription": "変更報告書（特例対象株券等）",
+          "filerName": "野村證券株式会社",
+          "issuerEdinetCode": "E33966",
+          "amendmentFlag": "0",
+          "parentDocID": "S100WPMA",
+          "formCode": "030002"
+        },
+        {
+          "date": "2025-10-07",
+          "docID": "S100WT3C",
+          "docDescription": "変更報告書（特例対象株券等）",
+          "filerName": "フィデリティ投信株式会社",
+          "issuerEdinetCode": "E33966",
+          "amendmentFlag": "0",
+          "parentDocID": "S100LLLM",
+          "formCode": "030002"
+        },
+        {
+          "date": "2025-11-07",
+          "docID": "S100WYVS",
+          "docDescription": "変更報告書（特例対象株券等）",
+          "filerName": "野村證券株式会社",
+          "issuerEdinetCode": "E33966",
+          "amendmentFlag": "0",
+          "parentDocID": "S100WPMA",
+          "formCode": "030002"
+        },
+        {
+          "date": "2025-11-20",
+          "docID": "S100X5FM",
+          "docDescription": "変更報告書（特例対象株券等）",
+          "filerName": "野村證券株式会社",
+          "issuerEdinetCode": "E33966",
+          "amendmentFlag": "0",
+          "parentDocID": "S100WPMA",
+          "formCode": "030002"
+        },
+        {
+          "date": "2025-11-21",
+          "docID": "S100X5UD",
+          "docDescription": "変更報告書（特例対象株券等）",
+          "filerName": "アセットマネジメントＯｎｅ株式会社",
+          "issuerEdinetCode": "E33966",
+          "amendmentFlag": "0",
+          "parentDocID": null,
+          "formCode": "030002"
+        }
+      ]
+    },
+    {
+      "sec_code": "4917",
+      "name": "マンダム",
+      "tob_date": "2025-09-26",
+      "tob_type": "MBO",
+      "lookback_months": 6,
+      "total_filings": 8,
+      "amendment_count": 6,
+      "change_report_count": 7,
+      "new_report_count": 1,
+      "unique_filers": [
+        "三井住友トラスト・アセットマネジメント株式会社",
+        "公益財団法人西村奨学財団",
+        "株式会社シティインデックスイレブンス"
+      ],
+      "filer_count": 3,
+      "has_amendment": true,
+      "has_old_amendment": true,
+      "filings": [
+        {
+          "date": "2025-06-05",
+          "docID": "S100VVB6",
+          "docDescription": "変更報告書（特例対象株券等）",
+          "filerName": "三井住友トラスト・アセットマネジメント株式会社",
+          "issuerEdinetCode": "E01027",
+          "amendmentFlag": "0",
+          "parentDocID": "S100OTTM",
+          "formCode": "030002"
+        },
+        {
+          "date": "2025-06-19",
+          "docID": "S100VYDT",
+          "docDescription": "変更報告書（特例対象株券等）",
+          "filerName": "三井住友トラスト・アセットマネジメント株式会社",
+          "issuerEdinetCode": "E01027",
+          "amendmentFlag": "0",
+          "parentDocID": "S100OTTM",
+          "formCode": "030002"
+        },
+        {
+          "date": "2025-09-18",
+          "docID": "S100WPS3",
+          "docDescription": "変更報告書",
+          "filerName": "公益財団法人西村奨学財団",
+          "issuerEdinetCode": "E01027",
+          "amendmentFlag": "0",
+          "parentDocID": null,
+          "formCode": "010002"
+        },
+        {
+          "date": "2025-09-19",
+          "docID": "S100WPCM",
+          "docDescription": "変更報告書（特例対象株券等）",
+          "filerName": "三井住友トラスト・アセットマネジメント株式会社",
+          "issuerEdinetCode": "E01027",
+          "amendmentFlag": "0",
+          "parentDocID": "S100OTTM",
+          "formCode": "030002"
+        },
+        {
+          "date": "2025-09-24",
+          "docID": "S100WQFH",
+          "docDescription": "大量保有報告書",
+          "filerName": "株式会社シティインデックスイレブンス",
+          "issuerEdinetCode": "E01027",
+          "amendmentFlag": "0",
+          "parentDocID": null,
+          "formCode": "010000"
+        },
+        {
+          "date": "2025-09-25",
+          "docID": "S100WQUI",
+          "docDescription": "変更報告書",
+          "filerName": "株式会社シティインデックスイレブンス",
+          "issuerEdinetCode": "E01027",
+          "amendmentFlag": "0",
+          "parentDocID": "S100WQFH",
+          "formCode": "010002"
+        },
+        {
+          "date": "2025-09-25",
+          "docID": "S100WRAE",
+          "docDescription": "訂正報告書（大量保有報告書・変更報告書）",
+          "filerName": "公益財団法人西村奨学財団",
+          "issuerEdinetCode": "E01027",
+          "amendmentFlag": "0",
+          "parentDocID": "S100WPS3",
+          "formCode": "090001"
+        },
+        {
+          "date": "2025-09-26",
+          "docID": "S100WQUW",
+          "docDescription": "変更報告書",
+          "filerName": "株式会社シティインデックスイレブンス",
+          "issuerEdinetCode": "E01027",
+          "amendmentFlag": "0",
+          "parentDocID": "S100WQFH",
+          "formCode": "010002"
+        }
+      ]
+    },
+    {
+      "sec_code": "6197",
+      "name": "ソラスト",
+      "tob_date": "2026-03-24",
+      "tob_type": "MBO",
+      "lookback_months": 6,
+      "total_filings": 2,
+      "amendment_count": 1,
+      "change_report_count": 1,
+      "new_report_count": 0,
+      "unique_filers": [
+        "野村證券株式会社"
+      ],
+      "filer_count": 1,
+      "has_amendment": true,
+      "has_old_amendment": true,
+      "filings": [
+        {
+          "date": "2026-02-05",
+          "docID": "S100XJ39",
+          "docDescription": "大量保有報告書（特例対象株券等）",
+          "filerName": "野村證券株式会社",
+          "issuerEdinetCode": "E04878",
+          "amendmentFlag": "0",
+          "parentDocID": null,
+          "formCode": "030000"
+        },
+        {
+          "date": "2026-03-03",
+          "docID": "S100XOF7",
+          "docDescription": "変更報告書（特例対象株券等）",
+          "filerName": "野村證券株式会社",
+          "issuerEdinetCode": "E04878",
+          "amendmentFlag": "0",
+          "parentDocID": "S100XJ39",
+          "formCode": "030002"
+        }
+      ]
+    },
+    {
+      "sec_code": "9749",
+      "name": "富士ソフト",
+      "tob_date": "2024-08-01",
+      "tob_type": "ファンド買収",
+      "lookback_months": 6,
+      "total_filings": 6,
+      "amendment_count": 5,
+      "change_report_count": 6,
+      "new_report_count": 0,
+      "unique_filers": [
+        "野村證券株式会社"
+      ],
+      "filer_count": 1,
+      "has_amendment": true,
+      "has_old_amendment": true,
+      "filings": [
+        {
+          "date": "2024-03-25",
+          "docID": "S100T42V",
+          "docDescription": "変更報告書（特例対象株券等）",
+          "filerName": "野村證券株式会社",
+          "issuerEdinetCode": "E04810",
+          "amendmentFlag": "0",
+          "parentDocID": "S100SF5T",
+          "formCode": "030002"
+        },
+        {
+          "date": "2024-04-05",
+          "docID": "S100T8A8",
+          "docDescription": "変更報告書（特例対象株券等）",
+          "filerName": "野村證券株式会社",
+          "issuerEdinetCode": "E04810",
+          "amendmentFlag": "0",
+          "parentDocID": "S100SF5T",
+          "formCode": "030002"
+        },
+        {
+          "date": "2024-04-22",
+          "docID": "S100TB3M",
+          "docDescription": "変更報告書（特例対象株券等）",
+          "filerName": "野村證券株式会社",
+          "issuerEdinetCode": "E04810",
+          "amendmentFlag": "0",
+          "parentDocID": "S100SF5T",
+          "formCode": "030002"
+        },
+        {
+          "date": "2024-06-07",
+          "docID": "S100TKJQ",
+          "docDescription": "変更報告書（特例対象株券等）",
+          "filerName": "野村證券株式会社",
+          "issuerEdinetCode": "E04810",
+          "amendmentFlag": "0",
+          "parentDocID": null,
+          "formCode": "030002"
+        },
+        {
+          "date": "2024-07-04",
+          "docID": "S100TZPH",
+          "docDescription": "変更報告書（特例対象株券等）",
+          "filerName": "野村證券株式会社",
+          "issuerEdinetCode": "E04810",
+          "amendmentFlag": "0",
+          "parentDocID": "S100TKJQ",
+          "formCode": "030002"
+        },
+        {
+          "date": "2024-07-22",
+          "docID": "S100U331",
+          "docDescription": "変更報告書（特例対象株券等）",
+          "filerName": "野村證券株式会社",
+          "issuerEdinetCode": "E04810",
+          "amendmentFlag": "0",
+          "parentDocID": "S100TKJQ",
+          "formCode": "030002"
+        }
+      ]
+    },
+    {
+      "sec_code": "3978",
+      "name": "マクロミル",
+      "tob_date": "2024-11-14",
+      "tob_type": "ファンド買収",
+      "lookback_months": 6,
+      "total_filings": 5,
+      "amendment_count": 4,
+      "change_report_count": 4,
+      "new_report_count": 0,
+      "unique_filers": [
+        "野村アセットマネジメント株式会社",
+        "スパークス・アセット・マネジメント株式会社",
+        "ノルウェー銀行",
+        "三井住友トラスト・アセットマネジメント株式会社"
+      ],
+      "filer_count": 4,
+      "has_amendment": true,
+      "has_old_amendment": true,
+      "filings": [
+        {
+          "date": "2024-06-18",
+          "docID": "S100TN1T",
+          "docDescription": "変更報告書",
+          "filerName": "ノルウェー銀行",
+          "issuerEdinetCode": "E05372",
+          "amendmentFlag": "0",
+          "parentDocID": "S100PYVJ",
+          "formCode": "010002"
+        },
+        {
+          "date": "2024-07-02",
+          "docID": "S100TYSF",
+          "docDescription": "変更報告書（特例対象株券等）",
+          "filerName": "スパークス・アセット・マネジメント株式会社",
+          "issuerEdinetCode": "E05372",
+          "amendmentFlag": "0",
+          "parentDocID": "S100NLQ2",
+          "formCode": "030002"
+        },
+        {
+          "date": "2024-08-08",
+          "docID": "S100U6M3",
+          "docDescription": "変更報告書",
+          "filerName": "ノルウェー銀行",
+          "issuerEdinetCode": "E05372",
+          "amendmentFlag": "0",
+          "parentDocID": "S100PYVJ",
+          "formCode": "010002"
+        },
+        {
+          "date": "2024-09-20",
+          "docID": "S100UDUA",
+          "docDescription": "変更報告書（特例対象株券等）",
+          "filerName": "三井住友トラスト・アセットマネジメント株式会社",
+          "issuerEdinetCode": "E05372",
+          "amendmentFlag": "0",
+          "parentDocID": "S100SZM2",
+          "formCode": "030002"
+        },
+        {
+          "date": "2024-10-18",
+          "docID": "S100UK0C",
+          "docDescription": "大量保有報告書（特例対象株券等）",
+          "filerName": "野村アセットマネジメント株式会社",
+          "issuerEdinetCode": "E05372",
+          "amendmentFlag": "0",
+          "parentDocID": null,
+          "formCode": "030000"
+        }
+      ]
+    },
+    {
+      "sec_code": "7518",
+      "name": "ネットワンシステムズ",
+      "tob_date": "2024-11-06",
+      "tob_type": "第三者買収",
+      "lookback_months": 6,
+      "total_filings": 2,
+      "amendment_count": 2,
+      "change_report_count": 2,
+      "new_report_count": 0,
+      "unique_filers": [
+        "マラソン・アセット・マネジメント・リミテッド"
+      ],
+      "filer_count": 1,
+      "has_amendment": true,
+      "has_old_amendment": true,
+      "filings": [
+        {
+          "date": "2024-06-05",
+          "docID": "S100TK5S",
+          "docDescription": "変更報告書（特例対象株券等）",
+          "filerName": "マラソン・アセット・マネジメント・リミテッド",
+          "issuerEdinetCode": "E04966",
+          "amendmentFlag": "0",
+          "parentDocID": "S100NJC7",
+          "formCode": "030002"
+        },
+        {
+          "date": "2024-07-03",
+          "docID": "S100TZ7W",
+          "docDescription": "変更報告書（特例対象株券等）",
+          "filerName": "マラソン・アセット・マネジメント・リミテッド",
+          "issuerEdinetCode": "E04966",
+          "amendmentFlag": "0",
+          "parentDocID": "S100NJC7",
+          "formCode": "030002"
+        }
+      ]
+    },
+    {
+      "sec_code": "6789",
+      "name": "ローランドDG",
+      "tob_date": "2024-05-01",
+      "tob_type": "ファンド買収",
+      "lookback_months": 6,
+      "total_filings": 6,
+      "amendment_count": 4,
+      "change_report_count": 4,
+      "new_report_count": 0,
+      "unique_filers": [
+        "野村證券株式会社",
+        "タイヨウ・パシフィック・パートナーズ・エルピー",
+        "みずほ証券株式会社"
+      ],
+      "filer_count": 3,
+      "has_amendment": true,
+      "has_old_amendment": true,
+      "filings": [
+        {
+          "date": "2024-02-16",
+          "docID": "S100SWAO",
+          "docDescription": "変更報告書",
+          "filerName": "タイヨウ・パシフィック・パートナーズ・エルピー",
+          "issuerEdinetCode": "E02054",
+          "amendmentFlag": "0",
+          "parentDocID": "S100N5SC",
+          "formCode": "010002"
+        },
+        {
+          "date": "2024-03-07",
+          "docID": "S100T0AM",
+          "docDescription": "大量保有報告書（特例対象株券等）",
+          "filerName": "みずほ証券株式会社",
+          "issuerEdinetCode": "E02054",
+          "amendmentFlag": "0",
+          "parentDocID": null,
+          "formCode": "030000"
+        },
+        {
+          "date": "2024-03-22",
+          "docID": "S100T3CM",
+          "docDescription": "大量保有報告書（特例対象株券等）",
+          "filerName": "野村證券株式会社",
+          "issuerEdinetCode": "E02054",
+          "amendmentFlag": "0",
+          "parentDocID": null,
+          "formCode": "030000"
+        },
+        {
+          "date": "2024-04-05",
+          "docID": "S100T857",
+          "docDescription": "変更報告書（特例対象株券等）",
+          "filerName": "野村證券株式会社",
+          "issuerEdinetCode": "E02054",
+          "amendmentFlag": "0",
+          "parentDocID": "S100T3CM",
+          "formCode": "030002"
+        },
+        {
+          "date": "2024-04-22",
+          "docID": "S100TAUL",
+          "docDescription": "変更報告書（特例対象株券等）",
+          "filerName": "みずほ証券株式会社",
+          "issuerEdinetCode": "E02054",
+          "amendmentFlag": "0",
+          "parentDocID": "S100T0AM",
+          "formCode": "030002"
+        },
+        {
+          "date": "2024-04-22",
+          "docID": "S100TARI",
+          "docDescription": "変更報告書（特例対象株券等）",
+          "filerName": "野村證券株式会社",
+          "issuerEdinetCode": "E02054",
+          "amendmentFlag": "0",
+          "parentDocID": "S100T3CM",
+          "formCode": "030002"
+        }
+      ]
+    },
+    {
+      "sec_code": "3294",
+      "name": "イーグランド",
+      "tob_date": "2026-03-31",
+      "tob_type": "第三者買収",
+      "lookback_months": 6,
+      "total_filings": 0,
+      "amendment_count": 0,
+      "change_report_count": 0,
+      "new_report_count": 0,
+      "unique_filers": [],
+      "filer_count": 0,
+      "has_amendment": false,
+      "has_old_amendment": false,
+      "filings": []
+    },
+    {
+      "sec_code": "8155",
+      "name": "三益半導体工業",
+      "tob_date": "2024-04-25",
+      "tob_type": "親子上場解消",
+      "lookback_months": 6,
+      "total_filings": 2,
+      "amendment_count": 2,
+      "change_report_count": 2,
+      "new_report_count": 0,
+      "unique_filers": [
+        "アセットマネジメントＯｎｅ株式会社",
+        "シュローダー・インベストメント・マネジメント株式会社"
+      ],
+      "filer_count": 2,
+      "has_amendment": true,
+      "has_old_amendment": true,
+      "filings": [
+        {
+          "date": "2023-11-21",
+          "docID": "S100SBHD",
+          "docDescription": "変更報告書（特例対象株券等）",
+          "filerName": "シュローダー・インベストメント・マネジメント株式会社",
+          "issuerEdinetCode": "E02677",
+          "amendmentFlag": "0",
+          "parentDocID": "S100NX1H",
+          "formCode": "030002"
+        },
+        {
+          "date": "2024-03-07",
+          "docID": "S100T0B7",
+          "docDescription": "変更報告書（特例対象株券等）",
+          "filerName": "アセットマネジメントＯｎｅ株式会社",
+          "issuerEdinetCode": "E02677",
+          "amendmentFlag": "0",
+          "parentDocID": "S100HS19",
+          "formCode": "030002"
+        }
+      ]
+    },
+    {
+      "sec_code": "4726",
+      "name": "SBテクノロジー",
+      "tob_date": "2024-04-25",
+      "tob_type": "親子上場解消",
+      "lookback_months": 6,
+      "total_filings": 0,
+      "amendment_count": 0,
+      "change_report_count": 0,
+      "new_report_count": 0,
+      "unique_filers": [],
+      "filer_count": 0,
+      "has_amendment": false,
+      "has_old_amendment": false,
+      "filings": []
+    },
+    {
+      "sec_code": "9613",
+      "name": "NTTデータ",
+      "tob_date": "2025-05-08",
+      "tob_type": "親子上場解消",
+      "lookback_months": 6,
+      "total_filings": 0,
+      "amendment_count": 0,
+      "change_report_count": 0,
+      "new_report_count": 0,
+      "unique_filers": [],
+      "filer_count": 0,
+      "has_amendment": false,
+      "has_old_amendment": false,
+      "filings": []
+    },
+    {
+      "sec_code": "7451",
+      "name": "三菱食品",
+      "tob_date": "2025-05-08",
+      "tob_type": "親子上場解消",
+      "lookback_months": 6,
+      "total_filings": 0,
+      "amendment_count": 0,
+      "change_report_count": 0,
+      "new_report_count": 0,
+      "unique_filers": [],
+      "filer_count": 0,
+      "has_amendment": false,
+      "has_old_amendment": false,
+      "filings": []
+    },
+    {
+      "sec_code": "1884",
+      "name": "日本道路",
+      "tob_date": "2025-05-14",
+      "tob_type": "親子上場解消",
+      "lookback_months": 6,
+      "total_filings": 0,
+      "amendment_count": 0,
+      "change_report_count": 0,
+      "new_report_count": 0,
+      "unique_filers": [],
+      "filer_count": 0,
+      "has_amendment": false,
+      "has_old_amendment": false,
+      "filings": []
+    },
+    {
+      "sec_code": "5481",
+      "name": "山陽特殊製鋼",
+      "tob_date": "2025-01-15",
+      "tob_type": "親子上場解消",
+      "lookback_months": 6,
+      "total_filings": 0,
+      "amendment_count": 0,
+      "change_report_count": 0,
+      "new_report_count": 0,
+      "unique_filers": [],
+      "filer_count": 0,
+      "has_amendment": false,
+      "has_old_amendment": false,
+      "filings": []
+    },
+    {
+      "sec_code": "9787",
+      "name": "イオンディライト",
+      "tob_date": "2025-02-28",
+      "tob_type": "親子上場解消",
+      "lookback_months": 6,
+      "total_filings": 0,
+      "amendment_count": 0,
+      "change_report_count": 0,
+      "new_report_count": 0,
+      "unique_filers": [],
+      "filer_count": 0,
+      "has_amendment": false,
+      "has_old_amendment": false,
+      "filings": []
+    },
+    {
+      "sec_code": "3391",
+      "name": "ツルハHD",
+      "tob_date": "2025-03-01",
+      "tob_type": "親子上場解消",
+      "lookback_months": 6,
+      "total_filings": 6,
+      "amendment_count": 6,
+      "change_report_count": 6,
+      "new_report_count": 0,
+      "unique_filers": [
+        "野村證券株式会社",
+        "Ｍａｗｅｒ　Ｉｎｖｅｓｔｍｅｎｔ　Ｍａｎａｇｅｍｅｎｔ　Ｌｔｄ．",
+        "オービス・インベストメント・マネジメント・リミテッド"
+      ],
+      "filer_count": 3,
+      "has_amendment": true,
+      "has_old_amendment": true,
+      "filings": [
+        {
+          "date": "2024-09-06",
+          "docID": "S100UC5X",
+          "docDescription": "変更報告書",
+          "filerName": "野村證券株式会社",
+          "issuerEdinetCode": "E03464",
+          "amendmentFlag": "0",
+          "parentDocID": "S100SBS1",
+          "formCode": "010002"
+        },
+        {
+          "date": "2024-10-02",
+          "docID": "S100UH4W",
+          "docDescription": "変更報告書",
+          "filerName": "野村證券株式会社",
+          "issuerEdinetCode": "E03464",
+          "amendmentFlag": "0",
+          "parentDocID": "S100SBS1",
+          "formCode": "010002"
+        },
+        {
+          "date": "2024-11-22",
+          "docID": "S100UTTL",
+          "docDescription": "変更報告書",
+          "filerName": "野村證券株式会社",
+          "issuerEdinetCode": "E03464",
+          "amendmentFlag": "0",
+          "parentDocID": "S100SBS1",
+          "formCode": "010002"
+        },
+        {
+          "date": "2024-11-25",
+          "docID": "S100UU2T",
+          "docDescription": "変更報告書",
+          "filerName": "野村證券株式会社",
+          "issuerEdinetCode": "E03464",
+          "amendmentFlag": "0",
+          "parentDocID": "S100SBS1",
+          "formCode": "010002"
+        },
+        {
+          "date": "2024-12-04",
+          "docID": "S100UW9E",
+          "docDescription": "変更報告書（特例対象株券等）",
+          "filerName": "Ｍａｗｅｒ　Ｉｎｖｅｓｔｍｅｎｔ　Ｍａｎａｇｅｍｅｎｔ　Ｌｔｄ．",
+          "issuerEdinetCode": "E03464",
+          "amendmentFlag": "0",
+          "parentDocID": "S1004PXQ",
+          "formCode": "030002"
+        },
+        {
+          "date": "2025-01-24",
+          "docID": "S100V4C6",
+          "docDescription": "変更報告書",
+          "filerName": "オービス・インベストメント・マネジメント・リミテッド",
+          "issuerEdinetCode": "E03464",
+          "amendmentFlag": "0",
+          "parentDocID": "S100QYM0",
+          "formCode": "010002"
+        }
+      ]
+    },
+    {
+      "sec_code": "7163",
+      "name": "住信SBIネット銀行",
+      "tob_date": "2025-05-29",
+      "tob_type": "親子上場解消",
+      "lookback_months": 6,
+      "total_filings": 0,
+      "amendment_count": 0,
+      "change_report_count": 0,
+      "new_report_count": 0,
+      "unique_filers": [],
+      "filer_count": 0,
+      "has_amendment": false,
+      "has_old_amendment": false,
+      "filings": []
+    },
+    {
+      "sec_code": "8289",
+      "name": "Olympicグループ",
+      "tob_date": "2026-04-08",
+      "tob_type": "身売り観測",
+      "lookback_months": 6,
+      "total_filings": 3,
+      "amendment_count": 2,
+      "change_report_count": 3,
+      "new_report_count": 0,
+      "unique_filers": [
+        "武井　泰士",
+        "株式会社カネヨシ"
+      ],
+      "filer_count": 2,
+      "has_amendment": true,
+      "has_old_amendment": true,
+      "filings": [
+        {
+          "date": "2025-12-12",
+          "docID": "S100X9SI",
+          "docDescription": "変更報告書",
+          "filerName": "武井　泰士",
+          "issuerEdinetCode": "E03132",
+          "amendmentFlag": "0",
+          "parentDocID": "S100PENL",
+          "formCode": "010002"
+        },
+        {
+          "date": "2026-01-23",
+          "docID": "S100XGTL",
+          "docDescription": "変更報告書",
+          "filerName": "株式会社カネヨシ",
+          "issuerEdinetCode": "E03132",
+          "amendmentFlag": "0",
+          "parentDocID": null,
+          "formCode": "010002"
+        },
+        {
+          "date": "2026-01-26",
+          "docID": "S100XHAP",
+          "docDescription": "訂正報告書（大量保有報告書・変更報告書）",
+          "filerName": "株式会社カネヨシ",
+          "issuerEdinetCode": "E03132",
+          "amendmentFlag": "0",
+          "parentDocID": "S100XGTL",
+          "formCode": "090001"
+        }
+      ]
+    }
+  ]
+}

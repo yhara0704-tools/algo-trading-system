@@ -15,7 +15,7 @@ import sys
 import pathlib
 from datetime import date
 
-sys.path.insert(0, "/root/algo-trading-system")
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent.parent))
 
 import pandas as pd
 
@@ -38,7 +38,7 @@ TARGETS = [
 
 FETCH_DAYS = 60
 
-OUT_FILE = pathlib.Path("/root/algo-trading-system/data/scan_multi_strategy_result.json")
+OUT_FILE = pathlib.Path(__file__).resolve().parent.parent / "data" / "scan_multi_strategy_result.json"
 
 
 def _run(strat, df):

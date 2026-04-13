@@ -122,7 +122,8 @@ class PTSResult:
 
 def _load_1d_cache(symbol: str) -> pd.DataFrame | None:
     """1日足キャッシュを読み込む（Mac rsync経由 or yfinance フォールバック）。"""
-    cache_path = (pathlib.Path("/root/algo_shared/ohlcv_cache")
+    _project_root = pathlib.Path(__file__).resolve().parent.parent.parent.parent
+    cache_path = (_project_root / "algo_shared" / "ohlcv_cache"
                   / f"{symbol.replace('.', '_')}_1d.parquet")
     if cache_path.exists():
         try:
@@ -131,7 +132,7 @@ def _load_1d_cache(symbol: str) -> pd.DataFrame | None:
                 return df[["open", "high", "low", "close", "volume"]]
         except Exception:
             pass
-    # フォールバック: yfinance（VPSではrate limitに注意）
+    # フォールバック: yfinance
     try:
         import yfinance as yf
         df = yf.Ticker(symbol).history(period="40d", interval="1d", auto_adjust=True)

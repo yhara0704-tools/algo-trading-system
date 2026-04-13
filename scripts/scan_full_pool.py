@@ -17,7 +17,7 @@ import sys
 import pathlib
 from datetime import date
 
-sys.path.insert(0, "/root/algo-trading-system")
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent.parent))
 
 import pandas as pd
 
@@ -28,7 +28,7 @@ from backend.strategies.jp_stock.pts_screener import PTS_CANDIDATE_POOL
 
 FETCH_DAYS = 60
 MIN_BARS   = 80
-OUT_FILE   = pathlib.Path("/root/algo-trading-system/data/scan_full_pool_result.json")
+OUT_FILE   = pathlib.Path(__file__).resolve().parent.parent / "data" / "scan_full_pool_result.json"
 
 
 def _run(strat, df):
@@ -122,7 +122,7 @@ async def main():
         [r for r in valid if r.get("is_daily", 0) > 0],
         key=lambda x: -x["is_daily"]
     )[:15]
-    next_file = pathlib.Path("/root/algo-trading-system/data/next_grid_targets.json")
+    next_file = pathlib.Path(__file__).resolve().parent.parent / "data" / "next_grid_targets.json"
     next_file.write_text(json.dumps(
         {"date": str(date.today()), "candidates": next_candidates},
         ensure_ascii=False, indent=2

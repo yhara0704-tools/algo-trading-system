@@ -67,6 +67,17 @@ class CapitalTier:
         qty_raw = pos / price
         return int(qty_raw // lot_size) * lot_size
 
+    def can_pyramid(self, symbol: str, price: float, lot_size: int = 100) -> bool:
+        """この銘柄でピラミッド（追加100株）が余力的に可能か."""
+        return self.max_lot(symbol, price, lot_size) >= lot_size * 2
+
+    def pyramid_max(self, symbol: str, price: float, lot_size: int = 100) -> int:
+        """最大ピラミッド回数（初回エントリー除く）."""
+        max_lots = self.max_lot(symbol, price, lot_size)
+        if max_lots < lot_size * 2:
+            return 0
+        return (max_lots // lot_size) - 1  # 初回分を引く
+
 
 # ── 資金ティア定義 ─────────────────────────────────────────────────────────────
 TIERS: list[CapitalTier] = [

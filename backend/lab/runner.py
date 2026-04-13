@@ -200,11 +200,10 @@ def _cache_ttl(symbol: str) -> float:
 
 
 def _fetch_file_cache(symbol: str, interval: str, days: int) -> pd.DataFrame | None:
-    """ローカルMacからrsyncされたparquetキャッシュを読む。
-    ファイルパス: /root/algo_shared/ohlcv_cache/{symbol}_{interval}.parquet
-    """
+    """parquetキャッシュを読む。"""
     import pathlib
-    path = pathlib.Path("/root/algo_shared/ohlcv_cache") / f"{symbol.replace('.', '_')}_{interval}.parquet"
+    _project_root = pathlib.Path(__file__).resolve().parent.parent.parent
+    path = _project_root / "algo_shared" / "ohlcv_cache" / f"{symbol.replace('.', '_')}_{interval}.parquet"
     if not path.exists():
         return None
     try:

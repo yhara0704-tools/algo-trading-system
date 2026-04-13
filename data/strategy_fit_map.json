@@ -1,0 +1,2774 @@
+{
+  "9984.T": {
+    "name": "SoftBank Group",
+    "updated": "2026-04-08",
+    "strategies": {
+      "Breakout": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "Scalp": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "Momentum5Min": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "ORB": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "VwapReversion": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      }
+    },
+    "best_strategy": "Breakout",
+    "best_is_daily": 0.0,
+    "best_robust": false
+  },
+  "6758.T": {
+    "name": "Sony Group",
+    "updated": "2026-04-08",
+    "strategies": {
+      "MacdRci": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 335.7,
+        "robust": false
+      },
+      "Breakout": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": -12.1,
+        "robust": false
+      },
+      "Scalp": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 74.3,
+        "robust": false
+      },
+      "Momentum5Min": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "ORB": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 50.0,
+        "robust": false
+      },
+      "VwapReversion": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 120.7,
+        "robust": false
+      }
+    },
+    "best_strategy": "MacdRci",
+    "best_is_daily": 0.0,
+    "best_robust": false
+  },
+  "7203.T": {
+    "name": "Toyota",
+    "updated": "2026-04-08",
+    "strategies": {
+      "Breakout": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": -2.2,
+        "robust": false
+      },
+      "Scalp": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 14.8,
+        "robust": false
+      },
+      "Momentum5Min": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": -61.2,
+        "robust": false
+      },
+      "ORB": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": -146.3,
+        "robust": false
+      },
+      "VwapReversion": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 24.2,
+        "robust": false
+      }
+    },
+    "best_strategy": "Breakout",
+    "best_is_daily": 0.0,
+    "best_robust": false
+  },
+  "8306.T": {
+    "name": "MUFG",
+    "updated": "2026-04-08",
+    "strategies": {
+      "MacdRci": {
+        "is_daily": 359.9,
+        "is_pf": 1.129,
+        "is_trades": 429,
+        "oos_daily": -570.3,
+        "robust": false
+      },
+      "Breakout": {
+        "is_daily": 32.4,
+        "is_pf": 1.101,
+        "is_trades": 68,
+        "oos_daily": 29.1,
+        "robust": true
+      },
+      "Scalp": {
+        "is_daily": 158.6,
+        "is_pf": 1.316,
+        "is_trades": 104,
+        "oos_daily": 137.6,
+        "robust": true
+      },
+      "Momentum5Min": {
+        "is_daily": 34.7,
+        "is_pf": 1.275,
+        "is_trades": 12,
+        "oos_daily": 81.5,
+        "robust": true
+      },
+      "ORB": {
+        "is_daily": 265.1,
+        "is_pf": 2.041,
+        "is_trades": 14,
+        "oos_daily": 69.5,
+        "robust": true
+      },
+      "VwapReversion": {
+        "is_daily": 34.1,
+        "is_pf": 1.179,
+        "is_trades": 14,
+        "oos_daily": -64.7,
+        "robust": false
+      }
+    },
+    "best_strategy": "MacdRci",
+    "best_is_daily": 359.9,
+    "best_robust": false
+  },
+  "8316.T": {
+    "name": "SMBC",
+    "updated": "2026-04-08",
+    "strategies": {
+      "MacdRci": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "Breakout": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "Scalp": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "Momentum5Min": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "ORB": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "VwapReversion": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      }
+    },
+    "best_strategy": "MacdRci",
+    "best_is_daily": 0.0,
+    "best_robust": false
+  },
+  "8411.T": {
+    "name": "Mizuho FG",
+    "updated": "2026-04-08",
+    "strategies": {
+      "Breakout": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "Scalp": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "Momentum5Min": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "ORB": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "VwapReversion": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      }
+    },
+    "best_strategy": "Breakout",
+    "best_is_daily": 0.0,
+    "best_robust": false
+  },
+  "8604.T": {
+    "name": "Nomura Holdings",
+    "updated": "2026-04-08",
+    "strategies": {
+      "MacdRci": {
+        "is_daily": -36.8,
+        "is_pf": 0.987,
+        "is_trades": 398,
+        "oos_daily": -687.2,
+        "robust": false
+      },
+      "Breakout": {
+        "is_daily": -18.3,
+        "is_pf": 0.894,
+        "is_trades": 36,
+        "oos_daily": 12.2,
+        "robust": false
+      },
+      "Scalp": {
+        "is_daily": -82.6,
+        "is_pf": 0.863,
+        "is_trades": 100,
+        "oos_daily": -31.9,
+        "robust": false
+      },
+      "Momentum5Min": {
+        "is_daily": -32.6,
+        "is_pf": 0.0,
+        "is_trades": 3,
+        "oos_daily": -47.5,
+        "robust": false
+      },
+      "ORB": {
+        "is_daily": 86.0,
+        "is_pf": 2.609,
+        "is_trades": 11,
+        "oos_daily": 108.5,
+        "robust": true
+      },
+      "VwapReversion": {
+        "is_daily": 102.1,
+        "is_pf": 1.451,
+        "is_trades": 20,
+        "oos_daily": -710.5,
+        "robust": false
+      }
+    },
+    "best_strategy": "VwapReversion",
+    "best_is_daily": 102.1,
+    "best_robust": false
+  },
+  "9432.T": {
+    "name": "NTT",
+    "updated": "2026-04-08",
+    "strategies": {
+      "MacdRci": {
+        "is_daily": -437.0,
+        "is_pf": 0.767,
+        "is_trades": 428,
+        "oos_daily": 490.4,
+        "robust": false
+      },
+      "Breakout": {
+        "is_daily": 120.1,
+        "is_pf": 3.504,
+        "is_trades": 26,
+        "oos_daily": 26.7,
+        "robust": true
+      },
+      "Scalp": {
+        "is_daily": 135.1,
+        "is_pf": 1.387,
+        "is_trades": 117,
+        "oos_daily": 381.3,
+        "robust": true
+      },
+      "Momentum5Min": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 14.6,
+        "robust": false
+      },
+      "ORB": {
+        "is_daily": -338.1,
+        "is_pf": 0.077,
+        "is_trades": 13,
+        "oos_daily": 13.0,
+        "robust": false
+      },
+      "VwapReversion": {
+        "is_daily": 83.0,
+        "is_pf": 999.0,
+        "is_trades": 3,
+        "oos_daily": -27.5,
+        "robust": false
+      }
+    },
+    "best_strategy": "Scalp",
+    "best_is_daily": 135.1,
+    "best_robust": true
+  },
+  "9433.T": {
+    "name": "KDDI",
+    "updated": "2026-04-08",
+    "strategies": {
+      "MacdRci": {
+        "is_daily": 197.6,
+        "is_pf": 1.103,
+        "is_trades": 381,
+        "oos_daily": -352.0,
+        "robust": false
+      },
+      "Breakout": {
+        "is_daily": -39.1,
+        "is_pf": 0.772,
+        "is_trades": 38,
+        "oos_daily": -32.6,
+        "robust": false
+      },
+      "Scalp": {
+        "is_daily": 59.5,
+        "is_pf": 1.113,
+        "is_trades": 110,
+        "oos_daily": 158.7,
+        "robust": true
+      },
+      "Momentum5Min": {
+        "is_daily": 0.0,
+        "is_pf": 1.0,
+        "is_trades": 3,
+        "oos_daily": -37.0,
+        "robust": false
+      },
+      "ORB": {
+        "is_daily": -146.5,
+        "is_pf": 0.3,
+        "is_trades": 13,
+        "oos_daily": -243.3,
+        "robust": false
+      },
+      "VwapReversion": {
+        "is_daily": 0.3,
+        "is_pf": 1.003,
+        "is_trades": 9,
+        "oos_daily": 29.4,
+        "robust": true
+      }
+    },
+    "best_strategy": "MacdRci",
+    "best_is_daily": 197.6,
+    "best_robust": false
+  },
+  "9434.T": {
+    "name": "SoftBank Corp",
+    "updated": "2026-04-08",
+    "strategies": {
+      "MacdRci": {
+        "is_daily": -175.7,
+        "is_pf": 0.898,
+        "is_trades": 432,
+        "oos_daily": 101.7,
+        "robust": false
+      },
+      "Breakout": {
+        "is_daily": 26.4,
+        "is_pf": 1.223,
+        "is_trades": 35,
+        "oos_daily": 54.1,
+        "robust": true
+      },
+      "Scalp": {
+        "is_daily": -79.3,
+        "is_pf": 0.807,
+        "is_trades": 105,
+        "oos_daily": -116.3,
+        "robust": false
+      },
+      "Momentum5Min": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "ORB": {
+        "is_daily": -122.1,
+        "is_pf": 0.352,
+        "is_trades": 10,
+        "oos_daily": -7.3,
+        "robust": false
+      },
+      "VwapReversion": {
+        "is_daily": 31.4,
+        "is_pf": 10.001,
+        "is_trades": 3,
+        "oos_daily": -22.0,
+        "robust": false
+      }
+    },
+    "best_strategy": "VwapReversion",
+    "best_is_daily": 31.4,
+    "best_robust": false
+  },
+  "7201.T": {
+    "name": "Nissan",
+    "updated": "2026-04-08",
+    "strategies": {
+      "MacdRci": {
+        "is_daily": 51.2,
+        "is_pf": 1.013,
+        "is_trades": 409,
+        "oos_daily": -243.2,
+        "robust": false
+      },
+      "Breakout": {
+        "is_daily": -100.2,
+        "is_pf": 0.768,
+        "is_trades": 74,
+        "oos_daily": -45.4,
+        "robust": false
+      },
+      "Scalp": {
+        "is_daily": 164.7,
+        "is_pf": 1.306,
+        "is_trades": 100,
+        "oos_daily": 24.2,
+        "robust": true
+      },
+      "Momentum5Min": {
+        "is_daily": 57.5,
+        "is_pf": 1.61,
+        "is_trades": 10,
+        "oos_daily": -3.0,
+        "robust": false
+      },
+      "ORB": {
+        "is_daily": 284.4,
+        "is_pf": 2.239,
+        "is_trades": 16,
+        "oos_daily": -111.2,
+        "robust": false
+      },
+      "VwapReversion": {
+        "is_daily": 100.5,
+        "is_pf": 1.3,
+        "is_trades": 22,
+        "oos_daily": -180.7,
+        "robust": false
+      }
+    },
+    "best_strategy": "ORB",
+    "best_is_daily": 284.4,
+    "best_robust": false
+  },
+  "7267.T": {
+    "name": "Honda",
+    "updated": "2026-04-08",
+    "strategies": {
+      "MacdRci": {
+        "is_daily": -55.1,
+        "is_pf": 0.979,
+        "is_trades": 384,
+        "oos_daily": -733.4,
+        "robust": false
+      },
+      "Breakout": {
+        "is_daily": 8.9,
+        "is_pf": 1.034,
+        "is_trades": 62,
+        "oos_daily": -40.0,
+        "robust": false
+      },
+      "Scalp": {
+        "is_daily": 87.9,
+        "is_pf": 1.189,
+        "is_trades": 99,
+        "oos_daily": 194.4,
+        "robust": true
+      },
+      "Momentum5Min": {
+        "is_daily": 25.0,
+        "is_pf": 3.75,
+        "is_trades": 3,
+        "oos_daily": -70.5,
+        "robust": false
+      },
+      "ORB": {
+        "is_daily": 109.1,
+        "is_pf": 1.85,
+        "is_trades": 14,
+        "oos_daily": 22.0,
+        "robust": true
+      },
+      "VwapReversion": {
+        "is_daily": -72.0,
+        "is_pf": 0.775,
+        "is_trades": 15,
+        "oos_daily": -310.3,
+        "robust": false
+      }
+    },
+    "best_strategy": "ORB",
+    "best_is_daily": 109.1,
+    "best_robust": true
+  },
+  "7211.T": {
+    "name": "Mitsubishi Motors",
+    "updated": "2026-04-08",
+    "strategies": {
+      "MacdRci": {
+        "is_daily": 1068.6,
+        "is_pf": 1.287,
+        "is_trades": 387,
+        "oos_daily": -1199.2,
+        "robust": false
+      },
+      "Breakout": {
+        "is_daily": 176.9,
+        "is_pf": 1.499,
+        "is_trades": 79,
+        "oos_daily": 13.3,
+        "robust": true
+      },
+      "Scalp": {
+        "is_daily": 35.3,
+        "is_pf": 1.072,
+        "is_trades": 88,
+        "oos_daily": 203.0,
+        "robust": true
+      },
+      "Momentum5Min": {
+        "is_daily": 166.2,
+        "is_pf": 1.97,
+        "is_trades": 12,
+        "oos_daily": 72.4,
+        "robust": true
+      },
+      "ORB": {
+        "is_daily": 561.2,
+        "is_pf": 4.126,
+        "is_trades": 15,
+        "oos_daily": -128.8,
+        "robust": false
+      },
+      "VwapReversion": {
+        "is_daily": 157.3,
+        "is_pf": 1.382,
+        "is_trades": 26,
+        "oos_daily": -547.8,
+        "robust": false
+      }
+    },
+    "best_strategy": "MacdRci",
+    "best_is_daily": 1068.6,
+    "best_robust": false
+  },
+  "7269.T": {
+    "name": "Suzuki",
+    "updated": "2026-04-08",
+    "strategies": {
+      "MacdRci": {
+        "is_daily": -40.3,
+        "is_pf": 0.984,
+        "is_trades": 374,
+        "oos_daily": -680.3,
+        "robust": false
+      },
+      "Breakout": {
+        "is_daily": -47.7,
+        "is_pf": 0.712,
+        "is_trades": 39,
+        "oos_daily": -39.3,
+        "robust": false
+      },
+      "Scalp": {
+        "is_daily": 243.1,
+        "is_pf": 1.672,
+        "is_trades": 97,
+        "oos_daily": -4.4,
+        "robust": false
+      },
+      "Momentum5Min": {
+        "is_daily": -56.1,
+        "is_pf": 0.406,
+        "is_trades": 7,
+        "oos_daily": 21.3,
+        "robust": false
+      },
+      "ORB": {
+        "is_daily": 40.1,
+        "is_pf": 1.241,
+        "is_trades": 11,
+        "oos_daily": 25.6,
+        "robust": true
+      },
+      "VwapReversion": {
+        "is_daily": -25.1,
+        "is_pf": 0.915,
+        "is_trades": 18,
+        "oos_daily": -237.4,
+        "robust": false
+      }
+    },
+    "best_strategy": "Scalp",
+    "best_is_daily": 243.1,
+    "best_robust": false
+  },
+  "6501.T": {
+    "name": "Hitachi",
+    "updated": "2026-04-08",
+    "strategies": {
+      "MacdRci": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "Breakout": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "Scalp": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "Momentum5Min": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "ORB": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "VwapReversion": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      }
+    },
+    "best_strategy": "MacdRci",
+    "best_is_daily": 0.0,
+    "best_robust": false
+  },
+  "6752.T": {
+    "name": "Panasonic",
+    "updated": "2026-04-08",
+    "strategies": {
+      "MacdRci": {
+        "is_daily": 200.0,
+        "is_pf": 1.06,
+        "is_trades": 422,
+        "oos_daily": 594.7,
+        "robust": true
+      },
+      "Breakout": {
+        "is_daily": -94.6,
+        "is_pf": 0.623,
+        "is_trades": 49,
+        "oos_daily": 61.7,
+        "robust": false
+      },
+      "Scalp": {
+        "is_daily": -55.6,
+        "is_pf": 0.871,
+        "is_trades": 86,
+        "oos_daily": 121.9,
+        "robust": false
+      },
+      "Momentum5Min": {
+        "is_daily": -94.8,
+        "is_pf": 0.499,
+        "is_trades": 14,
+        "oos_daily": -155.6,
+        "robust": false
+      },
+      "ORB": {
+        "is_daily": -122.7,
+        "is_pf": 0.604,
+        "is_trades": 11,
+        "oos_daily": 101.2,
+        "robust": false
+      },
+      "VwapReversion": {
+        "is_daily": -270.6,
+        "is_pf": 0.583,
+        "is_trades": 34,
+        "oos_daily": 176.4,
+        "robust": false
+      }
+    },
+    "best_strategy": "MacdRci",
+    "best_is_daily": 200.0,
+    "best_robust": true
+  },
+  "6753.T": {
+    "name": "Sharp",
+    "updated": "2026-04-08",
+    "strategies": {
+      "MacdRci": {
+        "is_daily": -1398.7,
+        "is_pf": 0.668,
+        "is_trades": 396,
+        "oos_daily": -248.6,
+        "robust": false
+      },
+      "Breakout": {
+        "is_daily": 126.9,
+        "is_pf": 1.776,
+        "is_trades": 45,
+        "oos_daily": 18.9,
+        "robust": true
+      },
+      "Scalp": {
+        "is_daily": 171.9,
+        "is_pf": 1.457,
+        "is_trades": 79,
+        "oos_daily": 175.4,
+        "robust": true
+      },
+      "Momentum5Min": {
+        "is_daily": -26.4,
+        "is_pf": 0.436,
+        "is_trades": 4,
+        "oos_daily": -134.8,
+        "robust": false
+      },
+      "ORB": {
+        "is_daily": -24.7,
+        "is_pf": 0.926,
+        "is_trades": 15,
+        "oos_daily": 104.3,
+        "robust": false
+      },
+      "VwapReversion": {
+        "is_daily": -293.2,
+        "is_pf": 0.514,
+        "is_trades": 21,
+        "oos_daily": -102.8,
+        "robust": false
+      }
+    },
+    "best_strategy": "Scalp",
+    "best_is_daily": 171.9,
+    "best_robust": true
+  },
+  "6861.T": {
+    "name": "Keyence",
+    "updated": "2026-04-08",
+    "strategies": {
+      "Breakout": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "Scalp": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "Momentum5Min": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "ORB": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "VwapReversion": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      }
+    },
+    "best_strategy": "Breakout",
+    "best_is_daily": 0.0,
+    "best_robust": false
+  },
+  "6645.T": {
+    "name": "Omron",
+    "updated": "2026-04-08",
+    "strategies": {
+      "Breakout": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "Scalp": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "Momentum5Min": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "ORB": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "VwapReversion": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      }
+    },
+    "best_strategy": "Breakout",
+    "best_is_daily": 0.0,
+    "best_robust": false
+  },
+  "6954.T": {
+    "name": "Fanuc",
+    "updated": "2026-04-08",
+    "strategies": {
+      "MacdRci": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "Breakout": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "Scalp": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "Momentum5Min": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "ORB": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "VwapReversion": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      }
+    },
+    "best_strategy": "MacdRci",
+    "best_is_daily": 0.0,
+    "best_robust": false
+  },
+  "6367.T": {
+    "name": "Daikin",
+    "updated": "2026-04-08",
+    "strategies": {
+      "MacdRci": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "Breakout": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "Scalp": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "Momentum5Min": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "ORB": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "VwapReversion": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      }
+    },
+    "best_strategy": "MacdRci",
+    "best_is_daily": 0.0,
+    "best_robust": false
+  },
+  "6326.T": {
+    "name": "Kubota",
+    "updated": "2026-04-08",
+    "strategies": {
+      "MacdRci": {
+        "is_daily": 615.6,
+        "is_pf": 1.213,
+        "is_trades": 386,
+        "oos_daily": -1090.2,
+        "robust": false
+      },
+      "Breakout": {
+        "is_daily": 19.9,
+        "is_pf": 1.104,
+        "is_trades": 48,
+        "oos_daily": 73.7,
+        "robust": true
+      },
+      "Scalp": {
+        "is_daily": -3.3,
+        "is_pf": 0.994,
+        "is_trades": 104,
+        "oos_daily": 112.1,
+        "robust": false
+      },
+      "Momentum5Min": {
+        "is_daily": -21.0,
+        "is_pf": 0.735,
+        "is_trades": 4,
+        "oos_daily": 69.2,
+        "robust": false
+      },
+      "ORB": {
+        "is_daily": -743.0,
+        "is_pf": 0.282,
+        "is_trades": 11,
+        "oos_daily": 121.4,
+        "robust": false
+      },
+      "VwapReversion": {
+        "is_daily": 284.6,
+        "is_pf": 1.798,
+        "is_trades": 23,
+        "oos_daily": -607.5,
+        "robust": false
+      }
+    },
+    "best_strategy": "MacdRci",
+    "best_is_daily": 615.6,
+    "best_robust": false
+  },
+  "6723.T": {
+    "name": "Renesas",
+    "updated": "2026-04-08",
+    "strategies": {
+      "MacdRci": {
+        "is_daily": -260.3,
+        "is_pf": 0.941,
+        "is_trades": 426,
+        "oos_daily": -817.7,
+        "robust": false
+      },
+      "Breakout": {
+        "is_daily": -70.3,
+        "is_pf": 0.771,
+        "is_trades": 57,
+        "oos_daily": 69.6,
+        "robust": false
+      },
+      "Scalp": {
+        "is_daily": -125.3,
+        "is_pf": 0.763,
+        "is_trades": 84,
+        "oos_daily": 36.8,
+        "robust": false
+      },
+      "Momentum5Min": {
+        "is_daily": 26.3,
+        "is_pf": 1.094,
+        "is_trades": 18,
+        "oos_daily": -170.2,
+        "robust": false
+      },
+      "ORB": {
+        "is_daily": 214.0,
+        "is_pf": 2.136,
+        "is_trades": 13,
+        "oos_daily": 204.2,
+        "robust": true
+      },
+      "VwapReversion": {
+        "is_daily": 390.8,
+        "is_pf": 1.543,
+        "is_trades": 43,
+        "oos_daily": -943.9,
+        "robust": false
+      }
+    },
+    "best_strategy": "VwapReversion",
+    "best_is_daily": 390.8,
+    "best_robust": false
+  },
+  "8035.T": {
+    "name": "Tokyo Electron",
+    "updated": "2026-04-08",
+    "strategies": {
+      "MacdRci": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "Breakout": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "Scalp": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "Momentum5Min": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "ORB": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "VwapReversion": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      }
+    },
+    "best_strategy": "MacdRci",
+    "best_is_daily": 0.0,
+    "best_robust": false
+  },
+  "6920.T": {
+    "name": "Lasertec",
+    "updated": "2026-04-08",
+    "strategies": {
+      "MacdRci": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "Breakout": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "Scalp": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "Momentum5Min": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "ORB": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "VwapReversion": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      }
+    },
+    "best_strategy": "MacdRci",
+    "best_is_daily": 0.0,
+    "best_robust": false
+  },
+  "6613.T": {
+    "name": "QD Laser",
+    "updated": "2026-04-08",
+    "strategies": {
+      "MacdRci": {
+        "is_daily": 1731.5,
+        "is_pf": 1.145,
+        "is_trades": 387,
+        "oos_daily": -806.8,
+        "robust": false
+      },
+      "Breakout": {
+        "is_daily": -193.5,
+        "is_pf": 0.667,
+        "is_trades": 82,
+        "oos_daily": -265.0,
+        "robust": false
+      },
+      "Scalp": {
+        "is_daily": 29.4,
+        "is_pf": 1.11,
+        "is_trades": 47,
+        "oos_daily": -14.2,
+        "robust": false
+      },
+      "Momentum5Min": {
+        "is_daily": 957.8,
+        "is_pf": 1.568,
+        "is_trades": 92,
+        "oos_daily": -253.4,
+        "robust": false
+      },
+      "ORB": {
+        "is_daily": 486.4,
+        "is_pf": 1.93,
+        "is_trades": 12,
+        "oos_daily": -626.8,
+        "robust": false
+      },
+      "VwapReversion": {
+        "is_daily": -828.8,
+        "is_pf": 0.796,
+        "is_trades": 114,
+        "oos_daily": -1225.7,
+        "robust": false
+      }
+    },
+    "best_strategy": "MacdRci",
+    "best_is_daily": 1731.5,
+    "best_robust": false
+  },
+  "4385.T": {
+    "name": "Mercari",
+    "updated": "2026-04-08",
+    "strategies": {
+      "MacdRci": {
+        "is_daily": 809.5,
+        "is_pf": 1.326,
+        "is_trades": 245,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "Breakout": {
+        "is_daily": -89.6,
+        "is_pf": 0.318,
+        "is_trades": 16,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "Scalp": {
+        "is_daily": 28.0,
+        "is_pf": 1.135,
+        "is_trades": 38,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "Momentum5Min": {
+        "is_daily": -112.1,
+        "is_pf": 0.0,
+        "is_trades": 4,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "ORB": {
+        "is_daily": -36.4,
+        "is_pf": 0.875,
+        "is_trades": 6,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "VwapReversion": {
+        "is_daily": -281.6,
+        "is_pf": 0.374,
+        "is_trades": 15,
+        "oos_daily": 0.0,
+        "robust": false
+      }
+    },
+    "best_strategy": "MacdRci",
+    "best_is_daily": 809.5,
+    "best_robust": false
+  },
+  "4689.T": {
+    "name": "LY Corp",
+    "updated": "2026-04-08",
+    "strategies": {
+      "MacdRci": {
+        "is_daily": -164.1,
+        "is_pf": 0.931,
+        "is_trades": 395,
+        "oos_daily": 355.2,
+        "robust": false
+      },
+      "Breakout": {
+        "is_daily": 39.9,
+        "is_pf": 1.343,
+        "is_trades": 34,
+        "oos_daily": 42.8,
+        "robust": true
+      },
+      "Scalp": {
+        "is_daily": 100.6,
+        "is_pf": 1.211,
+        "is_trades": 104,
+        "oos_daily": 62.0,
+        "robust": true
+      },
+      "Momentum5Min": {
+        "is_daily": 52.5,
+        "is_pf": 2.609,
+        "is_trades": 3,
+        "oos_daily": 16.8,
+        "robust": true
+      },
+      "ORB": {
+        "is_daily": -53.0,
+        "is_pf": 0.791,
+        "is_trades": 11,
+        "oos_daily": 136.6,
+        "robust": false
+      },
+      "VwapReversion": {
+        "is_daily": -404.1,
+        "is_pf": 0.175,
+        "is_trades": 18,
+        "oos_daily": 185.0,
+        "robust": false
+      }
+    },
+    "best_strategy": "Scalp",
+    "best_is_daily": 100.6,
+    "best_robust": true
+  },
+  "4751.T": {
+    "name": "CyberAgent",
+    "updated": "2026-04-08",
+    "strategies": {
+      "MacdRci": {
+        "is_daily": -129.5,
+        "is_pf": 0.96,
+        "is_trades": 393,
+        "oos_daily": 8.7,
+        "robust": false
+      },
+      "Breakout": {
+        "is_daily": -40.2,
+        "is_pf": 0.791,
+        "is_trades": 37,
+        "oos_daily": 57.9,
+        "robust": false
+      },
+      "Scalp": {
+        "is_daily": -55.7,
+        "is_pf": 0.892,
+        "is_trades": 89,
+        "oos_daily": 140.3,
+        "robust": false
+      },
+      "Momentum5Min": {
+        "is_daily": -155.9,
+        "is_pf": 0.247,
+        "is_trades": 10,
+        "oos_daily": -12.1,
+        "robust": false
+      },
+      "ORB": {
+        "is_daily": -314.0,
+        "is_pf": 0.161,
+        "is_trades": 10,
+        "oos_daily": 151.2,
+        "robust": false
+      },
+      "VwapReversion": {
+        "is_daily": -831.2,
+        "is_pf": 0.348,
+        "is_trades": 43,
+        "oos_daily": 39.3,
+        "robust": false
+      }
+    },
+    "best_strategy": "Breakout",
+    "best_is_daily": -40.2,
+    "best_robust": false
+  },
+  "4755.T": {
+    "name": "Rakuten",
+    "updated": "2026-04-08",
+    "strategies": {
+      "MacdRci": {
+        "is_daily": -501.8,
+        "is_pf": 0.816,
+        "is_trades": 395,
+        "oos_daily": 290.7,
+        "robust": false
+      },
+      "Breakout": {
+        "is_daily": 33.2,
+        "is_pf": 1.162,
+        "is_trades": 52,
+        "oos_daily": 142.7,
+        "robust": true
+      },
+      "Scalp": {
+        "is_daily": 24.3,
+        "is_pf": 1.046,
+        "is_trades": 101,
+        "oos_daily": 239.3,
+        "robust": true
+      },
+      "Momentum5Min": {
+        "is_daily": 11.2,
+        "is_pf": 1.471,
+        "is_trades": 4,
+        "oos_daily": 57.4,
+        "robust": true
+      },
+      "ORB": {
+        "is_daily": -182.8,
+        "is_pf": 0.319,
+        "is_trades": 11,
+        "oos_daily": -137.1,
+        "robust": false
+      },
+      "VwapReversion": {
+        "is_daily": 93.3,
+        "is_pf": 1.26,
+        "is_trades": 26,
+        "oos_daily": -192.5,
+        "robust": false
+      }
+    },
+    "best_strategy": "VwapReversion",
+    "best_is_daily": 93.3,
+    "best_robust": false
+  },
+  "9449.T": {
+    "name": "GMO Internet",
+    "updated": "2026-04-08",
+    "strategies": {
+      "MacdRci": {
+        "is_daily": -551.4,
+        "is_pf": 0.649,
+        "is_trades": 119,
+        "oos_daily": -234.9,
+        "robust": false
+      },
+      "Breakout": {
+        "is_daily": 5.5,
+        "is_pf": 1.119,
+        "is_trades": 9,
+        "oos_daily": 58.9,
+        "robust": true
+      },
+      "Scalp": {
+        "is_daily": 34.4,
+        "is_pf": 1.267,
+        "is_trades": 26,
+        "oos_daily": 29.1,
+        "robust": true
+      },
+      "Momentum5Min": {
+        "is_daily": -4.7,
+        "is_pf": 0.0,
+        "is_trades": 1,
+        "oos_daily": -92.6,
+        "robust": false
+      },
+      "ORB": {
+        "is_daily": -84.9,
+        "is_pf": 0.0,
+        "is_trades": 2,
+        "oos_daily": -244.6,
+        "robust": false
+      },
+      "VwapReversion": {
+        "is_daily": -157.0,
+        "is_pf": 0.606,
+        "is_trades": 13,
+        "oos_daily": -148.5,
+        "robust": false
+      }
+    },
+    "best_strategy": "Scalp",
+    "best_is_daily": 34.4,
+    "best_robust": true
+  },
+  "9468.T": {
+    "name": "Kadokawa",
+    "updated": "2026-04-08",
+    "strategies": {
+      "MacdRci": {
+        "is_daily": 181.6,
+        "is_pf": 1.054,
+        "is_trades": 358,
+        "oos_daily": 728.4,
+        "robust": true
+      },
+      "Breakout": {
+        "is_daily": 33.9,
+        "is_pf": 1.247,
+        "is_trades": 33,
+        "oos_daily": 58.7,
+        "robust": true
+      },
+      "Scalp": {
+        "is_daily": 53.5,
+        "is_pf": 1.131,
+        "is_trades": 76,
+        "oos_daily": 129.4,
+        "robust": true
+      },
+      "Momentum5Min": {
+        "is_daily": -24.9,
+        "is_pf": 0.608,
+        "is_trades": 3,
+        "oos_daily": -29.6,
+        "robust": false
+      },
+      "ORB": {
+        "is_daily": -73.9,
+        "is_pf": 0.515,
+        "is_trades": 6,
+        "oos_daily": 237.2,
+        "robust": false
+      },
+      "VwapReversion": {
+        "is_daily": 5.6,
+        "is_pf": 1.012,
+        "is_trades": 23,
+        "oos_daily": 117.6,
+        "robust": true
+      }
+    },
+    "best_strategy": "MacdRci",
+    "best_is_daily": 181.6,
+    "best_robust": true
+  },
+  "2432.T": {
+    "name": "DeNA",
+    "updated": "2026-04-08",
+    "strategies": {
+      "MacdRci": {
+        "is_daily": -165.5,
+        "is_pf": 0.94,
+        "is_trades": 422,
+        "oos_daily": 551.2,
+        "robust": false
+      },
+      "Breakout": {
+        "is_daily": -94.9,
+        "is_pf": 0.649,
+        "is_trades": 56,
+        "oos_daily": 148.5,
+        "robust": false
+      },
+      "Scalp": {
+        "is_daily": 6.6,
+        "is_pf": 1.014,
+        "is_trades": 91,
+        "oos_daily": 210.5,
+        "robust": true
+      },
+      "Momentum5Min": {
+        "is_daily": 21.8,
+        "is_pf": 1.319,
+        "is_trades": 6,
+        "oos_daily": -18.6,
+        "robust": false
+      },
+      "ORB": {
+        "is_daily": -401.2,
+        "is_pf": 0.142,
+        "is_trades": 14,
+        "oos_daily": 4.9,
+        "robust": false
+      },
+      "VwapReversion": {
+        "is_daily": -104.5,
+        "is_pf": 0.775,
+        "is_trades": 25,
+        "oos_daily": -49.9,
+        "robust": false
+      }
+    },
+    "best_strategy": "Momentum5Min",
+    "best_is_daily": 21.8,
+    "best_robust": false
+  },
+  "2413.T": {
+    "name": "M3",
+    "updated": "2026-04-08",
+    "strategies": {
+      "MacdRci": {
+        "is_daily": -472.7,
+        "is_pf": 0.836,
+        "is_trades": 411,
+        "oos_daily": 494.7,
+        "robust": false
+      },
+      "Breakout": {
+        "is_daily": -95.8,
+        "is_pf": 0.515,
+        "is_trades": 41,
+        "oos_daily": -37.5,
+        "robust": false
+      },
+      "Scalp": {
+        "is_daily": 158.8,
+        "is_pf": 1.451,
+        "is_trades": 91,
+        "oos_daily": 234.3,
+        "robust": true
+      },
+      "Momentum5Min": {
+        "is_daily": -104.5,
+        "is_pf": 0.0,
+        "is_trades": 5,
+        "oos_daily": -36.9,
+        "robust": false
+      },
+      "ORB": {
+        "is_daily": -125.0,
+        "is_pf": 0.321,
+        "is_trades": 7,
+        "oos_daily": -56.1,
+        "robust": false
+      },
+      "VwapReversion": {
+        "is_daily": -174.9,
+        "is_pf": 0.796,
+        "is_trades": 48,
+        "oos_daily": 39.5,
+        "robust": false
+      }
+    },
+    "best_strategy": "Scalp",
+    "best_is_daily": 158.8,
+    "best_robust": true
+  },
+  "4568.T": {
+    "name": "Daiichi Sankyo",
+    "updated": "2026-04-08",
+    "strategies": {
+      "Breakout": {
+        "is_daily": 20.5,
+        "is_pf": 1.146,
+        "is_trades": 32,
+        "oos_daily": 76.1,
+        "robust": true
+      },
+      "Scalp": {
+        "is_daily": -84.6,
+        "is_pf": 0.842,
+        "is_trades": 92,
+        "oos_daily": 277.3,
+        "robust": false
+      },
+      "Momentum5Min": {
+        "is_daily": 33.4,
+        "is_pf": 1.961,
+        "is_trades": 2,
+        "oos_daily": 208.2,
+        "robust": true
+      },
+      "ORB": {
+        "is_daily": -154.5,
+        "is_pf": 0.39,
+        "is_trades": 8,
+        "oos_daily": 79.3,
+        "robust": false
+      },
+      "VwapReversion": {
+        "is_daily": -6.3,
+        "is_pf": 0.987,
+        "is_trades": 19,
+        "oos_daily": -331.9,
+        "robust": false
+      }
+    },
+    "best_strategy": "Momentum5Min",
+    "best_is_daily": 33.4,
+    "best_robust": true
+  },
+  "4502.T": {
+    "name": "Takeda",
+    "updated": "2026-04-08",
+    "strategies": {
+      "MacdRci": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "Breakout": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "Scalp": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "Momentum5Min": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "ORB": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "VwapReversion": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      }
+    },
+    "best_strategy": "MacdRci",
+    "best_is_daily": 0.0,
+    "best_robust": false
+  },
+  "4592.T": {
+    "name": "SanBio",
+    "updated": "2026-04-08",
+    "strategies": {
+      "MacdRci": {
+        "is_daily": 672.1,
+        "is_pf": 1.173,
+        "is_trades": 436,
+        "oos_daily": -1183.7,
+        "robust": false
+      },
+      "Breakout": {
+        "is_daily": -130.0,
+        "is_pf": 0.697,
+        "is_trades": 95,
+        "oos_daily": -57.5,
+        "robust": false
+      },
+      "Scalp": {
+        "is_daily": 48.2,
+        "is_pf": 1.157,
+        "is_trades": 80,
+        "oos_daily": 93.4,
+        "robust": true
+      },
+      "Momentum5Min": {
+        "is_daily": -247.9,
+        "is_pf": 0.682,
+        "is_trades": 45,
+        "oos_daily": 105.3,
+        "robust": false
+      },
+      "ORB": {
+        "is_daily": -65.1,
+        "is_pf": 0.765,
+        "is_trades": 11,
+        "oos_daily": 114.3,
+        "robust": false
+      },
+      "VwapReversion": {
+        "is_daily": 462.0,
+        "is_pf": 1.549,
+        "is_trades": 53,
+        "oos_daily": -1725.6,
+        "robust": false
+      }
+    },
+    "best_strategy": "MacdRci",
+    "best_is_daily": 672.1,
+    "best_robust": false
+  },
+  "8058.T": {
+    "name": "Mitsubishi Corp",
+    "updated": "2026-04-08",
+    "strategies": {
+      "MacdRci": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "Breakout": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "Scalp": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "Momentum5Min": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "ORB": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "VwapReversion": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      }
+    },
+    "best_strategy": "MacdRci",
+    "best_is_daily": 0.0,
+    "best_robust": false
+  },
+  "8031.T": {
+    "name": "Mitsui & Co",
+    "updated": "2026-04-08",
+    "strategies": {
+      "Scalp": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "Momentum5Min": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "ORB": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "VwapReversion": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      }
+    },
+    "best_strategy": "Scalp",
+    "best_is_daily": 0.0,
+    "best_robust": false
+  },
+  "8002.T": {
+    "name": "Marubeni",
+    "updated": "2026-04-08",
+    "strategies": {
+      "Scalp": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "Momentum5Min": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "ORB": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "VwapReversion": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      }
+    },
+    "best_strategy": "Scalp",
+    "best_is_daily": 0.0,
+    "best_robust": false
+  },
+  "8053.T": {
+    "name": "Sumitomo Corp",
+    "updated": "2026-04-08",
+    "strategies": {
+      "Breakout": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "Scalp": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "Momentum5Min": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "ORB": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "VwapReversion": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      }
+    },
+    "best_strategy": "Breakout",
+    "best_is_daily": 0.0,
+    "best_robust": false
+  },
+  "5020.T": {
+    "name": "ENEOS Holdings",
+    "updated": "2026-04-08",
+    "strategies": {
+      "MacdRci": {
+        "is_daily": 421.7,
+        "is_pf": 1.169,
+        "is_trades": 399,
+        "oos_daily": 18.1,
+        "robust": true
+      },
+      "Breakout": {
+        "is_daily": -139.3,
+        "is_pf": 0.588,
+        "is_trades": 63,
+        "oos_daily": 92.4,
+        "robust": false
+      },
+      "Scalp": {
+        "is_daily": 5.6,
+        "is_pf": 1.01,
+        "is_trades": 109,
+        "oos_daily": -71.2,
+        "robust": false
+      },
+      "Momentum5Min": {
+        "is_daily": 34.9,
+        "is_pf": 2.669,
+        "is_trades": 3,
+        "oos_daily": -46.3,
+        "robust": false
+      },
+      "ORB": {
+        "is_daily": 151.2,
+        "is_pf": 1.774,
+        "is_trades": 16,
+        "oos_daily": -100.0,
+        "robust": false
+      },
+      "VwapReversion": {
+        "is_daily": -3.4,
+        "is_pf": 0.992,
+        "is_trades": 17,
+        "oos_daily": -85.1,
+        "robust": false
+      }
+    },
+    "best_strategy": "MacdRci",
+    "best_is_daily": 421.7,
+    "best_robust": true
+  },
+  "1605.T": {
+    "name": "INPEX",
+    "updated": "2026-04-08",
+    "strategies": {
+      "MacdRci": {
+        "is_daily": -45.5,
+        "is_pf": 0.954,
+        "is_trades": 133,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "Breakout": {
+        "is_daily": -39.2,
+        "is_pf": 0.667,
+        "is_trades": 21,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "Scalp": {
+        "is_daily": -46.9,
+        "is_pf": 0.776,
+        "is_trades": 34,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "Momentum5Min": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "ORB": {
+        "is_daily": -16.3,
+        "is_pf": 0.806,
+        "is_trades": 6,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "VwapReversion": {
+        "is_daily": 16.3,
+        "is_pf": 999.0,
+        "is_trades": 1,
+        "oos_daily": 0.0,
+        "robust": false
+      }
+    },
+    "best_strategy": "VwapReversion",
+    "best_is_daily": 16.3,
+    "best_robust": false
+  },
+  "5401.T": {
+    "name": "Nippon Steel",
+    "updated": "2026-04-08",
+    "strategies": {
+      "MacdRci": {
+        "is_daily": -409.3,
+        "is_pf": 0.875,
+        "is_trades": 393,
+        "oos_daily": -846.9,
+        "robust": false
+      },
+      "Breakout": {
+        "is_daily": -72.9,
+        "is_pf": 0.687,
+        "is_trades": 52,
+        "oos_daily": -11.8,
+        "robust": false
+      },
+      "Scalp": {
+        "is_daily": 174.9,
+        "is_pf": 1.379,
+        "is_trades": 98,
+        "oos_daily": 150.1,
+        "robust": true
+      },
+      "Momentum5Min": {
+        "is_daily": -76.4,
+        "is_pf": 0.464,
+        "is_trades": 7,
+        "oos_daily": 9.8,
+        "robust": false
+      },
+      "ORB": {
+        "is_daily": 164.2,
+        "is_pf": 4.195,
+        "is_trades": 10,
+        "oos_daily": -143.9,
+        "robust": false
+      },
+      "VwapReversion": {
+        "is_daily": -268.3,
+        "is_pf": 0.576,
+        "is_trades": 21,
+        "oos_daily": -98.2,
+        "robust": false
+      }
+    },
+    "best_strategy": "Scalp",
+    "best_is_daily": 174.9,
+    "best_robust": true
+  },
+  "9101.T": {
+    "name": "NYK Line",
+    "updated": "2026-04-08",
+    "strategies": {
+      "MacdRci": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "Breakout": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "Scalp": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "Momentum5Min": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "ORB": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "VwapReversion": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      }
+    },
+    "best_strategy": "MacdRci",
+    "best_is_daily": 0.0,
+    "best_robust": false
+  },
+  "9104.T": {
+    "name": "MOL",
+    "updated": "2026-04-08",
+    "strategies": {
+      "Breakout": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "Scalp": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "Momentum5Min": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "ORB": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "VwapReversion": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      }
+    },
+    "best_strategy": "Breakout",
+    "best_is_daily": 0.0,
+    "best_robust": false
+  },
+  "9107.T": {
+    "name": "Kawasaki Kisen",
+    "updated": "2026-04-08",
+    "strategies": {
+      "MacdRci": {
+        "is_daily": 285.8,
+        "is_pf": 1.169,
+        "is_trades": 395,
+        "oos_daily": -403.4,
+        "robust": false
+      },
+      "Breakout": {
+        "is_daily": 7.0,
+        "is_pf": 1.037,
+        "is_trades": 58,
+        "oos_daily": 57.9,
+        "robust": true
+      },
+      "Scalp": {
+        "is_daily": 107.2,
+        "is_pf": 1.284,
+        "is_trades": 96,
+        "oos_daily": 218.5,
+        "robust": true
+      },
+      "Momentum5Min": {
+        "is_daily": -8.1,
+        "is_pf": 0.3,
+        "is_trades": 2,
+        "oos_daily": 79.0,
+        "robust": false
+      },
+      "ORB": {
+        "is_daily": 0.6,
+        "is_pf": 1.003,
+        "is_trades": 14,
+        "oos_daily": -148.8,
+        "robust": false
+      },
+      "VwapReversion": {
+        "is_daily": -178.3,
+        "is_pf": 0.257,
+        "is_trades": 12,
+        "oos_daily": -522.2,
+        "robust": false
+      }
+    },
+    "best_strategy": "MacdRci",
+    "best_is_daily": 285.8,
+    "best_robust": false
+  },
+  "4063.T": {
+    "name": "Shin-Etsu Chem",
+    "updated": "2026-04-08",
+    "strategies": {
+      "MacdRci": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "Breakout": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "Scalp": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "Momentum5Min": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "ORB": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "VwapReversion": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      }
+    },
+    "best_strategy": "MacdRci",
+    "best_is_daily": 0.0,
+    "best_robust": false
+  },
+  "4911.T": {
+    "name": "Shiseido",
+    "updated": "2026-04-08",
+    "strategies": {
+      "MacdRci": {
+        "is_daily": 992.8,
+        "is_pf": 1.258,
+        "is_trades": 419,
+        "oos_daily": 685.7,
+        "robust": true
+      },
+      "Breakout": {
+        "is_daily": -167.2,
+        "is_pf": 0.378,
+        "is_trades": 45,
+        "oos_daily": -75.4,
+        "robust": false
+      },
+      "Scalp": {
+        "is_daily": 68.0,
+        "is_pf": 1.132,
+        "is_trades": 95,
+        "oos_daily": 187.9,
+        "robust": true
+      },
+      "Momentum5Min": {
+        "is_daily": -78.4,
+        "is_pf": 0.681,
+        "is_trades": 11,
+        "oos_daily": -131.1,
+        "robust": false
+      },
+      "ORB": {
+        "is_daily": 108.7,
+        "is_pf": 1.517,
+        "is_trades": 7,
+        "oos_daily": -256.1,
+        "robust": false
+      },
+      "VwapReversion": {
+        "is_daily": 33.7,
+        "is_pf": 1.075,
+        "is_trades": 25,
+        "oos_daily": -194.2,
+        "robust": false
+      }
+    },
+    "best_strategy": "MacdRci",
+    "best_is_daily": 992.8,
+    "best_robust": true
+  },
+  "6098.T": {
+    "name": "Recruit Holdings",
+    "updated": "2026-04-08",
+    "strategies": {
+      "MacdRci": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "Breakout": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "Scalp": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "Momentum5Min": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "ORB": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "VwapReversion": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      }
+    },
+    "best_strategy": "MacdRci",
+    "best_is_daily": 0.0,
+    "best_robust": false
+  },
+  "7974.T": {
+    "name": "Nintendo",
+    "updated": "2026-04-08",
+    "strategies": {
+      "MacdRci": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "Breakout": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "Scalp": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "Momentum5Min": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "ORB": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "VwapReversion": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      }
+    },
+    "best_strategy": "MacdRci",
+    "best_is_daily": 0.0,
+    "best_robust": false
+  },
+  "4661.T": {
+    "name": "Oriental Land",
+    "updated": "2026-04-08",
+    "strategies": {
+      "MacdRci": {
+        "is_daily": -259.1,
+        "is_pf": 0.89,
+        "is_trades": 396,
+        "oos_daily": -9.0,
+        "robust": false
+      },
+      "Breakout": {
+        "is_daily": -31.5,
+        "is_pf": 0.887,
+        "is_trades": 59,
+        "oos_daily": -13.2,
+        "robust": false
+      },
+      "Scalp": {
+        "is_daily": 35.0,
+        "is_pf": 1.088,
+        "is_trades": 76,
+        "oos_daily": 175.2,
+        "robust": true
+      },
+      "Momentum5Min": {
+        "is_daily": 27.9,
+        "is_pf": 2.5,
+        "is_trades": 4,
+        "oos_daily": 58.0,
+        "robust": true
+      },
+      "ORB": {
+        "is_daily": -74.4,
+        "is_pf": 0.665,
+        "is_trades": 13,
+        "oos_daily": -115.9,
+        "robust": false
+      },
+      "VwapReversion": {
+        "is_daily": 108.8,
+        "is_pf": 2.296,
+        "is_trades": 12,
+        "oos_daily": -160.1,
+        "robust": false
+      }
+    },
+    "best_strategy": "VwapReversion",
+    "best_is_daily": 108.8,
+    "best_robust": false
+  },
+  "3382.T": {
+    "name": "Seven & i",
+    "updated": "2026-04-08",
+    "strategies": {
+      "MacdRci": {
+        "is_daily": 73.3,
+        "is_pf": 1.039,
+        "is_trades": 361,
+        "oos_daily": 661.8,
+        "robust": true
+      },
+      "Breakout": {
+        "is_daily": -14.0,
+        "is_pf": 0.917,
+        "is_trades": 47,
+        "oos_daily": 23.6,
+        "robust": false
+      },
+      "Scalp": {
+        "is_daily": -72.4,
+        "is_pf": 0.835,
+        "is_trades": 98,
+        "oos_daily": 69.6,
+        "robust": false
+      },
+      "Momentum5Min": {
+        "is_daily": -72.6,
+        "is_pf": 0.0,
+        "is_trades": 6,
+        "oos_daily": -11.7,
+        "robust": false
+      },
+      "ORB": {
+        "is_daily": -12.8,
+        "is_pf": 0.894,
+        "is_trades": 12,
+        "oos_daily": 141.5,
+        "robust": false
+      },
+      "VwapReversion": {
+        "is_daily": -233.5,
+        "is_pf": 0.052,
+        "is_trades": 11,
+        "oos_daily": -146.1,
+        "robust": false
+      }
+    },
+    "best_strategy": "MacdRci",
+    "best_is_daily": 73.3,
+    "best_robust": true
+  },
+  "8766.T": {
+    "name": "Tokio Marine",
+    "updated": "2026-04-08",
+    "strategies": {
+      "MacdRci": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "Breakout": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "Scalp": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "Momentum5Min": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "ORB": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      },
+      "VwapReversion": {
+        "is_daily": 0.0,
+        "is_pf": 0.0,
+        "is_trades": 0,
+        "oos_daily": 0.0,
+        "robust": false
+      }
+    },
+    "best_strategy": "MacdRci",
+    "best_is_daily": 0.0,
+    "best_robust": false
+  },
+  "3103.T": {
+    "name": "Unitika",
+    "updated": "2026-04-08",
+    "strategies": {
+      "MacdRci": {
+        "is_daily": 5035.5,
+        "is_pf": 1.352,
+        "is_trades": 369,
+        "oos_daily": -2953.1,
+        "robust": false
+      },
+      "Breakout": {
+        "is_daily": 56.1,
+        "is_pf": 1.112,
+        "is_trades": 86,
+        "oos_daily": -337.7,
+        "robust": false
+      },
+      "Scalp": {
+        "is_daily": -8.4,
+        "is_pf": 0.968,
+        "is_trades": 46,
+        "oos_daily": -133.4,
+        "robust": false
+      },
+      "Momentum5Min": {
+        "is_daily": 516.4,
+        "is_pf": 1.352,
+        "is_trades": 90,
+        "oos_daily": -411.1,
+        "robust": false
+      },
+      "ORB": {
+        "is_daily": 1671.4,
+        "is_pf": 2.215,
+        "is_trades": 10,
+        "oos_daily": -1077.8,
+        "robust": false
+      },
+      "VwapReversion": {
+        "is_daily": 260.2,
+        "is_pf": 1.066,
+        "is_trades": 127,
+        "oos_daily": -1610.9,
+        "robust": false
+      }
+    },
+    "best_strategy": "MacdRci",
+    "best_is_daily": 5035.5,
+    "best_robust": false
+  },
+  "8136.T": {
+    "name": "Sanrio",
+    "updated": "2026-04-08",
+    "strategies": {
+      "MacdRci": {
+        "is_daily": 646.7,
+        "is_pf": 1.137,
+        "is_trades": 409,
+        "oos_daily": -291.9,
+        "robust": false
+      },
+      "Breakout": {
+        "is_daily": -63.4,
+        "is_pf": 0.813,
+        "is_trades": 61,
+        "oos_daily": -9.8,
+        "robust": false
+      },
+      "Scalp": {
+        "is_daily": -16.2,
+        "is_pf": 0.961,
+        "is_trades": 75,
+        "oos_daily": 274.3,
+        "robust": false
+      },
+      "Momentum5Min": {
+        "is_daily": -47.3,
+        "is_pf": 0.905,
+        "is_trades": 28,
+        "oos_daily": 258.3,
+        "robust": false
+      },
+      "ORB": {
+        "is_daily": -357.3,
+        "is_pf": 0.343,
+        "is_trades": 12,
+        "oos_daily": -325.1,
+        "robust": false
+      },
+      "VwapReversion": {
+        "is_daily": -461.9,
+        "is_pf": 0.623,
+        "is_trades": 49,
+        "oos_daily": -453.5,
+        "robust": false
+      }
+    },
+    "best_strategy": "MacdRci",
+    "best_is_daily": 646.7,
+    "best_robust": false
+  }
+}

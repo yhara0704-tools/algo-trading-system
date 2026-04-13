@@ -3,31 +3,31 @@
     "params": {
       "ema_fast": 3,
       "ema_slow": 8,
-      "tp_pct": 0.006,
-      "sl_pct": 0.003,
+      "tp_pct": 0.009000000000000001,
+      "sl_pct": 0.0045000000000000005,
       "atr_min_pct": 0.002,
       "allow_short": true
     },
-    "score": 17.6,
-    "daily_pnl_jpy": 128.8,
-    "win_rate": 35.0,
-    "last_updated": "2026-04-01",
+    "score": 35.43,
+    "daily_pnl_jpy": 548.0,
+    "win_rate": 52.38,
+    "last_updated": "2026-04-09",
     "source": "auto"
   },
   "3697.T": {
     "params": {
       "ema_fast": 3,
       "ema_slow": 5,
-      "tp_pct": 0.005,
-      "sl_pct": 0.003,
+      "tp_pct": 0.002,
+      "sl_pct": 0.0015,
       "atr_min_pct": 0.001,
       "allow_short": true
     },
-    "score": 0.0,
-    "daily_pnl_jpy": 0.0,
-    "win_rate": 0.0,
-    "last_updated": "2026-04-01",
-    "source": "manual"
+    "score": 56.53,
+    "daily_pnl_jpy": 334.7,
+    "win_rate": 63.64,
+    "last_updated": "2026-04-11",
+    "source": "auto"
   },
   "7267.T": {
     "params": {
@@ -191,6 +191,92 @@
     "daily_pnl_jpy": 649.1,
     "win_rate": 45.45,
     "last_updated": "2026-04-01",
+    "source": "auto"
+  },
+  "3382.T": {
+    "params": {
+      "ema_fast": 3,
+      "ema_slow": 8,
+      "tp_pct": 0.002,
+      "sl_pct": 0.0015,
+      "atr_min_pct": 0.002
+    },
+    "score": 42.18,
+    "daily_pnl_jpy": 199.2,
+    "win_rate": 58.33,
+    "last_updated": "2026-04-09",
+    "source": "auto"
+  },
+  "6752.T": {
+    "params": {
+      "tp_pct": 0.006,
+      "sl_pct": 0.001
+    },
+    "score": 41.09,
+    "daily_pnl_jpy": 1830.7,
+    "win_rate": 43.23,
+    "last_updated": "2026-04-09",
+    "source": "auto"
+  },
+  "6613.T": {
+    "params": {
+      "ema_fast": 3,
+      "ema_slow": 8,
+      "tp_pct": 0.006,
+      "sl_pct": 0.003,
+      "atr_min_pct": 0.002
+    },
+    "score": 25.39,
+    "daily_pnl_jpy": 212.8,
+    "win_rate": 40.0,
+    "last_updated": "2026-04-09",
+    "source": "auto"
+  },
+  "4369.T": {
+    "params": {
+      "tp_pct": 0.01,
+      "sl_pct": 0.005
+    },
+    "score": 41.98,
+    "daily_pnl_jpy": 284.1,
+    "win_rate": 52.94,
+    "last_updated": "2026-04-13",
+    "source": "auto"
+  },
+  "5020.T": {
+    "params": {
+      "ema_fast": 3,
+      "ema_slow": 8,
+      "tp_pct": 0.002,
+      "sl_pct": 0.0015,
+      "atr_min_pct": 0.002
+    },
+    "score": 25.04,
+    "daily_pnl_jpy": 86.1,
+    "win_rate": 48.28,
+    "last_updated": "2026-04-12",
+    "source": "auto"
+  },
+  "3103.T": {
+    "params": {
+      "sl_pct": 0.001,
+      "tp_pct": 0.006
+    },
+    "score": 85.5,
+    "daily_pnl_jpy": 6835.6,
+    "win_rate": 41.79,
+    "last_updated": "2026-04-13",
+    "source": "auto"
+  },
+  "7269.T": {
+    "params": {
+      "tp_pct": 0.002,
+      "sl_pct": 0.0015
+    },
+    "score": 22.75,
+    "daily_pnl_jpy": 33.1,
+    "win_rate": 46.15,
+    "last_updated": "2026-04-13",
     "source": "auto"
   }
 }

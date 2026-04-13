@@ -29,6 +29,15 @@ logger = logging.getLogger(__name__)
 _CLOSE_AFTERNOON = datetime.strptime("15:30", "%H:%M").time()
 
 
+def _get_event_tag(now: datetime) -> str:
+    """当日のイベントタグを返す。"""
+    try:
+        from backend.backtesting.trade_guard import get_event
+        return get_event(now.strftime("%Y-%m-%d")) or ""
+    except Exception:
+        return ""
+
+
 @dataclass
 class LivePosition:
     symbol: str
@@ -39,6 +48,9 @@ class LivePosition:
     take_profit: float
     entry_time: datetime
     side: str = "long"   # "long" | "short"
+    entry_regime: str = "unknown"
+    regime_history: list = field(default_factory=list)  # [(time, regime), ...]
+    event_day: str = ""  # "SQ", "決算集中" etc. 空なら通常日
 
 
 @dataclass
@@ -53,6 +65,11 @@ class LiveTrade:
     exit_time: datetime
     exit_reason: str   # "signal" | "stop" | "target" | "session_close"
     side: str = "long"  # "long" | "short"
+    entry_regime: str = "unknown"
+    exit_regime: str = "unknown"
+    regime_changed: bool = False  # 保有中にレジーム変化があったか
+    regime_history: list = field(default_factory=list)  # [(time_str, regime), ...]
+    event_day: str = ""  # "SQ", "決算集中" etc.
 
 
 @dataclass
@@ -329,6 +346,19 @@ class JPLiveRunner:
 
         # ── ポジションあり: SL/TP/セッションクローズチェック ──────────────────
         if pos:
+            # 保有中レジーム追跡（バーごとに最新レジームを記録）
+            try:
+                if df is not None and len(df) >= 30:
+                    from backend.market_regime import _detect as _det
+                    current_regime = _det(symbol, df).regime
+                    last_recorded = pos.regime_history[-1][1] if pos.regime_history else "unknown"
+                    if current_regime != last_recorded:
+                        pos.regime_history.append((now.strftime("%H:%M"), current_regime))
+                        logger.info("REGIME CHANGE %s [%s]: %s → %s (保有中)",
+                                    symbol, sid, last_recorded, current_regime)
+            except Exception:
+                pass
+
             exit_reason: str | None = None
 
             if pos.side == "long":
@@ -345,6 +375,36 @@ class JPLiveRunner:
             if exit_reason is None and now.time() >= _CLOSE_AFTERNOON:
                 exit_reason = "session_close"
 
+            # 同一セクター異変検知 → 緊急撤退（決算銘柄は除外）
+            if exit_reason is None:
+                try:
+                    from backend.backtesting.trade_guard import (
+                        get_sector_peers, detect_peer_anomaly, is_earnings_day_sync,
+                    )
+                    peers = get_sector_peers(symbol)
+                    if peers and self._feed:
+                        today_str = now.strftime("%Y-%m-%d")
+                        # 決算銘柄を除外（個社要因の急落でセクター異変と誤判定しない）
+                        earnings_exclude = {
+                            p for p in peers
+                            if is_earnings_day_sync(p, today_str)
+                        }
+                        peer_prices = {}
+                        for p in peers:
+                            p_bars = self._feed.get_bars(p)
+                            if p_bars is not None and len(p_bars) >= 5:
+                                peer_prices[p] = p_bars["close"].tail(5).tolist()
+                        anomalies = detect_peer_anomaly(
+                            peer_prices, threshold_pct=-1.5,
+                            exclude_symbols=earnings_exclude,
+                        )
+                        if anomalies:
+                            exit_reason = "peer_anomaly"
+                            logger.warning("PEER ANOMALY %s → %s 緊急撤退 (決算除外: %s)",
+                                           symbol, anomalies, earnings_exclude or "なし")
+                except Exception:
+                    pass
+
             if exit_reason:
                 await self._close_position(pos, latest_price, exit_reason, now)
                 del self._positions[symbol][sid]
@@ -359,6 +419,9 @@ class JPLiveRunner:
         # クールダウン中はエントリーしない（ただし既存ポジションの管理は続ける）
         if self._resume_after and now < self._resume_after:
             return
+
+        # イベント日フラグ（ペーパーではエントリーしてデータ取得、実弾時は別途制御）
+        # → データ蓄積のためペーパートレードではブロックしない
 
         # サブセッション損益ルールチェック
         ss = self._current_subsession
@@ -430,6 +493,15 @@ class JPLiveRunner:
                 return
         # short: PaperBrokerは空売り非対応のため内部管理のみ（ペーパー検証目的）
 
+        # エントリー時レジーム
+        entry_regime = "unknown"
+        try:
+            if df is not None and len(df) >= 30:
+                from backend.market_regime import _detect as _det
+                entry_regime = _det(symbol, df).regime
+        except Exception:
+            pass
+
         self._positions[symbol][sid] = LivePosition(
             symbol=symbol,
             strategy_id=sid,
@@ -439,10 +511,27 @@ class JPLiveRunner:
             take_profit=tp,
             entry_time=now,
             side="long" if is_long else "short",
+            entry_regime=entry_regime,
+            regime_history=[(now.strftime("%H:%M"), entry_regime)],
+            event_day=_get_event_tag(now),
         )
-        logger.info("ENTRY %s [%s] qty=%d @%.1f SL=%.1f TP=%.1f [%s]",
+        logger.info("ENTRY %s [%s] qty=%d @%.1f SL=%.1f TP=%.1f regime=%s [%s]",
                     symbol, "long" if is_long else "short",
-                    qty, latest_price, sl, tp, sid)
+                    qty, latest_price, sl, tp, entry_regime, sid)
+
+        # エントリー時に同一セクター銘柄の監視を開始
+        try:
+            from backend.backtesting.trade_guard import get_correlated_symbols, get_sector
+            sector = get_sector(symbol)
+            peers = get_correlated_symbols(symbol)
+            if peers and self._feed:
+                existing = set(self._feed._symbols)
+                new_peers = [p for p in peers if p not in existing and p.endswith('.T')]
+                if new_peers:
+                    self._feed.set_symbols(list(existing | set(new_peers)))
+                    logger.info("PEER WATCH: %s → %s (%s)", symbol, new_peers, sector)
+        except Exception as e:
+            logger.debug("Peer watch setup error: %s", e)
 
     async def _close_position(
         self,
@@ -459,6 +548,18 @@ class JPLiveRunner:
             pnl = (price - pos.entry_price) * pos.qty
         else:  # short: 売値 - 買戻し値（内部管理のみ）
             pnl = (pos.entry_price - price) * pos.qty
+        # 決済時のレジームを記録（振り返り用）
+        exit_regime = "unknown"
+        try:
+            if self._feed:
+                bars = self._feed.get_bars(pos.symbol)
+                if bars is not None and len(bars) >= 30:
+                    from backend.market_regime import _detect as _det
+                    exit_regime = _det(pos.symbol, bars).regime
+        except Exception:
+            pass
+
+        regime_changed = len(pos.regime_history) > 1
         trade = LiveTrade(
             symbol=pos.symbol,
             strategy_id=pos.strategy_id,
@@ -470,6 +571,11 @@ class JPLiveRunner:
             exit_time=now,
             exit_reason=reason,
             side=pos.side,
+            entry_regime=pos.entry_regime,
+            exit_regime=exit_regime,
+            regime_changed=regime_changed,
+            regime_history=list(pos.regime_history),
+            event_day=pos.event_day,
         )
         # サブセッションに記録（なければセッション直接）
         if self._current_subsession is not None:
@@ -481,6 +587,39 @@ class JPLiveRunner:
         pnl_sign = "+" if pnl >= 0 else ""
         logger.info("EXIT %s [%s] @%.1f pnl=%s%.0f円 reason=%s [%s]",
                     pos.symbol, pos.side, price, pnl_sign, pnl, reason, pos.strategy_id)
+
+        # 曜日×時間帯の記録
+        try:
+            from backend.backtesting.trade_guard import record_trade_timing
+            record_trade_timing(now, pnl)
+        except Exception:
+            pass
+
+        # 連敗検出 → レジームチェック＆戦略切替トリガー
+        if pnl < 0:
+            self._consecutive_losses = getattr(self, "_consecutive_losses", 0) + 1
+            if self._consecutive_losses >= 3:
+                logger.info("連敗%d回 → レジームチェック発動", self._consecutive_losses)
+                self._consecutive_losses = 0
+                asyncio.ensure_future(self._trigger_regime_recheck())
+        else:
+            self._consecutive_losses = 0
+
+    async def _trigger_regime_recheck(self) -> None:
+        """連敗時にレジームチェック＆戦略切替を実行する。"""
+        try:
+            from backend.lab.daily_prep import midday_regime_check
+            if self._feed:
+                result = await midday_regime_check(self, self._feed)
+                if result:
+                    logger.info("連敗トリガー戦略切替: %s", result)
+                    if self._notify:
+                        await self._notify(
+                            "連敗トリガー",
+                            f"3連敗検出 → レジームチェック実行\n{result}"
+                        )
+        except Exception as e:
+            logger.warning("連敗レジームチェック失敗: %s", e)
 
     # ── Session summary ───────────────────────────────────────────────────────
 

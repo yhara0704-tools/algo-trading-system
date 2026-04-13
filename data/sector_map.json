@@ -1,0 +1,111 @@
+{
+  "半導体・製造装置": {
+    "domestic": [
+      {"symbol": "8035.T", "name": "Tokyo Electron", "role": "leader"},
+      {"symbol": "6920.T", "name": "Lasertec",        "role": "leader"},
+      {"symbol": "6723.T", "name": "Renesas",         "role": "follower"},
+      {"symbol": "6861.T", "name": "Keyence",         "role": "follower"}
+    ],
+    "us_proxy": [
+      {"symbol": "SOXX",   "name": "SOX ETF",         "role": "index"},
+      {"symbol": "NVDA",   "name": "Nvidia",           "role": "leader"},
+      {"symbol": "AMAT",   "name": "Applied Materials","role": "leader"}
+    ]
+  },
+  "光半導体・フォトニクス": {
+    "domestic": [
+      {"symbol": "6965.T", "name": "Hamamatsu Photonics", "role": "leader"},
+      {"symbol": "6613.T", "name": "QD Laser",             "role": "follower"},
+      {"symbol": "6323.T", "name": "Lasertec",             "role": "follower"}
+    ],
+    "us_proxy": [
+      {"symbol": "LITE",   "name": "Lumentum",             "role": "leader"},
+      {"symbol": "COHR",   "name": "Coherent",             "role": "leader"}
+    ]
+  },
+  "銀行・証券": {
+    "domestic": [
+      {"symbol": "8306.T", "name": "MUFG",            "role": "leader"},
+      {"symbol": "8316.T", "name": "SMBC",            "role": "follower"},
+      {"symbol": "8411.T", "name": "Mizuho",          "role": "follower"},
+      {"symbol": "8604.T", "name": "Nomura",          "role": "follower"},
+      {"symbol": "8316.T", "name": "SMBC",            "role": "follower"}
+    ],
+    "us_proxy": [
+      {"symbol": "KBE",    "name": "銀行ETF",          "role": "index"},
+      {"symbol": "JPM",    "name": "JPMorgan",         "role": "leader"}
+    ]
+  },
+  "自動車": {
+    "domestic": [
+      {"symbol": "7203.T", "name": "Toyota",          "role": "leader"},
+      {"symbol": "7267.T", "name": "Honda",           "role": "follower"},
+      {"symbol": "7201.T", "name": "Nissan",          "role": "follower"},
+      {"symbol": "7269.T", "name": "Suzuki",          "role": "follower"},
+      {"symbol": "7211.T", "name": "Mitsubishi Motors","role": "follower"}
+    ],
+    "us_proxy": [
+      {"symbol": "CARZ",   "name": "自動車ETF",        "role": "index"},
+      {"symbol": "F",      "name": "Ford",             "role": "leader"}
+    ]
+  },
+  "通信・IT": {
+    "domestic": [
+      {"symbol": "9984.T", "name": "SoftBank Group",  "role": "leader"},
+      {"symbol": "9432.T", "name": "NTT",             "role": "follower"},
+      {"symbol": "9433.T", "name": "KDDI",            "role": "follower"},
+      {"symbol": "9434.T", "name": "SoftBank Corp",   "role": "follower"},
+      {"symbol": "4689.T", "name": "LY Corp",         "role": "follower"}
+    ],
+    "us_proxy": [
+      {"symbol": "XLC",    "name": "通信ETF",          "role": "index"}
+    ]
+  },
+  "商社・エネルギー": {
+    "domestic": [
+      {"symbol": "8058.T", "name": "Mitsubishi Corp", "role": "leader"},
+      {"symbol": "8031.T", "name": "Mitsui",          "role": "follower"},
+      {"symbol": "8053.T", "name": "Sumitomo",        "role": "follower"},
+      {"symbol": "8002.T", "name": "Marubeni",        "role": "follower"},
+      {"symbol": "5020.T", "name": "ENEOS",           "role": "follower"},
+      {"symbol": "1605.T", "name": "INPEX",           "role": "follower"}
+    ],
+    "us_proxy": [
+      {"symbol": "XLE",    "name": "エネルギーETF",    "role": "index"},
+      {"symbol": "XOM",    "name": "ExxonMobil",       "role": "leader"}
+    ]
+  },
+  "海運": {
+    "domestic": [
+      {"symbol": "9101.T", "name": "NYK Line",        "role": "leader"},
+      {"symbol": "9104.T", "name": "MOL",             "role": "follower"},
+      {"symbol": "9107.T", "name": "Kawasaki Kisen",  "role": "follower"}
+    ],
+    "us_proxy": [
+      {"symbol": "ZIM",    "name": "ZIM Shipping",    "role": "leader"}
+    ]
+  },
+  "電機・家電": {
+    "domestic": [
+      {"symbol": "6758.T", "name": "Sony",            "role": "leader"},
+      {"symbol": "6501.T", "name": "Hitachi",         "role": "leader"},
+      {"symbol": "6752.T", "name": "Panasonic",       "role": "follower"},
+      {"symbol": "6753.T", "name": "Sharp",           "role": "follower"}
+    ],
+    "us_proxy": [
+      {"symbol": "XLK",    "name": "テックETF",        "role": "index"}
+    ]
+  },
+  "医薬・バイオ": {
+    "domestic": [
+      {"symbol": "4568.T", "name": "Daiichi Sankyo",  "role": "leader"},
+      {"symbol": "4502.T", "name": "Takeda",          "role": "leader"},
+      {"symbol": "2413.T", "name": "M3",              "role": "follower"},
+      {"symbol": "4592.T", "name": "SanBio",          "role": "follower"}
+    ],
+    "us_proxy": [
+      {"symbol": "XBI",    "name": "バイオETF",        "role": "index"},
+      {"symbol": "JNJ",    "name": "J&J",              "role": "leader"}
+    ]
+  }
+}

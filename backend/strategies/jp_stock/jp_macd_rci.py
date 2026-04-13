@@ -145,10 +145,11 @@ class JPMacdRci(StrategyBase):
         # ── セッションフィルター ──────────────────────────────────────────────
         idx      = d.index
         time_min = pd.Series(idx.hour * 60 + idx.minute, index=d.index)
-        # エントリー可能ゾーン（次バーで約定するため各セッション末尾5分は除く）
-        # 前場: 9:05〜11:25、後場: 12:30〜15:20
+        # エントリー可能ゾーン
+        # 前場: 9:05〜11:25、後場: 12:30〜14:30
+        # 14:30以降は新規エントリー禁止（強制決済で利益減少を防ぐ）
         am_entry = (time_min >= 9 * 60 + 5) & (time_min <= 11 * 60 + 25)
-        pm_entry = (time_min >= 12 * 60 + 30) & (time_min <= 15 * 60 + 20)
+        pm_entry = (time_min >= 12 * 60 + 30) & (time_min <= 14 * 60 + 30)
         in_session = am_entry | pm_entry
         # エグジット判定ゾーン（エントリーより広め）
         am_exit = (time_min >= 9 * 60 + 5) & (time_min <= 11 * 60 + 30)

@@ -119,6 +119,125 @@ CREATE INDEX IF NOT EXISTS idx_agg_date     ON backtest_daily_agg(date);
 CREATE INDEX IF NOT EXISTS idx_agg_strategy ON backtest_daily_agg(strategy_id);
 CREATE INDEX IF NOT EXISTS idx_sub_date     ON jp_subsessions(date);
 CREATE INDEX IF NOT EXISTS idx_pts_date     ON pts_screening(date);
+
+-- ── TOB監視 ─────────────────────────────────────────────────────────────────
+
+CREATE TABLE IF NOT EXISTS tob_filings (
+    id                 INTEGER PRIMARY KEY AUTOINCREMENT,
+    doc_id             TEXT    NOT NULL UNIQUE,
+    date               TEXT    NOT NULL,
+    doc_description    TEXT    NOT NULL DEFAULT '',
+    filer_name         TEXT    NOT NULL DEFAULT '',
+    issuer_edinet_code TEXT    NOT NULL DEFAULT '',
+    amendment_flag     TEXT    NOT NULL DEFAULT '0',
+    parent_doc_id      TEXT,
+    form_code          TEXT    NOT NULL DEFAULT '',
+    filing_type        TEXT    NOT NULL DEFAULT '',
+    created_at         TEXT    NOT NULL DEFAULT (datetime('now'))
+);
+
+CREATE TABLE IF NOT EXISTS tob_scores (
+    id                 INTEGER PRIMARY KEY AUTOINCREMENT,
+    date               TEXT    NOT NULL,
+    issuer_edinet_code TEXT    NOT NULL,
+    issuer_name        TEXT    NOT NULL DEFAULT '',
+    sec_code           TEXT    NOT NULL DEFAULT '',
+    total_filings_6m   INTEGER NOT NULL DEFAULT 0,
+    amendment_count    INTEGER NOT NULL DEFAULT 0,
+    unique_filers      INTEGER NOT NULL DEFAULT 0,
+    has_old_amendment  INTEGER NOT NULL DEFAULT 0,
+    pbr                REAL,
+    market_cap_b       REAL,
+    score              REAL    NOT NULL DEFAULT 0,
+    score_detail       TEXT    NOT NULL DEFAULT '{}',
+    notified           INTEGER NOT NULL DEFAULT 0,
+    created_at         TEXT    NOT NULL DEFAULT (datetime('now')),
+    UNIQUE(date, issuer_edinet_code)
+);
+
+CREATE TABLE IF NOT EXISTS edinet_issuer_map (
+    issuer_edinet_code TEXT PRIMARY KEY,
+    sec_code           TEXT NOT NULL DEFAULT '',
+    issuer_name        TEXT NOT NULL DEFAULT '',
+    updated_at         TEXT NOT NULL DEFAULT (datetime('now'))
+);
+
+CREATE INDEX IF NOT EXISTS idx_tob_filings_date   ON tob_filings(date);
+CREATE INDEX IF NOT EXISTS idx_tob_filings_issuer ON tob_filings(issuer_edinet_code);
+CREATE INDEX IF NOT EXISTS idx_tob_scores_date    ON tob_scores(date);
+CREATE INDEX IF NOT EXISTS idx_tob_scores_score   ON tob_scores(score DESC);
+
+-- ── PDCA学習型バックテスト ──────────────────────────────────────────────────
+
+CREATE TABLE IF NOT EXISTS experiments (
+    id              INTEGER PRIMARY KEY AUTOINCREMENT,
+    generation      INTEGER NOT NULL,
+    experiment_type TEXT    NOT NULL,
+    strategy_name   TEXT    NOT NULL,
+    symbol          TEXT    NOT NULL,
+    params_json     TEXT    NOT NULL,
+    regime          TEXT    NOT NULL DEFAULT '',
+    is_daily_pnl    REAL,
+    oos_daily_pnl   REAL,
+    is_win_rate     REAL,
+    oos_win_rate    REAL,
+    is_pf           REAL,
+    oos_pf          REAL,
+    is_trades       INTEGER,
+    oos_trades      INTEGER,
+    max_dd_pct      REAL,
+    score           REAL,
+    robust          INTEGER NOT NULL DEFAULT 0,
+    failure_reasons TEXT    NOT NULL DEFAULT '[]',
+    sensitivity     REAL,
+    oos_is_ratio    REAL,
+    parent_exp_id   INTEGER,
+    hypothesis      TEXT    NOT NULL DEFAULT '',
+    created_at      TEXT    NOT NULL DEFAULT (datetime('now'))
+);
+
+CREATE TABLE IF NOT EXISTS strategy_graveyard (
+    id              INTEGER PRIMARY KEY AUTOINCREMENT,
+    strategy_name   TEXT    NOT NULL,
+    symbol          TEXT    NOT NULL,
+    params_hash     TEXT    NOT NULL,
+    failure_type    TEXT    NOT NULL,
+    failure_detail  TEXT    NOT NULL DEFAULT '',
+    attempts        INTEGER NOT NULL DEFAULT 1,
+    last_attempt_at TEXT    NOT NULL DEFAULT (datetime('now')),
+    UNIQUE(strategy_name, symbol, params_hash)
+);
+
+CREATE TABLE IF NOT EXISTS portfolio_runs (
+    id              INTEGER PRIMARY KEY AUTOINCREMENT,
+    generation      INTEGER NOT NULL,
+    combo_json      TEXT    NOT NULL,
+    num_strategies  INTEGER NOT NULL,
+    total_daily_pnl REAL    NOT NULL,
+    portfolio_sharpe REAL,
+    max_dd_pct      REAL,
+    margin_util_pct REAL,
+    created_at      TEXT    NOT NULL DEFAULT (datetime('now'))
+);
+
+CREATE TABLE IF NOT EXISTS generation_log (
+    id              INTEGER PRIMARY KEY AUTOINCREMENT,
+    generation      INTEGER NOT NULL UNIQUE,
+    plan_json       TEXT    NOT NULL,
+    summary         TEXT    NOT NULL DEFAULT '',
+    experiments_run INTEGER NOT NULL DEFAULT 0,
+    robust_found    INTEGER NOT NULL DEFAULT 0,
+    best_daily_pnl  REAL,
+    portfolio_pnl   REAL,
+    duration_sec    REAL,
+    created_at      TEXT    NOT NULL DEFAULT (datetime('now'))
+);
+
+CREATE INDEX IF NOT EXISTS idx_exp_gen    ON experiments(generation);
+CREATE INDEX IF NOT EXISTS idx_exp_sym    ON experiments(symbol);
+CREATE INDEX IF NOT EXISTS idx_exp_strat  ON experiments(strategy_name);
+CREATE INDEX IF NOT EXISTS idx_exp_robust ON experiments(robust);
+CREATE INDEX IF NOT EXISTS idx_grave_strat ON strategy_graveyard(strategy_name, symbol);
 """
 
 
@@ -358,6 +477,274 @@ def prune_old_data(
         conn.execute("VACUUM")   # ファイルサイズを実際に縮小
     logger.info("Prune complete: %s", deleted)
     return deleted
+
+
+# ── TOB監視 CRUD ─────────────────────────────────────────────────────────────
+
+def upsert_tob_filing(f: dict) -> None:
+    with _tx() as conn:
+        conn.execute("""
+            INSERT OR IGNORE INTO tob_filings
+                (doc_id, date, doc_description, filer_name,
+                 issuer_edinet_code, amendment_flag, parent_doc_id,
+                 form_code, filing_type)
+            VALUES (?,?,?,?,?,?,?,?,?)
+        """, (
+            f["doc_id"], f["date"], f.get("doc_description", ""),
+            f.get("filer_name", ""), f.get("issuer_edinet_code", ""),
+            f.get("amendment_flag", "0"), f.get("parent_doc_id"),
+            f.get("form_code", ""), f.get("filing_type", ""),
+        ))
+
+
+def upsert_tob_score(s: dict) -> None:
+    with _tx() as conn:
+        conn.execute("""
+            INSERT INTO tob_scores
+                (date, issuer_edinet_code, issuer_name, sec_code,
+                 total_filings_6m, amendment_count, unique_filers,
+                 has_old_amendment, pbr, market_cap_b,
+                 score, score_detail, notified)
+            VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)
+            ON CONFLICT(date, issuer_edinet_code) DO UPDATE SET
+                issuer_name=excluded.issuer_name,
+                sec_code=excluded.sec_code,
+                total_filings_6m=excluded.total_filings_6m,
+                amendment_count=excluded.amendment_count,
+                unique_filers=excluded.unique_filers,
+                has_old_amendment=excluded.has_old_amendment,
+                pbr=excluded.pbr,
+                market_cap_b=excluded.market_cap_b,
+                score=excluded.score,
+                score_detail=excluded.score_detail
+        """, (
+            s["date"], s["issuer_edinet_code"], s.get("issuer_name", ""),
+            s.get("sec_code", ""), s.get("total_filings_6m", 0),
+            s.get("amendment_count", 0), s.get("unique_filers", 0),
+            1 if s.get("has_old_amendment") else 0,
+            s.get("pbr"), s.get("market_cap_b"),
+            s.get("score", 0), json.dumps(s.get("score_detail", {}), ensure_ascii=False),
+            0,
+        ))
+
+
+def upsert_issuer_map(edinet_code: str, sec_code: str, name: str) -> None:
+    with _tx() as conn:
+        conn.execute("""
+            INSERT INTO edinet_issuer_map (issuer_edinet_code, sec_code, issuer_name)
+            VALUES (?,?,?)
+            ON CONFLICT(issuer_edinet_code) DO UPDATE SET
+                sec_code=excluded.sec_code,
+                issuer_name=excluded.issuer_name,
+                updated_at=datetime('now')
+        """, (edinet_code, sec_code, name))
+
+
+def get_issuer_map(edinet_code: str) -> dict | None:
+    with _tx() as conn:
+        row = conn.execute(
+            "SELECT * FROM edinet_issuer_map WHERE issuer_edinet_code=?",
+            (edinet_code,)
+        ).fetchone()
+    return dict(row) if row else None
+
+
+def get_tob_filings(issuer_edinet_code: str, days: int = 180) -> list[dict]:
+    since = (datetime.now() - timedelta(days=days)).strftime("%Y-%m-%d")
+    with _tx() as conn:
+        rows = conn.execute("""
+            SELECT * FROM tob_filings
+            WHERE issuer_edinet_code=? AND date>=?
+            ORDER BY date ASC
+        """, (issuer_edinet_code, since)).fetchall()
+    return [dict(r) for r in rows]
+
+
+def get_active_issuers(days: int = 180) -> list[str]:
+    since = (datetime.now() - timedelta(days=days)).strftime("%Y-%m-%d")
+    with _tx() as conn:
+        rows = conn.execute("""
+            SELECT DISTINCT issuer_edinet_code FROM tob_filings WHERE date>=?
+        """, (since,)).fetchall()
+    return [r["issuer_edinet_code"] for r in rows]
+
+
+def get_tob_ranking(limit: int = 30) -> list[dict]:
+    with _tx() as conn:
+        rows = conn.execute("""
+            SELECT * FROM tob_scores
+            WHERE date = (SELECT MAX(date) FROM tob_scores)
+            ORDER BY score DESC LIMIT ?
+        """, (limit,)).fetchall()
+    return [dict(r) for r in rows]
+
+
+def get_tob_score_history(issuer_edinet_code: str, days: int = 90) -> list[dict]:
+    since = (datetime.now() - timedelta(days=days)).strftime("%Y-%m-%d")
+    with _tx() as conn:
+        rows = conn.execute("""
+            SELECT * FROM tob_scores
+            WHERE issuer_edinet_code=? AND date>=?
+            ORDER BY date ASC
+        """, (issuer_edinet_code, since)).fetchall()
+    return [dict(r) for r in rows]
+
+
+def get_unnotified_tob_scores(min_score: float = 30.0) -> list[dict]:
+    with _tx() as conn:
+        rows = conn.execute("""
+            SELECT * FROM tob_scores
+            WHERE date = (SELECT MAX(date) FROM tob_scores)
+              AND score >= ? AND notified = 0
+            ORDER BY score DESC
+        """, (min_score,)).fetchall()
+    return [dict(r) for r in rows]
+
+
+def mark_tob_notified(date: str, issuer_edinet_code: str) -> None:
+    with _tx() as conn:
+        conn.execute("""
+            UPDATE tob_scores SET notified=1
+            WHERE date=? AND issuer_edinet_code=?
+        """, (date, issuer_edinet_code))
+
+
+# ── PDCA学習型バックテスト CRUD ──────────────────────────────────────────────
+
+def save_experiment(exp: dict) -> int:
+    with _tx() as conn:
+        cur = conn.execute("""
+            INSERT INTO experiments
+                (generation, experiment_type, strategy_name, symbol, params_json,
+                 regime, is_daily_pnl, oos_daily_pnl, is_win_rate, oos_win_rate,
+                 is_pf, oos_pf, is_trades, oos_trades, max_dd_pct, score,
+                 robust, failure_reasons, sensitivity, oos_is_ratio,
+                 parent_exp_id, hypothesis)
+            VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+        """, (
+            exp.get("generation", 0), exp.get("experiment_type", ""),
+            exp.get("strategy_name", ""), exp.get("symbol", ""),
+            json.dumps(exp.get("params", {}), ensure_ascii=False),
+            exp.get("regime", ""),
+            exp.get("is_daily_pnl"), exp.get("oos_daily_pnl"),
+            exp.get("is_win_rate"), exp.get("oos_win_rate"),
+            exp.get("is_pf"), exp.get("oos_pf"),
+            exp.get("is_trades"), exp.get("oos_trades"),
+            exp.get("max_dd_pct"), exp.get("score"),
+            1 if exp.get("robust") else 0,
+            json.dumps(exp.get("failure_reasons", []), ensure_ascii=False),
+            exp.get("sensitivity"), exp.get("oos_is_ratio"),
+            exp.get("parent_exp_id"), exp.get("hypothesis", ""),
+        ))
+        return cur.lastrowid
+
+
+def get_robust_experiments(min_oos: float = 0, limit: int = 50) -> list[dict]:
+    with _tx() as conn:
+        rows = conn.execute("""
+            SELECT * FROM experiments WHERE robust=1 AND oos_daily_pnl >= ?
+            ORDER BY oos_daily_pnl DESC LIMIT ?
+        """, (min_oos, limit)).fetchall()
+    return [dict(r) for r in rows]
+
+
+def get_experiment_count(strategy_name: str = "", symbol: str = "") -> int:
+    with _tx() as conn:
+        if strategy_name and symbol:
+            row = conn.execute(
+                "SELECT COUNT(*) as c FROM experiments WHERE strategy_name=? AND symbol=?",
+                (strategy_name, symbol)).fetchone()
+        elif strategy_name:
+            row = conn.execute(
+                "SELECT COUNT(*) as c FROM experiments WHERE strategy_name=?",
+                (strategy_name,)).fetchone()
+        else:
+            row = conn.execute("SELECT COUNT(*) as c FROM experiments").fetchone()
+    return row["c"]
+
+
+def get_latest_generation() -> int:
+    with _tx() as conn:
+        row = conn.execute("SELECT MAX(generation) as g FROM generation_log").fetchone()
+    return row["g"] or 0
+
+
+def add_to_graveyard(strategy_name: str, symbol: str, params_hash: str,
+                     failure_type: str, detail: str = "") -> None:
+    with _tx() as conn:
+        conn.execute("""
+            INSERT INTO strategy_graveyard
+                (strategy_name, symbol, params_hash, failure_type, failure_detail)
+            VALUES (?,?,?,?,?)
+            ON CONFLICT(strategy_name, symbol, params_hash) DO UPDATE SET
+                attempts = attempts + 1,
+                failure_type = excluded.failure_type,
+                failure_detail = excluded.failure_detail,
+                last_attempt_at = datetime('now')
+        """, (strategy_name, symbol, params_hash, failure_type, detail))
+
+
+def is_in_graveyard(strategy_name: str, symbol: str, params_hash: str) -> bool:
+    with _tx() as conn:
+        row = conn.execute("""
+            SELECT 1 FROM strategy_graveyard
+            WHERE strategy_name=? AND symbol=? AND params_hash=?
+        """, (strategy_name, symbol, params_hash)).fetchone()
+    return row is not None
+
+
+def save_generation_log(gen: int, plan_json: str, summary: str,
+                        experiments_run: int, robust_found: int,
+                        best_pnl: float, portfolio_pnl: float | None,
+                        duration_sec: float) -> None:
+    with _tx() as conn:
+        conn.execute("""
+            INSERT INTO generation_log
+                (generation, plan_json, summary, experiments_run, robust_found,
+                 best_daily_pnl, portfolio_pnl, duration_sec)
+            VALUES (?,?,?,?,?,?,?,?)
+            ON CONFLICT(generation) DO UPDATE SET
+                summary=excluded.summary,
+                experiments_run=excluded.experiments_run,
+                robust_found=excluded.robust_found,
+                best_daily_pnl=excluded.best_daily_pnl,
+                portfolio_pnl=excluded.portfolio_pnl,
+                duration_sec=excluded.duration_sec
+        """, (gen, plan_json, summary, experiments_run, robust_found,
+              best_pnl, portfolio_pnl, duration_sec))
+
+
+def save_portfolio_run(gen: int, combo: list[dict], total_pnl: float,
+                       sharpe: float | None, max_dd: float | None,
+                       margin_util: float | None) -> None:
+    with _tx() as conn:
+        conn.execute("""
+            INSERT INTO portfolio_runs
+                (generation, combo_json, num_strategies, total_daily_pnl,
+                 portfolio_sharpe, max_dd_pct, margin_util_pct)
+            VALUES (?,?,?,?,?,?,?)
+        """, (gen, json.dumps(combo, ensure_ascii=False), len(combo),
+              total_pnl, sharpe, max_dd, margin_util))
+
+
+def get_untested_combos(tested_set: set | None = None, limit: int = 20) -> list[tuple[str, str]]:
+    """実験ログにない (strategy_name, symbol) の組み合わせを返す。"""
+    with _tx() as conn:
+        rows = conn.execute("""
+            SELECT DISTINCT strategy_name, symbol FROM experiments
+        """).fetchall()
+    if tested_set is None:
+        tested_set = {(r["strategy_name"], r["symbol"]) for r in rows}
+    return tested_set
+
+
+def get_graveyard_hashes(strategy_name: str, symbol: str) -> set[str]:
+    with _tx() as conn:
+        rows = conn.execute("""
+            SELECT params_hash FROM strategy_graveyard
+            WHERE strategy_name=? AND symbol=?
+        """, (strategy_name, symbol)).fetchall()
+    return {r["params_hash"] for r in rows}
 
 
 # ── RunRecord 置き換え用の知識ベース統合 ──────────────────────────────────────

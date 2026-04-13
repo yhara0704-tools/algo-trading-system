@@ -1,0 +1,142 @@
+[
+  {
+    "hypothesis_id": "h20260408_001",
+    "type": "multi_symbol_group",
+    "description": "Robust=なしの大型株群（9984, 6758, 7203, 8316, 8411）に対してScalp手法を一括検証する。",
+    "rationale": "横断比較で大型株の多くがMacdRci/BreakoutでIS+0円となりRobust未達だが、Scalpは低ボラ銘柄でも小さな利益を積める可能性がある。M3(2413)やDeNA(2432)など中型株でScalpがRobust確定しており、大型・高流動性銘柄でも同様のエッジがあるか未検証。新しい手法×銘柄の組み合わせなので多重検定リスクは低い。",
+    "symbol": null,
+    "symbols": [
+      "9984.T",
+      "6758.T",
+      "7203.T",
+      "8316.T",
+      "8411.T"
+    ],
+    "strategy": "Scalp",
+    "params": {},
+    "priority": 1,
+    "status": "done",
+    "result_summary": "SoftBank Group(9984.T):NG | Sony Group(6758.T):NG | Toyota(7203.T):NG | SMBC(8316.T):NG | Mizuho FG(8411.T):NG",
+    "executed_at": "2026-04-08T22:25:28.197600"
+  },
+  {
+    "hypothesis_id": "h20260408_002",
+    "type": "multi_symbol_group",
+    "description": "商社セクター（8058, 8031, 8002, 8053）にORB手法を一括検証する。",
+    "rationale": "商社4銘柄はMacdRci/Scalp/BreakoutでいずれもIS+0円でRobust未達。しかしORBは銀行株（8306）や自動車（7201, 7267）で高ISかつRobust確定実績があり、寄り付きレンジブレイクが効くセクターとの相性を検証する価値がある。商社は朝の海外市場影響で方向感が出やすく、ORBの構造に合致する可能性がある。",
+    "symbol": null,
+    "symbols": [
+      "8058.T",
+      "8031.T",
+      "8002.T",
+      "8053.T"
+    ],
+    "strategy": "ORB",
+    "params": {},
+    "priority": 2,
+    "status": "done",
+    "result_summary": "Mitsubishi Corp(8058.T):NG | Mitsui & Co(8031.T):NG | Marubeni(8002.T):NG | Sumitomo Corp(8053.T):NG",
+    "executed_at": "2026-04-08T22:25:49.618460"
+  },
+  {
+    "hypothesis_id": "h20260408_003",
+    "type": "strategy_on_symbol",
+    "description": "Unitika(3103)にScalp手法を検証する。MacdRciでIS+5,892円/日と極めて高いがRobust未達であり、別手法でのエッジ存在を確認する。",
+    "rationale": "3103はMacdRciでIS日次+5,892円と全銘柄中最高だがOOSで崩れてRobust未達。低位株特有のボラティリティの高さはScalpの小幅利確スタイルとも相性が良い可能性がある。MacdRciの過学習ではなく銘柄自体にエッジがあるか、独立した手法で確認する。",
+    "symbol": "3103.T",
+    "symbols": [
+      "3103.T"
+    ],
+    "strategy": "Scalp",
+    "params": {},
+    "priority": 2,
+    "status": "done",
+    "result_summary": "データなし",
+    "executed_at": "2026-04-08T22:25:49.619141"
+  },
+  {
+    "hypothesis_id": "h20260408_004",
+    "type": "strategy_on_symbol",
+    "description": "Mercari(4385)にVwapReversion手法を検証する。",
+    "rationale": "4385はMacdRciでIS+840円/日だがRobust未達。中型成長株でVWAPからの平均回帰が効きやすい価格帯（低位〜中位）にある。VwapReversionはKDDI(9433)やRakuten(4755)でRobust確定しており、同価格帯の銘柄への適用可能性を確認する。パラメータ追加なしの新手法×銘柄テスト。",
+    "symbol": "4385.T",
+    "symbols": [
+      "4385.T"
+    ],
+    "strategy": "VwapReversion",
+    "params": {},
+    "priority": 3,
+    "status": "done",
+    "result_summary": "Mercari:LOW_SAMPLE(17trades) IS-451/OOS+0",
+    "executed_at": "2026-04-08T22:25:50.304395"
+  },
+  {
+    "hypothesis_id": "h20260408_005",
+    "type": "multi_symbol_group",
+    "description": "海運セクター（9101, 9104, 9107）にORB手法を一括検証する。",
+    "rationale": "海運3銘柄中、9107のみScalp/BreakoutでRobust確定。9101と9104はすべての手法でRobust未達だが、ORBは未検証または低ISにとどまっている。海運株はバルチック海運指数や前夜の米国市場を受けて寄り付きに大きな方向性が出やすく、ORBのレンジブレイク構造との適合性が高い可能性がある。",
+    "symbol": null,
+    "symbols": [
+      "9101.T",
+      "9104.T",
+      "9107.T"
+    ],
+    "strategy": "ORB",
+    "params": {},
+    "priority": 3,
+    "status": "done",
+    "result_summary": "NYK Line(9101.T):NG | MOL(9104.T):NG | Kawasaki Kisen(9107.T):Breakout | Kawasaki Kisen(9107.T):Scalp",
+    "executed_at": "2026-04-08T22:26:06.651524"
+  },
+  {
+    "hypothesis_id": "h20260408_006",
+    "type": "strategy_on_symbol",
+    "description": "Kubota(6326)にVwapReversion手法を検証する。MacdRciでIS+675円/日だがRobust未達の銘柄。",
+    "rationale": "6326はMacdRciで高ISながらOOSで崩れた。比較的低ボラの製造業株であり、VWAPへの回帰傾向が強い可能性がある。VwapReversionはKadokawa(9468)やOriental Land(4661)など多様な銘柄でRobust確定しており、同価格帯の製造業株への汎用性を確認したい。",
+    "symbol": "6326.T",
+    "symbols": [
+      "6326.T"
+    ],
+    "strategy": "VwapReversion",
+    "params": {},
+    "priority": 4,
+    "status": "done",
+    "result_summary": "Kubota:IS-ok IS+258/OOS-653",
+    "executed_at": "2026-04-08T22:26:07.335027"
+  },
+  {
+    "hypothesis_id": "h20260408_007",
+    "type": "multi_symbol_group",
+    "description": "複数手法でRobust確定している銘柄（8306, 9432, 4689, 9468）の全Robust手法の日次収益を比較し、ベスト手法への集約可能性を検証する。",
+    "rationale": "これらの銘柄は3手法以上でRobust確定しており、手法間の独立性が高ければ同時運用でリスク分散が可能。逆に相関が高ければベスト1手法に絞る方が資金効率が良い。現状のRobust確定パラメータのIS/OOS数値を手法間で比較し、最も安定した組み合わせを特定する。新たなパラメータ追加は行わない。",
+    "symbol": null,
+    "symbols": [
+      "8306.T",
+      "9432.T",
+      "4689.T",
+      "9468.T"
+    ],
+    "strategy": "Scalp",
+    "params": {},
+    "priority": 4,
+    "status": "done",
+    "result_summary": "MUFG(8306.T):Breakout | MUFG(8306.T):Scalp | MUFG(8306.T):Momentum5Min | MUFG(8306.T):ORB | MUFG(8306.T):VwapReversion | NTT(9432.T):Breakout | NTT(9432.T):Scalp | NTT(9432.T):VwapReversion | LY Corp(4689.T):Breakout | LY Corp(4689.T):Scalp | LY Corp(4689.T):Momentum5Min | Kadokawa(9468.T):MacdRci | Kadokawa(9468.T):Breakout | Kadokawa(9468.T):Scalp | Kadokawa(9468.T):VwapReversion",
+    "executed_at": "2026-04-08T22:26:30.179952"
+  },
+  {
+    "hypothesis_id": "h20260408_008",
+    "type": "strategy_on_symbol",
+    "description": "Shiseido(4911)にBreakout手法を検証する。MacdRciとScalpでRobust確定済みだが、BreakoutはIS+0円で未確認。",
+    "rationale": "4911はMacdRciでIS+1,101円かつRobust確定、Scalpでも確定済みの高相性銘柄。Breakoutが未検証であり、消費財セクターの中では値動きが活発なため、レンジブレイク型のエッジが追加で存在する可能性がある。既にRobustな銘柄に別の独立手法を試すことで、ポートフォリオの分散効果を確認する。",
+    "symbol": "4911.T",
+    "symbols": [
+      "4911.T"
+    ],
+    "strategy": "Breakout",
+    "params": {},
+    "priority": 5,
+    "status": "done",
+    "result_summary": "Shiseido:NG IS-188/OOS-82",
+    "executed_at": "2026-04-08T22:26:30.833366"
+  }
+]

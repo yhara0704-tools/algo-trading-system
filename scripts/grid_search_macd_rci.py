@@ -13,10 +13,11 @@ from __future__ import annotations
 
 import asyncio
 import itertools
+import pathlib
 import sys
 from dataclasses import dataclass
 
-sys.path.insert(0, "/root/algo-trading-system")
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent.parent))
 
 import pandas as pd
 

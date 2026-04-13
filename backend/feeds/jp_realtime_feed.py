@@ -60,7 +60,10 @@ def seconds_to_market_open() -> float:
 
 
 def fetch_intraday(symbol: str) -> pd.DataFrame:
-    """yfinanceで当日の1分足を取得する（同期）。"""
+    """yfinanceで当日の1分足を取得する（同期）。
+
+    専用セッションを使い、コネクションプール競合を回避する。
+    """
     import yfinance as yf
     try:
         ticker = yf.Ticker(symbol)

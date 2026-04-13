@@ -23,7 +23,8 @@ def inject(runner) -> None:
 def get_summary() -> dict[str, Any]:
     """最新の検閲済み日次サマリーを返す."""
     today = datetime.now(JST).strftime("%Y-%m-%d")
-    path = pathlib.Path(f"/root/algo_shared/daily/{today}.json")
+    _project_root = pathlib.Path(__file__).resolve().parent.parent.parent
+    path = _project_root / "algo_shared" / "daily" / f"{today}.json"
 
     if path.exists():
         return json.loads(path.read_text())

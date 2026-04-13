@@ -37,6 +37,7 @@ from backend.routers import trading as trading_router
 from backend.routers import prompt_lab as prompt_lab_router
 from backend.routers import social as social_router
 from backend.routers import bii as bii_router
+from backend.routers import tob as tob_router
 from backend.ws_manager import ConnectionManager
 
 load_dotenv()
@@ -61,9 +62,9 @@ polymarket = PolymarketFeed()
 multi_asset = MultiAssetFeed()
 spread = SpreadAnalyzer()
 manager = ConnectionManager()
-from backend.lab.runner import BTC_CAPITAL_USD, JP_CAPITAL_JPY
-paper_broker    = PaperBroker(starting_cash=BTC_CAPITAL_USD)   # BTC用 ~667 USD (10万円)
-jp_paper_broker = PaperBroker(starting_cash=JP_CAPITAL_JPY)    # JP株用 10万円
+from backend.lab.runner import BTC_CAPITAL_USD, JP_CAPITAL_JPY, JP_MAX_POSITION_JPY
+paper_broker    = PaperBroker(starting_cash=BTC_CAPITAL_USD)      # BTC用 ~667 USD (10万円)
+jp_paper_broker = PaperBroker(starting_cash=JP_MAX_POSITION_JPY)  # JP株用 99万円（30万×3.3倍信用）
 jp_feed         = JPRealtimeFeed(poll_interval=60)
 jp_live_runner  = JPLiveRunner(broker=jp_paper_broker)
 lab_runner      = LabRunner()
@@ -184,6 +185,7 @@ app.include_router(prompt_lab_router.router)
 app.include_router(social_router.router)
 bii_router.inject(lab_runner)
 app.include_router(bii_router.router)
+app.include_router(tob_router.router)
 
 
 # ── Lifecycle ──────────────────────────────────────────────────────────────────
@@ -221,6 +223,7 @@ async def startup():
     asyncio.create_task(jp_live_runner.run())
     asyncio.create_task(jp_live_runner.run_scalp_loop())   # 1分足スキャルピング
     asyncio.create_task(_jp_live_symbol_sync_loop())
+    asyncio.create_task(_daily_prep_loop())               # 朝の戦略準備 + 場中レジームチェック
 
     asyncio.create_task(coinbase.run())
     asyncio.create_task(polymarket.run())
@@ -229,7 +232,7 @@ async def startup():
     asyncio.create_task(_btc_fast_loop())
     asyncio.create_task(_jp_slow_loop())
     asyncio.create_task(_pts_nightly_loop())
-    asyncio.create_task(_prompt_opt_loop())
+    # asyncio.create_task(_prompt_opt_loop())  # Anthropic API不要化: ステージ上昇時に復活
     asyncio.create_task(_pattern_save_loop())
     asyncio.create_task(_evening_summary_loop())
     asyncio.create_task(_weekly_prune_loop())
@@ -303,15 +306,15 @@ def _build_lab_summary(results: list[dict], pdca: dict) -> dict:
                 "strategies": []}
     best = max(valid, key=lambda r: r.get("score", 0))
     return {
-        "best_strategy":  best["strategy_name"],
-        "best_daily_jpy": best["daily_pnl_jpy"],
-        "best_win_rate":  best["win_rate"],
+        "best_strategy":  best.get("strategy_name", "—"),
+        "best_daily_jpy": best.get("daily_pnl_jpy", 0),
+        "best_win_rate":  best.get("win_rate", 0),
         "pdca_stage":     pdca.get("current_stage", 1),
         "next_action":    pdca.get("next_action", ""),
         "strategies": [
-            {"name": r["strategy_name"], "daily_pnl_jpy": r["daily_pnl_jpy"],
-             "win_rate": r["win_rate"], "score": r["score"], "status": r.get("status")}
-            for r in results
+            {"name": r.get("strategy_name", ""), "daily_pnl_jpy": r.get("daily_pnl_jpy", 0),
+             "win_rate": r.get("win_rate", 0), "score": r.get("score", 0), "status": r.get("status")}
+            for r in results if r.get("status") != "error"
         ],
     }
 
@@ -404,15 +407,19 @@ async def _pts_nightly_loop() -> None:
             logger.error("PTS nightly loop error: %s", e)
 
 
+_daily_prep_active = False  # daily_prepが戦略をセットしたらTrue
+
 async def _jp_live_symbol_sync_loop() -> None:
     """JP株スクリーナー結果をリアルタイムフィードに反映する。
-    JPスロー・サイクルが走るたびにスクリーニング済み銘柄と戦略が更新されるので
-    5分ごとに lab_runner からピックアップして jp_feed / jp_live_runner に渡す。
+    daily_prepが動いた後はdaily_prepの戦略を優先（上書きしない）。
     """
-    await asyncio.sleep(90)  # lab_runner が初回スクリーニングを終えるまで待つ
+    await asyncio.sleep(90)
     while True:
+        if _daily_prep_active:
+            # daily_prepが戦略をセット済み → lab_runnerで上書きしない
+            await asyncio.sleep(5 * 60)
+            continue
         try:
-            # LabRunner が保持している JP 戦略リストを取得
             jp_strategies = lab_runner.get_live_jp_strategies()
             if jp_strategies:
                 symbols = list({s.meta.symbol for s in jp_strategies})
@@ -422,7 +429,7 @@ async def _jp_live_symbol_sync_loop() -> None:
                             len(symbols), len(jp_strategies))
         except Exception as e:
             logger.warning("JP live symbol sync error: %s", e)
-        await asyncio.sleep(5 * 60)  # 5分ごと
+        await asyncio.sleep(5 * 60)
 
 
 async def _weekly_prune_loop() -> None:
@@ -449,14 +456,14 @@ def _write_bii_daily(today: str, phase: str,
                      pnl_today: float, pnl_cumulative: float,
                      trade_count: int, win_count: int,
                      symbol: str = "") -> None:
-    """BII連携用日次JSONを /root/algo_shared/daily/YYYY-MM-DD.json に書き込む。
+    """BII連携用日次JSONを algo_shared/daily/YYYY-MM-DD.json に書き込む。
     書き込み前に検閲モジュールでホワイトリスト適用・バリデーション実施。
     symbol: 当日実際に取引した銘柄コード（監視リスト不可、空文字なら省略）
     """
     import json, pathlib
     from backend.bii.censor import sanitize_daily_json
 
-    out_dir = pathlib.Path("/root/algo_shared/daily")
+    out_dir = pathlib.Path(__file__).resolve().parent.parent / "algo_shared" / "daily"
     out_dir.mkdir(parents=True, exist_ok=True)
 
     raw = {
@@ -572,6 +579,64 @@ async def _prompt_opt_loop() -> None:
         except Exception as e:
             logger.error("Prompt optimization error: %s", e)
         await asyncio.sleep(6 * 60 * 60)  # 6時間ごと
+
+
+async def _daily_prep_loop() -> None:
+    """毎朝8:50にデーモン学習結果から最適戦略を選定 + 場中15分ごとにレジームチェック。"""
+    from backend.lab.daily_prep import prepare_daily_strategies, run_midday_check_loop
+
+    # 起動後まず1回実行（既にデーモンのRobustがあれば即反映）
+    global _daily_prep_active
+    await asyncio.sleep(3 * 60)  # lab_runnerの初回サイクルを待つ
+    try:
+        strategies, report = await prepare_daily_strategies()
+        if strategies:
+            jp_live_runner.set_strategies(strategies)
+            symbols = list(set(s.meta.symbol for s in strategies))
+            jp_feed.set_symbols(symbols)
+            _daily_prep_active = True
+            logger.info("Daily prep (初回): %d戦略 / %d銘柄", len(strategies), len(symbols))
+    except Exception as e:
+        logger.warning("Daily prep 初回エラー: %s", e)
+
+    # 毎朝8:50に再選定 + 場中レジームチェック
+    while True:
+        now = datetime.now(JST)
+        # 次の8:50まで待機
+        target = now.replace(hour=8, minute=50, second=0, microsecond=0)
+        if now >= target:
+            target += timedelta(days=1)
+        while target.weekday() >= 5:
+            target += timedelta(days=1)
+        wait = (target - now).total_seconds()
+        logger.info("Daily prep: 次回 %s JST (%.0f分後)",
+                     target.strftime("%m/%d %H:%M"), wait / 60)
+        await asyncio.sleep(min(wait, 15 * 60))
+
+        # 8:50到達 → 戦略準備
+        now = datetime.now(JST)
+        if now.hour == 8 and now.minute >= 50 and now.weekday() < 5:
+            try:
+                strategies, report = await prepare_daily_strategies()
+                if strategies:
+                    jp_live_runner.set_strategies(strategies)
+                    symbols = list(set(s.meta.symbol for s in strategies))
+                    jp_feed.set_symbols(symbols)
+                    _daily_prep_active = True  # sync_loopの上書きを防止
+                    logger.info("Daily prep: %d戦略 / %d銘柄 選定完了", len(strategies), len(symbols))
+                    from backend.notify import push as _push
+                    await _push("朝の戦略準備完了",
+                                f"{len(strategies)}戦略 / {len(symbols)}銘柄\n"
+                                f"期待損益: {report.get('expected_daily_pnl', 0):+,.0f}円/日")
+            except Exception as e:
+                logger.error("Daily prep エラー: %s", e)
+
+            # 場中レジームチェックループ開始（15:30まで）
+            try:
+                await run_midday_check_loop(jp_live_runner, jp_feed)
+            except Exception as e:
+                logger.warning("場中チェックループ終了: %s", e)
+
 
 
 async def _regime_analysis_loop() -> None:

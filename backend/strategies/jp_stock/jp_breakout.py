@@ -66,7 +66,7 @@ class JPBreakout(StrategyBase):
         idx      = d.index
         time_min = pd.Series(idx.hour * 60 + idx.minute, index=d.index)
         am_session = (time_min >= 9 * 60 + 10) & (time_min <= 11 * 60 + 30)
-        pm_session = (time_min >= 12 * 60 + 30) & (time_min <= 15 * 60 + 25)
+        pm_session = (time_min >= 12 * 60 + 30) & (time_min <= 14 * 60 + 30)
         d["in_session"] = am_session | pm_session
         # 昼休み中はエントリー不可・ポジション保有は継続（EODは engine に委譲）
         d["lunch_break"] = (time_min > 11 * 60 + 30) & (time_min < 12 * 60 + 30)
