@@ -9,13 +9,35 @@
 - 日足 PSAR ドット価格の +5% 以上に株価到達 → +1% に指値 → 約定なら採用
 - 約定しなければ見送り
 
-損切り:
-- 日足 PSAR 反転（おおむねリスク 1〜2% 程度、PSAR の動的な距離に従う）
+損切り（``sl_mode`` で切替、既定 ``entry_pct``）:
+- ``entry_pct``: エントリ価格 × (1 − ``sl_pct_from_entry``)（既定 -3%）。
+  「リスク約 1〜3%」を担保するための固定 SL。100 株 × 株価 3,000 円 で約 9,000 円。
+- ``psar_d``: 当該 15m 足時点の日足 PSAR。trailing するが距離が大きくなりがち。
+- ``psar_15m``: 15分足 PSAR。trailing 性能は最強だが反転に過敏。
 
-利確（AND）:
+利確（``exit_logic`` で AND/OR を切替、既定 ``or``）:
 - 1 時間足 RCI(10/12/15) のうち ``rci_exit_min_agree`` 本以上が ≥ ``rci_exit_threshold``
-  （既定: 1 本以上 ≥ 95。実質的に最短 RCI(10) のオーバーシュート判定）
-- かつ 1 時間足 close / 1 時間足 SMA(5) − 1 ≥ ``ma_exit_dev_pct``（既定 +12%）
+  （既定: 1 本以上 ≥ 95）
+- 1 時間足 close / 1 時間足 SMA(5) − 1 ≥ ``ma_exit_dev_pct``（既定 +5%）
+- ``and`` でも ``or`` でも書ける。OR は頻度確保用の保険。
+
+時間ベース exit:
+- ``max_hold_bars`` を超えて保有が続いたら次足始値で強制クローズ
+  （15m × 22本/日 × 20 日 = 440 が既定）。シミュレータ側で実装する慣習。
+
+エントリ重複抑止:
+- ``entry_cooldown_bars`` 本以内に直近 entry が出ていれば signal=1 を立てない
+  （既定 22 = 1 営業日）。これにより同銘柄の連投が抑制される。
+
+エントリ直後の即時 exit 防止:
+- ``min_hold_bars`` 本以内では exit シグナル (signal=-1) を抑止する
+  （既定 22 = 1 営業日）。これは「1H RCI が既に高水準のままエントリ →
+  同日中に exit シグナル発火 → 最悪タイミングの撤退」を防ぐ。
+
+天井買いガード:
+- ``entry_rci_h1_max`` を超える 1H RCI(10) では entry しない（既定 80）。
+  「PSAR から +5% overshoot 直後に +1% リトレース」は構造上ピーク近傍を
+  踏みやすいため、1H RCI 既に過熱な銘柄は除外する。
 
 実装上の規約:
 - primary df は **15 分足**（engine はこの足を 1 本ずつ進める）。
@@ -128,12 +150,19 @@ class JPParabolicSwing(StrategyBase):
         rci_exit_threshold: float = 95.0,
         rci_exit_min_agree: int = 1,
         ma_exit_period: int = 5,
-        ma_exit_dev_pct: float = 0.12,
+        ma_exit_dev_pct: float = 0.05,
+        exit_logic: str = "and",  # "or" or "and" — 利確 RCI と 5MA 乖離の連結
         overshoot_pct: float = 0.05,
         entry_offset_pct: float = 0.01,
         arming_lookback_bars: int = 16,
         require_15m_psar_up: bool = True,
         entry_psar_source: str = "15m",  # "d" (日足 PSAR) or "15m" (短足 PSAR)
+        sl_mode: str = "entry_pct",  # "entry_pct" / "psar_d" / "psar_15m"
+        sl_pct_from_entry: float = 0.03,  # entry_pct モード時の損切り幅（3%）
+        max_hold_bars: int = 440,  # 15m × 22本/日 × 20日
+        entry_cooldown_bars: int = 22,  # 1営業日分
+        min_hold_bars: int = 22,  # 1営業日分: entry 直後の exit 抑止
+        entry_rci_h1_max: float = 80.0,  # 1H RCI(短期) がこの値超のときは entry しない
     ) -> None:
         self.meta = StrategyMeta(
             id=f"jp_parabolic_swing_{symbol.replace('.', '_')}_{interval}",
@@ -159,6 +188,13 @@ class JPParabolicSwing(StrategyBase):
                 "arming_lookback_bars": arming_lookback_bars,
                 "require_15m_psar_up": require_15m_psar_up,
                 "entry_psar_source": entry_psar_source,
+                "exit_logic": exit_logic,
+                "sl_mode": sl_mode,
+                "sl_pct_from_entry": sl_pct_from_entry,
+                "max_hold_bars": max_hold_bars,
+                "entry_cooldown_bars": entry_cooldown_bars,
+                "min_hold_bars": min_hold_bars,
+                "entry_rci_h1_max": entry_rci_h1_max,
             },
         )
         self.psar_kwargs = {
@@ -180,6 +216,19 @@ class JPParabolicSwing(StrategyBase):
         if ep not in {"d", "15m"}:
             ep = "d"
         self.entry_psar_source = ep
+        el = str(exit_logic).strip().lower()
+        if el not in {"and", "or"}:
+            el = "or"
+        self.exit_logic = el
+        sm = str(sl_mode).strip().lower()
+        if sm not in {"entry_pct", "psar_d", "psar_15m"}:
+            sm = "entry_pct"
+        self.sl_mode = sm
+        self.sl_pct_from_entry = max(0.0, float(sl_pct_from_entry))
+        self.max_hold_bars = max(0, int(max_hold_bars))
+        self.entry_cooldown_bars = max(0, int(entry_cooldown_bars))
+        self.min_hold_bars = max(0, int(min_hold_bars))
+        self.entry_rci_h1_max = float(entry_rci_h1_max)
 
         # MTF 用補助 df（caller が attach する）
         self.df_d: pd.DataFrame | None = None
@@ -273,16 +322,39 @@ class JPParabolicSwing(StrategyBase):
         touched_entry_limit = (d["low"] <= entry_level) & (d["high"] >= entry_level)
         # ↑ 当足の値幅で entry_level を含むこと（= 約定可能性あり）
 
-        long_entry = base_filter & armed & touched_entry_limit
-        # 同一ポジション中の連発を抑止する目的で、armed が一度発火したらクールダウンを
-        # かけるのが望ましいが、engine 側で在庫管理されるためここでは行わない。
+        # 天井買いガード: 1H RCI(短期) が entry_rci_h1_max を超えていれば entry しない
+        # （shortest = rci_periods[0]）
+        rci_short_h1_col = f"rci_{self.rci_periods[0]}_h1"
+        if rci_short_h1_col in d.columns and self.entry_rci_h1_max < 100.0:
+            not_overbought_h1 = d[rci_short_h1_col] < self.entry_rci_h1_max
+        else:
+            not_overbought_h1 = pd.Series(True, index=d.index)
+
+        raw_long_entry = base_filter & armed & touched_entry_limit & not_overbought_h1
+
+        # entry_cooldown_bars: 直近 N 本に signal=1 が出ている bar では再発火を抑止
+        if self.entry_cooldown_bars > 0:
+            cd = self.entry_cooldown_bars
+            recent_entry = (
+                raw_long_entry.astype(bool).shift(1).fillna(False)
+                .rolling(cd, min_periods=1).sum() > 0
+            )
+            long_entry = raw_long_entry & ~recent_entry
+        else:
+            long_entry = raw_long_entry
 
         d.loc[long_entry, "signal"] = 1
-        # SL: 当該足時点の daily PSAR をそのまま採用（trailing 役）
-        d.loc[long_entry, "stop_loss"] = d.loc[long_entry, "psar_d"]
+        # SL: sl_mode で切替
+        if self.sl_mode == "entry_pct":
+            # エントリ価格 (= signal 発火 bar の close を近似) × (1 - sl_pct)
+            d.loc[long_entry, "stop_loss"] = d.loc[long_entry, "close"] * (1.0 - self.sl_pct_from_entry)
+        elif self.sl_mode == "psar_15m":
+            d.loc[long_entry, "stop_loss"] = d.loc[long_entry, "psar_15m"]
+        else:  # psar_d
+            d.loc[long_entry, "stop_loss"] = d.loc[long_entry, "psar_d"]
         d.loc[long_entry, "take_profit"] = np.nan  # 動的 exit でハンドル
 
-        # ── Exit (signal=-1): 1H RCI≥95 (AND/min_agree) AND 5MA 乖離 ≥ +15% ──
+        # ── Exit (signal=-1): RCI高水準 と 5MA 乖離 を AND/OR で連結 ──
         rci_cols_attached = [f"rci_{p}_h1" for p in self.rci_periods]
         rci_high_count = sum(
             (d[c] >= self.rci_exit_threshold).astype(int) for c in rci_cols_attached
@@ -291,7 +363,10 @@ class JPParabolicSwing(StrategyBase):
         ma_dev = (d["close_h1"] / d["sma5_h1"]) - 1.0
         ma_dev_ok = ma_dev >= self.ma_exit_dev_pct
 
-        exit_condition = rci_high_ok & ma_dev_ok
+        if self.exit_logic == "and":
+            exit_condition = rci_high_ok & ma_dev_ok
+        else:
+            exit_condition = rci_high_ok | ma_dev_ok
         # signal=1 が立った足には -1 を上書きしない（同一足エントリー&エグジット衝突回避）
         exit_mask = exit_condition & (d["signal"] == 0)
         d.loc[exit_mask, "signal"] = -1
