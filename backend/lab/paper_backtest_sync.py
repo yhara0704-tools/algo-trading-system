@@ -30,6 +30,10 @@ LOW_SAMPLE_EXCLUDED_FILE = DATA_DIR / "paper_low_sample_excluded_latest.json"
 # 2026-04-23 の報告で明文化（bull_forecast/BACKTEST_REPORT: サンプル不足組の昇格抑止）。
 # 環境変数で上書き可能。0 以下に設定するとフィルタ無効。
 _DEFAULT_MIN_OOS_TRADES_FOR_LIVE = 30
+# Walkforward が pass_ratio==1.0 かつ wf_window_total>=2 を満たす銘柄は、
+# 再現性の追加エビデンスがあるとみなして閾値を緩める（既定 20）。
+_DEFAULT_MIN_OOS_TRADES_FOR_LIVE_WF_RELAXED = 20
+_DEFAULT_WF_RELAX_MIN_WINDOWS = 2
 
 
 def _min_oos_trades_for_live() -> int:
@@ -40,6 +44,64 @@ def _min_oos_trades_for_live() -> int:
         return int(float(raw))
     except (TypeError, ValueError):
         return _DEFAULT_MIN_OOS_TRADES_FOR_LIVE
+
+
+def _min_oos_trades_for_live_wf_relaxed() -> int:
+    raw = os.getenv("MIN_OOS_TRADES_FOR_LIVE_WF_RELAXED")
+    if raw is None or str(raw).strip() == "":
+        return _DEFAULT_MIN_OOS_TRADES_FOR_LIVE_WF_RELAXED
+    try:
+        return int(float(raw))
+    except (TypeError, ValueError):
+        return _DEFAULT_MIN_OOS_TRADES_FOR_LIVE_WF_RELAXED
+
+
+def _wf_relax_min_windows() -> int:
+    raw = os.getenv("MIN_OOS_TRADES_WF_RELAX_MIN_WINDOWS")
+    if raw is None or str(raw).strip() == "":
+        return _DEFAULT_WF_RELAX_MIN_WINDOWS
+    try:
+        return int(float(raw))
+    except (TypeError, ValueError):
+        return _DEFAULT_WF_RELAX_MIN_WINDOWS
+
+
+def _wf_pass_meta(
+    row: dict,
+    fit_map_row: dict,
+    strategy_name: str,
+) -> tuple[int, float]:
+    """(wf_window_total, wf_window_pass_ratio) を universe_active → strategy_fit_map の順で解決。"""
+    fit_strategies = fit_map_row.get("strategies") if isinstance(fit_map_row, dict) else None
+    fit_strategy_row: dict = {}
+    if isinstance(fit_strategies, dict):
+        raw = fit_strategies.get(strategy_name)
+        if isinstance(raw, dict):
+            fit_strategy_row = raw
+
+    def _to_int(v) -> int:
+        try:
+            return int(v)
+        except (TypeError, ValueError):
+            return 0
+
+    def _to_float(v) -> float:
+        try:
+            return float(v)
+        except (TypeError, ValueError):
+            return 0.0
+
+    wf_total_raw = (
+        row.get("wf_window_total")
+        if row.get("wf_window_total") is not None
+        else fit_strategy_row.get("wf_window_total")
+    )
+    wf_ratio_raw = (
+        row.get("wf_window_pass_ratio")
+        if row.get("wf_window_pass_ratio") is not None
+        else fit_strategy_row.get("wf_window_pass_ratio")
+    )
+    return _to_int(wf_total_raw), _to_float(wf_ratio_raw)
 
 
 def _load_json(path: Path, default: object) -> object:
@@ -109,8 +171,11 @@ def collect_universe_specs(
         return []
 
     min_oos_trades = _min_oos_trades_for_live() if apply_sample_filter else 0
+    wf_relaxed_threshold = _min_oos_trades_for_live_wf_relaxed() if apply_sample_filter else 0
+    wf_relax_min_windows = _wf_relax_min_windows()
     kept: list[dict] = []
     excluded: list[dict] = []
+    wf_relaxed_hits: list[dict] = []
 
     for row in symbols:
         symbol = row.get("symbol")
@@ -126,24 +191,50 @@ def collect_universe_specs(
             if force_macd_max_pyramid >= 0:
                 params["max_pyramid"] = force_macd_max_pyramid
         oos_trades = _resolve_oos_trades(symbol, row, macd_row, fit_row, strategy)
+        wf_total, wf_ratio = _wf_pass_meta(row, fit_row, strategy)
         spec = {
             "strategy_name": strategy,
             "symbol": symbol,
             "name": row.get("name", fit_row.get("name", symbol)),
             "oos_daily_pnl": float(row.get("oos_daily", 0.0)),
             "oos_trades": oos_trades,
+            "wf_window_total": wf_total,
+            "wf_window_pass_ratio": wf_ratio,
             "params": params,
         }
-        if apply_sample_filter and min_oos_trades > 0 and (oos_trades is not None) and oos_trades < min_oos_trades:
-            excluded.append({
-                "strategy_name": strategy,
-                "symbol": symbol,
-                "name": spec["name"],
-                "oos_daily_pnl": spec["oos_daily_pnl"],
-                "oos_trades": oos_trades,
-                "reason": f"oos_trades<{min_oos_trades}",
-            })
-            continue
+        if apply_sample_filter and min_oos_trades > 0 and (oos_trades is not None):
+            # WF 再現性が担保されている銘柄は閾値を緩和（pass_ratio=1.0 かつ windows>=N）
+            wf_relaxed = (
+                wf_relaxed_threshold > 0
+                and wf_ratio >= 1.0 - 1e-9
+                and wf_total >= wf_relax_min_windows
+            )
+            effective_threshold = wf_relaxed_threshold if wf_relaxed else min_oos_trades
+            if oos_trades < effective_threshold:
+                excluded.append({
+                    "strategy_name": strategy,
+                    "symbol": symbol,
+                    "name": spec["name"],
+                    "oos_daily_pnl": spec["oos_daily_pnl"],
+                    "oos_trades": oos_trades,
+                    "wf_window_total": wf_total,
+                    "wf_window_pass_ratio": wf_ratio,
+                    "effective_threshold": effective_threshold,
+                    "reason": (
+                        f"oos_trades<{effective_threshold}"
+                        + (" (wf_relaxed)" if wf_relaxed else "")
+                    ),
+                })
+                continue
+            if wf_relaxed and oos_trades < min_oos_trades:
+                wf_relaxed_hits.append({
+                    "symbol": symbol,
+                    "strategy_name": strategy,
+                    "oos_trades": oos_trades,
+                    "wf_window_total": wf_total,
+                    "wf_window_pass_ratio": wf_ratio,
+                    "effective_threshold": effective_threshold,
+                })
         kept.append(spec)
 
     kept.sort(key=lambda x: float(x.get("oos_daily_pnl", 0.0)), reverse=True)
@@ -155,8 +246,11 @@ def collect_universe_specs(
                 {
                     "generated_at": datetime.now(JST).isoformat(),
                     "min_oos_trades_for_live": min_oos_trades,
+                    "min_oos_trades_for_live_wf_relaxed": wf_relaxed_threshold,
+                    "wf_relax_min_windows": wf_relax_min_windows,
                     "kept_count": len(kept),
                     "excluded_count": len(excluded),
+                    "wf_relaxed_hits": wf_relaxed_hits,
                     "excluded": excluded,
                 },
             )
@@ -165,10 +259,23 @@ def collect_universe_specs(
 
         if excluded:
             logger.info(
-                "paper_backtest_sync: サンプル不足除外 %d 件 (min_oos_trades=%d): %s",
+                "paper_backtest_sync: サンプル不足除外 %d 件 (min_oos_trades=%d, wf_relaxed=%d): %s",
                 len(excluded),
                 min_oos_trades,
-                ", ".join(f"{e['symbol']}({e['oos_trades']})" for e in excluded),
+                wf_relaxed_threshold,
+                ", ".join(
+                    f"{e['symbol']}({e['oos_trades']}<{e['effective_threshold']})"
+                    for e in excluded
+                ),
+            )
+        if wf_relaxed_hits:
+            logger.info(
+                "paper_backtest_sync: WF緩和で採用 %d 件: %s",
+                len(wf_relaxed_hits),
+                ", ".join(
+                    f"{h['symbol']}(oos={h['oos_trades']}, wf={h['wf_window_total']}/{h['wf_window_pass_ratio']:.2f})"
+                    for h in wf_relaxed_hits
+                ),
             )
 
     return kept[:max_count]
