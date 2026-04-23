@@ -1,19 +1,26 @@
 """JP 株 — マルチタイムフレーム パラボリック × RCI スイング戦略.
 
-条件（提案より）:
+トレンドフィルタ（共通）:
 - 日足 PSAR 上昇トレンド（ドット < ローソク足）
 - 15 分足 PSAR 上昇トレンド
 - 日足 RCI(10) が上向き（直近 1 本以上で上昇）
+- 1H RCI(短期) が ``entry_rci_h1_max`` 未満（天井買い回避、既定 80）
 
-エントリー:
-- 日足 PSAR ドット価格の +5% 以上に株価到達 → +1% に指値 → 約定なら採用
-- 約定しなければ見送り
+エントリー（``entry_mode`` で選択）:
+- ``"trend_follow"``（順張り、既定）: 15m PSAR が前 bar で trend=-1 → 当 bar で
+  trend=+1 に反転した「PSAR 反転第 1 本目」で signal=1。素直な順張り。
+- ``"pullback"``（提案者の原案、逆張り風）: 直近 ``arming_lookback_bars`` 本で
+  PSAR ドット +``overshoot_pct`` 到達した後に +``entry_offset_pct`` のリトレース
+  で指値約定可能と判断したら signal=1。100 株検証で WR 7% と性能不良のため
+  既定 OFF。互換性目的で残す。
 
-損切り（``sl_mode`` で切替、既定 ``entry_pct``）:
-- ``entry_pct``: エントリ価格 × (1 − ``sl_pct_from_entry``)（既定 -3%）。
-  「リスク約 1〜3%」を担保するための固定 SL。100 株 × 株価 3,000 円 で約 9,000 円。
-- ``psar_d``: 当該 15m 足時点の日足 PSAR。trailing するが距離が大きくなりがち。
-- ``psar_15m``: 15分足 PSAR。trailing 性能は最強だが反転に過敏。
+損切り（``sl_mode`` で切替、既定 ``psar_15m``）:
+- ``psar_15m``（既定）: 15分足 PSAR を **毎バー更新の trailing stop** として使う。
+  順張りでは PSAR 反転 = トレンド転換の自然な手仕舞いポイント。シミュレータが
+  ``stop_loss`` 列を毎バー読み直して上方向に更新（下方向には更新しない）。
+- ``entry_pct``: エントリ価格 × (1 − ``sl_pct_from_entry``)（既定 -3% の固定 SL）。
+  「まず負けない」を絶対視したい場合の選択肢。
+- ``psar_d``: 当該 15m 足時点の日足 PSAR。距離が大きくなりがち。
 
 利確（``exit_logic`` で AND/OR を切替、既定 ``or``）:
 - 1 時間足 RCI(10/12/15) のうち ``rci_exit_min_agree`` 本以上が ≥ ``rci_exit_threshold``
@@ -22,8 +29,9 @@
 - ``and`` でも ``or`` でも書ける。OR は頻度確保用の保険。
 
 時間ベース exit:
-- ``max_hold_bars`` を超えて保有が続いたら次足始値で強制クローズ
-  （15m × 22本/日 × 20 日 = 440 が既定）。シミュレータ側で実装する慣習。
+- 順張りでは「伸ばせる限り伸ばす」のが本筋なので **本番では原則無し**
+  （シミュレータ側 ``MAX_HOLD_BARS=0`` が既定）。
+- どうしても付けたい場合のみシミュレータ側で N 本指定する。
 
 エントリ重複抑止:
 - ``entry_cooldown_bars`` 本以内に直近 entry が出ていれば signal=1 を立てない
@@ -151,18 +159,20 @@ class JPParabolicSwing(StrategyBase):
         rci_exit_min_agree: int = 1,
         ma_exit_period: int = 5,
         ma_exit_dev_pct: float = 0.05,
-        exit_logic: str = "and",  # "or" or "and" — 利確 RCI と 5MA 乖離の連結
+        exit_logic: str = "or",  # "or" or "and" — 利確 RCI と 5MA 乖離の連結
         overshoot_pct: float = 0.05,
         entry_offset_pct: float = 0.01,
         arming_lookback_bars: int = 16,
         require_15m_psar_up: bool = True,
         entry_psar_source: str = "15m",  # "d" (日足 PSAR) or "15m" (短足 PSAR)
-        sl_mode: str = "entry_pct",  # "entry_pct" / "psar_d" / "psar_15m"
+        sl_mode: str = "psar_15m",  # "psar_15m"(trailing,既定) / "entry_pct" / "psar_d"
         sl_pct_from_entry: float = 0.03,  # entry_pct モード時の損切り幅（3%）
-        max_hold_bars: int = 440,  # 15m × 22本/日 × 20日
+        max_hold_bars: int = 0,  # 0 = 無制限（本番は伸ばす）。シミュレータが参照
         entry_cooldown_bars: int = 22,  # 1営業日分
         min_hold_bars: int = 22,  # 1営業日分: entry 直後の exit 抑止
         entry_rci_h1_max: float = 80.0,  # 1H RCI(短期) がこの値超のときは entry しない
+        entry_mode: str = "trend_follow",  # "trend_follow"(順張り) / "pullback"(逆張り、原案)
+        trend_flip_lookback_bars: int = 1,  # PSAR 反転後 N 本以内なら entry 候補
     ) -> None:
         self.meta = StrategyMeta(
             id=f"jp_parabolic_swing_{symbol.replace('.', '_')}_{interval}",
@@ -195,6 +205,8 @@ class JPParabolicSwing(StrategyBase):
                 "entry_cooldown_bars": entry_cooldown_bars,
                 "min_hold_bars": min_hold_bars,
                 "entry_rci_h1_max": entry_rci_h1_max,
+                "entry_mode": entry_mode,
+                "trend_flip_lookback_bars": trend_flip_lookback_bars,
             },
         )
         self.psar_kwargs = {
@@ -229,6 +241,11 @@ class JPParabolicSwing(StrategyBase):
         self.entry_cooldown_bars = max(0, int(entry_cooldown_bars))
         self.min_hold_bars = max(0, int(min_hold_bars))
         self.entry_rci_h1_max = float(entry_rci_h1_max)
+        em = str(entry_mode).strip().lower()
+        if em not in {"trend_follow", "pullback"}:
+            em = "trend_follow"
+        self.entry_mode = em
+        self.trend_flip_lookback_bars = max(1, int(trend_flip_lookback_bars))
 
         # MTF 用補助 df（caller が attach する）
         self.df_d: pd.DataFrame | None = None
@@ -310,18 +327,6 @@ class JPParabolicSwing(StrategyBase):
         if self.require_15m_psar_up:
             base_filter = base_filter & cond_15_psar_up
 
-        # 「ドット +5% に到達」と「ドット +1% に指値タッチ」のリファレンス PSAR は
-        # entry_psar_source で切替: "d"=日足 PSAR / "15m"=15分足 PSAR。
-        ref_psar = d["psar_d"] if self.entry_psar_source == "d" else d["psar_15m"]
-        overshoot_level = ref_psar * (1.0 + self.overshoot_pct)
-        touched_overshoot = (d["high"] >= overshoot_level).fillna(False)
-        armed = (
-            touched_overshoot.rolling(self.arming_lookback_bars, min_periods=1).sum() > 0
-        )
-        entry_level = ref_psar * (1.0 + self.entry_offset_pct)
-        touched_entry_limit = (d["low"] <= entry_level) & (d["high"] >= entry_level)
-        # ↑ 当足の値幅で entry_level を含むこと（= 約定可能性あり）
-
         # 天井買いガード: 1H RCI(短期) が entry_rci_h1_max を超えていれば entry しない
         # （shortest = rci_periods[0]）
         rci_short_h1_col = f"rci_{self.rci_periods[0]}_h1"
@@ -330,7 +335,33 @@ class JPParabolicSwing(StrategyBase):
         else:
             not_overbought_h1 = pd.Series(True, index=d.index)
 
-        raw_long_entry = base_filter & armed & touched_entry_limit & not_overbought_h1
+        # ── エントリ条件: entry_mode で切替 ────────────────────────────────
+        if self.entry_mode == "pullback":
+            # 提案者の原案（逆張り風）: ドット+5% 到達 → +1% リトレース
+            ref_psar = d["psar_d"] if self.entry_psar_source == "d" else d["psar_15m"]
+            overshoot_level = ref_psar * (1.0 + self.overshoot_pct)
+            touched_overshoot = (d["high"] >= overshoot_level).fillna(False)
+            armed = (
+                touched_overshoot.rolling(self.arming_lookback_bars, min_periods=1).sum() > 0
+            )
+            entry_level = ref_psar * (1.0 + self.entry_offset_pct)
+            touched_entry_limit = (d["low"] <= entry_level) & (d["high"] >= entry_level)
+            raw_long_entry = base_filter & armed & touched_entry_limit & not_overbought_h1
+            d["_armed"] = armed
+            d["_entry_level"] = entry_level
+            d["_overshoot_level"] = overshoot_level
+        else:
+            # trend_follow（順張り、既定）: 15m PSAR が直近 trend_flip_lookback_bars
+            # 本以内に trend=-1 → trend=+1 に反転した「PSAR 反転第 1 本目」で entry。
+            psar_trend_15m = d["psar_15m_trend"]
+            flip_up = (psar_trend_15m == 1) & (psar_trend_15m.shift(1) == -1)
+            recent_flip = (
+                flip_up.rolling(self.trend_flip_lookback_bars, min_periods=1).sum() > 0
+            )
+            raw_long_entry = base_filter & recent_flip & not_overbought_h1
+            d["_armed"] = flip_up
+            d["_entry_level"] = d["psar_15m"]
+            d["_overshoot_level"] = pd.Series(np.nan, index=d.index)
 
         # entry_cooldown_bars: 直近 N 本に signal=1 が出ている bar では再発火を抑止
         if self.entry_cooldown_bars > 0:
@@ -372,9 +403,6 @@ class JPParabolicSwing(StrategyBase):
         d.loc[exit_mask, "signal"] = -1
 
         # ── 補助 / デバッグ列（engine では参照されないが探索用に残す）─────────
-        d["_armed"] = armed
-        d["_entry_level"] = entry_level
-        d["_overshoot_level"] = overshoot_level
         d["_rci_high_count_h1"] = rci_high_count
         d["_ma_dev_h1"] = ma_dev
 
