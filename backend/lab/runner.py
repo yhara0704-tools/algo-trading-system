@@ -58,8 +58,10 @@ _INTERVAL_MAP = {"1m": "1m", "5m": "5m", "15m": "15m", "1h": "1h"}
 INITIAL_CAPITAL_JPY: float = 300_000.0      # 総資金 30万円（松井証券 一日信用 最低ライン）
 BTC_CAPITAL_JPY:     float = 100_000.0      # BTC用  10万円
 JP_CAPITAL_JPY:      float = 300_000.0      # JP株用 30万円（松井一日信用・手数料/金利完全0円）
+# 東証の年間おおよその営業日（日次複利・年換算・Tier sweep の上限に使用）
+JP_TRADING_DAYS_PER_YEAR: int = 245
 USD_JPY_RATE:        float = 150.0
-POSITION_PCT:        float = 0.33           # 1トレードに買付余力の33%（≒実質1倍レバ/ポジ、3銘柄同時保有前提）
+POSITION_PCT:        float = 0.50           # 買付余力の50%（EXP-001 B 寄せ。集中度高く DD も増えうる）
 
 # 信用倍率（松井証券 一日信用）: 委託保証金率30% → 最大3.3倍
 MARGIN_RATIO: float = 3.3
@@ -69,7 +71,7 @@ JP_MAX_POSITION_JPY: float = JP_CAPITAL_JPY * MARGIN_RATIO   # 99万円
 # 1単元(100株)が買える最大株価
 # JP_MAX_POSITION_JPY × POSITION_PCT / 100株
 LOT_SIZE: int = 100   # JP株の最低売買単位（100株）
-MAX_STOCK_PRICE: float = JP_MAX_POSITION_JPY * POSITION_PCT / LOT_SIZE  # 3,267円/株（99万×33%÷100株）
+MAX_STOCK_PRICE: float = JP_MAX_POSITION_JPY * POSITION_PCT / LOT_SIZE  # 例: 99万×50%÷100株 ≒ 4,950円/株
 
 BTC_CAPITAL_USD: float = BTC_CAPITAL_JPY / USD_JPY_RATE   # ≈ 667 USD
 
@@ -88,9 +90,12 @@ CAPITAL_MILESTONES = [
     CapitalMilestone("M2", 1_000_000, 5_000, "100万円達成 — 安定稼働"),
     CapitalMilestone("M3", 3_000_000, 15_000, "300万円達成 — 本格運用開始"),
     CapitalMilestone("M4", 10_000_000, 50_000, "1,000万円達成 — プロ水準"),
+    CapitalMilestone("M5", 30_000_000, 150_000, "3,000万円達成 — スイング比率高め"),
+    CapitalMilestone("M6", 100_000_000, 500_000, "1億円達成 — 最終目標"),
 ]
 
 # ── PDCA 目標ステージ ──────────────────────────────────────────────────────────
+# Phase A3: 円/日だけでなく %/日・Calmar も併記し、1億までの複利スケールで判定する
 @dataclass
 class PDCAGoal:
     stage:         int
@@ -98,12 +103,24 @@ class PDCAGoal:
     win_rate:      float
     max_drawdown:  float
     description:   str
+    daily_return_pct_min: float = 0.0   # 日次複利リターン下限 (%)
+    calmar_min:           float = 0.0   # Calmar (CAGR / |MDD%|) 下限
 
+# 各ステージの daily_return_pct_min は「ステージ下限資金」に対する円/日の比率で算出。
+# Calmar は複利スケーリングに耐える戦略の目安として設定。
 PDCA_STAGES = [
-    PDCAGoal(1,  1_000, 52, -8,  "毎日1,000円 — まず負けない（元本30万円・信用口座）"),
-    PDCAGoal(2,  2_500, 55, -6,  "毎日2,500円 — 50万円達成後"),
-    PDCAGoal(3,  5_000, 57, -5,  "毎日5,000円 — 100万円達成後"),
-    PDCAGoal(4,  15_000, 60, -4, "毎日15,000円 — 300万円達成後"),
+    PDCAGoal(1,  1_000, 52, -8,  "毎日1,000円 — まず負けない（元本30万円・信用口座）",
+             daily_return_pct_min=0.33, calmar_min=1.0),
+    PDCAGoal(2,  2_500, 55, -6,  "毎日2,500円 — 50万円達成後",
+             daily_return_pct_min=0.50, calmar_min=1.5),
+    PDCAGoal(3,  5_000, 57, -5,  "毎日5,000円 — 100万円達成後",
+             daily_return_pct_min=0.50, calmar_min=2.0),
+    PDCAGoal(4,  15_000, 60, -4, "毎日15,000円 — 300万円達成後",
+             daily_return_pct_min=0.50, calmar_min=2.5),
+    PDCAGoal(5,  50_000, 60, -4, "毎日50,000円 — 1,000万円達成後",
+             daily_return_pct_min=0.50, calmar_min=2.5),
+    PDCAGoal(6,  500_000, 60, -3, "毎日500,000円 — 1億円達成（最終目標）",
+             daily_return_pct_min=0.50, calmar_min=3.0),
 ]
 
 @dataclass
@@ -176,7 +193,20 @@ async def _fetch_yfinance_ohlcv(symbol: str, interval: str, days: int) -> pd.Dat
 
 def _yf_fetch(symbol: str, interval: str, days: int) -> pd.DataFrame | None:
     import yfinance as yf
-    period = f"{min(days, 59)}d"  # yfinance 1m/5m limit: 60 days
+    # yfinance 制約:
+    #   1m  → 7日（過去30日まで）
+    #   5m  → 60日
+    #   1d  → 期間指定自由（"max" まで可）
+    # Phase C1: 1d は 2〜3年の長期データを許可し、長期レジーム検証を可能にする
+    if interval in ("1m",):
+        period_days = min(days, 7)
+    elif interval in ("5m", "15m", "30m", "90m"):
+        period_days = min(days, 59)
+    elif interval in ("1d", "1wk", "1mo"):
+        period_days = min(days, 1500)
+    else:
+        period_days = min(days, 59)
+    period = f"{period_days}d"
     ticker = yf.Ticker(symbol)
     df = ticker.history(period=period, interval=interval, auto_adjust=True)
     if df is None or df.empty:
@@ -200,25 +230,62 @@ def _cache_ttl(symbol: str) -> float:
 
 
 def _fetch_file_cache(symbol: str, interval: str, days: int) -> pd.DataFrame | None:
-    """parquetキャッシュを読む。"""
+    """ファイルキャッシュを読む（parquet優先、pklフォールバック）。
+
+    探索先は以下の優先順位（最も新しい mtime を持つものを採用）:
+      1. 環境変数 ``OHLCV_CACHE_DIR`` （コロン区切りで複数可）
+      2. ``<project_root>/algo_shared/ohlcv_cache`` （既定・Mac + VPS 共通）
+      3. ``/root/algo_shared/ohlcv_cache`` （VPS 共有キャッシュ / rsync 先）
+
+    2026-04-23 不具合対応: ``push_ohlcv_cache.py`` / ``update_ohlcv_cache.py``
+    が VPS 上 ``/root/algo_shared/ohlcv_cache/`` に parquet を書き出していたが、
+    `_fetch_file_cache` は project-local の stale pkl のみを見ており、
+    バックテスト vs ペーパー の OoS 乖離 critical の遠因になっていた。
+    """
+    import os
     import pathlib
+
     _project_root = pathlib.Path(__file__).resolve().parent.parent.parent
-    path = _project_root / "algo_shared" / "ohlcv_cache" / f"{symbol.replace('.', '_')}_{interval}.parquet"
-    if not path.exists():
+    dirs: list[pathlib.Path] = []
+    env_dirs = os.getenv("OHLCV_CACHE_DIR", "")
+    if env_dirs:
+        for d in env_dirs.split(":"):
+            d = d.strip()
+            if d:
+                dirs.append(pathlib.Path(d))
+    dirs.append(_project_root / "algo_shared" / "ohlcv_cache")
+    shared = pathlib.Path("/root/algo_shared/ohlcv_cache")
+    if shared.exists() and shared not in dirs:
+        dirs.append(shared)
+
+    stem = f"{symbol.replace('.', '_')}_{interval}"
+    candidates: list[pathlib.Path] = []
+    for d in dirs:
+        candidates.append(d / f"{stem}.parquet")
+        candidates.append(d / f"{stem}.pkl")
+
+    existing = [p for p in candidates if p.exists()]
+    if not existing:
         return None
-    try:
-        df = pd.read_parquet(path)
-        # days でスライス
-        if days and not df.empty:
-            cutoff = pd.Timestamp.now(tz="Asia/Tokyo") - pd.Timedelta(days=days)
-            df = df[df.index >= cutoff]
-        if df.empty:
-            return None
-        logger.debug("file cache hit: %s", path.name)
-        return df
-    except Exception as e:
-        logger.warning("file cache read error %s: %s", path, e)
-        return None
+
+    existing.sort(key=lambda p: p.stat().st_mtime, reverse=True)
+
+    for path in existing:
+        try:
+            if path.suffix == ".parquet":
+                df = pd.read_parquet(path)
+            else:
+                df = pd.read_pickle(path)
+            if days and not df.empty:
+                cutoff = pd.Timestamp.now(tz="Asia/Tokyo") - pd.Timedelta(days=days)
+                df = df[df.index >= cutoff]
+            if df.empty:
+                continue
+            logger.debug("file cache hit: %s", path)
+            return df
+        except Exception as e:
+            logger.warning("file cache read error %s: %s", path, e)
+    return None
 
 
 async def fetch_ohlcv(symbol: str, interval: str, days: int) -> pd.DataFrame:
@@ -362,7 +429,7 @@ class LabRunner:
         self._effective_capital: float = JP_CAPITAL_JPY
         # 自動分析
         self._last_analysis: str = ""
-        # position_pct はスコア比較で随時見直す（現状 POSITION_PCT=0.33 固定）
+        # position_pct は EXP / 運用で見直す（POSITION_PCT 定数と capital_tier を揃える）
         # 実験フレームワーク
         from backend.lab.experiment import ExperimentManager
         self._exp_manager = ExperimentManager()
@@ -393,8 +460,8 @@ class LabRunner:
         pdca    = self.get_pdca()
         regime  = self.get_regime()
 
-        lines = [f"📈 今日の検証サマリー ({pdca['run_count']}回目)"]
-        lines.append(f"地合い: {regime.get('BTC-USD', {}).get('regime_jp', '不明')}")
+        lines = [f"📈 本日の検証サマリー（{pdca['run_count']}回目）"]
+        lines.append(f"相場の地合い: {regime.get('BTC-USD', {}).get('regime_jp', '不明')}")
         lines.append("")
 
         if done:
@@ -402,53 +469,57 @@ class LabRunner:
             worst = min(done, key=lambda r: r.get("score", 0))
             positive = [r for r in done if r.get("daily_pnl_jpy", 0) > 0]
 
-            lines.append(f"検証戦略数: {len(done)}")
-            lines.append(f"プラス戦略: {len(positive)}/{len(done)}")
-            lines.append(f"【最良】{best['strategy_name']}")
+            lines.append(f"評価できた戦略数: {len(done)}")
+            lines.append(f"利益が出た戦略: {len(positive)}/{len(done)}")
+            lines.append(f"成績トップ: {best['strategy_name']}")
             _baw = best.get('avg_win_jpy', 0); _bal = best.get('avg_loss_jpy', 0)
             _brr = abs(_baw / _bal) if _bal != 0 else 0
             lines.append(
-                f"  日次 {best.get('daily_pnl_jpy',0):+,.0f}円"
+                f"  1日あたり損益 {best.get('daily_pnl_jpy',0):+,.0f}円"
                 f"（利益{best.get('gross_profit_jpy',0):+,.0f}円"
                 f" / 損失{best.get('gross_loss_jpy',0):+,.0f}円）"
                 f" 勝率{best.get('win_rate',0):.1f}%"
             )
             lines.append(
-                f"  平均利益 {_baw:+,.0f}円/回、平均損失 {_bal:+,.0f}円/回 → R:R = {_brr:.2f}"
+                f"  1回あたり平均: 利益 {_baw:+,.0f}円 / 損失 {_bal:+,.0f}円（利益対損失の比率 {_brr:.2f}）"
             )
             if worst != best:
-                lines.append(f"【最悪】{worst['strategy_name']}")
+                lines.append(f"成績ワースト: {worst['strategy_name']}")
                 _waw = worst.get('avg_win_jpy', 0); _wal = worst.get('avg_loss_jpy', 0)
                 _wrr = abs(_waw / _wal) if _wal != 0 else 0
                 lines.append(
-                    f"  日次 {worst.get('daily_pnl_jpy',0):+,.0f}円"
+                    f"  1日あたり損益 {worst.get('daily_pnl_jpy',0):+,.0f}円"
                     f"（利益{worst.get('gross_profit_jpy',0):+,.0f}円"
                     f" / 損失{worst.get('gross_loss_jpy',0):+,.0f}円）"
                     f" 勝率{worst.get('win_rate',0):.1f}%"
                 )
                 lines.append(
-                    f"  平均利益 {_waw:+,.0f}円/回、平均損失 {_wal:+,.0f}円/回 → R:R = {_wrr:.2f}"
+                    f"  1回あたり平均: 利益 {_waw:+,.0f}円 / 損失 {_wal:+,.0f}円（利益対損失の比率 {_wrr:.2f}）"
                 )
         else:
-            lines.append("検証結果なし")
+            lines.append("本日は有効な検証結果がありませんでした。")
 
         lines.append("")
-        lines.append(f"PDCAステージ: {pdca['current_stage']} — {pdca.get('goal',{}).get('description','')}")
-        lines.append(f"次のアクション: {pdca.get('next_action','—')[:60]}")
+        lines.append(
+            f"改善フェーズ: {pdca['current_stage']}（目標: {pdca.get('goal',{}).get('description','未設定')}）"
+        )
+        lines.append(f"次にやること: {pdca.get('next_action','—')[:80]}")
 
         if jp_session and jp_session.get("num_trades", 0) > 0:
             lines.append("")
-            lines.append(f"【JP株リアル】{jp_session['date']}")
+            lines.append(f"日本株リアル運用: {jp_session['date']}")
             lines.append(
                 f"  損益 {jp_session['total_pnl']:+,.0f}円"
                 f"（利益{jp_session.get('gross_profit',0):+,.0f}円"
                 f" / 損失{jp_session.get('gross_loss',0):+,.0f}円）"
-                f" {jp_session['num_trades']}件"
+                f" / 取引 {jp_session['num_trades']}件"
             )
             _jaw = jp_session.get('avg_win', 0); _jal = jp_session.get('avg_loss', 0)
             _jrr = abs(_jaw / _jal) if _jal != 0 else 0
-            lines.append(f"  平均利益 {_jaw:+,.0f}円/回、平均損失 {_jal:+,.0f}円/回 → R:R = {_jrr:.2f}")
-            lines.append(f"  サブセッション: {len(jp_session.get('subsessions',[]))}回")
+            lines.append(
+                f"  1回あたり平均: 利益 {_jaw:+,.0f}円 / 損失 {_jal:+,.0f}円（利益対損失の比率 {_jrr:.2f}）"
+            )
+            lines.append(f"  時間帯ごとの区切り: {len(jp_session.get('subsessions',[]))}回")
 
         return "\n".join(lines)
 
@@ -500,13 +571,17 @@ class LabRunner:
         lines = []
         lines.append(f"【サイクル #{self._pdca.run_count} 分析】")
         lines.append("")
+        # `avg_loss_jpy` が None/0 のとき `/0` で落ちる（2026-04-22 "JP loop error: float division by zero" の再現源）。
+        # get(key, default) は key が "存在しない場合" にのみ default を返すので、値が 0 だと防げない。
+        _avg_loss = best.get('avg_loss_jpy') or 0.0
+        _avg_win = best.get('avg_win_jpy') or 0.0
+        rr_best = abs(_avg_win / _avg_loss) if _avg_loss else 0.0
         lines.append(f"✅ 最優秀: {best['strategy_name']}")
-        lines.append(f"   日次損益 {best['daily_pnl_jpy']:+,.0f}円 | 勝率 {best['win_rate']:.1f}% | R:R {abs(best.get('avg_win_jpy',0)/best.get('avg_loss_jpy',-1)):.2f} | PF {best['profit_factor']:.2f}")
+        lines.append(f"   日次損益 {best['daily_pnl_jpy']:+,.0f}円 | 勝率 {best['win_rate']:.1f}% | R:R {rr_best:.2f} | PF {best['profit_factor']:.2f}")
 
         good = []
         if best['win_rate'] >= 55: good.append("勝率が高い")
         if best['profit_factor'] >= 1.5: good.append("PFが良好")
-        rr_best = abs(best.get('avg_win_jpy', 0) / best.get('avg_loss_jpy', -1)) if best.get('avg_loss_jpy') else 0
         if rr_best >= 1.5: good.append(f"R:R={rr_best:.2f}で損小利大")
         if best.get('max_drawdown_pct', 0) > -5: good.append("DDが小さい")
         if good:
@@ -531,7 +606,7 @@ class LabRunner:
             lines.append("")
             lines.append(f"💰 複利資金: {self._compounded_capital:,.0f}円")
 
-        # position_pct=0.33 固定。スコア比較で見直す場合は手動変更。
+        # 既定ポジ比率は POSITION_PCT・ティア定義を参照。
 
         self._last_analysis = "\n".join(lines)
         return self._last_analysis
@@ -780,11 +855,13 @@ class LabRunner:
             if exp_event.get("experiment_done"):
                 logger.info("=== %s 完了 ===\n%s", exp_event["exp_id"], exp_event["conclusion"])
                 try:
-                    push(
+                    asyncio.create_task(push(
                         title=f"EXP完了: {exp_event['exp_id']} {exp_event['exp_name']}",
                         message=f"勝者: {exp_event['winner']}\n\n{exp_event['conclusion'][:300]}",
                         priority=1,
-                    )
+                        category="backtest",
+                        source="lab.runner.run_all",
+                    ))
                 except Exception:
                     pass
             elif exp_event.get("group_done"):
@@ -819,7 +896,13 @@ class LabRunner:
             f"→ 次の目標 Stage {new_stage}: "
             f"{PDCA_STAGES[min(new_stage-1, len(PDCA_STAGES)-1)].daily_pnl_jpy:,.0f}円/日"
         )
-        await push(title, msg, priority=1)
+        await push(
+            title,
+            msg,
+            priority=1,
+            category="backtest",
+            source="lab.runner._notify_if_stage_cleared",
+        )
 
     def _generate_variants(self) -> list[StrategyBase]:
         """上位戦略のパラメータをグリッドサーチ的に変化させてバリアントを生成。"""
@@ -934,11 +1017,28 @@ class LabRunner:
             # limit_slip_pct=0.003: 次足始値が指値から0.3%以上離れたら見送り
             s_fee  = 0.0 if is_jp else 0.001   # BTC(Binance)は0.1%taker
             s_slip = 0.003 if is_jp else 0.0   # JP株のみ指値スルー判定を適用
+
+            extra_ohlcv = None
+            if is_jp:
+                ei = getattr(strategy, "EXTRA_INTERVALS", None)
+                if ei:
+                    extra_ohlcv = {}
+                    if "1d" in ei:
+                        dfd = await fetch_ohlcv(strategy.meta.symbol, "1d", max(days, 400))
+                        if dfd is not None and not dfd.empty:
+                            extra_ohlcv["1d"] = dfd
+                    if "1h" in ei:
+                        dfh = await fetch_ohlcv(strategy.meta.symbol, "1h", days)
+                        if dfh is not None and not dfh.empty:
+                            extra_ohlcv["1h"] = dfh
+                    if not extra_ohlcv:
+                        extra_ohlcv = None
+
             loop   = asyncio.get_running_loop()
             result = await loop.run_in_executor(
                 self._executor,
-                lambda: run_backtest(
-                    strategy, df,
+                lambda s=strategy, d=df, ev=extra_ohlcv: run_backtest(
+                    s, d,
                     starting_cash=s_cash,
                     fee_pct=s_fee,
                     position_pct=s_pos_pct,
@@ -947,7 +1047,8 @@ class LabRunner:
                     limit_slip_pct=s_slip,
                     short_borrow_fee_annual=0.011 if is_jp else 0.0,
                     eod_close_time=(15, 20) if is_jp else None,  # JP株1日信用: 15:25クロージングオークション前クローズ
-                )
+                    extra_ohlcv=ev,
+                ),
             )
             self._results[sid] = result
             result_dict = {"status": "done", **self._result_to_dict(result)}
@@ -961,6 +1062,7 @@ class LabRunner:
                         lot_size=s_lot_size, limit_slip_pct=s_slip,
                         short_borrow_fee_annual=0.011,
                         eod_close_time=(15, 20),  # JP株1日信用: 15:25クロージングオークション前クローズ
+                        extra_ohlcv=extra_ohlcv,
                     )
                     guard  = OverfittingGuard()
                     report = await loop.run_in_executor(
@@ -1049,10 +1151,16 @@ class LabRunner:
             self._pdca.best_result_id = best["strategy_id"]
 
         goal = PDCA_STAGES[min(self._pdca.current_stage - 1, len(PDCA_STAGES) - 1)]
+        # Phase A3: 金額ゲートに加えて %/日・Calmar のゲートも課す。
+        # daily_return_pct_min や calmar_min が 0 の場合は旧挙動（金額のみ）にフォールバック。
+        daily_ret_pct = float(best.get("daily_return_pct_mean", 0.0))
+        calmar = float(best.get("calmar", 0.0))
         goal_met = (
             best["daily_pnl_jpy"]    >= goal.daily_pnl_jpy and
             best["win_rate"]         >= goal.win_rate and
-            best["max_drawdown_pct"] >= goal.max_drawdown
+            best["max_drawdown_pct"] >= goal.max_drawdown and
+            (goal.daily_return_pct_min <= 0 or daily_ret_pct >= goal.daily_return_pct_min) and
+            (goal.calmar_min           <= 0 or calmar        >= goal.calmar_min)
         )
 
         if goal_met and not self._pdca.goal_met:

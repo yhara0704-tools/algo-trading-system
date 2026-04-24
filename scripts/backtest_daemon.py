@@ -236,7 +236,7 @@ PREMIUM_FREE_SYMBOLS = {
 }
 
 
-def _run(strat, df, *, cost_enabled: bool = True):
+def _run(strat, df, *, cost_enabled: bool = True, extra_ohlcv: dict | None = None):
     sym = strat.meta.symbol
     cm = _load_cost_model()
     fee_pct = float(cm.get("fee_pct", 0.0)) if cost_enabled else 0.0
@@ -258,7 +258,22 @@ def _run(strat, df, *, cost_enabled: bool = True):
         long_margin_interest_annual=margin_int,
         latency_bars=latency,
         volume_impact_coeff=vol_impact,
+        extra_ohlcv=extra_ohlcv,
     )
+
+
+async def _mtf_extra_for_strategy(strategy_name: str, symbol: str) -> dict[str, pd.DataFrame]:
+    """JPParabolicSwing 等: 日足・1H を取得して extra_ohlcv に詰める。"""
+    if strategy_name != "ParabolicSwing":
+        return {}
+    out: dict[str, pd.DataFrame] = {}
+    df_d = await _get_ohlcv(symbol, "1d")
+    df_h = await _get_ohlcv(symbol, "1h")
+    if df_d is not None and not df_d.empty:
+        out["1d"] = df_d
+    if df_h is not None and not df_h.empty:
+        out["1h"] = df_h
+    return out
 
 
 # ── 実験実行 ──────────────────────────────────────────────────────────────────
@@ -328,8 +343,10 @@ async def run_experiment(exp: dict, generation: int) -> dict:
     except Exception as e:
         return {"skip": True, "error": str(e), "rci_slope_summary_json": "{}"}
 
+    mtf_extra = await _mtf_extra_for_strategy(strategy_name, symbol)
+
     # IS実行
-    r_is = _run(strat, df_is, cost_enabled=True)
+    r_is = _run(strat, df_is, cost_enabled=True, extra_ohlcv=mtf_extra or None)
     is_pnl = float(r_is.daily_pnl_jpy)
     is_trades = int(r_is.num_trades) if r_is.num_trades == r_is.num_trades else 0
 
@@ -368,9 +385,9 @@ async def run_experiment(exp: dict, generation: int) -> dict:
             logger.debug("rci slope summary skipped: %s", e)
             rci_slope_summary_json = json.dumps({"error": str(e)}, ensure_ascii=False)
 
-    r_oos = _run(strat2, df_oos, cost_enabled=True)
+    r_oos = _run(strat2, df_oos, cost_enabled=True, extra_ohlcv=mtf_extra or None)
     strat3 = create_strategy(strategy_name, symbol, params=params)
-    r_oos_no_cost = _run(strat3, df_oos, cost_enabled=False)
+    r_oos_no_cost = _run(strat3, df_oos, cost_enabled=False, extra_ohlcv=mtf_extra or None)
     # walkforward summary (OOS)
     # Phase C3: 窓タグ別の勝ち負けも集計する
     main_tag = getattr(main_split, "window_tag", "default")
@@ -379,11 +396,11 @@ async def run_experiment(exp: dict, generation: int) -> dict:
     if len(splits) > 1:
         for sp in splits[1:WALKFORWARD_TOPK]:
             s_is = create_strategy(strategy_name, symbol, params=params)
-            rr_is = _run(s_is, sp.is_df, cost_enabled=True)
+            rr_is = _run(s_is, sp.is_df, cost_enabled=True, extra_ohlcv=mtf_extra or None)
             if rr_is.daily_pnl_jpy <= 0:
                 continue
             s_oos = create_strategy(strategy_name, symbol, params=params)
-            rr_oos = _run(s_oos, sp.oos_df, cost_enabled=True)
+            rr_oos = _run(s_oos, sp.oos_df, cost_enabled=True, extra_ohlcv=mtf_extra or None)
             wf_oos_values.append(float(rr_oos.daily_pnl_jpy))
             wf_oos_pairs.append((getattr(sp, "window_tag", "default"), float(rr_oos.daily_pnl_jpy)))
     wf_sum = summarize_oos(wf_oos_values)

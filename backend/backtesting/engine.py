@@ -18,6 +18,24 @@ import pandas as pd
 from backend.strategies.base import StrategyBase
 
 
+def _attach_extra_ohlcv(strategy: StrategyBase, extra: dict[str, pd.DataFrame] | None) -> None:
+    """MTF 戦略向け: ``attach(df_d=..., df_h1=...)`` に 1d/1h を渡す。"""
+    if not extra:
+        return
+    attach = getattr(strategy, "attach", None)
+    if not callable(attach):
+        return
+    kw: dict[str, pd.DataFrame | None] = {}
+    dfd = extra.get("1d")
+    if dfd is not None and not getattr(dfd, "empty", True):
+        kw["df_d"] = dfd
+    dfh = extra.get("1h")
+    if dfh is not None and not getattr(dfh, "empty", True):
+        kw["df_h1"] = dfh
+    if kw:
+        attach(**kw)
+
+
 @dataclass
 class Trade:
     entry_time:   str
@@ -63,6 +81,12 @@ class BacktestResult:
     avg_loss_jpy:      float = 0.0   # 平均損失/トレード (JPY, 負値)
     days_tested:       int   = 0     # バックテスト期間（日数）
     score:             float = 0.0   # composite score for PDCA ranking
+    # 複利スケール指標（Phase A: 1億到達まで追跡）
+    cagr:                  float = 0.0   # 年率複利成長率 (%)
+    calmar:                float = 0.0   # CAGR / |MDD%|
+    mar:                   float = 0.0   # = calmar (alias)
+    daily_return_pct_mean: float = 0.0   # 日次リターンの平均 (%)
+    daily_return_pct_std:  float = 0.0   # 日次リターンの標準偏差 (%)
     # サブセッション統計: [{day, slot_end, reason, pnl_pct}]
     subsession_stats:  list  = field(default_factory=list)
 
@@ -81,8 +105,13 @@ def run_backtest(
     limit_slip_pct:        float = 0.003,    # 指値スルー判定: 次足始値が指値からこれ以上離れたらスキップ
     short_borrow_fee_annual: float = 0.0,    # デイトレ信用 貸株料0%（通常銘柄）
     short_premium_daily_pct: float = 0.0,   # プレミアム料（前日終値×%/日、0=なし）
+    long_margin_interest_annual: float = 0.0,  # Phase D4: 信用買い金利（年率）
+    latency_bars: int = 0,  # Phase E1: シグナル発生から約定までの追加遅延バー数（0=既定1バー）
+    volume_impact_coeff: float = 0.0,  # Phase E2: 出来高参加率スリッページ係数（0=無効、0.5程度が保守的）
     eod_close_time: tuple[int, int] | None = None,  # JP株1日信用の強制クローズ時刻 e.g. (14, 25)
     gate = None,  # AgentGate インスタンス（None = ゲートなし）
+    extra_ohlcv: dict[str, pd.DataFrame] | None = None,
+    # JPParabolicSwing 等: {"1d": df_daily, "1h": df_hourly} を渡すと attach される
 ) -> BacktestResult:
     """Run backtest. df must have DatetimeIndex and OHLCV columns.
 
@@ -96,6 +125,7 @@ def run_backtest(
       - 次足の始値が指値から limit_slip_pct 以上乖離していたら約定しなかったとみなしスキップ
       - 0.0 で無効化（常に約定）
     """
+    _attach_extra_ohlcv(strategy, extra_ohlcv)
 
     sig_df = strategy.generate_signals(df)
 
@@ -126,9 +156,11 @@ def run_backtest(
 
     cooldown = pd.Timedelta(minutes=subsession_cooldown_min)
 
-    for i in range(1, len(sig_df)):
+    # Phase E1: シグナル参照を latency_bars ぶん過去に遡る。既定は 0 で従来通り (prev = i-1)。
+    lat = max(0, int(latency_bars))
+    for i in range(1 + lat, len(sig_df)):
         row   = sig_df.iloc[i]
-        prev  = sig_df.iloc[i - 1]
+        prev  = sig_df.iloc[i - 1 - lat]
         price = row["close"]
         ts    = str(sig_df.index[i])
         ts_dt = sig_df.index[i]
@@ -172,6 +204,21 @@ def run_backtest(
             exit_price  = None
             exit_reason = None
 
+            # JPParabolicSwing psar_15m: 足ごとの PSAR でトレーリング SL を更新
+            sl_mode = (strategy.meta.params or {}).get("sl_mode", "")
+            if (
+                side == "long"
+                and str(sl_mode).lower() == "psar_15m"
+                and "psar_15m" in row.index
+            ):
+                p15 = row["psar_15m"]
+                if not np.isnan(p15):
+                    if np.isnan(sl):
+                        sl = float(p15)
+                    else:
+                        sl = max(float(sl), float(p15))
+                    position["stop_loss"] = sl
+
             # EOD強制クローズ（JP株1日信用対応）
             if eod_close_time is not None and exit_price is None:
                 bar_h = ts_dt.hour
@@ -202,13 +249,28 @@ def run_backtest(
             if exit_price is not None:
                 if side == "long":
                     exit_net = exit_price * (1 - fee_pct)
-                    pnl      = (exit_net - position["entry_net"]) * position["qty"]
+                    # Phase D4: 信用買い金利 — 保有日数×年率で按分してコスト化
+                    bars_per_day_long = {
+                        "1m": 390, "5m": 78, "15m": 26, "30m": 13, "1h": 7,
+                        "1d": 1, "1wk": 1 / 5, "1mo": 1 / 21,
+                    }.get(strategy.meta.interval, 78)
+                    hold_bars_long = i - position["entry_bar"]
+                    hold_days_long = max(hold_bars_long / bars_per_day_long, 1 / bars_per_day_long)
+                    margin_cost = (
+                        position["entry_net"] * position["qty"]
+                        * (long_margin_interest_annual * hold_days_long / 365)
+                    ) if long_margin_interest_annual > 0 else 0.0
+                    pnl      = (exit_net - position["entry_net"]) * position["qty"] - margin_cost
                     pnl_pct  = (exit_net / position["entry_net"] - 1) * 100
                 else:  # short: 売値 - 買戻し値 - 貸株料 - プレミアム料
                     exit_net = exit_price * (1 + fee_pct)
                     # 貸株料: 保有時間（バー数）から日数換算して年率から按分
                     hold_bars   = i - position["entry_bar"]
-                    bars_per_day = {"1m": 390, "5m": 78}.get(strategy.meta.interval, 78)
+                    # Phase C4: 日足/週足/月足のバー数換算を追加（スイング backtest 対応）
+                    bars_per_day = {
+                        "1m": 390, "5m": 78, "15m": 26, "30m": 13, "1h": 7,
+                        "1d": 1, "1wk": 1 / 5, "1mo": 1 / 21,
+                    }.get(strategy.meta.interval, 78)
                     hold_days   = max(hold_bars / bars_per_day, 1/bars_per_day)  # 最低1バー分
                     borrow_cost = position["entry_net"] * position["qty"] * (short_borrow_fee_annual * hold_days / 365)
                     # プレミアム料: 日割り（デイトレでも1日分かかる）
@@ -282,11 +344,6 @@ def run_backtest(
                     continue
 
             entry_price = row["open"]
-            if is_long:
-                entry_net = entry_price * (1 + fee_pct)
-            else:
-                entry_net = entry_price * (1 - fee_pct)   # 売り建て: 売値から手数料引く
-
             if entry_price != entry_price or entry_price <= 0:  # NaN or invalid
                 continue
             # 動的ロット倍率（戦略からlot_multiplier列が提供されていれば使用）
@@ -303,6 +360,20 @@ def run_backtest(
                     continue
             else:
                 qty = qty_raw
+
+            # Phase E2: 出来高参加率スリッページ — 大口発注ほど不利方向に価格がずれる。
+            # slippage_pct = coeff * (qty / bar_volume). ロングは上方、ショートは下方に約定。
+            vol_slip = 0.0
+            if volume_impact_coeff > 0 and "volume" in row.index:
+                bar_vol = float(row.get("volume") or 0.0)
+                if bar_vol > 0 and qty > 0:
+                    participation = min(qty / bar_vol, 0.5)  # 50%参加超は打ち止め
+                    vol_slip = volume_impact_coeff * participation
+
+            if is_long:
+                entry_net = entry_price * (1 + fee_pct + vol_slip)
+            else:
+                entry_net = entry_price * (1 - fee_pct - vol_slip)   # 売り建て: 不利方向
 
             sl = prev["stop_loss"]
             tp = prev["take_profit"]
@@ -394,6 +465,41 @@ def _compute_metrics(result: BacktestResult, starting_cash: float,
         daily_ret = eq_series.pct_change().dropna()
         if daily_ret.std() > 0:
             result.sharpe = float(daily_ret.mean() / daily_ret.std() * np.sqrt(252))
+
+    # Phase A: 複利スケール指標（CAGR / Calmar / MAR / 日次リターン%）
+    # 1億到達を見据えた promotion 判定のため、円/日ではなく %/日・CAGR を取り扱う
+    try:
+        final_equity = float(result.equity_curve[-1])
+        if starting_cash > 0 and final_equity > 0 and days > 0:
+            # CAGR: (final/start)^(365/days) - 1
+            growth = final_equity / starting_cash
+            if growth > 0:
+                cagr = (growth ** (365.0 / days) - 1.0) * 100.0
+            else:
+                cagr = -100.0
+            result.cagr = float(cagr)
+
+        # バー単位の日次リターン%を集計（bar pct_change を日付でグループ化して日次化）
+        # 単純化のため、equity_curve を日次リサンプリングした pct_change を使う
+        if len(result.equity_curve) > 2 and len(df.index) == len(result.equity_curve) - 1:
+            # equity_curve は「先頭に starting_cash + 各バー終端の equity」なので、df.index と1つずれる
+            eq_daily = pd.Series(result.equity_curve[1:], index=df.index).resample("1D").last().dropna()
+            daily_pct = eq_daily.pct_change().dropna() * 100.0
+            if len(daily_pct) > 0:
+                result.daily_return_pct_mean = float(daily_pct.mean())
+                result.daily_return_pct_std  = float(daily_pct.std())
+
+        # Calmar = CAGR / |MDD%|  （MDDが0に近い場合は上限を設定）
+        mdd_abs = abs(result.max_drawdown_pct)
+        if mdd_abs > 0.5:
+            result.calmar = float(result.cagr / mdd_abs)
+        else:
+            result.calmar = float(result.cagr)   # 実質 DD なしのときは CAGR をそのまま採用
+        # MAR は慣習的に Calmar と同義の別名として流通しているのでエイリアス
+        result.mar = result.calmar
+    except Exception:
+        # 指標計算失敗は致命ではないのでデフォルト値のまま残す
+        pass
 
     # Composite score: reward win_rate + profit_factor, penalize drawdown
     result.score = (
