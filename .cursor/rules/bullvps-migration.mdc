@@ -1,0 +1,33 @@
+---
+description: bullvps 移行アナウンス (2026-04-29)。SSH 接続先の鉄則。
+alwaysApply: true
+---
+
+# bullvps 移行 (2026-04-29 完了)
+
+`algo-trading-system` の本番稼働 VPS は **新環境 (4 GB プラン)** に移行済みです。
+
+## SSH 接続の鉄則
+
+| エイリアス | IPv4 | Tailscale | 用途 |
+|---|---|---|---|
+| **`bullvps`** | **`160.251.252.13`** | **`100.103.193.57`** | **新 VPS（4GB） — ここで作業する** |
+| `bullvps_old` | `160.251.179.0` | `100.92.193.34` | 旧 VPS（1GB）— 2026-05-01 頃 削除予定 |
+
+ローカル `~/.ssh/config` の `bullvps` エイリアスは新を指している。
+**普通に `ssh bullvps` で新に入る。**
+
+## やってはいけないこと
+
+⚠️ **旧 VPS (`ssh bullvps_old`) で `crontab` 入れ直し / `systemctl start` は禁止。**
+旧 VPS の cron / systemd custom services は全停止済み。新旧両方が走ると Pushover / X API / 出力ファイルが二重実行になる。
+
+## バックアップ
+
+Mac ローカル: `~/Backups/bullvps_20260429/` (921 MB)。
+詳細は `algo-trading-system/MIGRATION_NOTICE.md` 参照。
+
+## 新 VPS の追加機能
+
+- VOICEVOX Docker (CPU版) が `localhost:50021` で 24/7 稼働 (auto-restart)
+- ずんだもん (id=3) によるポッドキャスト・YouTube ショート音声合成が PC を開かなくても完全自動化
