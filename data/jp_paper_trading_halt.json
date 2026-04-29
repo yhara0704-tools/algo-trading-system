@@ -1,0 +1,15 @@
+{
+  "halt": false,
+  "reason": "",
+  "paused_pairs": [
+    {
+      "symbol": "1605.T",
+      "strategy_name": "MacdRci",
+      "reason": "WF 5/5 OOS negative (avg -2026 JPY/day, ref50_50 -2568 JPY) on 90d 5-split. 4/27 PoC (-1636 JPY) より悪化。Scalp(#236261)/Pullback(#179423) いずれも 5/5 OOS positive (avg +359/+372 JPY)。canonical では robust=true 維持されているが過適合確定。",
+      "until": "2026-05-25",
+      "added_at": "2026-04-27T19:50:00+09:00",
+      "renewed_at": "2026-04-29T22:10:00+09:00",
+      "evidence": "data/snapshots/walkforward_compare_1605_macdrci_vs_scalp_pullback.json"
+    }
+  ]
+}

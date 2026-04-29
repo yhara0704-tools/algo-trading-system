@@ -1,0 +1,314 @@
+{
+  "script": "walkforward_strategy_compare.py",
+  "symbol": "1605.T",
+  "fetch_days": 90,
+  "bars": 1889,
+  "split_ratios": [
+    0.3,
+    0.4,
+    0.5,
+    0.6,
+    0.7
+  ],
+  "runs": [
+    {
+      "label": "baseline:MacdRci#112726",
+      "strategy_name": "MacdRci",
+      "params": {
+        "tp_pct": 0.011009,
+        "sl_pct": 0.003479,
+        "rci_min_agree": 3,
+        "macd_signal": 15,
+        "macd_fast": 4,
+        "macd_slow": 5,
+        "entry_profile": 1,
+        "exit_profile": 2,
+        "hist_exit_delay_bars": 2,
+        "rci_exit_min_agree": 2,
+        "rci_entry_mode": 2,
+        "rci_gc_slope_lookback": 11,
+        "rci_gc_slope_enabled": 1,
+        "rci_gc_slope_min": 23.048682,
+        "rci_gc_slope_max": 2.20022,
+        "interval": "5m"
+      },
+      "reference_50_50": {
+        "is_daily_pnl_jpy": 3538.095238095238,
+        "oos_daily_pnl_jpy": -2568.235699999999,
+        "is_trades": 56,
+        "oos_trades": 68
+      },
+      "split_robustness": {
+        "oos_positive": 0,
+        "oos_total": 5,
+        "oos_positive_rate": 0.0,
+        "avg_oos_daily_pnl_jpy": -2025.8077622369583,
+        "avg_oos_trades": 67.2,
+        "splits": [
+          {
+            "train_frac": 0.3,
+            "is_daily_pnl_jpy": 4915.384615384615,
+            "oos_daily_pnl_jpy": -1349.4120586206889,
+            "oos_positive": false,
+            "is_trades": 33,
+            "oos_trades": 90
+          },
+          {
+            "train_frac": 0.4,
+            "is_daily_pnl_jpy": 5412.5,
+            "oos_daily_pnl_jpy": -2370.498065384614,
+            "oos_positive": false,
+            "is_trades": 43,
+            "oos_trades": 81
+          },
+          {
+            "train_frac": 0.5,
+            "is_daily_pnl_jpy": 3538.095238095238,
+            "oos_daily_pnl_jpy": -2568.235699999999,
+            "oos_positive": false,
+            "is_trades": 56,
+            "oos_trades": 68
+          },
+          {
+            "train_frac": 0.6,
+            "is_daily_pnl_jpy": 2576.1391375000017,
+            "oos_daily_pnl_jpy": -2197.793833333334,
+            "oos_positive": false,
+            "is_trades": 68,
+            "oos_trades": 55
+          },
+          {
+            "train_frac": 0.7,
+            "is_daily_pnl_jpy": 1283.701355172415,
+            "oos_daily_pnl_jpy": -1643.0991538461546,
+            "oos_positive": false,
+            "is_trades": 81,
+            "oos_trades": 42
+          }
+        ]
+      },
+      "meta": {
+        "strategy_name": "MacdRci",
+        "params": {
+          "tp_pct": 0.011009,
+          "sl_pct": 0.003479,
+          "rci_min_agree": 3,
+          "macd_signal": 15,
+          "macd_fast": 4,
+          "macd_slow": 5,
+          "entry_profile": 1,
+          "exit_profile": 2,
+          "hist_exit_delay_bars": 2,
+          "rci_exit_min_agree": 2,
+          "rci_entry_mode": 2,
+          "rci_gc_slope_lookback": 11,
+          "rci_gc_slope_enabled": 1,
+          "rci_gc_slope_min": 23.048682,
+          "rci_gc_slope_max": 2.20022,
+          "interval": "5m"
+        },
+        "experiment_type": "explore",
+        "generation": 28682,
+        "db_oos_win_rate": 46.902654867256636,
+        "db_oos_daily_pnl": 1220.7058025641036,
+        "db_oos_pf": 1.3059757658445148,
+        "db_oos_trades": 113,
+        "db_robust": true
+      }
+    },
+    {
+      "label": "candidate:Scalp#236261",
+      "strategy_name": "Scalp",
+      "params": {
+        "tp_pct": 0.005523,
+        "sl_pct": 0.002827,
+        "ema_fast": 3,
+        "ema_slow": 9,
+        "atr_period": 18,
+        "atr_min_pct": 0.001264,
+        "vwap_dev_limit": 0.00264,
+        "morning_only": 0,
+        "allow_short": 0,
+        "interval": "5m"
+      },
+      "reference_50_50": {
+        "is_daily_pnl_jpy": 696.3893619047494,
+        "oos_daily_pnl_jpy": 402.143299999991,
+        "is_trades": 14,
+        "oos_trades": 19
+      },
+      "split_robustness": {
+        "oos_positive": 5,
+        "oos_total": 5,
+        "oos_positive_rate": 1.0,
+        "avg_oos_daily_pnl_jpy": 358.7239821662162,
+        "avg_oos_trades": 16.6,
+        "splits": [
+          {
+            "train_frac": 0.3,
+            "is_daily_pnl_jpy": 643.6579076922918,
+            "oos_daily_pnl_jpy": 513.8494172413708,
+            "oos_positive": true,
+            "is_trades": 10,
+            "oos_trades": 22
+          },
+          {
+            "train_frac": 0.4,
+            "is_daily_pnl_jpy": 597.1979499999861,
+            "oos_daily_pnl_jpy": 527.4622576922989,
+            "oos_positive": true,
+            "is_trades": 12,
+            "oos_trades": 20
+          },
+          {
+            "train_frac": 0.5,
+            "is_daily_pnl_jpy": 696.3893619047494,
+            "oos_daily_pnl_jpy": 402.143299999991,
+            "oos_positive": true,
+            "is_trades": 14,
+            "oos_trades": 19
+          },
+          {
+            "train_frac": 0.6,
+            "is_daily_pnl_jpy": 805.1662624999873,
+            "oos_daily_pnl_jpy": 277.51086666665844,
+            "oos_positive": true,
+            "is_trades": 18,
+            "oos_trades": 13
+          },
+          {
+            "train_frac": 0.7,
+            "is_daily_pnl_jpy": 689.9414862068844,
+            "oos_daily_pnl_jpy": 72.65406923076206,
+            "oos_positive": true,
+            "is_trades": 22,
+            "oos_trades": 9
+          }
+        ]
+      },
+      "meta": {
+        "strategy_name": "Scalp",
+        "params": {
+          "tp_pct": 0.005523,
+          "sl_pct": 0.002827,
+          "ema_fast": 3,
+          "ema_slow": 9,
+          "atr_period": 18,
+          "atr_min_pct": 0.001264,
+          "vwap_dev_limit": 0.00264,
+          "morning_only": 0,
+          "allow_short": 0,
+          "interval": "5m"
+        },
+        "experiment_type": "oos_booster",
+        "generation": 42293,
+        "db_oos_win_rate": 50.0,
+        "db_oos_daily_pnl": 491.2766702433798,
+        "db_oos_pf": 2.0371617898806744,
+        "db_oos_trades": 20,
+        "db_robust": true
+      }
+    },
+    {
+      "label": "candidate:Pullback#179423",
+      "strategy_name": "Pullback",
+      "params": {
+        "ema_fast": 23,
+        "ema_slow": 56,
+        "slope_lookback": 5,
+        "pullback_lookback": 13,
+        "pullback_depth_pct": 0.0005,
+        "vol_confirm_mult": 1.125411,
+        "vwap_tol_pct": 0.001737,
+        "rsi_period": 20,
+        "rsi_min": 36.25,
+        "rsi_max": 66.96161,
+        "tp_pct": 0.006795,
+        "sl_pct": 0.002402,
+        "full_session": 1,
+        "interval": "5m"
+      },
+      "reference_50_50": {
+        "is_daily_pnl_jpy": 852.9068761904931,
+        "oos_daily_pnl_jpy": 374.18126190476914,
+        "is_trades": 20,
+        "oos_trades": 9
+      },
+      "split_robustness": {
+        "oos_positive": 5,
+        "oos_total": 5,
+        "oos_positive_rate": 1.0,
+        "avg_oos_daily_pnl_jpy": 372.1688562241663,
+        "avg_oos_trades": 10.6,
+        "splits": [
+          {
+            "train_frac": 0.3,
+            "is_daily_pnl_jpy": 1504.6184153846439,
+            "oos_daily_pnl_jpy": 214.09694827586682,
+            "oos_positive": true,
+            "is_trades": 14,
+            "oos_trades": 15
+          },
+          {
+            "train_frac": 0.4,
+            "is_daily_pnl_jpy": 1222.502462500023,
+            "oos_daily_pnl_jpy": 231.5746115384662,
+            "oos_positive": true,
+            "is_trades": 14,
+            "oos_trades": 11
+          },
+          {
+            "train_frac": 0.5,
+            "is_daily_pnl_jpy": 852.9068761904931,
+            "oos_daily_pnl_jpy": 374.18126190476914,
+            "oos_positive": true,
+            "is_trades": 20,
+            "oos_trades": 9
+          },
+          {
+            "train_frac": 0.6,
+            "is_daily_pnl_jpy": 746.2935166666815,
+            "oos_daily_pnl_jpy": 436.544805555564,
+            "oos_positive": true,
+            "is_trades": 20,
+            "oos_trades": 9
+          },
+          {
+            "train_frac": 0.7,
+            "is_daily_pnl_jpy": 617.6222206896674,
+            "oos_daily_pnl_jpy": 604.4466538461655,
+            "oos_positive": true,
+            "is_trades": 20,
+            "oos_trades": 9
+          }
+        ]
+      },
+      "meta": {
+        "strategy_name": "Pullback",
+        "params": {
+          "ema_fast": 23,
+          "ema_slow": 56,
+          "slope_lookback": 5,
+          "pullback_lookback": 13,
+          "pullback_depth_pct": 0.0005,
+          "vol_confirm_mult": 1.125411,
+          "vwap_tol_pct": 0.001737,
+          "rsi_period": 20,
+          "rsi_min": 36.25,
+          "rsi_max": 66.96161,
+          "tp_pct": 0.006795,
+          "sl_pct": 0.002402,
+          "full_session": 1,
+          "interval": "5m"
+        },
+        "experiment_type": "oos_booster",
+        "generation": 37661,
+        "db_oos_win_rate": 40.0,
+        "db_oos_daily_pnl": 387.39074558717795,
+        "db_oos_pf": 1.8281639081135732,
+        "db_oos_trades": 30,
+        "db_robust": true
+      }
+    }
+  ]
+}

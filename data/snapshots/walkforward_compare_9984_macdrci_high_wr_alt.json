@@ -1,0 +1,237 @@
+{
+  "script": "walkforward_strategy_compare.py",
+  "symbol": "9984.T",
+  "fetch_days": 90,
+  "bars": 1895,
+  "split_ratios": [
+    0.3,
+    0.4,
+    0.5,
+    0.6,
+    0.7
+  ],
+  "runs": [
+    {
+      "label": "baseline:MacdRci#348632",
+      "strategy_name": "MacdRci",
+      "params": {
+        "tp_pct": 0.01286,
+        "sl_pct": 0.0005,
+        "rci_min_agree": 2,
+        "macd_signal": 14,
+        "macd_fast": 5,
+        "macd_slow": 15,
+        "entry_profile": 1,
+        "exit_profile": 2,
+        "hist_exit_delay_bars": 3,
+        "rci_exit_min_agree": 2,
+        "rci_entry_mode": 0,
+        "rci_gc_slope_lookback": 9,
+        "rci_gc_slope_enabled": 1,
+        "rci_gc_slope_min": -3.0,
+        "rci_gc_slope_max": 9.146427,
+        "interval": "5m"
+      },
+      "reference_50_50": {
+        "is_daily_pnl_jpy": 2859.804000000051,
+        "oos_daily_pnl_jpy": 8705.270285714363,
+        "is_trades": 94,
+        "oos_trades": 102
+      },
+      "split_robustness": {
+        "oos_positive": 5,
+        "oos_total": 5,
+        "oos_positive_rate": 1.0,
+        "avg_oos_daily_pnl_jpy": 7085.529786526948,
+        "avg_oos_trades": 90.4,
+        "splits": [
+          {
+            "train_frac": 0.3,
+            "is_daily_pnl_jpy": 4278.118615384644,
+            "oos_daily_pnl_jpy": 5790.984689655242,
+            "oos_positive": true,
+            "is_trades": 49,
+            "oos_trades": 134
+          },
+          {
+            "train_frac": 0.4,
+            "is_daily_pnl_jpy": 3627.3696250000557,
+            "oos_daily_pnl_jpy": 6827.032923076996,
+            "oos_positive": true,
+            "is_trades": 75,
+            "oos_trades": 119
+          },
+          {
+            "train_frac": 0.5,
+            "is_daily_pnl_jpy": 2859.804000000051,
+            "oos_daily_pnl_jpy": 8705.270285714363,
+            "oos_positive": true,
+            "is_trades": 94,
+            "oos_trades": 102
+          },
+          {
+            "train_frac": 0.6,
+            "is_daily_pnl_jpy": 3656.1872500000504,
+            "oos_daily_pnl_jpy": 7865.262111111172,
+            "oos_positive": true,
+            "is_trades": 110,
+            "oos_trades": 66
+          },
+          {
+            "train_frac": 0.7,
+            "is_daily_pnl_jpy": 3971.0336551724745,
+            "oos_daily_pnl_jpy": 6239.098923076962,
+            "oos_positive": true,
+            "is_trades": 141,
+            "oos_trades": 31
+          }
+        ]
+      },
+      "meta": {
+        "strategy_name": "MacdRci",
+        "params": {
+          "tp_pct": 0.01286,
+          "sl_pct": 0.0005,
+          "rci_min_agree": 2,
+          "macd_signal": 14,
+          "macd_fast": 5,
+          "macd_slow": 15,
+          "entry_profile": 1,
+          "exit_profile": 2,
+          "hist_exit_delay_bars": 3,
+          "rci_exit_min_agree": 2,
+          "rci_entry_mode": 0,
+          "rci_gc_slope_lookback": 9,
+          "rci_gc_slope_enabled": 1,
+          "rci_gc_slope_min": -3.0,
+          "rci_gc_slope_max": 9.146427,
+          "interval": "5m"
+        },
+        "experiment_type": "exploit",
+        "generation": 51807,
+        "db_oos_win_rate": 42.5531914893617,
+        "db_oos_daily_pnl": 9932.362552289356,
+        "db_oos_pf": 4.791533163097789,
+        "db_oos_trades": 47,
+        "db_robust": true
+      }
+    },
+    {
+      "label": "candidate:MacdRci#309603",
+      "strategy_name": "MacdRci",
+      "params": {
+        "tp_pct": 0.008749,
+        "sl_pct": 0.003105,
+        "rci_min_agree": 3,
+        "macd_signal": 11,
+        "macd_fast": 6,
+        "macd_slow": 11,
+        "entry_profile": 2,
+        "exit_profile": 1,
+        "hist_exit_delay_bars": 3,
+        "rci_exit_min_agree": 2,
+        "rci_entry_mode": 2,
+        "rci_gc_slope_lookback": 12,
+        "rci_gc_slope_enabled": 1,
+        "rci_gc_slope_min": 14.727825,
+        "rci_gc_slope_max": 12.948892,
+        "disable_lunch_session_entry": 0,
+        "require_macd_above_signal": 0,
+        "rci_danger_zone_enabled": 1,
+        "rci_danger_low": -76.329128,
+        "rci_danger_high": 9.162317,
+        "volume_surge_max_ratio": 0.987148,
+        "interval": "5m"
+      },
+      "reference_50_50": {
+        "is_daily_pnl_jpy": 1847.6190476190477,
+        "oos_daily_pnl_jpy": 6357.142857142857,
+        "is_trades": 46,
+        "oos_trades": 38
+      },
+      "split_robustness": {
+        "oos_positive": 5,
+        "oos_total": 5,
+        "oos_positive_rate": 1.0,
+        "avg_oos_daily_pnl_jpy": 5536.857395478085,
+        "avg_oos_trades": 36.0,
+        "splits": [
+          {
+            "train_frac": 0.3,
+            "is_daily_pnl_jpy": 2307.6923076923076,
+            "oos_daily_pnl_jpy": 4775.862068965517,
+            "oos_positive": true,
+            "is_trades": 26,
+            "oos_trades": 58
+          },
+          {
+            "train_frac": 0.4,
+            "is_daily_pnl_jpy": 2381.25,
+            "oos_daily_pnl_jpy": 5200.0,
+            "oos_positive": true,
+            "is_trades": 37,
+            "oos_trades": 47
+          },
+          {
+            "train_frac": 0.5,
+            "is_daily_pnl_jpy": 1847.6190476190477,
+            "oos_daily_pnl_jpy": 6357.142857142857,
+            "oos_positive": true,
+            "is_trades": 46,
+            "oos_trades": 38
+          },
+          {
+            "train_frac": 0.6,
+            "is_daily_pnl_jpy": 2870.8333333333335,
+            "oos_daily_pnl_jpy": 5566.666666666667,
+            "oos_positive": true,
+            "is_trades": 56,
+            "oos_trades": 24
+          },
+          {
+            "train_frac": 0.7,
+            "is_daily_pnl_jpy": 2900.0,
+            "oos_daily_pnl_jpy": 5784.615384615385,
+            "oos_positive": true,
+            "is_trades": 67,
+            "oos_trades": 13
+          }
+        ]
+      },
+      "meta": {
+        "strategy_name": "MacdRci",
+        "params": {
+          "tp_pct": 0.008749,
+          "sl_pct": 0.003105,
+          "rci_min_agree": 3,
+          "macd_signal": 11,
+          "macd_fast": 6,
+          "macd_slow": 11,
+          "entry_profile": 2,
+          "exit_profile": 1,
+          "hist_exit_delay_bars": 3,
+          "rci_exit_min_agree": 2,
+          "rci_entry_mode": 2,
+          "rci_gc_slope_lookback": 12,
+          "rci_gc_slope_enabled": 1,
+          "rci_gc_slope_min": 14.727825,
+          "rci_gc_slope_max": 12.948892,
+          "disable_lunch_session_entry": 0,
+          "require_macd_above_signal": 0,
+          "rci_danger_zone_enabled": 1,
+          "rci_danger_low": -76.329128,
+          "rci_danger_high": 9.162317,
+          "volume_surge_max_ratio": 0.987148,
+          "interval": "5m"
+        },
+        "experiment_type": "explore",
+        "generation": 48468,
+        "db_oos_win_rate": 71.42857142857143,
+        "db_oos_daily_pnl": 6815.124132851853,
+        "db_oos_pf": 4.2127804829143365,
+        "db_oos_trades": 42,
+        "db_robust": true
+      }
+    }
+  ]
+}
