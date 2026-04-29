@@ -65,7 +65,12 @@ ssh bullvps "tail -30 /tmp/daemon_detail.log"
 **VPS 上の DB が正の環境なら、VPS で実行:**
 
 ```bash
-ssh bullvps "cd /root/algo-trading-system && python3 scripts/update_backtest_report_checkpoint.py --dry-run"
+# 推奨: daemon と同じ .venv で実行する（system python3 だと pandas 等が無いことがある）
+ssh bullvps "cd /root/algo-trading-system && .venv/bin/python3 scripts/update_backtest_report_checkpoint.py --dry-run"
+
+# system python3 で pandas 等が無い場合は --skip-slope を使うか、未指定でも自動で
+# slope 集計だけスキップして他の差分は完走する（2026-04-29 修正）。
+ssh bullvps "cd /root/algo-trading-system && python3 scripts/update_backtest_report_checkpoint.py --dry-run --skip-slope"
 ```
 
 ローカル DB が VPS と同期している場合のみローカルでも可。
@@ -102,7 +107,8 @@ cd /path/to/algo-trading-system && .venv/bin/python scripts/sync_canonical_from_
 **報告が一段落したらチェックポイントを進める（必須）:**
 
 ```bash
-ssh bullvps "cd /root/algo-trading-system && python3 scripts/update_backtest_report_checkpoint.py --note \"（報告単位のメモ）\""
+# 推奨: daemon と同じ .venv で実行
+ssh bullvps "cd /root/algo-trading-system && .venv/bin/python3 scripts/update_backtest_report_checkpoint.py --note \"（報告単位のメモ）\""
 ```
 
 - 差分の内部実装: `get_method_pdca_aggregate_since(last_experiment_id)` / MacdRci 傾きは `aggregate_macd_rci_slope_since(last_experiment_id)`
