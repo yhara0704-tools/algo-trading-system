@@ -1859,3 +1859,37 @@ VPS でオンデマンド再実行して復旧（`.venv/bin/python scripts/night
 - 観察継続: per-config 観測 OOS（前回 -917 → 今回 -667.4、4/30〜5/2 で 0 円超え追跡）
 - 観察課題: ORB / Momentum5Min は manual_observation 状態のまま `nightly_walkforward_latest.json::skipped_summary` に積み上がる。次回別 PR で「正規 strategy 実装するか universe から除くか」を判断。
 
+### (C6) 観察候補 (manual_observation) を nightly_wf 側で意図通り skip する
+
+(C5) で残課題とした「ORB / Momentum5Min が `unknown_strategy` として nightly_wf の警告に積み上がる問題」を即日処理。
+
+調査結果:
+
+- `backend/backtesting/strategy_factory.py` 冒頭に **明確な設計コメント**:
+  > アーカイブ済み（PDCA 非対象）: Momentum5Min / ORB / VwapReversion — experiments で平均 OOS が負 or NULL、robust=0 だったため、factory/daemon のループから外して新規研究リソースを温存する。クラス本体は backend/lab/runner.py や social_strategy.py が直接 import しているため残す。
+- 一方、`merge_robust_into_universe.py` が `data/universe_observation_pairs.json` から `source='manual_observation'` で universe_active.json に流し込む別経路がある（4/28 (B4) 導入）。設計は `force_paper=False` で paper 投入はせず観察のみ、だが nightly_walkforward は universe_active を全件回すため衝突。
+- universe_active.json から手で削除しても、毎営業日 08:50 の cron `merge_robust_into_universe.py` で再生成される。
+
+結論: **正本（universe_observation_pairs.json）と universe_active.json は触らない**。`nightly_walkforward_revalidation.py` 側で `source == 'manual_observation'` のペアは観察意図を尊重して skip する。
+
+修正:
+
+- 評価ループの先頭で `row.get('source') == 'manual_observation'` を判定し、`skipped='observation_only'` で個別 skip。`note` フィールドに `source=manual_observation (force_paper=false, factory archived)` を残す。
+- これにより `skipped_summary` のキーが `unknown_strategy`（factory に登録すべき真のバグ）と `observation_only`（設計通りの skip）に分かれる。今後 `unknown_strategy` にペアが現れたら本物の警告として対応する。
+
+VPS で再実行検証 (`.venv/bin/python scripts/nightly_walkforward_revalidation.py`):
+
+```
+total=18 / demote=9 / low_sample=2
+skipped_summary:
+  observation_only: 5 pairs
+    5985.T ORB / 6522.T ORB / 6433.T ORB / 247A.T Momentum5Min / 5243.T Momentum5Min
+```
+
+`unknown_strategy` カテゴリは消え、観察候補は意図通り分類された。
+
+成果物:
+
+- 更新: `scripts/nightly_walkforward_revalidation.py`（`source=manual_observation` を `observation_only` で skip）
+- VPS 出力: `data/nightly_walkforward_latest.json` 22:25 更新（`skipped_summary.observation_only=5, unknown_strategy=0`）
+

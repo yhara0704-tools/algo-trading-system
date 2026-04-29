@@ -180,6 +180,21 @@ async def main() -> int:
         strat_name = row.get("strategy")
         if not sym or not strat_name:
             continue
+        # source='manual_observation' のペアは設計上 paper も研究 PDCA も対象外
+        # （`merge_robust_into_universe.py` が `force_paper=False` で投入する観察候補）。
+        # それらの戦略は `strategy_factory.py` で「アーカイブ済み（ORB/Momentum5Min/
+        # VwapReversion）」とコメントされているもので、factory に登録すべきではない。
+        # ここで明示的に skip して `unknown_strategy` 警告と区別する。
+        if row.get("source") == "manual_observation":
+            r = {
+                "symbol": sym,
+                "strategy": strat_name,
+                "skipped": "observation_only",
+                "note": "source=manual_observation (force_paper=false, factory archived)",
+            }
+            results.append(r)
+            logger.info("done %s %s: %s", sym, strat_name, r)
+            continue
         params: dict = {}
         if strat_name == "MacdRci":
             params = dict(macd_params.get(sym, {}))
