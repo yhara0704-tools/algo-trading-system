@@ -1,5 +1,98 @@
 # Phase1 実装ログ
 
+## 2026-04-30 (夜) MicroScalp (+5円固定スキャル) MVP 実装 — コンセプト実証 / 本番投入は保留
+
+### 背景
+
+ユーザー提案: 三菱UFJ e スマート証券 (デイトレ信用) / 松井証券 (一日信用) の **手数料 0 円** を活かし、「+5 円 (= 100株なら +500円) を 1 分以内で取り、外れたら即損切り」を 1 日 20 回繰り返して **+10,000 円/日** を狙う。アルゴが優位な「即断即決」領域。
+
+### (H1-H2) 技術調査
+
+- **engine の TP/SL** は `take_profit` / `stop_loss` 列に **絶対価格** で書ける (率ではない) → +5 円固定 TP は実装可能
+- **engine に timeout 機能無し** → 戦略側で entry の N バー後に signal=-1 上書きで擬似実装
+- **1m interval は engine が `bars_per_day=390` で正しく扱う**
+- **1m データ取得経路**:
+  - J-Quants は `5minute` API までで **1m API 無し** (Standard プラン)
+  - yfinance 1m データは過去 7 日分まで取得可能 (9984.T で 2,244 rows 確認済)
+  - VPS の `algo_shared/ohlcv_cache/` には 1d / 5m のみキャッシュ
+
+### (H3-H4) MicroScalp 戦略本体実装
+
+**`backend/strategies/jp_stock/jp_micro_scalp.py`** (新規):
+
+- ロジック: 当日累積 VWAP からの絶対円乖離で逆張り (戻り狙い)
+  - LONG: `close <= vwap - entry_dev_jpy` (デフォルト 8 円下方乖離)
+  - SHORT: `close >= vwap + entry_dev_jpy` (allow_short=True なら)
+- TP/SL: `entry ± tp_jpy / sl_jpy` (デフォルト ±5 円固定)
+- 時間帯: 寄付直後 5 分・大引け前 30 分・ランチ休止帯を自動回避
+- フィルタ: 1m ATR が `atr_min_jpy` (3 円) 未満は閑散時間帯としてスキップ
+- timeout: `timeout_bars` (2) で強制決済 (signal=-1 を engine に渡す)
+- **v2 追加**: `cooldown_bars` (直近 N バー以内 entry 禁止)、`max_trades_per_day` (1 日上限)、`atr_max_jpy` (過熱フィルタ)
+
+**`backend/backtesting/strategy_factory.py`**: `MicroScalp` 分岐 + `STRATEGY_DEFAULTS` 登録 (interval="1m" 既定)。
+
+### (H5) MVP backtest スクリプト
+
+**`scripts/backtest_micro_scalp_mvp.py`** (新規): yfinance 1m × 12 銘柄 × 4 config を試行し、`data/micro_scalp_mvp_latest.json` に WR/PF/avg_hold/TP_hit/trades_per_day を保存。
+
+```
+fee_pct=0.0, position_pct=0.30 (余力 30%), starting_cash=990,000,
+lot_size=100, eod_close_time=(15,25), subsession_cooldown_min=2
+```
+
+### (H6) v1 → v2 の劇的改善
+
+| label | trades | WR | TP_hit% | total_pnl (7日12銘柄) | trades/日/銘柄 |
+|---|---|---|---|---|---|
+| v1_baseline (TP=5/SL=5/cd=0) | 1,759 | 42.1% | 40.1% | **-141,250 円** | 25.1 |
+| **v2_8_4_cd5 (TP=8/SL=4/cd=5/max=20)** | 283 | 39.2% | 24.7% | **+3,950 円** | 4.0 |
+| v2_atr_band (上記 + ATR 3-15円) | 276 | 38.4% | 23.2% | +800 円 | 3.9 |
+| v2_tight_10_5 (TP=10/SL=5/dev=12) | 148 | 36.5% | 25.0% | -2,350 円 | 2.1 |
+
+→ **損小利大 (TP=8/SL=4) + cooldown 5 分 + 1 日 20 回上限** で **+145,200 円の収支改善**。コンセプト「+5円固定スキャル」の **収支プラス化が技術的に可能** であることを実証。
+
+### v2 で勝った銘柄 (本番候補)
+
+- **4568.T**: +5,300 円 (n=94, WR 43.6%, PF 1.27) ✓✓ — 注: MacdRci では `jp_paper_trading_halt.json` で paused 中だが MicroScalp は別戦略
+- **3103.T**: +1,800 円 (n=83, WR 34.9%, PF 1.08) — v1 で -118,200 円だったのが cooldown で **収支転換**
+- 9433.T: +450 円 (n=12)
+- 8306.T: +200 円 (n=72)
+
+### v1 → v2 で得た知見
+
+1. **cooldown が連発擬陽性に強烈に効く**: 3103.T が 1,178 → 83 trades に絞られて収支転換
+2. **TP/SL 1.6:1 (損小利大)** で WR 39% でも生存可能 (R/R 比で WR を補う)
+3. **銘柄選別が必須**: 株価 3,000 円超で値動き静かな銘柄 (9984.T / 7203.T / 6758.T / 4385.T / 1605.T) は 1m ATR が 3 円届かず **シグナル発生 0**
+4. **最適 cooldown は銘柄ごとに違う**: 6723.T は v1 (cooldown=0) の方が良かった (元々シグナル発生密度が低いため cooldown かけると枯れる)
+
+### 現実的な期待値 (注意喚起)
+
+- v2_8_4_cd5 を 5 銘柄並走で運用 → 7 日 +3,950 ÷ 7 ÷ 5 = **約 +110 円/銘柄/日**、合計 **約 +560 円/日** (元本 30万 ROI 0.2%)
+- 特定銘柄に絞れば 1,500-3,000 円/日 の上乗せが現実線
+- **ユーザー想定 +10,000 円/日 (=元本 3.3% ROI) には MVP 段階では届かない**。理由は (a) yfinance 1m が過去 7 日制限でサンプル少 (b) 全銘柄で 1日 20 回はシグナル発生密度が足りない
+
+### 本番 paper 投入は保留した理由
+
+1. **サンプル不足**: yfinance 7 日データでは「特定週の偶然」で +3,950 円が出ている可能性を排除できない
+2. **1m データキャッシュが無い**: 長期評価には J-Quants Premium 契約 or yfinance 定期 cron で `algo_shared/ohlcv_cache/` に 1m parquet を保存する仕組みが必要
+3. **`jp_live_runner` 組み込みの影響範囲が大きい**: 既存 5m パイプラインと並走させる場合、「余力 30% 専用枠」の実装が `capital_tier` / `jp_live_runner._calc_position_value` 改造を伴う
+4. **本日同時に T1 攻めシフト (position_pct 0.5→0.7, max_concurrent 3→5, universe 17→29) を入れたばかり**: ノイズが混じると効果切り分け不能になる
+
+→ MicroScalp は **戦略本体を factory 登録済 = いつでも backtest 可能** という状態で commit。本番投入は次フェーズで慎重に進める。
+
+### フォローアップ
+
+- (1) **長期 1m データキャッシュ整備**: yfinance を毎営業日 cron で叩いて `algo_shared/ohlcv_cache/{sym}_1m.parquet` に append (累積 30+ 日)
+- (2) **銘柄別 cooldown / TP/SL 最適化**: backtest_daemon の MicroScalp 分岐を追加 (既存 MacdRci/Breakout 同様にパラメータ最適化を回す)
+- (3) **本番投入時の設計**:
+  - `capital_tier.T1` に `micro_scalp_pct=0.30` フィールド追加 (余力 30% 専用枠)
+  - `jp_live_runner._calc_position_value` で MicroScalp 戦略時のみ `micro_scalp_pct` を使う
+  - `data/jp_paper_trading_halt.json` の MacdRci paused とは独立に動かせる
+- (4) **+10,000 円/日 達成への現実線**: 本体戦略 (T1 強化版) で +5,000-10,000 円 + MicroScalp で +1,000-3,000 円 のハイブリッドが現実解
+- (5) **次の調査軸**: tick データ (J-Quants Premium で取れるか) があれば真の「数秒スキャル」が可能になる
+
+---
+
 ## 2026-04-30 (夕方) Phase1 攻めシフト: position_pct 0.5→0.7 / max_concurrent 3→5 / universe 17→29 ペア
 
 ### 背景

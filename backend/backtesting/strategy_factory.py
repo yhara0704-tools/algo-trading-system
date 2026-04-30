@@ -4,6 +4,7 @@ from __future__ import annotations
 from backend.strategies.jp_stock.jp_macd_rci import JPMacdRci
 from backend.strategies.jp_stock.jp_breakout import JPBreakout
 from backend.strategies.jp_stock.jp_scalp import JPScalp
+from backend.strategies.jp_stock.jp_micro_scalp import JPMicroScalp
 from backend.strategies.jp_stock.enhanced_macd_rci import EnhancedMacdRci
 from backend.strategies.jp_stock.enhanced_scalp import EnhancedScalp
 from backend.strategies.jp_stock.jp_bb_short import JPBbShort
@@ -31,6 +32,14 @@ STRATEGY_DEFAULTS = {
         "rci_gc_slope_max": 999.0,
         "entry_profile": 0, "exit_profile": 0,
         "hist_exit_delay_bars": 1, "rci_exit_min_agree": 2,
+        # Phase F7 事故防止フィルタ（デフォルト OFF）
+        "disable_lunch_session_entry": 0,
+        "require_macd_above_signal": 0,
+        "rci_danger_zone_enabled": 0,
+        "rci_danger_low": -80.0,
+        "rci_danger_high": 80.0,
+        "volume_surge_max_ratio": 0.0,
+        "volume_surge_lookback": 5,
     },
     "Breakout": {
         "interval": "5m",
@@ -44,6 +53,23 @@ STRATEGY_DEFAULTS = {
         "atr_period": 10, "atr_min_pct": 0.001,
         "morning_only": True, "allow_short": True,
         "vwap_dev_limit": 0.005,
+    },
+    # 2026-04-30 ユーザー提案: +5円 1分以内 即決スキャル (アルゴ優位領域)
+    "MicroScalp": {
+        "interval": "1m",
+        "tp_jpy": 5.0,
+        "sl_jpy": 5.0,
+        "entry_dev_jpy": 8.0,
+        "atr_period": 10,
+        "atr_min_jpy": 3.0,
+        "atr_max_jpy": 0.0,
+        "timeout_bars": 2,
+        "cooldown_bars": 5,
+        "avoid_open_min": 5,
+        "avoid_close_min": 30,
+        "morning_only": False,
+        "allow_short": True,
+        "max_trades_per_day": 0,
     },
     # BB 上端(3σ)タッチでショートのみ（ロング新規なし）
     "BbShort": {
@@ -142,6 +168,16 @@ PARAM_RANGES = {
         "rci_gc_slope_enabled": (0, 1, int),
         "rci_gc_slope_min": (-30.0, 30.0, float),
         "rci_gc_slope_max": (-30.0, 30.0, float),
+        # Phase F7 事故防止フィルタ（探索キー、すべて 0 含む = OFF を許容）
+        "disable_lunch_session_entry": (0, 1, int),
+        "require_macd_above_signal": (0, 1, int),
+        "rci_danger_zone_enabled": (0, 1, int),
+        # 危険帯はおおむね下側で観測されている（極オーバーソールド or 中途半端売られ）。
+        # 上側 80 以上もあるため high は 0..80 で振る。low と high は内部で swap される。
+        "rci_danger_low": (-100.0, 0.0, float),
+        "rci_danger_high": (-80.0, 80.0, float),
+        # 0 = 無効、>0 = 有効化。3.0 を上限にすると 1.5x〜3.0x が当たりやすい。
+        "volume_surge_max_ratio": (0.0, 3.0, float),
     },
     "Scalp": {
         "tp_pct":   (0.001, 0.008, float),  # 拡張
@@ -323,6 +359,14 @@ def create(strategy_name: str, symbol: str, name: str = "",
             rci_gc_slope_enabled=int(p.get("rci_gc_slope_enabled", 0)),
             rci_gc_slope_min=float(p.get("rci_gc_slope_min", -999.0)),
             rci_gc_slope_max=float(p.get("rci_gc_slope_max", 999.0)),
+            # Phase F7 事故防止フィルタ（opt-in、デフォルト OFF で既存挙動を温存）
+            disable_lunch_session_entry=int(p.get("disable_lunch_session_entry", 0)),
+            require_macd_above_signal=int(p.get("require_macd_above_signal", 0)),
+            rci_danger_zone_enabled=int(p.get("rci_danger_zone_enabled", 0)),
+            rci_danger_low=float(p.get("rci_danger_low", -80.0)),
+            rci_danger_high=float(p.get("rci_danger_high", 80.0)),
+            volume_surge_max_ratio=float(p.get("volume_surge_max_ratio", 0.0)),
+            volume_surge_lookback=int(p.get("volume_surge_lookback", 5)),
             max_pyramid=int(p.get("max_pyramid", 0)),
         )
     elif strategy_name == "Breakout":
@@ -346,6 +390,23 @@ def create(strategy_name: str, symbol: str, name: str = "",
             morning_only=bool(p.get("morning_only", True)),
             allow_short=bool(p.get("allow_short", True)),
             vwap_dev_limit=p.get("vwap_dev_limit", 0.005),
+        )
+    elif strategy_name == "MicroScalp":
+        return JPMicroScalp(
+            symbol, name, interval=p.get("interval", "1m"),
+            tp_jpy=float(p.get("tp_jpy", 5.0)),
+            sl_jpy=float(p.get("sl_jpy", 5.0)),
+            entry_dev_jpy=float(p.get("entry_dev_jpy", 8.0)),
+            atr_period=int(p.get("atr_period", 10)),
+            atr_min_jpy=float(p.get("atr_min_jpy", 3.0)),
+            atr_max_jpy=float(p.get("atr_max_jpy", 0.0)),
+            timeout_bars=int(p.get("timeout_bars", 2)),
+            cooldown_bars=int(p.get("cooldown_bars", 5)),
+            avoid_open_min=int(p.get("avoid_open_min", 5)),
+            avoid_close_min=int(p.get("avoid_close_min", 30)),
+            morning_only=bool(p.get("morning_only", False)),
+            allow_short=bool(p.get("allow_short", True)),
+            max_trades_per_day=int(p.get("max_trades_per_day", 0)),
         )
     elif strategy_name == "EnhancedScalp":
         return EnhancedScalp(
