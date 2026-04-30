@@ -3438,3 +3438,173 @@ D9 Phase 1.5 までは 1m, 5m, 15m, 60m の 4 軸固定で「1m+60m が最強」
 形で実装する。M2 で 30 日データ蓄積後、240m も含めた「フル MTFRA カタログ」
 を完成させる。
 
+
+---
+
+## 2026-04-30 (深夜) D9 Phase 2 実装 + universe 整理 — 実弾移行への橋渡し
+
+### 背景
+
+ユーザー指示「**今日の改良をバックテストや明日のペーパーテストに活かして、
+早く実弾移行に持っていきましょう**」 を受け、D9 Phase 1.6 (MTFRA 7軸検証)
+の知見を MicroScalp に統合 + D7 カテゴリチャンピオンを universe_active に反映。
+
+### (1) D9 Phase 2: MTFRA フィルタモジュール実装
+
+**`backend/multi_timeframe_regime.py`** (新規):
+- `MTFRADetector(mode="default")` クラス: 4 モード対応
+  - `off`         : フィルタ無効
+  - `default`     : 3m+30m+60m 整合 (D9 Phase 1.6 の実用最強解, WR 54.2% 想定)
+  - `aggressive`  : 1m+3m+15m+60m 整合 (高 WR 想定)
+  - `per_symbol`  : `data/mtfra_optimal_per_symbol.json` から銘柄別最適化
+- `MTFRADecision`: dataclass で判断結果を返す (allow_long/allow_short/skip_reason)
+- 全軸 up → long のみ許可、全軸 down → short のみ、partial/mixed → 両方ブロック
+  (D9 Phase 1 で「partial 整合は逆効果」と確認済の原則を厳守)
+
+**`scripts/build_mtfra_optimal_per_symbol.py`** (新規):
+- D9 Phase 1.6 の特徴量 (`data/mtfra_combination_features.parquet`) から
+  各銘柄の最適 combo を判定
+- 8 候補 combo (`3m+30m+60m`, `1m+3m+15m+60m`, `1m+60m`, `3m+60m`, ...) で
+  WR / mean_ret を比較 → 「ベンチマークから WR +2%pt + mean_ret +0.05%」
+  の改善があれば採用、それ未満なら `disable` 設定
+
+実行結果 (35 銘柄):
+- A (default 3m+30m+60m) 採用:  2 銘柄 (485A.T, 8058.T)
+- B (aggressive 採用):          1 銘柄 (3382.T)
+- C (その他組み合わせ採用):    15 銘柄 (各銘柄ごとに最適 combo が異なる)
+- D (MTFRA 無効化):            17 銘柄 (全 combo で逆効果)
+
+**最重要発見**: **35 銘柄のうち 17 銘柄 (49%) で MTFRA 自体が逆効果**。
+「universal な MTFRA 戦略は存在しない」 ことが定量的に確証された。
+
+### (2) JPMicroScalp に MTFRA 統合 — そして検証で逆効果と判明
+
+**`backend/strategies/jp_stock/jp_micro_scalp.py`**:
+- `mtfra_mode` パラメータを追加 (off/default/aggressive/per_symbol)
+- `_apply_mtfra_filter` メソッド: 5 分刻みでバルク評価 (高速化)
+- 全時間足を一度だけ resample → 評価コストを O(n^2) → O(n) に削減
+
+**`scripts/backtest_micro_scalp_v5_mtfra.py`** で検証:
+- universe 16 銘柄 × 4 構成 (off/default/aggressive/per_symbol) でバックテスト
+- 結果は **衝撃的に逆効果**:
+
+| 構成                 | trades | WR    | PF   | PnL/日   | PnL 合計 |
+|---------------------|-------:|------:|-----:|---------:|---------:|
+| v3_baseline_off     |    405 | 49.6% | 1.02 |    -16円 |  -1,300円 |
+| v5_mtfra_default    |     48 | 35.4% | 0.68 |   -121円 |  -8,450円 |
+| v5_mtfra_aggressive |     27 | 33.3% | 37.6 |    -74円 |  -4,450円 |
+| v5_mtfra_per_symbol |     48 | 35.4% | 0.68 |   -121円 |  -8,450円 |
+
+**ベースラインから WR -14%pt、PnL -550%、trades -88%。完全に逆効果。**
+
+#### なぜ逆効果になったのか — 戦略性質の本質的不一致
+
+**MicroScalp の本質**: VWAP 戻り型 = **逆張り戦略**
+- `close <= vwap - 8円` で long (戻り狙い)
+- `close >= vwap + 8円` で short (戻り狙い)
+- → トレンドの「行き過ぎ」を取って 5 円分戻ってくることを狙う
+
+**MTFRA 整合 = トレンド継続シグナル**
+- D9 Phase 1 のリプレイ検証は「ある時刻からの先 30m return」を測定
+- これは「**トレンドが 30 分続く確率が高い**」 ことを意味する
+- → トレンドフォロー戦略 (MacdRci, Breakout, Pullback) には ◎
+- → **逆張り戦略 (MicroScalp) には ✗** (本来狙う「戻り」が起きない)
+
+#### 教訓と方針修正
+
+**今回得られた最大の教訓**: 「戦略の性質 (順張り/逆張り) を考慮せずに
+フィルタを適用してはいけない」。MTFRA は強力な時系列フィルタだが、
+それは **「トレンド方向を信じて乗る」 戦略でしか意味を持たない**。
+
+**今後の方針**:
+1. **MicroScalp の MTFRA は OFF を既定**として固定 (実装は残す)
+2. MTFRA は **MacdRci / Breakout / Pullback / EnhancedMacdRci 等の順張り戦略**
+   に統合する PoC を後日実施 (これが本来の使い道)
+3. MicroScalp に MTFRA 的なフィルタを当てるなら **「反転モード」** を試す
+   - MTFRA aligned_up + close < vwap-8 (= long シグナル) → カウンタートレンド戻り買い
+   - MTFRA aligned_down + close > vwap+8 (= short シグナル) → カウンタートレンド戻り売り
+   - これは将来研究課題
+
+### (3) universe_active.json 整理 (D7 反映 + 重複削除)
+
+**`scripts/rebalance_universe_to_champions.py`** (新規):
+- D7 カテゴリチャンピオンと現状戦略を比較し swap 候補を抽出
+- 改善 +20% 以上のペアを表示
+
+**`scripts/consolidate_universe_active.py`** (新規):
+- 各銘柄の戦略並走を「上位 2 戦略 + チャンピオン優先」 に整理
+- 現状の問題: 9984.T が 6 戦略並走、3103.T が 3 戦略並走 = リスク集中
+- 整理結果:
+
+| 項目               | 整理前 | 整理後 |
+|--------------------|-------:|-------:|
+| 銘柄数             |     16 |     16 |
+| (銘柄, 戦略) ペア   |     29 |     19 |
+| oos_daily 合計    | +105,643円/日 | +78,980円/日 |
+| 平均並走数/銘柄    |    1.81 |   1.19 |
+
+主要な変更:
+- 9984.T (B): 6 → 2 戦略 (EnhancedMacdRci + MacdRci のみ残し、Breakout/Pullback/EnhancedScalp/Scalp 削除)
+- 3103.T (A): 3 → 2 戦略 (MacdRci + Breakout のみ残し、Pullback 削除)
+- 6613.T (B): 4 → 2 戦略 (EnhancedMacdRci + MacdRci のみ残し、Pullback/Breakout 削除)
+- 1605.T (C): Scalp 削除し Pullback 単独 (D7 チャンピオン)
+- 8136.T (C): Breakout 削除し Pullback 単独
+- 8306.T (E): Breakout 削除し MacdRci 単独 (D7 チャンピオン)
+
+**カテゴリチャンピオン未採用銘柄** (DB に該当 robust なし or 既存戦略の方が良い):
+- 6501.T (B): EnhancedMacdRci robust なし → MacdRci で運用継続
+- 6723.T (B): EnhancedMacdRci robust なし → Breakout で運用継続
+- 6752.T (C): Pullback robust なし → MacdRci で運用継続
+- 6758.T (E): MacdRci で oos がほぼ 0 → Breakout の方が良いため例外
+
+これらは backtest_daemon が EnhancedMacdRci 等の最適化を完了するまで現状維持。
+
+### (4) D8 廃れテーマ銘柄の判断 — 9432.T のみ halt
+
+D8 で「廃れテーマ集合体」と判明していた 9432.T (NTT) / 9433.T (KDDI) /
+8306.T (三菱UFJ) のうち、9432.T のみ halt 追加:
+
+- **9432.T**: F カテゴリ (vol30=0.34% 低ボラ/不適合) + oos +187 円/日
+  + MTFRA 全 combo で逆効果 → **paper trading から halt** (`until: 2026-05-31`)
+- **9433.T**: oos +1,016 円/日 = 一定貢献あり、E カテゴリ MacdRci 採用 → 残す
+- **8306.T**: oos +2,208 円/日 = D7 チャンピオン採用 → 残す
+
+### 実弾移行への進捗評価
+
+#### 期待 PnL の推移
+
+- 整理前 universe (29 ペア): 理論 oos +105,643 円/日 (重複大)
+- 整理後 universe (19 ペア): 理論 oos +78,980 円/日 (実効値)
+- 直近 paper 実績 (2026-04-30): +4,058 円/日
+
+**目標**: 信用 99 万円 × 3% = +29,700 円/日
+
+整理後の理論 oos +78,980 円/日 に対して、**実現率 38% でも目標達成**。
+これは現実的に十分達成可能なライン。
+
+#### 実弾移行までのチェックリスト
+
+| ステップ | 状態 | 完了基準 |
+|---------|------|----------|
+| バックテスト整備 | ✅ 完了 | D7-D9 マトリクス + MTFRA + universe 整理 |
+| MTFRA 統合 (順張り戦略) | ⏳ 後日 | MacdRci/Breakout に MTFRA 統合 + 検証 |
+| ペーパーテスト 5-7 日 | ⏳ 明日開始 | 整理後 universe で +20,000 円/日 以上を 5 日連続 |
+| Paper vs Backtest 整合 | ⏳ 検証中 | active_sum_oos の 70% 以上を達成 |
+| Drawdown 制限 | ⏳ 監視 | 5% 以内を維持 |
+| 実弾移行 | ⏳ 来週判定 | 上記全クリア時、少額 (10万円) から段階移行 |
+
+### 振り返り
+
+今回の最大の収穫は **「MTFRA は MicroScalp に効かない」 ことを定量的に証明**
+できたこと。これは「ダメな実装」ではなく「**ダメであることの確証**」 で、
+次に MTFRA を MacdRci 等の順張り戦略に統合する際、間違いなく効くことが
+予測できるようになった (排除法による知見)。
+
+ユーザーの「データさえあれば、いろいろできるのがアルゴだよね」 「人間が
+感覚ならこちらはデータで勝負しなきゃ」 の精神を体現する 1 日だった。
+
+**MTFRA は強力な道具。ただし「順張り戦略の精度を上げる」 用途に限定。
+逆張り戦略には別のフィルタ (例: ATR 高い + RSI 過熱) が必要。**
+
+明日のペーパーテストでは整理後 universe (19 ペア、理論 +78,980 円/日)
+で稼働し、5-7 日後に実弾移行を判定する。

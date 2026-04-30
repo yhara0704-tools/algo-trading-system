@@ -18,6 +18,14 @@
       "until": "2026-05-14",
       "added_at": "2026-04-30T15:50:00+09:00",
       "evidence": "data/algo_trading.db experiments id=249257 (created_at 2026-04-24 21:37) + jp_trade_executions 4/30 6件"
+    },
+    {
+      "symbol": "9432.T",
+      "strategy_name": "MacdRci",
+      "reason": "D8 動的カテゴリ追跡で『廃れテーマ集合体』 と判明 (電子書籍/SaaS/NFC/テレワーク 等の rank=0.5 テーマ複数所属、avg_rank=0.5)。F カテゴリ (vol30=0.34% 低ボラ/不適合)、現状の oos_daily=+187 円/日 は取引コストに対して薄利で実弾移行に値しない。MTFRA 検証でも全 combo で逆効果 (best WR -2%pt) と判定済。M2 で半導体/AI テーマ強い銘柄に枠を譲る方が合理的。",
+      "until": "2026-05-31",
+      "added_at": "2026-04-30T19:30:00+09:00",
+      "evidence": "data/category_migrations_latest.json テーマ強弱、data/mtfra_optimal_per_symbol.json 9432_T 参照"
     }
   ]
 }
