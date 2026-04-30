@@ -41,8 +41,16 @@ OHLCV_DIR = ROOT / "data/ohlcv_1m"
 FEATURES_PATH = ROOT / "data/mtfra_combination_features.parquet"
 RESULTS_PATH = ROOT / "data/mtfra_combination_results.json"
 
-TIMEFRAMES = ["1m", "5m", "15m", "60m"]
-TF_RULE = {"1m": "1min", "5m": "5min", "15m": "15min", "60m": "60min"}
+# 投資家層別の代表時間足:
+#   1m, 3m  → スキャラー
+#   5m, 15m → デイトレーダー
+#   30m, 60m → スイング初動派
+#   240m (4H) → 中期トレンド派 / 機関投資家
+TIMEFRAMES = ["1m", "3m", "5m", "15m", "30m", "60m", "240m"]
+TF_RULE = {
+    "1m": "1min", "3m": "3min", "5m": "5min", "15m": "15min",
+    "30m": "30min", "60m": "60min", "240m": "240min",
+}
 FWD_MIN = [5, 15, 30, 60]
 
 
@@ -109,30 +117,34 @@ def build_features_for_symbol(symbol: str) -> pd.DataFrame:
     df_1m = load_symbol_data(symbol)
     if df_1m.empty or len(df_1m) < 200:
         return pd.DataFrame()
-    df_5m = resample(df_1m, "5min")
-    df_15m = resample(df_1m, "15min")
-    df_60m = resample(df_1m, "60min")
+    # 全時間足を resample
+    tf_dfs = {tf: resample(df_1m, TF_RULE[tf]) if tf != "1m" else df_1m
+              for tf in TIMEFRAMES}
+    # 各時間足の最低必要バー数 (簡易判定 14 本、240m は前日数日分しかないので緩く 4)
+    min_bars = {"1m": 14, "3m": 14, "5m": 14, "15m": 14,
+                "30m": 10, "60m": 5, "240m": 3}
 
     eval_times = df_1m.index[df_1m.index.minute % 5 == 0]
     rows = []
     for ts in eval_times:
-        d1 = df_1m[df_1m.index <= ts].tail(60)
-        d5 = df_5m[df_5m.index <= ts].tail(60)
-        d15 = df_15m[df_15m.index <= ts].tail(40)
-        d60 = df_60m[df_60m.index <= ts].tail(30)
-        if len(d1) < 14 or len(d5) < 14 or len(d15) < 14 or len(d60) < 5:
-            continue
         cur_close = float(df_1m.loc[ts, "close"]) if ts in df_1m.index else None
         if cur_close is None:
             continue
-        row = {
-            "symbol": symbol, "ts": ts,
-            "dir_1m": detect_dir(d1),
-            "dir_5m": detect_dir(d5),
-            "dir_15m": detect_dir(d15),
-            "dir_60m": detect_dir(d60),
-            "close": cur_close,
-        }
+        # 各時間足で direction を計算
+        dirs = {}
+        skip = False
+        for tf in TIMEFRAMES:
+            d = tf_dfs[tf]
+            d_sub = d[d.index <= ts].tail(60)
+            if len(d_sub) < min_bars[tf]:
+                skip = True
+                break
+            dirs[tf] = detect_dir(d_sub)
+        if skip:
+            continue
+        row = {"symbol": symbol, "ts": ts, "close": cur_close}
+        for tf, di in dirs.items():
+            row[f"dir_{tf}"] = di
         for fm in FWD_MIN:
             tgt = ts + pd.Timedelta(minutes=fm)
             fwd = df_1m[df_1m.index >= tgt].head(1)
@@ -331,10 +343,44 @@ def main() -> None:
     # Stage 2: 全組み合わせ評価
     results = stage2_combination_search(feat)
 
-    # 上位表示
-    print(f"\n=== トップ {args.top} 組み合わせ (各 fwd 期間別) ===")
-    for fm_key in ["5m", "15m", "30m", "60m"]:
-        display_top_combinations(results, fm_key=fm_key, min_n=args.min_n, top=args.top)
+    # 上位表示 (30m に絞る、各軸数別 Top 5)
+    print(f"\n=== 30m forward Top 組み合わせ (軸数別) ===")
+    for n_axes in range(1, len(TIMEFRAMES) + 1):
+        # 軸数 n_axes に絞って表示
+        bench = results["benchmark_no_filter"].get("30m", {})
+        base_ret = bench.get("mean_ret_pct", 0)
+        base_wr = bench.get("win_rate_pct", 0)
+        rows = []
+        for key, rec in results["combinations"].items():
+            if len(rec["combo"]) != n_axes:
+                continue
+            st = rec["fwd_stats"].get("30m", {})
+            # 軸数が多いほど機会数が減るので閾値を緩和
+            min_n_dyn = max(20, args.min_n // (2 ** (n_axes - 1)))
+            if st.get("n", 0) < min_n_dyn:
+                continue
+            side = rec["side"]
+            sb_ret = -base_ret if side == "short" else base_ret
+            sb_wr = 100 - base_wr if side == "short" else base_wr
+            d_ret = st["mean_ret_pct"] - sb_ret
+            d_wr = st["win_rate_pct"] - sb_wr
+            score = d_ret + d_wr / 100
+            rows.append({"key": key, "side": side, "n": st["n"],
+                          "ret": st["mean_ret_pct"], "wr": st["win_rate_pct"],
+                          "d_ret": d_ret, "d_wr": d_wr, "score": score})
+        rows.sort(key=lambda r: -r["score"])
+        if not rows:
+            continue
+        print(f"\n  -- 軸数 {n_axes} (top 5) --")
+        print(f"  {'#':<3} {'組み合わせ':<40} {'side':<6} {'n':>5} | "
+              f"{'WR':>5} {'Δret':>7} {'ΔWR':>6} {'score':>6}")
+        for i, r in enumerate(rows[:5], 1):
+            print(f"  {i:<3} {r['key']:<40} {r['side']:<6} {r['n']:>5} | "
+                  f"{r['wr']:>4.1f}% {r['d_ret']:>+6.3f}% {r['d_wr']:>+5.1f}% {r['score']:>+5.3f}")
+
+    # 全体 Top (軸数問わず)
+    print(f"\n=== 30m forward 全体 Top {args.top} (軸数問わず) ===")
+    display_top_combinations(results, fm_key="30m", min_n=args.min_n, top=args.top)
 
     # Stage 3: 銘柄別 (30m, 上位 5)
     bench = results["benchmark_no_filter"].get("30m", {})
