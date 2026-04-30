@@ -1,0 +1,68 @@
+{
+  "generated_at": "2026-05-01T07:58:00+09:00",
+  "symbol": "9984.T",
+  "context": "5/1 朝バックテスト報告 N3: WR gap 16.4pt の改善候補抽出",
+  "current_adopted": {
+    "EnhancedMacdRci": {
+      "oos_win_rate_pct": 42.6,
+      "oos_daily_pnl": 9932.4,
+      "oos_pf": 4.79,
+      "oos_trades": 47
+    },
+    "MacdRci": {
+      "oos_win_rate_pct": 42.6,
+      "oos_daily_pnl": 9932.4,
+      "oos_pf": 4.79,
+      "oos_trades": 47
+    }
+  },
+  "high_wr_alt_top1": {
+    "EnhancedMacdRci": {
+      "experiment_id": 257953,
+      "generation": 44141,
+      "type": "exploit",
+      "oos_win_rate_pct": 54.0,
+      "oos_daily_pnl": 12117.6,
+      "oos_pf": 6.12,
+      "oos_trades": 50,
+      "is_win_rate_pct": 32.4,
+      "is_daily_pnl": 1264.4,
+      "is_pf": 1.61,
+      "is_trades": 139,
+      "regime": "low_vol",
+      "verdict": "全指標で改善 (WR +11.4pt, daily +2,185, PF +1.33). 即採用候補。",
+      "params": {
+        "allow_reentry": 1,
+        "bb_period": 20,
+        "bb_std": 2.0,
+        "macd_fast": 4,
+        "macd_signal": 8,
+        "macd_slow": 8,
+        "max_pyramid": 2,
+        "rci_min_agree": 1,
+        "rsi_exit_high": 66.629032,
+        "rsi_period": 18,
+        "sl_pct": 0.0016,
+        "tp_pct": 0.015,
+        "vwap_stop": 1
+      }
+    },
+    "MacdRci": {
+      "experiment_id": 309603,
+      "generation": 48468,
+      "type": "exploit",
+      "oos_win_rate_pct": 71.4,
+      "oos_daily_pnl": 6815.1,
+      "oos_pf": 4.21,
+      "oos_trades": 42,
+      "is_win_rate_pct": 55.3,
+      "is_pf": 1.29,
+      "regime": "low_vol",
+      "verdict": "WR 大幅向上 (+28.8pt) だが daily -3,117/PF -0.58 で trade-off. 慎重判定。"
+    }
+  },
+  "decision": {
+    "EnhancedMacdRci": "5/1 朝は適用見送り (universe_active への params 反映機構が未整備)。次回 backtest_daemon サイクルで自動 promotion される可能性あり、または手動切替を検討。",
+    "MacdRci": "trade-off のため見送り。WR↑だが daily↓で総合的に劣化見込み。"
+  }
+}

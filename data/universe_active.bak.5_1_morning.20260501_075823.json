@@ -1,7 +1,7 @@
 {
   "updated": "2026-04-30",
   "updated_at": "2026-04-30T16:30:00.000000+09:00",
-  "active_count": 18,
+  "active_count": 19,
   "symbols": [
     {
       "symbol": "1605.T",
@@ -27,7 +27,7 @@
       "symbol": "3103.T",
       "name": "Unitika",
       "strategy": "MacdRci",
-      "score": 1321.1,
+      "score": 13210.7,
       "is_daily": 789.7,
       "oos_daily": 18248.2,
       "is_pf": 1.09,
@@ -35,11 +35,7 @@
       "robust": true,
       "is_oos_pass": true,
       "calmar": 5000.93,
-      "source": "macd_rci_params.robust_merge",
-      "observation_only": true,
-      "observation_reason": "oos_trades=14 (paper_low_sample 閾値 20 未満)、IS_pf=1.00 / IS_daily=+27円/日 で 本体未機能。OOS の偶発当たりだけでの Robust 化疑い。paper_low_sample_excluded で除外済 = paper では既に使われない。OOS trades が 20+ に増えるまで実弾候補から除外。",
-      "score_demoted_from": 13210.7,
-      "observed_since": "2026-05-01T07:58:23.118639"
+      "source": "macd_rci_params.robust_merge"
     },
     {
       "symbol": "3103.T",
@@ -88,6 +84,18 @@
       "is_oos_pass": false,
       "calmar": 6.659,
       "source": "macd_rci_params.robust_merge"
+    },
+    {
+      "symbol": "6613.T",
+      "name": "QD Laser",
+      "strategy": "EnhancedMacdRci",
+      "oos_daily": 5464.0,
+      "oos_pf": 4.85,
+      "oos_win_rate": 18.2,
+      "robust": true,
+      "is_oos_pass": true,
+      "source": "manual_robust_promotion_2026-04-30",
+      "promotion_note": "fit_map robust=true 拾い。シグナル発生密度向上目的"
     },
     {
       "symbol": "6613.T",
@@ -574,10 +582,5 @@
         "removed_oos_sum": 12284.0
       }
     ]
-  },
-  "last_5_1_morning_fix": "2026-05-01T07:58:23.120735",
-  "5_1_morning_fix_actions": [
-    "DEMOTE 3103.T MacdRci to observation (score 13210.7 → 1321.1)",
-    "REMOVE 6613.T EnhancedMacdRci (low_robust_yield robust_rate=0%)"
-  ]
+  }
 }

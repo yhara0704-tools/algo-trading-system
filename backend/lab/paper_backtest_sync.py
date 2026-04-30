@@ -280,10 +280,22 @@ def collect_universe_specs(
     excluded: list[dict] = []
     wf_relaxed_hits: list[dict] = []
 
+    observation_skipped: list[dict] = []
     for row in symbols:
         symbol = row.get("symbol")
         strategy = row.get("strategy")
         if not symbol or not strategy:
+            continue
+        # observation_only フラグの (symbol, strategy) は paper 推し運用から除外。
+        # 5/1 朝報告で導入: バックテスト DB 上では robust 維持しつつ、サンプル不足や
+        # 過適合疑い (例: 3103.T MacdRci oos_trades=14 / IS_pf=1.00) のペアを
+        # 「観察対象」 として実弾候補から外す。研究用 Robust 集合は変えない。
+        if bool(row.get("observation_only", False)):
+            observation_skipped.append({
+                "symbol": symbol,
+                "strategy_name": strategy,
+                "reason": str(row.get("observation_reason", "observation_only=True"))[:200],
+            })
             continue
         fit_row = fit_map.get(symbol, {}) if isinstance(fit_map, dict) else {}
         macd_row = macd_params.get(symbol, {}) if isinstance(macd_params, dict) else {}
@@ -377,6 +389,8 @@ def collect_universe_specs(
                     "excluded_count": len(excluded),
                     "wf_relaxed_hits": wf_relaxed_hits,
                     "excluded": excluded,
+                    "observation_skipped_count": len(observation_skipped),
+                    "observation_skipped": observation_skipped,
                 },
             )
         except Exception as exc:  # pragma: no cover - IO エラーは致命ではない
@@ -400,6 +414,15 @@ def collect_universe_specs(
                 ", ".join(
                     f"{h['symbol']}(oos={h['oos_trades']}, wf={h['wf_window_total']}/{h['wf_window_pass_ratio']:.2f})"
                     for h in wf_relaxed_hits
+                ),
+            )
+        if observation_skipped:
+            logger.info(
+                "paper_backtest_sync: observation_only でスキップ %d 件: %s",
+                len(observation_skipped),
+                ", ".join(
+                    f"{o['symbol']}/{o['strategy_name']}"
+                    for o in observation_skipped
                 ),
             )
 

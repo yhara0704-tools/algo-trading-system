@@ -1,0 +1,321 @@
+{
+  "generated_at": "2026-05-01T08:11:58.756347",
+  "n_symbols": 3,
+  "n_days": 14,
+  "configs": [
+    "off",
+    "mtfra_30m_60m",
+    "mtfra_15m_30m_60m",
+    "mtfra_5m_15m_30m_60m"
+  ],
+  "summary": {
+    "off": {
+      "n_symbols": 2,
+      "total_trades": 378,
+      "weighted_wr": 37.8,
+      "weighted_pf": 1.29,
+      "total_pnl": 136147.0,
+      "avg_pnl_per_day": 3242.0
+    },
+    "mtfra_30m_60m": {
+      "n_symbols": 2,
+      "total_trades": 4,
+      "weighted_wr": 50.0,
+      "weighted_pf": 249.86,
+      "total_pnl": -4600.0,
+      "avg_pnl_per_day": -110.0
+    },
+    "mtfra_15m_30m_60m": {
+      "n_symbols": 2,
+      "total_trades": 4,
+      "weighted_wr": 50.0,
+      "weighted_pf": 249.86,
+      "total_pnl": -4600.0,
+      "avg_pnl_per_day": -110.0
+    },
+    "mtfra_5m_15m_30m_60m": {
+      "n_symbols": 2,
+      "total_trades": 3,
+      "weighted_wr": 33.3,
+      "weighted_pf": 333.0,
+      "total_pnl": -5400.0,
+      "avg_pnl_per_day": -129.0
+    }
+  },
+  "results": [
+    {
+      "label": "off",
+      "symbol": "9984.T",
+      "trades": 0,
+      "wr": null,
+      "pf": null,
+      "pnl_jpy": 0.0,
+      "long_n": 0,
+      "short_n": 0,
+      "long_pnl": 0.0,
+      "short_pnl": 0.0,
+      "trades_per_day": 0,
+      "days": null,
+      "filter": {
+        "n_long_orig": 431,
+        "n_long_kept": 431,
+        "n_short_orig": 377,
+        "n_short_kept": 377
+      }
+    },
+    {
+      "label": "mtfra_30m_60m",
+      "symbol": "9984.T",
+      "trades": 0,
+      "wr": null,
+      "pf": null,
+      "pnl_jpy": 0.0,
+      "long_n": 0,
+      "short_n": 0,
+      "long_pnl": 0.0,
+      "short_pnl": 0.0,
+      "trades_per_day": 0,
+      "days": null,
+      "filter": {
+        "n_long_orig": 431,
+        "n_long_kept": 296,
+        "n_long_filtered": 135,
+        "n_short_orig": 377,
+        "n_short_kept": 10,
+        "n_short_filtered": 367
+      }
+    },
+    {
+      "label": "mtfra_15m_30m_60m",
+      "symbol": "9984.T",
+      "trades": 0,
+      "wr": null,
+      "pf": null,
+      "pnl_jpy": 0.0,
+      "long_n": 0,
+      "short_n": 0,
+      "long_pnl": 0.0,
+      "short_pnl": 0.0,
+      "trades_per_day": 0,
+      "days": null,
+      "filter": {
+        "n_long_orig": 431,
+        "n_long_kept": 248,
+        "n_long_filtered": 183,
+        "n_short_orig": 377,
+        "n_short_kept": 10,
+        "n_short_filtered": 367
+      }
+    },
+    {
+      "label": "mtfra_5m_15m_30m_60m",
+      "symbol": "9984.T",
+      "trades": 0,
+      "wr": null,
+      "pf": null,
+      "pnl_jpy": 0.0,
+      "long_n": 0,
+      "short_n": 0,
+      "long_pnl": 0.0,
+      "short_pnl": 0.0,
+      "trades_per_day": 0,
+      "days": null,
+      "filter": {
+        "n_long_orig": 431,
+        "n_long_kept": 167,
+        "n_long_filtered": 264,
+        "n_short_orig": 377,
+        "n_short_kept": 10,
+        "n_short_filtered": 367
+      }
+    },
+    {
+      "label": "off",
+      "symbol": "6613.T",
+      "trades": 228,
+      "wr": 36.8,
+      "pf": 1.06,
+      "long_n": 181,
+      "short_n": 47,
+      "long_pnl": 10541.0,
+      "short_pnl": 2686.0,
+      "long_wr": 38.1,
+      "short_wr": 31.9,
+      "pnl_jpy": 13227.0,
+      "days": 21,
+      "trades_per_day": 10.86,
+      "filter": {
+        "n_long_orig": 434,
+        "n_long_kept": 434,
+        "n_short_orig": 355,
+        "n_short_kept": 355
+      }
+    },
+    {
+      "label": "mtfra_30m_60m",
+      "symbol": "6613.T",
+      "trades": 3,
+      "wr": 33.3,
+      "pf": 0.14,
+      "long_n": 3,
+      "short_n": 0,
+      "long_pnl": -16000.0,
+      "short_pnl": 0.0,
+      "long_wr": 33.3,
+      "short_wr": null,
+      "pnl_jpy": -16000.0,
+      "days": 21,
+      "trades_per_day": 0.14,
+      "filter": {
+        "n_long_orig": 434,
+        "n_long_kept": 213,
+        "n_long_filtered": 221,
+        "n_short_orig": 355,
+        "n_short_kept": 37,
+        "n_short_filtered": 318
+      }
+    },
+    {
+      "label": "mtfra_15m_30m_60m",
+      "symbol": "6613.T",
+      "trades": 3,
+      "wr": 33.3,
+      "pf": 0.14,
+      "long_n": 3,
+      "short_n": 0,
+      "long_pnl": -16000.0,
+      "short_pnl": 0.0,
+      "long_wr": 33.3,
+      "short_wr": null,
+      "pnl_jpy": -16000.0,
+      "days": 21,
+      "trades_per_day": 0.14,
+      "filter": {
+        "n_long_orig": 434,
+        "n_long_kept": 147,
+        "n_long_filtered": 287,
+        "n_short_orig": 355,
+        "n_short_kept": 28,
+        "n_short_filtered": 327
+      }
+    },
+    {
+      "label": "mtfra_5m_15m_30m_60m",
+      "symbol": "6613.T",
+      "trades": 2,
+      "wr": 0.0,
+      "pf": 0.0,
+      "long_n": 2,
+      "short_n": 0,
+      "long_pnl": -16800.0,
+      "short_pnl": 0.0,
+      "long_wr": 0.0,
+      "short_wr": null,
+      "pnl_jpy": -16800.0,
+      "days": 21,
+      "trades_per_day": 0.1,
+      "filter": {
+        "n_long_orig": 434,
+        "n_long_kept": 75,
+        "n_long_filtered": 359,
+        "n_short_orig": 355,
+        "n_short_kept": 18,
+        "n_short_filtered": 337
+      }
+    },
+    {
+      "label": "off",
+      "symbol": "3103.T",
+      "trades": 150,
+      "wr": 39.3,
+      "pf": 1.63,
+      "long_n": 128,
+      "short_n": 22,
+      "long_pnl": 119522.0,
+      "short_pnl": 3398.0,
+      "long_wr": 39.8,
+      "short_wr": 36.4,
+      "pnl_jpy": 122920.0,
+      "days": 21,
+      "trades_per_day": 7.14,
+      "filter": {
+        "n_long_orig": 316,
+        "n_long_kept": 316,
+        "n_short_orig": 296,
+        "n_short_kept": 296
+      }
+    },
+    {
+      "label": "mtfra_30m_60m",
+      "symbol": "3103.T",
+      "trades": 1,
+      "wr": 100.0,
+      "pf": 999.0,
+      "long_n": 1,
+      "short_n": 0,
+      "long_pnl": 11400.0,
+      "short_pnl": 0.0,
+      "long_wr": 100.0,
+      "short_wr": null,
+      "pnl_jpy": 11400.0,
+      "days": 21,
+      "trades_per_day": 0.05,
+      "filter": {
+        "n_long_orig": 316,
+        "n_long_kept": 112,
+        "n_long_filtered": 204,
+        "n_short_orig": 296,
+        "n_short_kept": 37,
+        "n_short_filtered": 259
+      }
+    },
+    {
+      "label": "mtfra_15m_30m_60m",
+      "symbol": "3103.T",
+      "trades": 1,
+      "wr": 100.0,
+      "pf": 999.0,
+      "long_n": 1,
+      "short_n": 0,
+      "long_pnl": 11400.0,
+      "short_pnl": 0.0,
+      "long_wr": 100.0,
+      "short_wr": null,
+      "pnl_jpy": 11400.0,
+      "days": 21,
+      "trades_per_day": 0.05,
+      "filter": {
+        "n_long_orig": 316,
+        "n_long_kept": 94,
+        "n_long_filtered": 222,
+        "n_short_orig": 296,
+        "n_short_kept": 36,
+        "n_short_filtered": 260
+      }
+    },
+    {
+      "label": "mtfra_5m_15m_30m_60m",
+      "symbol": "3103.T",
+      "trades": 1,
+      "wr": 100.0,
+      "pf": 999.0,
+      "long_n": 1,
+      "short_n": 0,
+      "long_pnl": 11400.0,
+      "short_pnl": 0.0,
+      "long_wr": 100.0,
+      "short_wr": null,
+      "pnl_jpy": 11400.0,
+      "days": 21,
+      "trades_per_day": 0.05,
+      "filter": {
+        "n_long_orig": 316,
+        "n_long_kept": 81,
+        "n_long_filtered": 235,
+        "n_short_orig": 296,
+        "n_short_kept": 13,
+        "n_short_filtered": 283
+      }
+    }
+  ]
+}
