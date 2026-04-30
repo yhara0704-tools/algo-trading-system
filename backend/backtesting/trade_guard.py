@@ -27,22 +27,57 @@ _sector_map: dict | None = None
 
 
 def _load_sector_map() -> dict:
+    """sector_map.json を読み込み、メタコメント等の不正エントリを除外して返す。
+
+    過去に `_doc` という str 型のメタキーがトップレベルに混入し、
+    `info.get("domestic", [])` が AttributeError を起こして
+    `backtest-daemon.service` がクラッシュループした実績がある (2026-04-30)。
+    再発防止のため、`_*` で始まるキーと dict 以外の value を除外する。
+    """
     global _sector_map
     if _sector_map is None:
         path = DATA_DIR / "sector_map.json"
         if path.exists():
-            _sector_map = json.loads(path.read_text())
+            raw = json.loads(path.read_text())
         else:
-            _sector_map = {}
+            raw = {}
+        cleaned: dict = {}
+        for key, value in raw.items():
+            if key.startswith("_"):
+                continue
+            if not isinstance(value, dict):
+                logger.warning(
+                    "sector_map: skip non-dict entry key=%s type=%s",
+                    key,
+                    type(value).__name__,
+                )
+                continue
+            cleaned[key] = value
+        _sector_map = cleaned
     return _sector_map
+
+
+def _domestic_of(info: dict) -> list[dict]:
+    """sector_map の 1 セクターから domestic 配列を防御的に取り出す。"""
+    if not isinstance(info, dict):
+        return []
+    domestic = info.get("domestic", [])
+    return domestic if isinstance(domestic, list) else []
+
+
+def _us_proxy_of(info: dict) -> list[dict]:
+    if not isinstance(info, dict):
+        return []
+    us = info.get("us_proxy", [])
+    return us if isinstance(us, list) else []
 
 
 def get_sector(symbol: str) -> str | None:
     """銘柄のセクターを返す。"""
     sm = _load_sector_map()
     for sector, info in sm.items():
-        for stock in info.get("domestic", []):
-            if stock["symbol"] == symbol:
+        for stock in _domestic_of(info):
+            if isinstance(stock, dict) and stock.get("symbol") == symbol:
                 return sector
     return None
 
@@ -54,9 +89,10 @@ def get_sector_peers(symbol: str) -> list[str]:
     if not sector:
         return []
     peers = []
-    for stock in sm[sector].get("domestic", []):
-        if stock["symbol"] != symbol:
-            peers.append(stock["symbol"])
+    for stock in _domestic_of(sm.get(sector, {})):
+        sym = stock.get("symbol") if isinstance(stock, dict) else None
+        if sym and sym != symbol:
+            peers.append(sym)
     return peers
 
 
@@ -66,12 +102,16 @@ def get_correlated_symbols(symbol: str) -> list[str]:
     sector = get_sector(symbol)
     if not sector:
         return []
-    result = []
-    for stock in sm[sector].get("domestic", []):
-        if stock["symbol"] != symbol:
-            result.append(stock["symbol"])
-    for stock in sm[sector].get("us_proxy", []):
-        result.append(stock["symbol"])
+    info = sm.get(sector, {})
+    result: list[str] = []
+    for stock in _domestic_of(info):
+        sym = stock.get("symbol") if isinstance(stock, dict) else None
+        if sym and sym != symbol:
+            result.append(sym)
+    for stock in _us_proxy_of(info):
+        sym = stock.get("symbol") if isinstance(stock, dict) else None
+        if sym:
+            result.append(sym)
     return result
 
 

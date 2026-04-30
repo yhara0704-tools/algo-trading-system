@@ -1,5 +1,64 @@
 # Phase1 実装ログ
 
+## 2026-04-30 (午前) `data/sector_map.json` メタキー混入による backtest-daemon クラッシュループ — 緊急復旧 + 二重防御
+
+### 背景
+
+- 朝 11:00 のバックテスト報告で `backtest-daemon.service` が **約 13 時間クラッシュループ中**であることを発見。
+- 直近 1h trials = 0、`data/macd_rci_params.json` / `daemon_state.json` などが **2026-04-29 21:51 以降進捗ゼロ**。
+- 真因は `data/sector_map.json` トップレベルに混入していた `_doc` (str 型のメタコメント) を `backend/backtesting/trade_guard.py:get_sector` がそのまま `info.get("domestic", [])` で舐めて `AttributeError: 'str' object has no attribute 'get'`。systemd `Restart=on-failure` で 30 秒間隔の復活→即死を繰り返していた (`restart counter 1306+`)。
+- 副次障害: 4/30 03:10 cron `nightly_walkforward_revalidation.py` も同じ ORB/Momentum5Min 由来の `ValueError: Unknown strategy` で失火 (4/29 commit a140f82 の防御修正が rsync 経路で revert されていた)。systemd unit の `Environment=` (cluster_cooling 系) も消失。
+
+### (D1) A1: VPS の `data/sector_map.json` から `_doc` を退避
+
+- `data/sector_map.NOTES.md` を新規作成して本注記をサイドカー化、JSON 本体からは `_doc` キーを削除。
+- VPS 側は `python3 -c 'json.load → pop("_doc") → dump'` で in-place 修復。
+
+### (D2) A2: `backtest-daemon.service` 復旧確認
+
+- `systemctl restart backtest-daemon.service` 後、`Gen51812: 11実験 Robust3 Best+8,228円/日 (62秒)` で完走 → ✅ 復旧。
+- Gen51812 で `1605.T × Scalp` が **★Robust 化 (IS+295 OOS+672)**。これは 4/29 night の `low_robust_yield_warnings` が「`1605.T MacdRci` の代替候補に `Scalp` を提案」と整合。`paused_pairs[1605.T MacdRci]` の Scalp 切替検討余地が裏取りされた。
+
+### (D3) A3: systemd unit `Environment` を **drop-in** で恒久復元
+
+- 4/29 22:53 に何らかの操作 (本人セッション内の編集ミス推定) でベース unit 上書き → `Environment=` 消失していた。
+- `/etc/systemd/system/backtest-daemon.service.d/cluster-cooling.conf` を新設し、`BACKTEST_CLUSTER_COOLING_ENABLED=1 / DAYS=7 / MAX_SHARE=0.15` を **drop-in 形式**で投入。本体 unit が今後再上書きされても drop-in 側は保護される (二重防御)。
+- `systemctl daemon-reload && restart` 後、`systemctl show -p Environment` で 3 変数が正しくセットされていることを確認。
+
+### (D4) B1: `backend/backtesting/trade_guard.py` に防御ガード追加
+
+- `_load_sector_map()` で **キー名が `_` で始まる要素**と **value が dict でない要素** を `logger.warning` 付きで skip するように変更。
+- `_domestic_of()` / `_us_proxy_of()` ヘルパーを切り出し、`get_sector` / `get_sector_peers` / `get_correlated_symbols` から呼ぶ形に統一。`stock` が dict でない場合も `isinstance` で skip。
+- 動作確認: `_doc` を意図的に再注入 → 例外ゼロで `9984.T sector= 通信・IT` が返る。
+
+### (D5) B2: 同型 `sector_map` ローダーの横展開チェック
+
+| ファイル | 状態 | 対応 |
+|---|---|---|
+| `backend/backtesting/trade_guard.py` | 🚨 真因 | D4 で修正 |
+| `scripts/sector_strength.py` | ✅ 既にガード済 (`_iter_sectors` で `isinstance(info, dict)` skip) | 変更なし |
+| `scripts/sector_scanner.py` | ⚠️ `targets = {k: v for k, v in sector_map.items() ...}` 後段で `.get("domestic", [])` を素読み | `not k.startswith("_") and isinstance(v, dict)` をフィルタに追加 |
+| `scripts/lookup_kabutan.py` | ⚠️ `_collect_from_sector_map` で `payload.get("domestic", [])` を素読み | 同上の skip ガード追加 + `entry` の dict 判定追加 |
+
+### (D6) B3: ローカル修正版を VPS へ再デプロイ
+
+- `make deploy-vps-dry` で 236 件差分検出 → 主要修正 (`trade_guard.py`, `nightly_walkforward_revalidation.py`, `update_backtest_report_checkpoint.py`, `sector_scanner.py`, `lookup_kabutan.py`, `BACKTEST_REPORT_TEMPLATE.md`) が含まれることを確認後、`make deploy-vps` 本実行 (data/ は除外)。
+- 反映後 `systemctl restart backtest-daemon.service` で新コードを適用。同 generation 内で `BbShort×8411.T`, `Pullback×6753.T`, `ParabolicSwing×7201.T` 等を健全に処理。
+
+### (D7) C2: `nightly_walkforward_revalidation.py` を本日分手動再実行
+
+- VPS 反映済の防御版で実行 → `total=18 / demote=11 / low_sample=0`、`skipped_summary.observation_only=5` (ORB×3, Momentum5Min×2) で完走。`data/nightly_walkforward_latest.json` mtime 2026-04-30 11:12:57。
+- demote_candidates 上位 (oos_daily_mean 高 → 低): `6613.T MacdRci +10,647`, `9984.T MacdRci +3,957`, `6752.T MacdRci +893`, `1605.T MacdRci -70`, `9433.T MacdRci -22`, `6645.T Breakout -68`。`pass_ratio=0.5` (windows=2 で 1勝1敗) も demote 候補に入る現行ロジックなので、この11件全てが即時撤退対象という意味ではなく、**daemon の研究 PDCA で漸進的にデモートが進む**前提。
+
+### 結論 / フォローアップ
+
+- `backtest-daemon.service` は **完全復旧**、Generation 51812 から正常進行。
+- 二重防御 (JSON 本体からメタキー除去 + ローダー側 skip ガード) により再発リスクを最小化。
+- systemd unit は drop-in 形式に切り出したため、本体 unit が再上書きされても `Environment=` は保護される。
+- 残課題: **per-config OOS 0 円超え観測 (4/30〜5/2)** は今夜以降のデータ蓄積で再評価。`9984.T MacdRci` の demote_candidate 入りは pass_ratio 仕様に依る一時的なもので、別 wf スナップ (snapshot 4/29) では `5/5 OOS positive +7,086円/日` と整合済。
+
+---
+
 ## 2026-04-28 (深夜4) イベント駆動戦略 H4-light: TP拡大 + cutoff + ドテン買い実装
 
 ### 背景

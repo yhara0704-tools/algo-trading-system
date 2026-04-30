@@ -149,6 +149,8 @@ def format_report(sectors_data: list[dict], period: int) -> str:
 
 
 def push(title: str, msg: str) -> None:
+    if os.getenv("PUSHOVER_ENABLED", "1") == "0":
+        return
     import requests
     requests.post("https://api.pushover.net/1/messages.json", data={
         "token": PUSHOVER_TOKEN, "user": PUSHOVER_USER,
@@ -168,8 +170,11 @@ def main():
     period = int(args.days.split(",")[0])
 
     # 対象セクター絞り込み
+    # NOTE: `_doc` のようなメタ string キーはここで弾く (2026-04-30 daemon クラッシュの再発防止)
     targets = {k: v for k, v in sector_map.items()
-               if args.sector is None or args.sector in k}
+               if not k.startswith("_")
+               and isinstance(v, dict)
+               and (args.sector is None or args.sector in k)}
 
     if not targets:
         print(f"セクター '{args.sector}' が見つかりません")
