@@ -70,6 +70,9 @@ STRATEGY_DEFAULTS = {
         "morning_only": False,
         "allow_short": True,
         "max_trades_per_day": 0,
+        # 2026-04-30 グリッド評価で 9:30-11:30 が擬陽性化することが判明。
+        # デフォルトでは「寄り後 30 分 + 後場」のみ許可し、前場後半を除外。
+        "allowed_time_windows": ["09:00-09:30", "12:30-15:00"],
     },
     # BB 上端(3σ)タッチでショートのみ（ロング新規なし）
     "BbShort": {
@@ -407,6 +410,7 @@ def create(strategy_name: str, symbol: str, name: str = "",
             morning_only=bool(p.get("morning_only", False)),
             allow_short=bool(p.get("allow_short", True)),
             max_trades_per_day=int(p.get("max_trades_per_day", 0)),
+            allowed_time_windows=p.get("allowed_time_windows") or None,
         )
     elif strategy_name == "EnhancedScalp":
         return EnhancedScalp(

@@ -2268,3 +2268,103 @@ skipped_summary:
 - 更新: `scripts/nightly_walkforward_revalidation.py`（`source=manual_observation` を `observation_only` で skip）
 - VPS 出力: `data/nightly_walkforward_latest.json` 22:25 更新（`skipped_summary.observation_only=5, unknown_strategy=0`）
 
+---
+
+## 2026-04-30 (D2): MicroScalp グリッドサーチで時間帯フィルタの効果を確認、v3 ロック設定で +1,675 円/日
+
+ユーザー追加提案 (16:53):
+> 銘柄によって値幅を変えることで勝率がどう変わるかとか見ても面白いかもね。
+> +10円〜+3円くらいで勝率を比較したりとかね。
+> 地味に9:00~9:30に適した手法かもしれないしね。
+
+3 つの直感がすべて当たっていることが確認できた。
+
+### 実施内容
+
+1. **グリッドサーチ** (`scripts/backtest_micro_scalp_grid.py`):
+   - 12 銘柄 × TP/SL 6 通り (3/3 〜 10/5) × 時間帯 4 バケット (morning_open / morning_mid / afternoon / closing)
+   - 出力: `data/micro_scalp_grid_latest.json`
+
+2. **時間帯フィルタを戦略本体に追加**:
+   - `backend/strategies/jp_stock/jp_micro_scalp.py` に `allowed_time_windows: list[str]` パラメータを追加
+   - `["09:00-09:30", "12:30-15:00"]` 形式の "HH:MM-HH:MM" を受け付ける
+   - `backend/backtesting/strategy_factory.py::STRATEGY_DEFAULTS["MicroScalp"]` の既定値も同じく設定 → デフォルトで 9:30-11:30 を除外
+
+3. **v3 ロック版検証** (`scripts/backtest_micro_scalp_v3.py`):
+   - 9 銘柄 × 4 設定 (時間帯ロック 10/5, 同 8/4, 寄り直後のみ 10/5, フィルタ無し 8/4)
+   - 出力: `data/micro_scalp_v3_latest.json`
+
+### 主な発見
+
+#### 発見 1: 9:00-9:30 (寄り直後) は MicroScalp に最適、9:30-11:30 は擬陽性化
+
+時間帯バケット別 (TP/SL 別、銘柄合算、7日):
+
+| TP/SL | bucket | trades | WR% | PnL |
+|---|---|---|---|---|
+| 10/5 | **morning_open (9:00-9:30)** | 62 | **51.6%** | **+8,500** ★最高 |
+| 8/4 | morning_open | 62 | 48.4% | +5,600 |
+| 10/5 | afternoon (12:30-15:00) | 117 | 44.4% | +5,200 |
+| 5/5 | morning_open | 62 | 54.8% | +1,850 |
+| 8/4 | **morning_mid (9:30-11:30)** | 198 | 34.8% | -2,800 |
+| 5/5 | morning_mid | 198 | 36.4% | **-22,550** ★最悪 |
+
+→ 9:30-11:30 は値動きが落ち着き 1m ATR が縮むため、VWAP 戻りシグナルが擬陽性化する仮説と整合。
+
+#### 発見 2: 銘柄ごとに最適 TP は明確に違う
+
+| 銘柄 | TP 3/3 | TP 5/3 | TP 8/4 | TP 10/5 | 最強 |
+|---|---|---|---|---|---|
+| **4568.T** | -750 | +4,150 | +6,650 | **+9,700** | TP=10 全方位最強 |
+| 8306.T (MUFG) | -3,650 | -950 | **+1,900** | +900 | 大型株は値幅大が良い |
+| 9433.T (KDDI) | **+1,950** | +750 | +1,050 | +1,650 | n少だが小幅 TP も◎ |
+| 3103.T | -16,100 | -9,500 | -1,100 | **-200** | 大幅 TP で被害縮小 |
+
+#### 発見 3: 時間帯フィルタの効果は劇的 (3.1 倍)
+
+| label | trades | WR% | PnL/7d | **PnL/day** |
+|---|---|---|---|---|
+| **v3_locked_10/5** (9:00-9:30 + 12:30-15:00) | 236 | 44.9% | **+16,750** | **+1,675** |
+| v3_locked_8/4 | 236 | 43.6% | +13,200 | +1,320 |
+| v3_open_only_10/5 (9:00-9:30 のみ) | 67 | **50.7%** | +7,900 | +790 |
+| v2_no_filter_8/4 (フィルタ無し) | 280 | 40.0% | +5,350 | +535 |
+
+→ フィルタ無し +535 円/日 → 時間帯ロック +1,675 円/日 = **3.1 倍**。
+→ さらに 10/5 が 8/4 より強い (+27%)。寄り直後の大きな値動きを取り切る。
+
+### 推奨設定 (本番投入時)
+
+```yaml
+universe (MicroScalp):
+  - 4568.T:  TP=10  SL=5  (9:00-9:30 + 12:30-15:00) - 主力
+  - 8306.T:  TP=8   SL=4  (9:00-9:30 + 12:30-15:00) - WR 55.3%
+  - 9433.T:  TP=10  SL=5  (9:00-9:30 + 12:30-15:00) - WR 87.5% (n少、要観察)
+  - 3103.T:  TP=10  SL=5  (9:00-9:30 + 12:30-15:00) - サンプル多
+  - 6723.T:  TP=10  SL=5  (9:00-9:30 + 12:30-15:00) - filter で +2,300 に改善
+  - 8136.T:  TP=8   SL=4  (9:00-9:30 + 12:30-15:00) - filter で +1,000 に改善
+
+blacklist:
+  - 3382.T (全敗)
+  - 1605.T / 9984.T (シグナル発生せず、株価帯不一致)
+```
+
+期待値: **+1,675 円/日 (元本 30万 ROI 0.6%/日)** = 30 営業日で +50,000 円。
+T1 攻めシフト後の本体 (+5,000 円/日 daily_target) と並走で **+6,675 円/日 (+2.2%/日)** が射程に入る。
+ユーザー目標 +3% (+30,000 円/日) には未達だが、3 倍ブーストが今回の v3 で確認できた手応え。
+
+### 残課題 (フェーズ M2 で対応予定)
+
+1. **長期 1m データキャッシュ**: yfinance は 7 日制限 → J-Quants Premium 申請 or 自前 1m 蓄積パイプ構築
+2. **per-symbol 動的 TP/SL 切替**: jp_live_runner で銘柄ごとに最適 TP/SL を保持する仕組み
+3. **MicroScalp 専用 capital_tier**: T1 余力枠 30% を MicroScalp 専用に分離する設定
+4. **paper trading 導入判定**: 1 ヶ月分のデータで再検証してから本番投入
+
+### 成果物
+
+- 新規: `backend/strategies/jp_stock/jp_micro_scalp.py` (allowed_time_windows 対応)
+- 更新: `backend/backtesting/strategy_factory.py` (MicroScalp factory + 既定で 9:30-11:30 除外)
+- 新規: `scripts/backtest_micro_scalp_grid.py` (グリッドサーチ)
+- 新規: `scripts/backtest_micro_scalp_v3.py` (v3 ロック検証)
+- 出力: `data/micro_scalp_grid_latest.json`
+- 出力: `data/micro_scalp_v3_latest.json`
+

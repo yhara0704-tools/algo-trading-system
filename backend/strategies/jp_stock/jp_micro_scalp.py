@@ -61,6 +61,9 @@ class JPMicroScalp(StrategyBase):
         morning_only:     bool  = False,  # False=ザラ場全体、True=前場のみ
         allow_short:      bool  = True,   # ショート許可 (デイトレ信用なら貸株料も 0)
         max_trades_per_day: int = 0,      # 1日 N トレードで打止め (0 = 無制限)
+        # 2026-04-30 グリッドサーチで判明: 9:00-9:30 + afternoon が最適、9:30-11:30 で擬陽性化
+        # 許可時間帯リスト (空 = 全許可)。例: ["09:00-09:30", "12:30-15:00"]
+        allowed_time_windows: list[str] | None = None,
         interval:         str   = "1m",
     ) -> None:
         self.meta = StrategyMeta(
@@ -87,6 +90,7 @@ class JPMicroScalp(StrategyBase):
                 "morning_only":       morning_only,
                 "allow_short":        allow_short,
                 "max_trades_per_day": max_trades_per_day,
+                "allowed_time_windows": list(allowed_time_windows) if allowed_time_windows else [],
             },
         )
         self.tp_jpy             = float(tp_jpy)
@@ -102,6 +106,18 @@ class JPMicroScalp(StrategyBase):
         self.morning_only       = bool(morning_only)
         self.allow_short        = bool(allow_short)
         self.max_trades_per_day = max(0, int(max_trades_per_day))
+        # "HH:MM-HH:MM" を (start_min, end_min) にパースして保持
+        self.allowed_time_windows: list[tuple[int, int]] = []
+        for w in (allowed_time_windows or []):
+            try:
+                a, b = w.split("-")
+                ah, am = a.split(":")
+                bh, bm = b.split(":")
+                self.allowed_time_windows.append(
+                    (int(ah) * 60 + int(am), int(bh) * 60 + int(bm))
+                )
+            except Exception:
+                continue
 
     def generate_signals(self, df: pd.DataFrame) -> pd.DataFrame:
         d = df.copy()
@@ -145,6 +161,14 @@ class JPMicroScalp(StrategyBase):
             morning_block = (hh > 11) | ((hh == 11) & (mm >= 30))
         # ランチ 11:30-12:30 は値がつかない (東証ザラ場休止) ので自動スキップ
         time_ok = ~(avoid_open | before_close_cut | morning_block)
+
+        # allowed_time_windows が指定されていれば、その合算範囲のみ許可
+        if self.allowed_time_windows:
+            cur_min = hh * 60 + mm
+            window_mask = pd.Series(False, index=d.index)
+            for s, e in self.allowed_time_windows:
+                window_mask |= ((cur_min >= s) & (cur_min < e))
+            time_ok &= window_mask
 
         # ── ATR フィルタ + VWAP 乖離 ─────────────────────────────────────
         atr_ok = d["atr_jpy"] >= self.atr_min_jpy
