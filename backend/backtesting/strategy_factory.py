@@ -73,6 +73,14 @@ STRATEGY_DEFAULTS = {
         # 2026-04-30 グリッド評価で 9:30-11:30 が擬陽性化することが判明。
         # デフォルトでは「寄り後 30 分 + 後場」のみ許可し、前場後半を除外。
         "allowed_time_windows": ["09:00-09:30", "12:30-15:00"],
+        # 2026-04-30 寄り付きパターン分析と v4 検証で確認:
+        #   - 仮説 (GD はショート優位 60-87%) は当たっていた (short_PnL +6.3% 改善)
+        #   - しかし 7 日 60 サンプルでは銘柄横断の固定バイアスは過剰削減で総合 -9% (3103.T等)
+        #   - 銘柄別の過去パターン履歴 (30 日以上) で個別判定するまで既定 OFF
+        # 戦略実装は残し、長期 1m データを取得後に再評価する。
+        "open_bias_mode": False,
+        "bias_observe_min": 10,
+        "bias_apply_until_min": 30,
     },
     # BB 上端(3σ)タッチでショートのみ（ロング新規なし）
     "BbShort": {
@@ -411,6 +419,9 @@ def create(strategy_name: str, symbol: str, name: str = "",
             allow_short=bool(p.get("allow_short", True)),
             max_trades_per_day=int(p.get("max_trades_per_day", 0)),
             allowed_time_windows=p.get("allowed_time_windows") or None,
+            open_bias_mode=bool(p.get("open_bias_mode", False)),
+            bias_observe_min=int(p.get("bias_observe_min", 10)),
+            bias_apply_until_min=int(p.get("bias_apply_until_min", 30)),
         )
     elif strategy_name == "EnhancedScalp":
         return EnhancedScalp(

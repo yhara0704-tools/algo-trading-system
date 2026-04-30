@@ -2368,3 +2368,108 @@ T1 攻めシフト後の本体 (+5,000 円/日 daily_target) と並走で **+6,6
 - 出力: `data/micro_scalp_grid_latest.json`
 - 出力: `data/micro_scalp_v3_latest.json`
 
+---
+
+## 2026-04-30 (D3): 寄り付きパターン分析 + open_bias_mode 仮説検証 (短期では既定 OFF 据置)
+
+ユーザー追加提案 (17:07):
+> 始値が前日終値から何 % 離れて始まるかによってエントリーの方向を決めてもいいよね。
+> 寄り天が疑われる始値なら基本逆張りとか、終値とほぼ変わらず、最初の10分でここまで上がった銘柄はそこからズルズル下がる確率が何 % とかをデータとして持っておけば、…
+
+データドリブンで仮説検証 → 戦略本体に組み込み → v3 と比較 までを実施。
+
+### Phase 1: 寄り付きパターン分析 (data 集計)
+
+`scripts/analyze_open_patterns.py` を新規実装し、9 銘柄 × 7 営業日 = 60 events で集計。
+
+主要発見 (`data/micro_scalp_open_patterns.json`):
+
+| ギャップ | n | 9:10-9:30 平均ドリフト | ショート勝ち率 | ロング勝ち率 | 結論 |
+|---|---|---|---|---|---|
+| GD_big (<-1%) | 19 | **-0.44%** | **68.4%** | 15.8% | ショート優位 |
+| GD_mid (-1〜-0.3%) | 14 | -0.29% | 64.3% | 14.3% | ショート優位 |
+| flat (±0.3%) | 9 | -0.05% | 33.3% | 11.1% | 中立 |
+| GU_mid (+0.3〜+1%) | 8 | -0.04% | 25.0% | 12.5% | 中立 |
+| GU_big (+1% 超) | 10 | -0.14% | 60.0% | 40.0% | 二極化 |
+
+細分パターン (ギャップ × 初動 9:00-9:10):
+  - **GD_big × 初動 up (戻り)**: 8 events で **87.5% ショート勝ち** (戻り高値ショート王道)
+  - **GU_big × 初動 flat**: 2 events で **100% ロング** (トレンド継続)
+  - **GU_big × 初動 up/down**: 8 events で **75% ショート** (寄り天)
+
+「全 60 日のうち 46.7% (28日) が寄り天パターン」 = MicroScalp は構造的にショートに有利。
+
+注意: yfinance 1m は 9:00 ジャストのバーが無い日が多いため、`open_price` は **9 時台最初のバー** を使う実装にする (デバッグで判明: 4568.T で 9:00 バーが存在したのは 7 日中 1 日のみ)。
+
+### Phase 2: 戦略本体に open_bias_mode 実装
+
+`backend/strategies/jp_stock/jp_micro_scalp.py` に 3 つのパラメータを追加:
+  - `open_bias_mode: bool` (既定 False)
+  - `bias_observe_min: int` (既定 10): 9:00 から N 分の動きを観察
+  - `bias_apply_until_min: int` (既定 30): バイアスを 9:00+N 分まで適用
+
+ロジック (`_apply_open_bias()`):
+  1. 各営業日について `df` 内の前日最終バーから前日終値を取得
+  2. 当日 9 時台最初のバーから当日始値を取得 → ギャップ % 計算
+  3. 9:00+observe_min バーで初動方向 (down/flat/up) 判定
+  4. (gap_pct, init_dir) からバイアスを決定 (`short_only` / `long_only` / `neutral`)
+  5. 9:00+observe_min ~ 9:00+apply_until_min の long_raw / short_raw を制限
+
+バイアス決定式:
+```
+GD (gap <= -0.3%):   全初動でショート優位 → short_only
+GU_big (gap >= 1%):  flat なら long_only、それ以外は short_only
+GU_mid (gap >= 0.3): down 初動なら long_only、それ以外は neutral
+flat:                neutral
+```
+
+### Phase 3: v4 検証 (`scripts/backtest_micro_scalp_v4.py`)
+
+| label | trades | WR | PnL/day | long_PnL | short_PnL |
+|---|---|---|---|---|---|
+| **v3_locked_10/5** (bias OFF) | 236 | 44.9% | **+1,675** | **+4,100** | +12,650 |
+| v3_locked_8/4 (bias OFF) | 236 | 43.6% | +1,320 | +1,750 | +11,450 |
+| v4_bias_10/5 (bias ON) | 223 | 44.4% | +1,520 | +1,750 | **+13,450** |
+| v4_bias_8/4 | 223 | 43.0% | +1,175 | +500 | +11,250 |
+| v4_bias_obs5_10/5 (観察 5分) | 222 | 43.7% | +1,385 | +250 | +13,600 |
+
+### 結論
+
+1. **ショート方向のバイアスは確かに効いている** (short_PnL +12,650 → +13,450, +6.3%)
+   → ユーザー仮説「GD 系はショート優位」はデータで裏付けられた
+
+2. **ロング側の取りこぼしで総合 PnL は -9% 微減** (long_PnL -2,350 円)
+   - 内訳: **3103.T** で long_PnL +200 → **-2,200** が支配的
+   - 7 日 60 サンプルで「GD 系平均ドリフト -0.44%」と出ていても、約 15-20% はロング勝ち日
+   - バイアスが一律排除して機会損失
+
+3. **銘柄別の差が大きすぎる**
+   - 4568.T: bias で long_PnL -2,050 → -350 に改善 (バイアス◎)
+   - 3103.T: bias で long_PnL +200 → -2,200 に悪化 (バイアス✗)
+   - → 「銘柄ごとの過去パターン履歴」で個別判定するべき
+
+### 意思決定
+
+**`open_bias_mode` 既定値を `True` → `False` に戻す** (安全側)。
+
+戦略実装は残し、以下が揃ってから再評価:
+  - **長期 1m データ** (30 日以上、J-Quants Premium or 自前蓄積)
+  - **銘柄別ローリング履歴** (各銘柄の過去 30 日 GD/GU パターン勝率)
+  - **WF 検証** (in-sample でバイアス決定、out-of-sample で評価)
+
+### 成果物
+
+- 新規: `scripts/analyze_open_patterns.py` (寄り付きパターン分析)
+- 新規: `scripts/backtest_micro_scalp_v4.py` (open_bias 検証)
+- 更新: `backend/strategies/jp_stock/jp_micro_scalp.py` (open_bias_mode 実装)
+- 更新: `backend/backtesting/strategy_factory.py` (既定 OFF + パラメータ受け渡し)
+- 出力: `data/micro_scalp_open_patterns.json`
+- 出力: `data/micro_scalp_v4_latest.json`
+
+### 振り返り
+
+ユーザーの「データさえあれば、いろいろできるのがアルゴだよね」という発想は方向として完璧に正しかった。
+パターン分析で「GD 系 = ショート 64-87%」という構造的優位性が見えたのは大収穫。
+今回の実装は「7 日サンプルでは粗すぎて固定バイアスは過剰補正だった」というだけで、
+ロジック自体は将来の長期データ取得後に再評価する価値が極めて高い。
+

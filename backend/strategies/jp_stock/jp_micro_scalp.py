@@ -64,6 +64,11 @@ class JPMicroScalp(StrategyBase):
         # 2026-04-30 グリッドサーチで判明: 9:00-9:30 + afternoon が最適、9:30-11:30 で擬陽性化
         # 許可時間帯リスト (空 = 全許可)。例: ["09:00-09:30", "12:30-15:00"]
         allowed_time_windows: list[str] | None = None,
+        # 2026-04-30 寄り付きパターン分析で判明: GD_big + 初動 up は 87.5% ショート、
+        # GU_big + 初動 flat は 100% ロング等、ギャップ × 初動で方向バイアスがある
+        open_bias_mode:   bool = False,   # ON にすると 9:10 までの動きで 9:10-9:30 の方向を制限
+        bias_observe_min: int  = 10,      # 9:00 から N 分観察してバイアスを決定
+        bias_apply_until_min: int = 30,   # バイアスを 9:00+N 分まで適用 (9:30 まで)
         interval:         str   = "1m",
     ) -> None:
         self.meta = StrategyMeta(
@@ -91,6 +96,9 @@ class JPMicroScalp(StrategyBase):
                 "allow_short":        allow_short,
                 "max_trades_per_day": max_trades_per_day,
                 "allowed_time_windows": list(allowed_time_windows) if allowed_time_windows else [],
+                "open_bias_mode":      open_bias_mode,
+                "bias_observe_min":    bias_observe_min,
+                "bias_apply_until_min": bias_apply_until_min,
             },
         )
         self.tp_jpy             = float(tp_jpy)
@@ -118,6 +126,9 @@ class JPMicroScalp(StrategyBase):
                 )
             except Exception:
                 continue
+        self.open_bias_mode = bool(open_bias_mode)
+        self.bias_observe_min = max(1, int(bias_observe_min))
+        self.bias_apply_until_min = max(self.bias_observe_min + 1, int(bias_apply_until_min))
 
     def generate_signals(self, df: pd.DataFrame) -> pd.DataFrame:
         d = df.copy()
@@ -181,6 +192,26 @@ class JPMicroScalp(StrategyBase):
         else:
             short_raw = time_ok & atr_ok & ((d["close"] - d["vwap"]) >= self.entry_dev_jpy)
 
+        # ── open_bias_mode (寄り付きパターンによる方向制限) ────────────────
+        #
+        # 2026-04-30 寄り付きパターン分析 (data/micro_scalp_open_patterns.json) で判明:
+        #   GD_big (<-1%) × 初動 up   → 87.5% ショート勝ち (戻り高値ショート)
+        #   GD_big × 初動 flat        → 57.1% ショート
+        #   GU_big (>+1%) × 初動 flat → 100% ロング (トレンド継続)
+        #   GU_big × 初動 up/down     → 75% ショート (寄り天)
+        #   flat (±0.3%) × 初動 down  → 中立
+        #
+        # 仕組み: 各営業日について、9:00 から `bias_observe_min` 分の動きを観察し、
+        #         (gap_pct, init_dir) で 9:00+observe_min 〜 9:00+apply_until_min の
+        #         エントリー方向 ("long_only" / "short_only" / "neutral") を決める。
+        #
+        # 前日終値は df の前営業日最後のバー (close) を使う。当日始値は当日 9 時台の
+        # 最初のバーの open。yfinance は 9:00 ジャストのバーが無い日があるので注意。
+        if self.open_bias_mode:
+            self._apply_open_bias(d, long_raw, short_raw, idx_jst)
+            long_raw = d["_long_raw_after_bias"]
+            short_raw = d["_short_raw_after_bias"]
+
         d["signal"] = 0
         d["stop_loss"] = np.nan
         d["take_profit"] = np.nan
@@ -237,7 +268,134 @@ class JPMicroScalp(StrategyBase):
                     d.iloc[exit_pos, d.columns.get_loc("signal")] = -1
 
         # クリーンアップ
-        for col in ("_day", "_cum_tpv", "_cum_vol"):
+        for col in ("_day", "_cum_tpv", "_cum_vol", "_long_raw_after_bias", "_short_raw_after_bias"):
             if col in d.columns:
                 d.drop(columns=col, inplace=True)
         return d
+
+    # ── 寄り付きパターン分析に基づく方向バイアス ─────────────────────────
+    def _apply_open_bias(
+        self,
+        d: pd.DataFrame,
+        long_raw: pd.Series,
+        short_raw: pd.Series,
+        idx_jst,
+    ) -> None:
+        """各営業日について寄り付きパターンから 9:10-9:30 の方向制限を掛ける.
+
+        ロジック (data/micro_scalp_open_patterns.json で確認したパターン):
+          - GD (gap_pct <= -0.3%): 全初動 でショート優位 (60-87%)
+          - flat (-0.3% < gap_pct < 0.3%): 中立
+          - GU_mid (0.3 <= gap_pct < 1.0%): 中立 (但し down 初動は弱ロング)
+          - GU_big (gap_pct >= 1.0%): 初動 flat ならロング 100%、それ以外は寄り天ショート 75%
+
+        観察期間中 (9:00 〜 9:00+bias_observe_min) は両側許可。
+        観察後 (9:00+observe_min 〜 9:00+apply_until_min) でのみ片側制限を適用。
+        9:00+apply_until_min 以降は再度両側許可 (= 通常の MicroScalp に戻る)。
+        """
+        n = len(d)
+        long_after = long_raw.copy()
+        short_after = short_raw.copy()
+        if n == 0:
+            d["_long_raw_after_bias"] = long_after
+            d["_short_raw_after_bias"] = short_after
+            return
+
+        days = pd.Series(d["_day"]).values
+        close_arr = d["close"].values
+        open_arr = d["open"].values
+
+        # 各日について「前日 close (= 前日最終バーの close) と当日 open (= 当日最初の 9 時台バーの open)」を求める
+        unique_days = []
+        seen = set()
+        for dy in days:
+            if dy not in seen:
+                seen.add(dy)
+                unique_days.append(dy)
+
+        # 日ごとに index 範囲を取る
+        day_ranges: dict = {}
+        cur_day = None
+        start_i = 0
+        for i in range(n):
+            dy = days[i]
+            if dy != cur_day:
+                if cur_day is not None:
+                    day_ranges[cur_day] = (start_i, i - 1)
+                cur_day = dy
+                start_i = i
+        day_ranges[cur_day] = (start_i, n - 1)
+
+        prev_day_close: dict = {}
+        prev_dy = None
+        for dy in unique_days:
+            if prev_dy is not None and prev_dy in day_ranges:
+                _, prev_end = day_ranges[prev_dy]
+                prev_day_close[dy] = float(close_arr[prev_end])
+            prev_dy = dy
+
+        # 9:00+observe_min と 9:00+apply_until_min の境界 minute (JST 内)
+        observe_end_min = 9 * 60 + self.bias_observe_min
+        apply_end_min = 9 * 60 + self.bias_apply_until_min
+
+        cur_min_arr = (idx_jst.hour * 60 + idx_jst.minute).values
+
+        for dy in unique_days:
+            if dy not in prev_day_close:
+                continue  # 初日は前日 close 取れないので bias 適用せず両側許可のまま
+            prev_close = prev_day_close[dy]
+            s, e = day_ranges[dy]
+            # 当日の 9 時台最初のバーを open_price に
+            day_slice_idx = list(range(s, e + 1))
+            morning_idx = [i for i in day_slice_idx if idx_jst[i].hour == 9]
+            if not morning_idx:
+                continue
+            open_price = float(open_arr[morning_idx[0]])
+            gap_pct = (open_price - prev_close) / prev_close * 100
+
+            # 9:00+observe_min バーの close (= 観察期間終了時点)
+            observe_end_idx = None
+            for i in morning_idx:
+                if cur_min_arr[i] >= observe_end_min:
+                    observe_end_idx = i
+                    break
+            if observe_end_idx is None:
+                continue
+            close_at_observe_end = float(close_arr[observe_end_idx])
+            init_drift_pct = (close_at_observe_end - open_price) / open_price * 100
+            if init_drift_pct <= -0.3:
+                init_dir = "down"
+            elif init_drift_pct < 0.3:
+                init_dir = "flat"
+            else:
+                init_dir = "up"
+
+            # ── バイアス決定 ──────────────────────────────
+            if gap_pct <= -0.3:
+                # GD 系: 全初動でショート優位 → ロング禁止
+                bias = "short_only"
+            elif gap_pct >= 1.0:
+                # GU_big: 初動 flat ならロング、それ以外は寄り天ショート
+                bias = "long_only" if init_dir == "flat" else "short_only"
+            elif gap_pct >= 0.3:
+                # GU_mid: down 初動なら長ロング、それ以外は中立
+                bias = "long_only" if init_dir == "down" else "neutral"
+            else:
+                # flat: 中立
+                bias = "neutral"
+
+            # 観察期間 (~9:00+observe_min) の後で apply_end_min まで適用
+            for i in day_slice_idx:
+                cm = cur_min_arr[i]
+                if cm < observe_end_min:
+                    continue
+                if cm >= apply_end_min:
+                    break
+                if bias == "short_only":
+                    long_after.iat[i] = False
+                elif bias == "long_only":
+                    short_after.iat[i] = False
+                # neutral は何もしない
+
+        d["_long_raw_after_bias"] = long_after
+        d["_short_raw_after_bias"] = short_after
