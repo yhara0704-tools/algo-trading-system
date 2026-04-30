@@ -151,6 +151,109 @@ def _resolve_oos_trades(
     return None
 
 
+def _audit_macd_rci_direct_pairs(
+    macd_params: dict,
+    active_pairs: set[tuple[str, str]],
+    min_oos_trades: int,
+    wf_relaxed_threshold: int,
+    wf_relax_min_windows: int,
+) -> list[dict]:
+    """`macd_rci_params.json` の MacdRci robust 銘柄のうち、`universe_active`
+    に居ないものを ``experiments`` DB から最新 robust 実績を引いて
+    OOS 件数 / WF 通過率で評価する。閾値未満なら excluded リストを返す。
+
+    `jp_live_runner` は `macd_rci_params.json` の `robust=true` から直接
+    エントリー候補を拾うパスがあり、`universe_active` 外で paper に乗る
+    銘柄は `paper_low_sample_excluded_latest.json` に登録されないと
+    `_apply_low_sample_second_filter` の対象にもならず素通りする。
+    本関数で穴を塞ぐ。
+    """
+    if not isinstance(macd_params, dict):
+        return []
+    direct_targets: list[str] = []
+    for sym, row in macd_params.items():
+        if not isinstance(sym, str) or sym.startswith("_"):
+            continue
+        if not isinstance(row, dict) or not row.get("robust"):
+            continue
+        if ("MacdRci", sym) in active_pairs:
+            continue
+        direct_targets.append(sym)
+    if not direct_targets:
+        return []
+    try:
+        from backend.storage.db import _DB_PATH  # 遅延 import (循環回避)
+    except Exception:
+        return []
+    db_path = Path(str(_DB_PATH))
+    if not db_path.exists():
+        return []
+    out: list[dict] = []
+    try:
+        import sqlite3
+
+        conn = sqlite3.connect(str(db_path))
+        try:
+            for sym in direct_targets:
+                cur = conn.execute(
+                    """
+                    SELECT id, oos_trades, oos_daily_pnl,
+                           wf_window_total, wf_window_pass_ratio
+                      FROM experiments
+                     WHERE symbol = ? AND strategy_name = 'MacdRci' AND robust = 1
+                     ORDER BY id DESC LIMIT 1
+                    """,
+                    (sym,),
+                )
+                row = cur.fetchone()
+                if not row:
+                    continue
+                _, oos_trades_raw, oos_daily_raw, wf_total_raw, wf_ratio_raw = row
+                if oos_trades_raw is None:
+                    continue
+                try:
+                    oos_trades = int(oos_trades_raw)
+                except (TypeError, ValueError):
+                    continue
+                try:
+                    wf_total = int(wf_total_raw) if wf_total_raw is not None else 0
+                except (TypeError, ValueError):
+                    wf_total = 0
+                try:
+                    wf_ratio = float(wf_ratio_raw) if wf_ratio_raw is not None else 0.0
+                except (TypeError, ValueError):
+                    wf_ratio = 0.0
+                wf_relaxed = (
+                    wf_relaxed_threshold > 0
+                    and wf_ratio >= 1.0 - 1e-9
+                    and wf_total >= wf_relax_min_windows
+                )
+                effective_threshold = wf_relaxed_threshold if wf_relaxed else min_oos_trades
+                if oos_trades >= effective_threshold:
+                    continue
+                out.append({
+                    "strategy_name": "MacdRci",
+                    "symbol": sym,
+                    "name": sym,
+                    "oos_daily_pnl": float(oos_daily_raw or 0.0),
+                    "oos_trades": oos_trades,
+                    "wf_window_total": wf_total,
+                    "wf_window_pass_ratio": wf_ratio,
+                    "effective_threshold": effective_threshold,
+                    "reason": (
+                        f"oos_trades<{effective_threshold}"
+                        + (" (wf_relaxed)" if wf_relaxed else "")
+                        + " (macd_rci_params direct, not in universe_active)"
+                    ),
+                })
+        finally:
+            conn.close()
+    except Exception as exc:  # pragma: no cover - DB エラーは致命ではない
+        logger.info("audit_macd_rci_direct_pairs: skipped: %s", exc)
+        return []
+    return out
+
+
 def collect_universe_specs(
     max_count: int = 30,
     force_macd_max_pyramid: int = -1,
@@ -238,6 +341,28 @@ def collect_universe_specs(
         kept.append(spec)
 
     kept.sort(key=lambda x: float(x.get("oos_daily_pnl", 0.0)), reverse=True)
+
+    # 2026-04-30 拡張: universe_active に居ない `macd_rci_params.json` 直拾いの
+    # MacdRci robust 銘柄 (jp_live_runner が直接拾うパス) も低 OOS 評価対象に
+    # 含める。`paper_low_sample_excluded_latest.json` に追加されると
+    # `jp_live_runner._apply_low_sample_second_filter` で paper エントリーから
+    # 弾かれる (4/30 4568.T のように oos_trades=17 で 6 trades -3,350 円を出す
+    # 穴を塞ぐ)。
+    if apply_sample_filter and min_oos_trades > 0:
+        active_pairs = {
+            (str(s.get("strategy", "")), str(s.get("symbol", "")))
+            for s in symbols
+            if isinstance(s, dict)
+        }
+        direct_excluded = _audit_macd_rci_direct_pairs(
+            macd_params,
+            active_pairs,
+            min_oos_trades,
+            wf_relaxed_threshold,
+            wf_relax_min_windows,
+        )
+        if direct_excluded:
+            excluded.extend(direct_excluded)
 
     if apply_sample_filter:
         try:
@@ -369,8 +494,154 @@ async def prepare_from_backtest_universe(max_count: int = 30) -> tuple[list, dic
     return strategies, report
 
 
-def _divergence_report(session_pnl: float, sum_oos: float | None) -> dict | None:
-    """Phase E3: ペーパー vs バックテスト (sum_oos) の乖離を算出する。"""
+# ── Active universe 動的合計 (A 案, 2026-04-30 追加) ──────────────────────────
+#
+# `backtest_sum_oos_jpy` は `collect_universe_specs` の robust 集合 (今日 13 件)
+# 全銘柄の `oos_daily` を素朴に合計した値で、当日シグナルが立たなかった銘柄も
+# 含む「理論上限」になる。シグナル発生数が 13 件未満の日は構造的に paper が
+# これを下回り、severity=critical が頻発しがちで判断しづらい。
+#
+# A 案: 当日 paper で実際にエントリーした (symbol, strategy_name) ペアだけに
+# 絞った `oos_daily_pnl` 合計 (`active_sum_oos_jpy`) を併記し、こちらの diff_pct
+# も `_divergence_report` に出す。これは「立った銘柄での平均ペースに対する
+# 当日実績」のチェックになる。旧 `backtest_sum_oos_jpy` は「上限に対する
+# 到達率」として残す。
+#
+# `jp_trade_executions.strategy_id` のプレフィックス → strategy_name の写像。
+# `scripts/paper_observability_report.py:_PREFIX_TO_BUCKET` と同期させること。
+_LIVE_PREFIX_TO_STRATEGY: tuple[tuple[str, str], ...] = (
+    ("jp_parabolic_swing_", "ParabolicSwing"),
+    ("jp_swing_donchian_",  "SwingDonchianD"),
+    ("enhanced_macd_rci_",  "EnhancedMacdRci"),
+    ("enhanced_scalp_",     "EnhancedScalp"),
+    ("jp_macd_rci_",        "MacdRci"),
+    ("jp_scalp_",           "Scalp"),
+    ("jp_breakout_",        "Breakout"),
+    ("jp_bb_short_",        "BbShort"),
+    ("jp_pullback_",        "Pullback"),
+    ("jp_ma_vol_",          "MaVol"),
+)
+
+
+def _strategy_name_from_id(strategy_id: str) -> str | None:
+    sid = strategy_id or ""
+    for prefix, name in _LIVE_PREFIX_TO_STRATEGY:
+        if sid.startswith(prefix):
+            return name
+    return None
+
+
+def _oos_daily_for_pair(
+    symbol: str,
+    strategy_name: str,
+    macd_params: dict,
+    fit_map: dict,
+) -> float | None:
+    """(symbol, strategy_name) の oos_daily を canonical JSON から拾う。
+
+    優先度:
+      1. `MacdRci` のときは `macd_rci_params.json[symbol]["oos_daily"]`
+      2. `strategy_fit_map.json[symbol]["strategies"][strategy_name]["oos_daily"]`
+    どちらも無ければ None。
+    """
+    if strategy_name == "MacdRci" and isinstance(macd_params, dict):
+        row = macd_params.get(symbol)
+        if isinstance(row, dict):
+            v = row.get("oos_daily")
+            if v is not None:
+                try:
+                    return float(v)
+                except (TypeError, ValueError):
+                    pass
+    if isinstance(fit_map, dict):
+        sym_row = fit_map.get(symbol)
+        if isinstance(sym_row, dict):
+            strats = sym_row.get("strategies")
+            if isinstance(strats, dict):
+                strat_row = strats.get(strategy_name)
+                if isinstance(strat_row, dict):
+                    v = strat_row.get("oos_daily")
+                    if v is not None:
+                        try:
+                            return float(v)
+                        except (TypeError, ValueError):
+                            pass
+    return None
+
+
+def _active_universe_sum_oos(date_str: str) -> tuple[float, list[dict]] | None:
+    """当日 paper で実際にエントリーした (symbol, strategy_name) ペアの
+    oos_daily を canonical から引いて合計する (A 案)。
+
+    返り値: (合計, 内訳リスト)。DB 不在 / 当日約定ゼロのときは None。
+    内訳リスト要素: ``{"symbol", "strategy_name", "strategy_id", "n_trades",
+                      "paper_pnl_jpy", "oos_daily_pnl_jpy"}``。
+    """
+    try:
+        from backend.storage.db import _DB_PATH  # 遅延 import (循環回避)
+    except Exception:
+        return None
+    db_path = Path(str(_DB_PATH))
+    if not db_path.exists():
+        return None
+    macd_params = _load_json(MACD_PARAMS_FILE, {})
+    fit_map = _load_json(FIT_MAP_FILE, {})
+    rows: list[tuple] = []
+    try:
+        import sqlite3
+
+        conn = sqlite3.connect(str(db_path))
+        try:
+            cur = conn.execute(
+                """
+                SELECT strategy_id, symbol,
+                       COUNT(*) AS n,
+                       COALESCE(SUM(pnl_jpy), 0) AS pnl
+                  FROM jp_trade_executions
+                 WHERE date = ?
+                 GROUP BY strategy_id, symbol
+                 ORDER BY symbol, strategy_id
+                """,
+                (date_str,),
+            )
+            rows = list(cur.fetchall())
+        finally:
+            conn.close()
+    except Exception as exc:  # pragma: no cover - DB 参照不可は致命ではない
+        logger.info("active_universe_sum_oos: db read skipped: %s", exc)
+        return None
+    if not rows:
+        return None
+    breakdown: list[dict] = []
+    total = 0.0
+    for sid, sym, n, pnl in rows:
+        strat = _strategy_name_from_id(str(sid or "")) or ""
+        oos = _oos_daily_for_pair(str(sym or ""), strat, macd_params, fit_map) if strat else None
+        if oos is not None:
+            total += float(oos)
+        breakdown.append({
+            "symbol": str(sym or ""),
+            "strategy_name": strat,
+            "strategy_id": str(sid or ""),
+            "n_trades": int(n or 0),
+            "paper_pnl_jpy": round(float(pnl or 0.0), 1),
+            "oos_daily_pnl_jpy": round(float(oos), 1) if oos is not None else None,
+        })
+    return total, breakdown
+
+
+def _divergence_report(
+    session_pnl: float,
+    sum_oos: float | None,
+    active_sum_oos: float | None = None,
+    active_breakdown: list[dict] | None = None,
+) -> dict | None:
+    """Phase E3 (+A 案 2026-04-30): ペーパー vs バックテスト乖離を算出する。
+
+    - ``sum_oos``: robust 集合の oos_daily 合計 (理論上限ベンチ)
+    - ``active_sum_oos``: 当日 paper でエントリーした銘柄に絞った oos_daily 合計
+      (シグナル発生数で正規化した実績ベンチ)。
+    """
     if sum_oos is None:
         return None
     try:
@@ -386,7 +657,8 @@ def _divergence_report(session_pnl: float, sum_oos: float | None) -> dict | None
         severity = "critical" if diff_pct <= -60.0 else "warning"
     elif abs(diff_pct) >= 50.0:
         severity = "warning"
-    return {
+
+    out: dict = {
         "paper_pnl_jpy": round(float(session_pnl), 1),
         "backtest_sum_oos_jpy": round(sum_oos_f, 1),
         "diff_jpy": round(diff, 1),
@@ -394,28 +666,188 @@ def _divergence_report(session_pnl: float, sum_oos: float | None) -> dict | None
         "severity": severity,
     }
 
+    # A 案 (active universe) の評価を追加。active_sum_oos が None でも出す
+    # (=シグナル発生ゼロ日で、その事実自体が情報になる)。
+    if active_sum_oos is not None:
+        try:
+            active_f = float(active_sum_oos)
+        except (TypeError, ValueError):
+            active_f = None
+    else:
+        active_f = None
+
+    if active_f is not None:
+        active_diff = float(session_pnl) - active_f
+        active_denom = max(abs(active_f), 1000.0)
+        active_diff_pct = active_diff / active_denom * 100
+        # active_severity は「下振れのみ」を警告対象とする (旧 severity は abs >= 50%
+        # で上振れも warning にしてしまうが、これはノイズが多いため active 側では除外)。
+        active_sev: str | None = None
+        if active_f > 0 and active_diff_pct <= -30.0:
+            active_sev = "critical" if active_diff_pct <= -60.0 else "warning"
+        elif active_f <= 0 and active_diff_pct <= -50.0:
+            # 期待値が 0 円以下で、それすら大きく下回った日も warning
+            active_sev = "warning"
+        out["active_sum_oos_jpy"] = round(active_f, 1)
+        out["active_diff_jpy"] = round(active_diff, 1)
+        out["active_diff_pct"] = round(active_diff_pct, 2)
+        out["active_severity"] = active_sev
+    if active_breakdown is not None:
+        out["active_pair_count"] = len(active_breakdown)
+        out["active_pairs"] = active_breakdown
+    return out
+
 
 async def _notify_divergence(date_str: str, report: dict) -> None:
-    """Phase E3: 乖離が閾値を超えたら Pushover に通知する（失敗時は握り潰す）。"""
+    """Phase E3: 乖離が閾値を超えたら Pushover に通知する（失敗時は握り潰す）。
+
+    A 案 (active universe) の severity と sum_oos も併記し、当日シグナル発生
+    銘柄ベースでの判定を一目で確認できるようにする。
+    """
     sev = report.get("severity")
-    if not sev:
+    active_sev = report.get("active_severity")
+    # 旧 severity / active_severity いずれかが立っていれば通知
+    if not sev and not active_sev:
         return
     try:
         from backend.notify import push  # 遅延 import（循環回避）
 
-        title = f"ペーパー乖離 [{sev}] {date_str}"
-        msg = (
-            f"Paper PnL: {report['paper_pnl_jpy']:+.0f} 円\n"
-            f"Backtest sum_oos: {report['backtest_sum_oos_jpy']:+.0f} 円\n"
-            f"差分: {report['diff_jpy']:+.0f} 円 ({report['diff_pct']:+.1f}%)"
-        )
-        await push(title=title, message=msg, priority=1 if sev == "critical" else 0)
+        primary = sev or active_sev
+        title = f"ペーパー乖離 [{primary}] {date_str}"
+        lines = [
+            f"Paper PnL: {report['paper_pnl_jpy']:+.0f} 円",
+            (
+                f"Robust 13 上限: {report['backtest_sum_oos_jpy']:+.0f} 円  "
+                f"diff={report['diff_jpy']:+.0f} ({report['diff_pct']:+.1f}%) "
+                f"sev={sev or '-'}"
+            ),
+        ]
+        if "active_sum_oos_jpy" in report:
+            n = report.get("active_pair_count", "?")
+            lines.append(
+                f"Active {n} 銘柄: {report['active_sum_oos_jpy']:+.0f} 円  "
+                f"diff={report['active_diff_jpy']:+.0f} "
+                f"({report['active_diff_pct']:+.1f}%) sev={active_sev or '-'}"
+            )
+        msg = "\n".join(lines)
+        # critical (旧 / active のいずれか) が立っていれば priority=1
+        crit = (sev == "critical") or (active_sev == "critical")
+        await push(title=title, message=msg, priority=1 if crit else 0)
     except Exception as exc:  # pragma: no cover - 通知失敗は致命ではない
         logger.warning("paper_backtest_sync: divergence notify failed: %s", exc)
 
 
+def _write_divergence_report_file(date_str: str, divergence: dict) -> Path | None:
+    """severity (旧) または active_severity (A 案) が立った日は
+    ``data/paper_vs_backtest_divergence_<DATE>.txt`` に自動保存する。
+    SQLite ベースの詳細内訳までは出さず、サマリ行と active pair 内訳を残す
+    (詳細は ``scripts/`` 配下の手動レポートで補完する想定)。
+    """
+    sev = divergence.get("severity")
+    active_sev = divergence.get("active_severity")
+    if not sev and not active_sev:
+        return None
+    out = DATA_DIR / f"paper_vs_backtest_divergence_{date_str}.txt"
+    try:
+        sym_rows = []
+        try:
+            from backend.storage.db import _DB_PATH  # 遅延 import（循環回避）
+
+            db_path = Path(str(_DB_PATH))
+            if db_path.exists():
+                import sqlite3
+
+                conn = sqlite3.connect(str(db_path))
+                try:
+                    cur = conn.execute(
+                        """
+                        SELECT symbol,
+                               COUNT(*) AS n,
+                               COALESCE(SUM(pnl_jpy), 0) AS pnl,
+                               GROUP_CONCAT(DISTINCT exit_reason) AS reasons
+                          FROM jp_trade_executions
+                         WHERE date = ?
+                         GROUP BY symbol
+                         ORDER BY pnl ASC
+                        """,
+                        (date_str,),
+                    )
+                    sym_rows = list(cur.fetchall())
+                finally:
+                    conn.close()
+        except Exception as exc:  # pragma: no cover - DB 参照不可は致命ではない
+            logger.info("divergence report: db breakdown skipped: %s", exc)
+
+        lines: list[str] = []
+        lines.append(f"# paper_vs_backtest_divergence ({date_str})")
+        lines.append(f"severity={sev or '-'} active_severity={active_sev or '-'}")
+        lines.append(
+            f"paper_pnl_jpy={divergence.get('paper_pnl_jpy'):+.0f} "
+            f"backtest_sum_oos_jpy={divergence.get('backtest_sum_oos_jpy'):+.0f} "
+            f"diff_jpy={divergence.get('diff_jpy'):+.0f} "
+            f"diff_pct={divergence.get('diff_pct'):+.2f}"
+        )
+        if "active_sum_oos_jpy" in divergence:
+            lines.append(
+                f"active_sum_oos_jpy={divergence.get('active_sum_oos_jpy'):+.0f} "
+                f"active_diff_jpy={divergence.get('active_diff_jpy'):+.0f} "
+                f"active_diff_pct={divergence.get('active_diff_pct'):+.2f} "
+                f"active_pair_count={divergence.get('active_pair_count', '?')}"
+            )
+        lines.append(
+            "auto_saved_by=backend.lab.paper_backtest_sync.finalize_paper_session"
+        )
+        # active pair (=当日シグナルが立った銘柄) の paper vs oos_daily 内訳
+        pairs = divergence.get("active_pairs") or []
+        if pairs:
+            lines.append("")
+            lines.append("active pair breakdown (paper vs oos_daily):")
+            lines.append(
+                f"{'symbol':<10} {'strategy':<18} {'n':>3} "
+                f"{'paper_pnl':>10} {'oos_daily':>10} {'diff':>10}"
+            )
+            lines.append("-" * 70)
+            for p in pairs:
+                paper = float(p.get("paper_pnl_jpy") or 0.0)
+                oos = p.get("oos_daily_pnl_jpy")
+                oos_v = float(oos) if oos is not None else 0.0
+                diff_v = paper - oos_v if oos is not None else 0.0
+                oos_disp = f"{oos_v:+.0f}" if oos is not None else "n/a"
+                diff_disp = f"{diff_v:+.0f}" if oos is not None else "n/a"
+                lines.append(
+                    f"{p.get('symbol','')[:10]:<10} "
+                    f"{p.get('strategy_name','')[:18]:<18} "
+                    f"{p.get('n_trades',0):>3d} "
+                    f"{paper:>+10.0f} {oos_disp:>10} {diff_disp:>10}"
+                )
+        if sym_rows:
+            lines.append("")
+            lines.append("symbol      n      pnl     reasons")
+            lines.append("-" * 60)
+            for row in sym_rows:
+                sym = str(row[0] or "")
+                n = int(row[1] or 0)
+                pnl = float(row[2] or 0.0)
+                reasons = (row[3] or "").replace(",", "|") if len(row) > 3 else ""
+                lines.append(f"{sym:<10} {n:>4} {pnl:>+8.0f}  {reasons}")
+        out.write_text("\n".join(lines) + "\n", encoding="utf-8")
+        logger.info(
+            "divergence report saved: %s (severity=%s active=%s)",
+            out, sev, active_sev,
+        )
+        return out
+    except Exception as exc:  # pragma: no cover - 書き込み失敗も致命ではない
+        logger.warning("paper_backtest_sync: divergence report write failed: %s", exc)
+        return None
+
+
 def finalize_paper_session(session_date: str, session_pnl_jpy: float, sum_oos_snapshot: float | None) -> dict:
-    """大引け後: ペーパー損益が当日のバックテスト合計 OOS を上回ったら floor を更新。"""
+    """大引け後: ペーパー損益が当日のバックテスト合計 OOS を上回ったら floor を更新。
+
+    A 案 (2026-04-30): `_active_universe_sum_oos(session_date)` で当日 paper の
+    エントリー銘柄に絞った oos_daily 合計を併算し、divergence report に
+    `active_*` フィールドとして併記する。
+    """
     h = _load_handoff()
     promoted = float(h.get("paper_promoted_floor_jpy") or 0.0)
     beat = False
@@ -424,7 +856,18 @@ def finalize_paper_session(session_date: str, session_pnl_jpy: float, sum_oos_sn
             promoted = max(promoted, session_pnl_jpy)
             beat = True
 
-    divergence = _divergence_report(session_pnl_jpy, sum_oos_snapshot)
+    active_pair = _active_universe_sum_oos(session_date)
+    if active_pair is not None:
+        active_sum, active_breakdown = active_pair
+    else:
+        active_sum, active_breakdown = None, None
+
+    divergence = _divergence_report(
+        session_pnl_jpy,
+        sum_oos_snapshot,
+        active_sum_oos=active_sum,
+        active_breakdown=active_breakdown,
+    )
 
     out = {
         **h,
@@ -445,8 +888,9 @@ def finalize_paper_session(session_date: str, session_pnl_jpy: float, sum_oos_sn
         promoted,
         divergence,
     )
-    # 乖離通知（非同期 fire-and-forget）
+    # 乖離通知（非同期 fire-and-forget）と自動レポート保存
     if divergence and divergence.get("severity"):
+        _write_divergence_report_file(session_date, divergence)
         try:
             import asyncio
 

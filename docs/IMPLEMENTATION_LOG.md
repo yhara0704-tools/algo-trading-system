@@ -1,5 +1,71 @@
 # Phase1 実装ログ
 
+## 2026-04-30 (午後 part 2) `paper_vs_backtest` 乖離指標を A 案 (active universe) に拡張 + low_sample 評価穴の修正
+
+### 背景
+
+午後の paper レビューで「`backtest_sum_oos_jpy` (=robust 13 銘柄の `oos_daily` 単純合計、本日 16,303 円) は当日シグナルが立たなかった銘柄も含む理論上限であり、シグナル発生数が少ない日は構造的に paper が下回る → critical が頻発して判断ノイズになっている」と判明。さらに `4568.T MacdRci` のように `macd_rci_params.json` 直拾いで paper エントリーする銘柄は `paper_low_sample_excluded_latest.json` の評価対象から外れ、低 OOS 銘柄が二重フィルタも素通りする穴があった。
+
+### (F1) `_active_universe_sum_oos(date_str)` 新設 — A 案実装
+
+`backend/lab/paper_backtest_sync.py` に以下を追加:
+
+- `_LIVE_PREFIX_TO_STRATEGY` (10 件): `jp_trade_executions.strategy_id` プレフィックス → strategy_name 写像。`scripts/paper_observability_report.py:_PREFIX_TO_BUCKET` と同期 (コメントで明記)。
+- `_strategy_name_from_id(strategy_id)`: prefix マッチで strategy_name を返す (未知は `None`)。
+- `_oos_daily_for_pair(symbol, strategy_name, macd_params, fit_map)`: `MacdRci` のときは `macd_rci_params.json[sym]["oos_daily"]`、それ以外は `strategy_fit_map.json[sym]["strategies"][strategy_name]["oos_daily"]` を順に拾う。
+- `_active_universe_sum_oos(date_str) -> (total, breakdown) | None`: SQLite `jp_trade_executions` から当日 entry がある (strategy_id, symbol) を集計、各ペアの `oos_daily_pnl` を canonical から引いて合計値と内訳を返す。
+
+### (F2) `_divergence_report` を多軸評価に拡張
+
+旧: `(paper_pnl_jpy, backtest_sum_oos_jpy, diff_jpy, diff_pct, severity)` のみ。
+新: 上記 + `active_sum_oos_jpy / active_diff_jpy / active_diff_pct / active_severity / active_pair_count / active_pairs`。
+
+`active_severity` は **下振れのみ警告** (`active_diff_pct <= -30%` で warning、`<= -60%` で critical)。`abs >= 50%` で上振れも warning する旧 severity と異なり、good day の偽陽性を抑える設計。`paper_validation_handoff.json:last_divergence` には自動的に `active_*` フィールドが入るので、handoff を見れば一目で両指標が分かる。
+
+### (F3) `_write_divergence_report_file` / `_notify_divergence` の改修
+
+- divergence ファイル冒頭行: `severity=... active_severity=...` を併記
+- `active_pair_count` / `active_sum_oos_jpy` / `active_diff_pct` を 1 行で出力
+- 新セクション `active pair breakdown (paper vs oos_daily)` で当日エントリー銘柄ごとに `paper_pnl / oos_daily / diff` をテーブル化
+- Pushover 通知本文も「Robust 13 上限: ... / Active N 銘柄: ...」の 2 行構成に変更
+- 通知トリガー: 旧 severity または active_severity のどちらかが立った日 (両方 None なら通知なし)
+
+### (F4) `_audit_macd_rci_direct_pairs(...)` 新設 — low_sample 評価穴の修正
+
+`collect_universe_specs` の `apply_sample_filter` 部分の終端で呼び出す。`macd_rci_params.json` の `robust=true` で `(MacdRci, sym)` が `universe_active.json` に居ない銘柄を抽出 → SQLite `experiments` から最新 robust id の `oos_trades / wf_window_total / wf_window_pass_ratio` を取得 → 既存閾値 (`min_oos_trades_for_live=30, _wf_relaxed=20`) で判定し、未満なら `paper_low_sample_excluded_latest.json` の `excluded` に追加。`reason` 欄に `(macd_rci_params direct, not in universe_active)` を併記。
+
+これにより `jp_live_runner._apply_low_sample_second_filter` (file ベース二重フィルタ) で、universe 経由でなく直接拾われる銘柄も含めて `(strategy_name, symbol)` ペアで paper entry を block できる。本日の `4568.T MacdRci` (oos_trades=17, oos_daily=46.5円, paper -3,350円) のような穴を以後は構造的に塞ぐ。
+
+### (F5) VPS 検算 — 本日 4/30 を再評価
+
+`make deploy-vps` 後、VPS で `_active_universe_sum_oos("2026-04-30")` を実行:
+
+```
+active_sum_oos_jpy = +4,058 円    pair_count = 4
+  4385.T MacdRci  n=4  paper=+5,100  oos_daily=+1,028
+  4568.T MacdRci  n=6  paper=-3,350  oos_daily=  +543
+  6723.T MacdRci  n=2  paper=  -100  oos_daily=+1,471
+  9433.T MacdRci  n=3  paper=+1,350  oos_daily=+1,016
+```
+
+→ paper +3,000 vs **active +4,058** = `active_diff_pct=-26.08%` で **active_severity=None** (警告対象外)。「立った 4 銘柄では概ね期待ペースで取れている」が新たに分かる。旧指標の `severity=critical (-81.6%)` と比較すると判断材料の質が大きく改善。
+
+`algo-trading.service` を 16:09 JST に再起動して新コードを反映。明日朝 9:00 以降の `finalize_paper_session` で新形式の `paper_vs_backtest_divergence_<DATE>.txt` と `last_divergence` が出力される。
+
+### 副次的な決定事項
+
+- 旧 `severity` (上振れ含む warning ロジック) は **後方互換のため変更しない**。`paper_promoted_floor_jpy` 更新ロジックも `sum_oos_snapshot` を見続ける (=理論上限を超えた日のみ昇格)。
+- `_notify_divergence` の Pushover priority: `severity == "critical"` または `active_severity == "critical"` のいずれかで `priority=1` (即時通知)。両方とも warning なら `priority=0`。
+- `scripts/paper_observability_report.py` の `_PREFIX_TO_BUCKET` と `paper_backtest_sync.py:_LIVE_PREFIX_TO_STRATEGY` の二重定義は、両ファイルのコメントで「同期させること」を明記。将来 `backend/lab/strategy_id_map.py` のような共通モジュールに切り出しても良いが、現在は循環 import 回避のため独立定義を維持。
+
+### フォローアップ
+
+- 翌営業日 (5/1 金) の `finalize_paper_session` 出力で `active_*` フィールドが正しく入っているかを確認。
+- 数営業日後に `active_severity` の発火頻度を旧 `severity` と比較し、偽陽性削減効果を定量化。
+- E4 (連続 critical 検知時の auto-pause) は引き続き別タスクで検討。`active_severity` が連続 N 日 critical かつ `active_pairs` の特定銘柄が連敗している場合に `paused_pairs` 提案を JSON で出力 (実反映は手動承認) のワークフローが安全。
+
+---
+
 ## 2026-04-30 (午後) ペーパーテスト報告 — 連続 critical 乖離 + halt.json 同期不全 + 4568.T paused 追加
 
 ### 背景
