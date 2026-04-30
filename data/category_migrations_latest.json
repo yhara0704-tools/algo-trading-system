@@ -1,0 +1,8046 @@
+{
+  "generated_at": "2026-04-30T17:56:46.639505",
+  "cur_snapshot": "2026-04-30.json",
+  "prev_snapshot": null,
+  "n_migrations": 0,
+  "migrations": [],
+  "theme_movements": [],
+  "themes_current": {
+    "レアアース": {
+      "n_tracked": 1,
+      "n_total": 35,
+      "members": [
+        {
+          "symbol": "8058.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "パワー半導体": {
+      "n_tracked": 3,
+      "n_total": 83,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "6723.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 4.33,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "半導体部材・部品": {
+      "n_tracked": 2,
+      "n_total": 105,
+      "members": [
+        {
+          "symbol": "3103.T",
+          "category": "A_high_vol_short_pref"
+        },
+        {
+          "symbol": "6613.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 5.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "フィジカルAI": {
+      "n_tracked": 4,
+      "n_total": 43,
+      "members": [
+        {
+          "symbol": "9984.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        },
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 2.75,
+      "status": "○ 中程度"
+    },
+    "ロボット": {
+      "n_tracked": 4,
+      "n_total": 138,
+      "members": [
+        {
+          "symbol": "9984.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 3.5,
+      "status": "○ 中程度"
+    },
+    "化粧品": {
+      "n_tracked": 1,
+      "n_total": 124,
+      "members": [
+        {
+          "symbol": "4911.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "美容家電": {
+      "n_tracked": 1,
+      "n_total": 12,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "光半導体・フォトニクス": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6613.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 5.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "ファインケミカル": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "3103.T",
+          "category": "A_high_vol_short_pref"
+        }
+      ],
+      "avg_rank": 5.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "包装フィルム": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "3103.T",
+          "category": "A_high_vol_short_pref"
+        }
+      ],
+      "avg_rank": 5.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "スーパー繊維": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "3103.T",
+          "category": "A_high_vol_short_pref"
+        }
+      ],
+      "avg_rank": 5.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "合成繊維": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "3103.T",
+          "category": "A_high_vol_short_pref"
+        }
+      ],
+      "avg_rank": 5.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "ナイロン": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "3103.T",
+          "category": "A_high_vol_short_pref"
+        }
+      ],
+      "avg_rank": 5.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "建設資材": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "3103.T",
+          "category": "A_high_vol_short_pref"
+        }
+      ],
+      "avg_rank": 5.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "医療器材": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "3103.T",
+          "category": "A_high_vol_short_pref"
+        }
+      ],
+      "avg_rank": 5.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "電子材料": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "3103.T",
+          "category": "A_high_vol_short_pref"
+        }
+      ],
+      "avg_rank": 5.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "自動車部材・部品": {
+      "n_tracked": 4,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "3103.T",
+          "category": "A_high_vol_short_pref"
+        },
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "6723.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 4.5,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "データセンター": {
+      "n_tracked": 6,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "3103.T",
+          "category": "A_high_vol_short_pref"
+        },
+        {
+          "symbol": "9984.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "9433.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "8058.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        }
+      ],
+      "avg_rank": 2.83,
+      "status": "○ 中程度"
+    },
+    "バイオマスプラスチック": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "3103.T",
+          "category": "A_high_vol_short_pref"
+        }
+      ],
+      "avg_rank": 5.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "脱プラスチック": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "3103.T",
+          "category": "A_high_vol_short_pref"
+        }
+      ],
+      "avg_rank": 5.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "燃料電池関連": {
+      "n_tracked": 5,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "3103.T",
+          "category": "A_high_vol_short_pref"
+        },
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "9433.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "8058.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "3Dプリンター": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "3103.T",
+          "category": "A_high_vol_short_pref"
+        },
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 4.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "ナノテクノロジー": {
+      "n_tracked": 4,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "3103.T",
+          "category": "A_high_vol_short_pref"
+        },
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "8058.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 3.5,
+      "status": "○ 中程度"
+    },
+    "防災": {
+      "n_tracked": 6,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "3103.T",
+          "category": "A_high_vol_short_pref"
+        },
+        {
+          "symbol": "9984.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "9433.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        }
+      ],
+      "avg_rank": 3.17,
+      "status": "○ 中程度"
+    },
+    "ウォームビズ": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "3103.T",
+          "category": "A_high_vol_short_pref"
+        }
+      ],
+      "avg_rank": 5.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "クールビズ": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "3103.T",
+          "category": "A_high_vol_short_pref"
+        }
+      ],
+      "avg_rank": 5.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "農業関連": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "3103.T",
+          "category": "A_high_vol_short_pref"
+        }
+      ],
+      "avg_rank": 5.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "老舗": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "3103.T",
+          "category": "A_high_vol_short_pref"
+        }
+      ],
+      "avg_rank": 5.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "放射能対策": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "3103.T",
+          "category": "A_high_vol_short_pref"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 5.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "アジア関連": {
+      "n_tracked": 5,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "3103.T",
+          "category": "A_high_vol_short_pref"
+        },
+        {
+          "symbol": "8306.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "8058.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "8136.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "繊維": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "3103.T",
+          "category": "A_high_vol_short_pref"
+        }
+      ],
+      "avg_rank": 5.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "半導体": {
+      "n_tracked": 3,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6613.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "6723.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 3.67,
+      "status": "○ 中程度"
+    },
+    "半導体製造装置": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6613.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 5.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "その他半導体関連": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6613.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 5.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "量子コンピューター": {
+      "n_tracked": 3,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6613.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        }
+      ],
+      "avg_rank": 3.33,
+      "status": "○ 中程度"
+    },
+    "センサー": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6613.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 5.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "5G": {
+      "n_tracked": 6,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6613.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "9984.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "9433.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        }
+      ],
+      "avg_rank": 3.17,
+      "status": "○ 中程度"
+    },
+    "医療機器": {
+      "n_tracked": 4,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6613.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 3.5,
+      "status": "○ 中程度"
+    },
+    "ウェアラブル端末": {
+      "n_tracked": 5,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6613.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        },
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 2.8,
+      "status": "○ 中程度"
+    },
+    "ファブレス": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6613.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 5.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "障害者支援": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6613.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 5.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "2021年のIPO": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6613.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 5.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "TOPIXコア30": {
+      "n_tracked": 7,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9984.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "8306.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "9433.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "8058.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        },
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 2.0,
+      "status": "○ 中程度"
+    },
+    "投資事業": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9984.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "8306.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "通信キャリア": {
+      "n_tracked": 3,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9984.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "9433.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        }
+      ],
+      "avg_rank": 2.0,
+      "status": "○ 中程度"
+    },
+    "ベンチャーキャピタル": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9984.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 5.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "アリババ関連": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9984.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 5.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "M&A": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9984.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "8306.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "人工知能": {
+      "n_tracked": 7,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9984.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "9468.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "9433.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        },
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "6723.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 2.57,
+      "status": "○ 中程度"
+    },
+    "生成AI": {
+      "n_tracked": 5,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9984.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "9433.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        },
+        {
+          "symbol": "6723.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 3.2,
+      "status": "○ 中程度"
+    },
+    "AIエージェント": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9984.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 5.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "サービスロボット": {
+      "n_tracked": 3,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9984.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "8136.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 4.33,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "自動運転車": {
+      "n_tracked": 7,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9984.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "8058.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        },
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "6723.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 2.86,
+      "status": "○ 中程度"
+    },
+    "コネクテッドカー": {
+      "n_tracked": 5,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9984.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "9433.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        },
+        {
+          "symbol": "6723.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 2.8,
+      "status": "○ 中程度"
+    },
+    "シェアリングエコノミー": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9984.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "9433.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "プロ野球": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9984.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 5.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "次世代ネットワーク": {
+      "n_tracked": 6,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9984.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "9433.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        },
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 2.5,
+      "status": "○ 中程度"
+    },
+    "ブロードバンド": {
+      "n_tracked": 3,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9984.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "9433.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        }
+      ],
+      "avg_rank": 2.0,
+      "status": "○ 中程度"
+    },
+    "スマートフォン": {
+      "n_tracked": 5,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9984.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "9468.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "9433.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        },
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.6,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "格安スマホ": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9984.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "9433.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "動画配信": {
+      "n_tracked": 6,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9984.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "9468.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "9433.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        },
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "8136.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 1.83,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "モバイルコンテンツ": {
+      "n_tracked": 4,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9984.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "9468.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "9433.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        }
+      ],
+      "avg_rank": 1.75,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "コンテンツ配信": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9984.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "9468.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "iPhone関連": {
+      "n_tracked": 5,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9984.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "9468.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "9433.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        },
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.6,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "iPad関連": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9984.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "Android": {
+      "n_tracked": 3,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9984.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "9433.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        }
+      ],
+      "avg_rank": 2.0,
+      "status": "○ 中程度"
+    },
+    "メガソーラー": {
+      "n_tracked": 5,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9984.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "8058.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        },
+        {
+          "symbol": "1605.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 2.4,
+      "status": "○ 中程度"
+    },
+    "風力発電": {
+      "n_tracked": 4,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9984.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "8058.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "1605.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 3.5,
+      "status": "○ 中程度"
+    },
+    "天然ガス火力発電": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9984.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 5.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "IoT": {
+      "n_tracked": 5,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9984.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "9433.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        },
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 2.4,
+      "status": "○ 中程度"
+    },
+    "M2M": {
+      "n_tracked": 4,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9984.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "9433.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 3.5,
+      "status": "○ 中程度"
+    },
+    "LTE": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9984.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "9433.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "ビッグデータ": {
+      "n_tracked": 4,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9984.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "9433.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "RPA": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9984.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        }
+      ],
+      "avg_rank": 2.5,
+      "status": "○ 中程度"
+    },
+    "顔認証": {
+      "n_tracked": 3,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9984.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 4.33,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "AIスピーカー": {
+      "n_tracked": 3,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9984.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "VR": {
+      "n_tracked": 4,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9984.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        },
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 2.25,
+      "status": "○ 中程度"
+    },
+    "デジタルツイン": {
+      "n_tracked": 3,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9984.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "9433.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        }
+      ],
+      "avg_rank": 2.0,
+      "status": "○ 中程度"
+    },
+    "スマホゲーム": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9984.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 5.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "位置情報ゲーム": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9984.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "8306.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "ゲーム関連": {
+      "n_tracked": 3,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9984.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "9468.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 2.33,
+      "status": "○ 中程度"
+    },
+    "公衆無線LAN": {
+      "n_tracked": 3,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9984.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "9433.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        }
+      ],
+      "avg_rank": 2.0,
+      "status": "○ 中程度"
+    },
+    "電子決済代行サービス": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9984.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 5.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "キャッシュレス決済": {
+      "n_tracked": 6,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9984.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "8306.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "9433.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        },
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.83,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "デジタル給与": {
+      "n_tracked": 3,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9984.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "9433.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        }
+      ],
+      "avg_rank": 2.0,
+      "status": "○ 中程度"
+    },
+    "QRコード": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9984.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        }
+      ],
+      "avg_rank": 2.5,
+      "status": "○ 中程度"
+    },
+    "ブロックチェーン": {
+      "n_tracked": 3,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9984.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        }
+      ],
+      "avg_rank": 3.33,
+      "status": "○ 中程度"
+    },
+    "プリペイドカード": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9984.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "9433.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "鉄道系ICカード": {
+      "n_tracked": 3,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9984.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "9433.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 2.33,
+      "status": "○ 中程度"
+    },
+    "クラウドコンピューティング": {
+      "n_tracked": 5,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9984.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "9468.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "9433.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        }
+      ],
+      "avg_rank": 2.4,
+      "status": "○ 中程度"
+    },
+    "デジタルサイネージ": {
+      "n_tracked": 5,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9984.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        },
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 2.8,
+      "status": "○ 中程度"
+    },
+    "eラーニング": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9984.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        }
+      ],
+      "avg_rank": 2.5,
+      "status": "○ 中程度"
+    },
+    "ふるさと納税": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9984.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 5.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "携帯ナビ": {
+      "n_tracked": 3,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9984.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "9433.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "6723.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 3.67,
+      "status": "○ 中程度"
+    },
+    "MaaS": {
+      "n_tracked": 3,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9984.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "9433.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        }
+      ],
+      "avg_rank": 2.0,
+      "status": "○ 中程度"
+    },
+    "がん最先端治療": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9984.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 5.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "PCR検査": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9984.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 5.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "NISA関連": {
+      "n_tracked": 7,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9984.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "8306.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "9433.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "8058.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        },
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.71,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "国際会計基準": {
+      "n_tracked": 9,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9984.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "9433.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "8058.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        },
+        {
+          "symbol": "4911.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "6723.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 2.44,
+      "status": "○ 中程度"
+    },
+    "Society5.0": {
+      "n_tracked": 8,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9984.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "9468.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "9433.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        },
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "6723.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 2.62,
+      "status": "○ 中程度"
+    },
+    "中国関連": {
+      "n_tracked": 11,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9984.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "9107.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "9468.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "8306.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "8058.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "4911.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "8136.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "6723.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 2.45,
+      "status": "○ 中程度"
+    },
+    "韓国関連": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9984.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 5.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "モンゴル関連": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9984.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "9433.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "中東関連": {
+      "n_tracked": 6,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9984.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        },
+        {
+          "symbol": "4911.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 2.5,
+      "status": "○ 中程度"
+    },
+    "シャリア指数": {
+      "n_tracked": 6,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9984.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        },
+        {
+          "symbol": "4911.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 2.5,
+      "status": "○ 中程度"
+    },
+    "ツイッター": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9984.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 5.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "YouTube": {
+      "n_tracked": 8,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9984.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "9468.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "9433.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        },
+        {
+          "symbol": "4911.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "8136.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 1.88,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "見守りサービス": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9984.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 5.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "ワンセグ": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9984.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "9433.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "アベノミクス関連": {
+      "n_tracked": 8,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9984.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "9468.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "8306.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "8058.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "8136.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 2.5,
+      "status": "○ 中程度"
+    },
+    "親子上場": {
+      "n_tracked": 7,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9984.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "9107.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "9433.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "8058.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        },
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 2.0,
+      "status": "○ 中程度"
+    },
+    "通信": {
+      "n_tracked": 3,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9984.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "9433.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        }
+      ],
+      "avg_rank": 2.0,
+      "status": "○ 中程度"
+    },
+    "IT関連": {
+      "n_tracked": 6,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9984.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "9468.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "9433.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        },
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 2.17,
+      "status": "○ 中程度"
+    },
+    "読売333": {
+      "n_tracked": 14,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9984.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "9107.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "9468.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "8306.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "9433.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "8058.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        },
+        {
+          "symbol": "4911.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "1605.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "8136.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "6723.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 2.21,
+      "status": "○ 中程度"
+    },
+    "JPX日経400": {
+      "n_tracked": 12,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9984.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "9107.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "8306.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "9433.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "8058.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        },
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "1605.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "8136.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "6723.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 2.42,
+      "status": "○ 中程度"
+    },
+    "JPXプライム150": {
+      "n_tracked": 10,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9984.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "8306.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "9433.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "8058.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        },
+        {
+          "symbol": "4911.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "8136.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "6723.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 2.3,
+      "status": "○ 中程度"
+    },
+    "家電": {
+      "n_tracked": 3,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "液晶テレビ関連": {
+      "n_tracked": 3,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "自動車電子化": {
+      "n_tracked": 5,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        },
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "6723.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 2.8,
+      "status": "○ 中程度"
+    },
+    "ハイブリッド車関連": {
+      "n_tracked": 3,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "8058.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "電気自動車関連": {
+      "n_tracked": 5,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "8058.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        },
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "6723.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 2.0,
+      "status": "○ 中程度"
+    },
+    "電気自動車充電器": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "燃料電池車": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "環境対応車関連": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 4.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "カーナビゲーション": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "6723.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 4.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "リチウムイオン電池": {
+      "n_tracked": 3,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "8058.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "ニッケル水素電池": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "蓄電池": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 4.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "全固体電池": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 4.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "太陽電池・太陽光発電システム": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 4.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "ペロブスカイト太陽電池": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "家庭用燃料電池": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "エコキュート": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 4.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "ヒートポンプ": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "4K・8Kテレビ": {
+      "n_tracked": 3,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "スマートテレビ": {
+      "n_tracked": 3,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "9433.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.67,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "冷蔵庫": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 4.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "洗濯機": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 4.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "エアコン": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 4.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "一眼レフカメラ": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 2.0,
+      "status": "○ 中程度"
+    },
+    "デジタルカメラ": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 2.0,
+      "status": "○ 中程度"
+    },
+    "デジタルビデオカメラ": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 2.0,
+      "status": "○ 中程度"
+    },
+    "ブルーレイ": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 2.0,
+      "status": "○ 中程度"
+    },
+    "オーディオ": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 2.0,
+      "status": "○ 中程度"
+    },
+    "調理家電": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "ミキサー": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "オール電化": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "住宅設備機器": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "省エネ住宅": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "長期優良住宅": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "リフォーム": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "FA関連": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "6723.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 4.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "電子マネー": {
+      "n_tracked": 5,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "9433.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        },
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 2.0,
+      "status": "○ 中程度"
+    },
+    "決済サービス": {
+      "n_tracked": 3,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "ローカル5G": {
+      "n_tracked": 3,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "9433.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        }
+      ],
+      "avg_rank": 1.33,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "コージェネレーション": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 4.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "CMOSセンサー": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 2.0,
+      "status": "○ 中程度"
+    },
+    "MEMS": {
+      "n_tracked": 3,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "情報セキュリティ": {
+      "n_tracked": 3,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        }
+      ],
+      "avg_rank": 2.67,
+      "status": "○ 中程度"
+    },
+    "生体認証": {
+      "n_tracked": 3,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "ETC": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 4.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "3D映像": {
+      "n_tracked": 3,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "GPS": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 2.0,
+      "status": "○ 中程度"
+    },
+    "ITS": {
+      "n_tracked": 3,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "6723.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 4.33,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "建設DX": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "スマートシティ": {
+      "n_tracked": 5,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "9433.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "8058.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        }
+      ],
+      "avg_rank": 2.0,
+      "status": "○ 中程度"
+    },
+    "スマートハウス": {
+      "n_tracked": 4,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "9433.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 2.5,
+      "status": "○ 中程度"
+    },
+    "スマートグリッド": {
+      "n_tracked": 6,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "8058.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        },
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "6723.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 2.5,
+      "status": "○ 中程度"
+    },
+    "スマートメーター": {
+      "n_tracked": 3,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "6723.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 4.33,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "スマートロック": {
+      "n_tracked": 3,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "9433.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.67,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "電子部品": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "発電電子部品": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "6723.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 4.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "液晶部材・部品": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 2.0,
+      "status": "○ 中程度"
+    },
+    "タッチパネル": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 2.0,
+      "status": "○ 中程度"
+    },
+    "LED照明": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "有機EL照明": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "パソコン": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "タブレット端末": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 2.0,
+      "status": "○ 中程度"
+    },
+    "グリーンIT": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 4.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "ドライブレコーダー": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 2.0,
+      "status": "○ 中程度"
+    },
+    "バイオテクノロジー関連": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "電子カルテ": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "再生医療": {
+      "n_tracked": 4,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "4911.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 2.5,
+      "status": "○ 中程度"
+    },
+    "iPS細胞": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "メタボリック対策": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "ホームヘルスケア": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "在宅医療": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "介護関連": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "介護ロボット": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "介護レンタル": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "省エネ支援": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 4.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "アンチエイジング": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "4911.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 2.0,
+      "status": "○ 中程度"
+    },
+    "光触媒": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "1605.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "ボーイング787": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "ICタグ": {
+      "n_tracked": 3,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "8058.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "セルフレジ": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "無人店舗": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "ユーロ高メリット": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 2.0,
+      "status": "○ 中程度"
+    },
+    "円安メリット": {
+      "n_tracked": 4,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "9107.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "8058.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 2.5,
+      "status": "○ 中程度"
+    },
+    "プロジェクションマッピング": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 2.0,
+      "status": "○ 中程度"
+    },
+    "REACH": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 4.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "有機ELディスプレー": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "電動アシスト自転車": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "監視カメラ": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "電子ミラー": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "ミラーレス車": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "自動翻訳": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "宅配ボックス": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "スマート農業": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 4.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "次世代農業ビジネス": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 4.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "植物工場": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "サブスクリプション": {
+      "n_tracked": 6,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "9468.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "8058.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        },
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.83,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "空飛ぶクルマ": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "テレビ会議": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 4.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "ワイヤレス充電": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "6723.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 4.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "メタバース": {
+      "n_tracked": 6,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "9433.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        },
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "8136.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 2.17,
+      "status": "○ 中程度"
+    },
+    "エヌビディア関連": {
+      "n_tracked": 3,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        }
+      ],
+      "avg_rank": 2.67,
+      "status": "○ 中程度"
+    },
+    "宇宙開発関連": {
+      "n_tracked": 3,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "ダイナミックプライシング": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "電子部品実装": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "水素": {
+      "n_tracked": 3,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "1605.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 3.67,
+      "status": "○ 中程度"
+    },
+    "ESG投資": {
+      "n_tracked": 6,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "8306.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "9433.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        },
+        {
+          "symbol": "4911.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.17,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "インド関連": {
+      "n_tracked": 6,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "8058.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        },
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "6723.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 2.5,
+      "status": "○ 中程度"
+    },
+    "チャインドネシア関連": {
+      "n_tracked": 3,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "9107.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "4911.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.67,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "ベトナム関連": {
+      "n_tracked": 3,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "8058.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.67,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "ロシア関連": {
+      "n_tracked": 6,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "9107.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "8058.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "4911.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "1605.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 2.33,
+      "status": "○ 中程度"
+    },
+    "ブラジル関連": {
+      "n_tracked": 8,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "9107.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "8306.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "8058.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "1605.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "8136.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 2.25,
+      "status": "○ 中程度"
+    },
+    "トルコ関連": {
+      "n_tracked": 3,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "8306.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "アフリカ関連": {
+      "n_tracked": 8,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "9107.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "8058.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        },
+        {
+          "symbol": "4911.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "1605.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 1.88,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "2024年問題": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "補聴器": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "人体通信": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        }
+      ],
+      "avg_rank": 1.5,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "電力線通信": {
+      "n_tracked": 3,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "9433.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        }
+      ],
+      "avg_rank": 1.33,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "電磁環境適合性": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "電池関連": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 4.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "固定電話": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "地上デジタル放送": {
+      "n_tracked": 3,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "ドライミスト": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "花粉症対策": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "4911.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 2.0,
+      "status": "○ 中程度"
+    },
+    "食の安全": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        }
+      ],
+      "avg_rank": 1.5,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "排出権取引": {
+      "n_tracked": 3,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "8306.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "8058.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.67,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "ノンフロン冷却": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "水ビジネス": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "8058.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 2.0,
+      "status": "○ 中程度"
+    },
+    "緑化関連": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "パリオリンピック": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "東京オリンピック": {
+      "n_tracked": 4,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "8306.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        },
+        {
+          "symbol": "8136.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 1.75,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "電気機器": {
+      "n_tracked": 4,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "category": "C_mid_vol_trend"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "6723.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 3.5,
+      "status": "○ 中程度"
+    },
+    "海運": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9107.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "LNG運搬船": {
+      "n_tracked": 3,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9107.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "8058.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "1605.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 1.67,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "原油安メリット": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9107.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "LNG": {
+      "n_tracked": 3,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9107.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "8058.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "1605.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 1.67,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "北極海航路": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9107.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "モーダルシフト": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9107.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "CO2回収・貯留": {
+      "n_tracked": 4,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9107.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "8058.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "1605.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 2.5,
+      "status": "○ 中程度"
+    },
+    "洋上風力発電": {
+      "n_tracked": 4,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9107.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "8058.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "1605.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 2.5,
+      "status": "○ 中程度"
+    },
+    "インドネシア関連": {
+      "n_tracked": 3,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9107.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "8058.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "1605.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 1.67,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "運輸": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9107.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "出版": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9468.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "映画": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9468.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "ライブ配信": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9468.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "動画投稿サイト": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9468.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "ポータルサイト": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9468.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "音楽配信": {
+      "n_tracked": 3,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9468.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "9433.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "電子書籍": {
+      "n_tracked": 4,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9468.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "9433.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        },
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 0.75,
+      "status": "✗ 廃れ (除外候補)"
+    },
+    "アニメ": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9468.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "コミック": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9468.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "著作権ビジネス": {
+      "n_tracked": 3,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9468.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "8136.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 1.67,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "IP": {
+      "n_tracked": 3,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9468.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "8136.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 1.67,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "ソーシャルメディア": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9468.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "ゲームソフト": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9468.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "eスポーツ": {
+      "n_tracked": 4,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9468.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "9433.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        },
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 0.75,
+      "status": "✗ 廃れ (除外候補)"
+    },
+    "LINE関連": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9468.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "ネット選挙": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9468.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "選挙関連": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9468.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "巣ごもり": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9468.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "クールジャパン": {
+      "n_tracked": 3,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9468.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "8136.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 1.67,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "コンテンツ": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9468.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "8136.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 2.0,
+      "status": "○ 中程度"
+    },
+    "関税フリー": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9468.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        }
+      ],
+      "avg_rank": 0.5,
+      "status": "✗ 廃れ (除外候補)"
+    },
+    "ウェブサービス": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9468.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        }
+      ],
+      "avg_rank": 0.5,
+      "status": "✗ 廃れ (除外候補)"
+    },
+    "メガバンク": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "8306.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "銀行": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "8306.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "リース": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "8306.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "証券": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "8306.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "サービサー": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "8306.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "クレジットカード": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "8306.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "デジタル通貨": {
+      "n_tracked": 3,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "8306.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "9433.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        }
+      ],
+      "avg_rank": 0.67,
+      "status": "✗ 廃れ (除外候補)"
+    },
+    "仮想通貨": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "8306.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "ステーブルコイン": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "8306.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        }
+      ],
+      "avg_rank": 0.5,
+      "status": "✗ 廃れ (除外候補)"
+    },
+    "NFT": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "8306.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "消費者金融": {
+      "n_tracked": 3,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "8306.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "9433.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        }
+      ],
+      "avg_rank": 0.67,
+      "status": "✗ 廃れ (除外候補)"
+    },
+    "フィンテック": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "8306.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "金利上昇メリット": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "8306.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "事業承継": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "8306.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "ドバイ関連": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "8306.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "8058.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "ミャンマー関連": {
+      "n_tracked": 5,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "8306.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "9433.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "8058.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        }
+      ],
+      "avg_rank": 1.6,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "カーボンニュートラル": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "8306.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "8058.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "カーボンオフセット": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "8306.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "8058.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "WBC": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "8306.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "攻めのIT経営銘柄": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "8306.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "好配当": {
+      "n_tracked": 3,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "8306.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "8058.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "1605.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 1.67,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "金融": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "8306.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "CATV": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9433.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "6G": {
+      "n_tracked": 4,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9433.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        },
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.75,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "デジタルシネマ": {
+      "n_tracked": 3,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9433.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        },
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 0.67,
+      "status": "✗ 廃れ (除外候補)"
+    },
+    "WiMAX": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9433.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "光ファイバー": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9433.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        }
+      ],
+      "avg_rank": 0.5,
+      "status": "✗ 廃れ (除外候補)"
+    },
+    "銀行事業・業務": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9433.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "ネット銀行": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9433.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "サーバー冷却": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9433.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "ライブコマース": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9433.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "4911.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "スポーツテック": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9433.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        }
+      ],
+      "avg_rank": 0.5,
+      "status": "✗ 廃れ (除外候補)"
+    },
+    "仮想空間": {
+      "n_tracked": 3,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9433.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        },
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 0.67,
+      "status": "✗ 廃れ (除外候補)"
+    },
+    "SMS": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9433.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        }
+      ],
+      "avg_rank": 0.5,
+      "status": "✗ 廃れ (除外候補)"
+    },
+    "SaaS": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9433.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        }
+      ],
+      "avg_rank": 0.5,
+      "status": "✗ 廃れ (除外候補)"
+    },
+    "ドローン": {
+      "n_tracked": 3,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9433.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        },
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 0.67,
+      "status": "✗ 廃れ (除外候補)"
+    },
+    "光海底ケーブル": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9433.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        }
+      ],
+      "avg_rank": 0.5,
+      "status": "✗ 廃れ (除外候補)"
+    },
+    "電動キックボード": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9433.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "ディフェンシブ": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9433.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        }
+      ],
+      "avg_rank": 0.5,
+      "status": "✗ 廃れ (除外候補)"
+    },
+    "テレワーク": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9433.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        }
+      ],
+      "avg_rank": 0.5,
+      "status": "✗ 廃れ (除外候補)"
+    },
+    "Go To イート": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9433.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "なでしこ銘柄": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9433.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "優待人気": {
+      "n_tracked": 4,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9433.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        },
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "8136.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 1.25,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "重電": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 5.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "原子炉": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 5.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "原子力発電": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "8058.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "システムインテグレーション": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        }
+      ],
+      "avg_rank": 2.5,
+      "status": "○ 中程度"
+    },
+    "ソフト・システム開発": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        }
+      ],
+      "avg_rank": 2.5,
+      "status": "○ 中程度"
+    },
+    "インフラ輸出": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "8058.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "電力設備投資関連": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 5.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "鉄道関連": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "8058.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "鉄道設備投資": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 5.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "リニア中央新幹線": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 5.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "リニア鉄道輸出": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 5.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "リニアモーターカー": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 5.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "ホームドア": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 5.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "送電": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 5.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "石炭ガス化複合発電": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 5.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "石炭火力発電": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "8058.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "火力発電": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 5.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "地熱発電": {
+      "n_tracked": 3,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "8058.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "1605.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "核融合発電": {
+      "n_tracked": 4,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "8058.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        },
+        {
+          "symbol": "1605.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 2.25,
+      "status": "○ 中程度"
+    },
+    "小型原子炉": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 5.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "オイルサンド・シェール": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "1605.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 4.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "クリーンルーム": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 5.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "証券取引所システム": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 5.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "電子政府": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        }
+      ],
+      "avg_rank": 2.5,
+      "status": "○ 中程度"
+    },
+    "マイナンバー": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        }
+      ],
+      "avg_rank": 2.5,
+      "status": "○ 中程度"
+    },
+    "ATM": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 5.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "トレーサビリティー": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        }
+      ],
+      "avg_rank": 2.5,
+      "status": "○ 中程度"
+    },
+    "エレベーター": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 5.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "eKYC": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 5.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "ICカード": {
+      "n_tracked": 3,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "6723.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 3.67,
+      "status": "○ 中程度"
+    },
+    "MRAM": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "6723.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 5.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "ブレイン・マシン・インターフェース": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        }
+      ],
+      "avg_rank": 2.5,
+      "status": "○ 中程度"
+    },
+    "ERP": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 5.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "MRI": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 5.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "がん検査": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 5.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "災害ロボット": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 5.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "ストレージ": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 5.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "防衛": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 5.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "生産性革命": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 5.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "オフショア開発": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 5.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "国際優良株": {
+      "n_tracked": 3,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "8058.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 2.33,
+      "status": "○ 中程度"
+    },
+    "欧州関連": {
+      "n_tracked": 3,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "8136.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "イラク関連": {
+      "n_tracked": 3,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "8058.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "1605.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "サハリン2": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "8058.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "独立系発電事業者": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 5.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "微細藻類": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 5.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "01銘柄": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 5.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "日本版SOX法": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 5.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "新紙幣": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 5.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "都市鉱山": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 5.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "リサイクル": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "8058.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "CO2削減触媒": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 5.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "海水淡水化": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6501.T",
+          "category": "B_high_vol_trend_follow"
+        },
+        {
+          "symbol": "8058.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "総合商社": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "8058.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "資源開発": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "8058.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "1605.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 2.0,
+      "status": "○ 中程度"
+    },
+    "石炭": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "8058.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "石油": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "8058.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "1605.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 2.0,
+      "status": "○ 中程度"
+    },
+    "鉄鉱石": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "8058.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "天然ガス": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "8058.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "シェールガス": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "8058.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "1605.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 2.0,
+      "status": "○ 中程度"
+    },
+    "LPG": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "8058.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "プラント": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "8058.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "鉄鋼": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "8058.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "ニッケル": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "8058.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "レアメタル": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "8058.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "1605.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 2.0,
+      "status": "○ 中程度"
+    },
+    "銅": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "8058.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "ウラン": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "8058.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "プラチナ": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "8058.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "バイオエタノール": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "8058.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "太陽熱発電": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "8058.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "コンビニエンスストア": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "8058.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "飼料": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "8058.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "水産資源": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "8058.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "養殖マグロ": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "8058.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "養殖": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "8058.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "農薬": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "8058.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "三菱スペースジェット": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "8058.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "原油高メリット": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "8058.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "1605.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 2.0,
+      "status": "○ 中程度"
+    },
+    "アンモニア": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "8058.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "1605.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 2.0,
+      "status": "○ 中程度"
+    },
+    "脱炭素": {
+      "n_tracked": 3,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "8058.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        },
+        {
+          "symbol": "1605.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 1.33,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "オーストラリア関連": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "8058.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "1605.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 2.0,
+      "status": "○ 中程度"
+    },
+    "タイ関連": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "8058.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "ポストコロナ": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "8058.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "PFI": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "8058.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "商社": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "8058.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "量子暗号通信": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        }
+      ],
+      "avg_rank": 0.0,
+      "status": "✗ 廃れ (除外候補)"
+    },
+    "エッジコンピューティング": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        }
+      ],
+      "avg_rank": 0.0,
+      "status": "✗ 廃れ (除外候補)"
+    },
+    "サイバーセキュリティ": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        }
+      ],
+      "avg_rank": 0.0,
+      "status": "✗ 廃れ (除外候補)"
+    },
+    "検索サイト": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        }
+      ],
+      "avg_rank": 0.0,
+      "status": "✗ 廃れ (除外候補)"
+    },
+    "気象情報": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        }
+      ],
+      "avg_rank": 0.0,
+      "status": "✗ 廃れ (除外候補)"
+    },
+    "NFC": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        },
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 0.5,
+      "status": "✗ 廃れ (除外候補)"
+    },
+    "遠隔医療": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        }
+      ],
+      "avg_rank": 0.0,
+      "status": "✗ 廃れ (除外候補)"
+    },
+    "再生可能エネルギー": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        },
+        {
+          "symbol": "1605.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 1.5,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "太陽光発電関連": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        },
+        {
+          "symbol": "1605.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 1.5,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "グラフェン": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        }
+      ],
+      "avg_rank": 0.0,
+      "status": "✗ 廃れ (除外候補)"
+    },
+    "電子お薬手帳": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "9432.T",
+          "category": "F_low_vol_or_ng"
+        }
+      ],
+      "avg_rank": 0.0,
+      "status": "✗ 廃れ (除外候補)"
+    },
+    "健康・機能性食品": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "4911.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "美容": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "4911.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "インバウンド": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "4911.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "8136.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 2.0,
+      "status": "○ 中程度"
+    },
+    "個人消費関連": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "4911.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "スキンケア": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "4911.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "発毛・育毛": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "4911.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "毛髪": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "4911.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "インフルエンザ関連": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "4911.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "サマーストック": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "4911.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "猛暑": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "4911.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "8136.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 2.0,
+      "status": "○ 中程度"
+    },
+    "オムニチャネル": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "4911.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "育児": {
+      "n_tracked": 2,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "4911.T",
+          "category": "E_low_vol_trend"
+        },
+        {
+          "symbol": "8136.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 2.0,
+      "status": "○ 中程度"
+    },
+    "アミノ酸": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "4911.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "免税店": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "4911.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "越境EC": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "4911.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "ハラル": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "4911.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "エコ・ファースト制度": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "4911.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "シニア": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "4911.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "輸出": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "4911.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "銀イオン商品": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "4911.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "衛生": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "4911.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "プレイステーション": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "音楽": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "放送機器": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "ライドシェア": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "携帯電話部材・部品": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "ハードディスクドライブ": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "インプランタブル機器": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "クラウドゲーム": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "アップル": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "モバイル通信販売": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "MR": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "空中ディスプレー": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "プロジェクター": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "業務用モニター": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "ハイレゾ": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "電子ペーパー": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "遺伝子治療": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "鬼滅の刃": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "年末商戦": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "クリスマス": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "メキシコ関連": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "カメラ": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "自分撮り": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6758.T",
+          "category": "E_low_vol_trend"
+        }
+      ],
+      "avg_rank": 1.0,
+      "status": "▽ 弱め (低ボラ)"
+    },
+    "海底資源": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "1605.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "メタンハイドレート": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "1605.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "GTL": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "1605.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "シェールオイル": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "1605.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "ヨウ素": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "1605.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "CO2固定化技術": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "1605.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "エネルギー": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "1605.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "キャラクター": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "8136.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "レジャー施設関連": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "8136.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "テーマパーク": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "8136.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "アミューズメント": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "8136.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "知育": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "8136.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "レジャー・リゾート": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "8136.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "電子チケット": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "8136.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "マレーシア関連": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "8136.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "リベンジ消費": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "8136.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "ハロウィン": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "8136.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "10連休": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "8136.T",
+          "category": "C_mid_vol_trend"
+        }
+      ],
+      "avg_rank": 3.0,
+      "status": "○ 中程度"
+    },
+    "システムLSI": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6723.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 5.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "画像認識": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6723.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 5.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "SDV": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6723.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 5.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "Wii": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6723.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 5.0,
+      "status": "🔥 強い (高ボラ集中)"
+    },
+    "電子機器": {
+      "n_tracked": 1,
+      "n_total": null,
+      "members": [
+        {
+          "symbol": "6723.T",
+          "category": "B_high_vol_trend_follow"
+        }
+      ],
+      "avg_rank": 5.0,
+      "status": "🔥 強い (高ボラ集中)"
+    }
+  }
+}

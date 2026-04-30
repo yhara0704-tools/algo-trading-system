@@ -232,6 +232,35 @@ def main() -> None:
     print(f"=> 結果保存: {out_path.relative_to(ROOT)}")
     print(f"\n累計: {sum(len(cat_members[c]) for c in CATEGORY_ORDER)} 銘柄を 6 カテゴリに分類")
 
+    # ── 履歴スナップショット保存 (動的カテゴリ追跡用) ────────────────────
+    # ユーザー指針 (2026-04-30 17:52): カテゴライズされた中身は動的に変化する。
+    # ずっと強いテーマもあれば、すぐ廃れるテーマもある。
+    # → 週次スナップショットを蓄積して、後で遷移検出 + テーマ強弱分析に使う。
+    today_str = datetime.now().strftime("%Y-%m-%d")
+    history_dir = ROOT / "data/category_history"
+    history_dir.mkdir(parents=True, exist_ok=True)
+    snapshot_path = history_dir / f"{today_str}.json"
+    snapshot_payload = {
+        "snapshot_date": today_str,
+        "n_symbols": len(profiles),
+        "symbol_to_category": sym_to_cat,
+        "category_counts": {c: len(cat_members[c]) for c in CATEGORY_ORDER},
+        "symbol_features": {
+            sym: {
+                "category": sym_to_cat[sym],
+                "vol30": round(_vol30(profiles[sym]), 2),
+                "yoriten": profiles[sym].get("yoriten_pct", 0),
+                "best_observe_min": (profiles[sym].get("best_observe_min") or {}).get("observe_min"),
+            }
+            for sym in profiles
+        },
+    }
+    snapshot_path.write_text(
+        json.dumps(snapshot_payload, ensure_ascii=False, indent=2, default=str),
+        encoding="utf-8",
+    )
+    print(f"=> 履歴スナップショット保存: {snapshot_path.relative_to(ROOT)}")
+
 
 if __name__ == "__main__":
     main()
