@@ -1,0 +1,3388 @@
+{
+  "generated_at": "2026-04-30T17:26:45.533898",
+  "n_symbols": 35,
+  "n_profiled": 35,
+  "days": 7,
+  "profiles": {
+    "1605.T": {
+      "symbol": "1605.T",
+      "n_days": 7,
+      "gap_stats": {
+        "mean": 0.269,
+        "std": 1.466,
+        "abs_mean": 1.19,
+        "min": -2.209,
+        "max": 2.495
+      },
+      "observe_predict": {
+        "3": {
+          "sample": 1,
+          "corr": null,
+          "same_dir_pct": null
+        },
+        "5": {
+          "sample": 7,
+          "corr": -0.697,
+          "same_dir_pct": 42.9,
+          "non_zero_sample": 6
+        },
+        "8": {
+          "sample": 7,
+          "corr": -0.705,
+          "same_dir_pct": 42.9,
+          "non_zero_sample": 6
+        },
+        "10": {
+          "sample": 7,
+          "corr": -0.65,
+          "same_dir_pct": 28.6,
+          "non_zero_sample": 7
+        },
+        "15": {
+          "sample": 7,
+          "corr": -0.388,
+          "same_dir_pct": 28.6,
+          "non_zero_sample": 7
+        },
+        "20": {
+          "sample": 7,
+          "corr": -0.353,
+          "same_dir_pct": 42.9,
+          "non_zero_sample": 4
+        }
+      },
+      "best_observe_min": {
+        "observe_min": 5,
+        "same_dir_pct": 42.9,
+        "corr": -0.697
+      },
+      "yoriten_pct": 14.3,
+      "vol_decay_range_pct": {
+        "3": 1.983,
+        "5": 0.789,
+        "8": 1.15,
+        "10": 1.242,
+        "15": 1.319,
+        "20": 1.475,
+        "30": 1.621
+      },
+      "bias_recommendation": "trend_follow",
+      "notes": [
+        "yoriten_pct=14.3 <= 25%, トレンド継続型"
+      ]
+    },
+    "2413.T": {
+      "symbol": "2413.T",
+      "n_days": 7,
+      "gap_stats": {
+        "mean": -0.725,
+        "std": 0.698,
+        "abs_mean": 0.725,
+        "min": -1.902,
+        "max": 0.0
+      },
+      "observe_predict": {
+        "3": {
+          "sample": 1,
+          "corr": null,
+          "same_dir_pct": null
+        },
+        "5": {
+          "sample": 7,
+          "corr": 0.964,
+          "same_dir_pct": 57.1,
+          "non_zero_sample": 6
+        },
+        "8": {
+          "sample": 7,
+          "corr": 0.872,
+          "same_dir_pct": 42.9,
+          "non_zero_sample": 6
+        },
+        "10": {
+          "sample": 7,
+          "corr": 0.649,
+          "same_dir_pct": 28.6,
+          "non_zero_sample": 6
+        },
+        "15": {
+          "sample": 7,
+          "corr": 0.317,
+          "same_dir_pct": 28.6,
+          "non_zero_sample": 7
+        },
+        "20": {
+          "sample": 7,
+          "corr": 0.445,
+          "same_dir_pct": 42.9,
+          "non_zero_sample": 5
+        }
+      },
+      "best_observe_min": {
+        "observe_min": 5,
+        "same_dir_pct": 57.1,
+        "corr": 0.964
+      },
+      "yoriten_pct": 14.3,
+      "vol_decay_range_pct": {
+        "3": 1.309,
+        "5": 0.611,
+        "8": 0.772,
+        "10": 0.948,
+        "15": 1.223,
+        "20": 1.325,
+        "30": 1.542
+      },
+      "bias_recommendation": "trend_follow",
+      "notes": [
+        "yoriten_pct=14.3 <= 25%, トレンド継続型"
+      ]
+    },
+    "2432.T": {
+      "symbol": "2432.T",
+      "n_days": 7,
+      "gap_stats": {
+        "mean": -0.404,
+        "std": 0.751,
+        "abs_mean": 0.687,
+        "min": -1.577,
+        "max": 0.919
+      },
+      "observe_predict": {
+        "3": {
+          "sample": 1,
+          "corr": null,
+          "same_dir_pct": null
+        },
+        "5": {
+          "sample": 7,
+          "corr": -0.742,
+          "same_dir_pct": 14.3,
+          "non_zero_sample": 6
+        },
+        "8": {
+          "sample": 7,
+          "corr": -0.602,
+          "same_dir_pct": 28.6,
+          "non_zero_sample": 6
+        },
+        "10": {
+          "sample": 7,
+          "corr": -0.553,
+          "same_dir_pct": 42.9,
+          "non_zero_sample": 7
+        },
+        "15": {
+          "sample": 7,
+          "corr": -0.43,
+          "same_dir_pct": 28.6,
+          "non_zero_sample": 4
+        },
+        "20": {
+          "sample": 7,
+          "corr": 0.629,
+          "same_dir_pct": 71.4,
+          "non_zero_sample": 7
+        }
+      },
+      "best_observe_min": {
+        "observe_min": 20,
+        "same_dir_pct": 71.4,
+        "corr": 0.629
+      },
+      "yoriten_pct": 0.0,
+      "vol_decay_range_pct": {
+        "3": 1.074,
+        "5": 0.275,
+        "8": 0.463,
+        "10": 0.555,
+        "15": 0.735,
+        "20": 0.862,
+        "30": 1.097
+      },
+      "bias_recommendation": "trend_follow",
+      "notes": [
+        "yoriten_pct=0.0 <= 25%, トレンド継続型"
+      ]
+    },
+    "3103.T": {
+      "symbol": "3103.T",
+      "n_days": 7,
+      "gap_stats": {
+        "mean": 1.606,
+        "std": 5.759,
+        "abs_mean": 5.27,
+        "min": -10.509,
+        "max": 7.477
+      },
+      "observe_predict": {
+        "3": {
+          "sample": 1,
+          "corr": null,
+          "same_dir_pct": null
+        },
+        "5": {
+          "sample": 4,
+          "corr": 0.075,
+          "same_dir_pct": 50.0,
+          "non_zero_sample": 4
+        },
+        "8": {
+          "sample": 5,
+          "corr": 0.626,
+          "same_dir_pct": 80.0,
+          "non_zero_sample": 5
+        },
+        "10": {
+          "sample": 6,
+          "corr": 0.278,
+          "same_dir_pct": 83.3,
+          "non_zero_sample": 6
+        },
+        "15": {
+          "sample": 6,
+          "corr": -0.561,
+          "same_dir_pct": 50.0,
+          "non_zero_sample": 5
+        },
+        "20": {
+          "sample": 7,
+          "corr": 0.042,
+          "same_dir_pct": 57.1,
+          "non_zero_sample": 6
+        }
+      },
+      "best_observe_min": {
+        "observe_min": 10,
+        "same_dir_pct": 83.3,
+        "corr": 0.278
+      },
+      "yoriten_pct": 57.1,
+      "vol_decay_range_pct": {
+        "3": 3.842,
+        "5": 4.169,
+        "8": 6.107,
+        "10": 7.33,
+        "15": 8.652,
+        "20": 9.112,
+        "30": 12.15
+      },
+      "bias_recommendation": "neutral",
+      "notes": [
+        "abs_gap_mean=5.27%, ギャップ大きい銘柄"
+      ]
+    },
+    "3382.T": {
+      "symbol": "3382.T",
+      "n_days": 7,
+      "gap_stats": {
+        "mean": 0.038,
+        "std": 0.638,
+        "abs_mean": 0.583,
+        "min": -0.941,
+        "max": 0.825
+      },
+      "observe_predict": {
+        "3": {
+          "sample": 1,
+          "corr": null,
+          "same_dir_pct": null
+        },
+        "5": {
+          "sample": 7,
+          "corr": 0.167,
+          "same_dir_pct": 57.1,
+          "non_zero_sample": 5
+        },
+        "8": {
+          "sample": 7,
+          "corr": 0.194,
+          "same_dir_pct": 57.1,
+          "non_zero_sample": 6
+        },
+        "10": {
+          "sample": 7,
+          "corr": 0.646,
+          "same_dir_pct": 71.4,
+          "non_zero_sample": 7
+        },
+        "15": {
+          "sample": 7,
+          "corr": -0.019,
+          "same_dir_pct": 42.9,
+          "non_zero_sample": 6
+        },
+        "20": {
+          "sample": 7,
+          "corr": -0.224,
+          "same_dir_pct": 57.1,
+          "non_zero_sample": 6
+        }
+      },
+      "best_observe_min": {
+        "observe_min": 10,
+        "same_dir_pct": 71.4,
+        "corr": 0.646
+      },
+      "yoriten_pct": 14.3,
+      "vol_decay_range_pct": {
+        "3": 1.768,
+        "5": 0.491,
+        "8": 0.618,
+        "10": 0.687,
+        "15": 0.895,
+        "20": 1.028,
+        "30": 1.118
+      },
+      "bias_recommendation": "trend_follow",
+      "notes": [
+        "yoriten_pct=14.3 <= 25%, トレンド継続型"
+      ]
+    },
+    "4385.T": {
+      "symbol": "4385.T",
+      "n_days": 7,
+      "gap_stats": {
+        "mean": -1.34,
+        "std": 1.736,
+        "abs_mean": 1.594,
+        "min": -4.506,
+        "max": 0.584
+      },
+      "observe_predict": {
+        "3": {
+          "sample": 0,
+          "corr": null,
+          "same_dir_pct": null
+        },
+        "5": {
+          "sample": 6,
+          "corr": 0.141,
+          "same_dir_pct": 33.3,
+          "non_zero_sample": 6
+        },
+        "8": {
+          "sample": 7,
+          "corr": -0.182,
+          "same_dir_pct": 28.6,
+          "non_zero_sample": 5
+        },
+        "10": {
+          "sample": 7,
+          "corr": -0.468,
+          "same_dir_pct": 42.9,
+          "non_zero_sample": 6
+        },
+        "15": {
+          "sample": 7,
+          "corr": 0.293,
+          "same_dir_pct": 28.6,
+          "non_zero_sample": 6
+        },
+        "20": {
+          "sample": 7,
+          "corr": 0.709,
+          "same_dir_pct": 28.6,
+          "non_zero_sample": 6
+        }
+      },
+      "best_observe_min": {
+        "observe_min": 10,
+        "same_dir_pct": 42.9,
+        "corr": -0.468
+      },
+      "yoriten_pct": 0.0,
+      "vol_decay_range_pct": {
+        "5": 0.37,
+        "8": 0.769,
+        "10": 0.841,
+        "15": 1.027,
+        "20": 1.393,
+        "30": 1.472
+      },
+      "bias_recommendation": "trend_follow",
+      "notes": [
+        "yoriten_pct=0.0 <= 25%, トレンド継続型"
+      ]
+    },
+    "4568.T": {
+      "symbol": "4568.T",
+      "n_days": 7,
+      "gap_stats": {
+        "mean": -1.975,
+        "std": 2.045,
+        "abs_mean": 1.981,
+        "min": -6.81,
+        "max": 0.02
+      },
+      "observe_predict": {
+        "3": {
+          "sample": 1,
+          "corr": null,
+          "same_dir_pct": null
+        },
+        "5": {
+          "sample": 6,
+          "corr": 0.151,
+          "same_dir_pct": 50.0,
+          "non_zero_sample": 5
+        },
+        "8": {
+          "sample": 6,
+          "corr": -0.378,
+          "same_dir_pct": 33.3,
+          "non_zero_sample": 6
+        },
+        "10": {
+          "sample": 7,
+          "corr": -0.665,
+          "same_dir_pct": 42.9,
+          "non_zero_sample": 7
+        },
+        "15": {
+          "sample": 7,
+          "corr": -0.754,
+          "same_dir_pct": 14.3,
+          "non_zero_sample": 7
+        },
+        "20": {
+          "sample": 7,
+          "corr": -0.24,
+          "same_dir_pct": 28.6,
+          "non_zero_sample": 6
+        }
+      },
+      "best_observe_min": {
+        "observe_min": 5,
+        "same_dir_pct": 50.0,
+        "corr": 0.151
+      },
+      "yoriten_pct": 0.0,
+      "vol_decay_range_pct": {
+        "3": 1.9,
+        "5": 0.597,
+        "8": 0.859,
+        "10": 1.468,
+        "15": 1.937,
+        "20": 1.971,
+        "30": 2.02
+      },
+      "bias_recommendation": "trend_follow",
+      "notes": [
+        "yoriten_pct=0.0 <= 25%, トレンド継続型"
+      ]
+    },
+    "4592.T": {
+      "symbol": "4592.T",
+      "n_days": 7,
+      "gap_stats": {
+        "mean": -0.229,
+        "std": 1.804,
+        "abs_mean": 1.296,
+        "min": -3.288,
+        "max": 2.982
+      },
+      "observe_predict": {
+        "3": {
+          "sample": 1,
+          "corr": null,
+          "same_dir_pct": null
+        },
+        "5": {
+          "sample": 7,
+          "corr": -0.027,
+          "same_dir_pct": 42.9,
+          "non_zero_sample": 7
+        },
+        "8": {
+          "sample": 7,
+          "corr": 0.14,
+          "same_dir_pct": 28.6,
+          "non_zero_sample": 5
+        },
+        "10": {
+          "sample": 7,
+          "corr": 0.024,
+          "same_dir_pct": 42.9,
+          "non_zero_sample": 6
+        },
+        "15": {
+          "sample": 7,
+          "corr": -0.022,
+          "same_dir_pct": 14.3,
+          "non_zero_sample": 6
+        },
+        "20": {
+          "sample": 7,
+          "corr": 0.259,
+          "same_dir_pct": 42.9,
+          "non_zero_sample": 7
+        }
+      },
+      "best_observe_min": {
+        "observe_min": 5,
+        "same_dir_pct": 42.9,
+        "corr": -0.027
+      },
+      "yoriten_pct": 0.0,
+      "vol_decay_range_pct": {
+        "3": 2.779,
+        "5": 0.811,
+        "8": 1.092,
+        "10": 1.227,
+        "15": 1.324,
+        "20": 1.552,
+        "30": 1.795
+      },
+      "bias_recommendation": "trend_follow",
+      "notes": [
+        "yoriten_pct=0.0 <= 25%, トレンド継続型"
+      ]
+    },
+    "4689.T": {
+      "symbol": "4689.T",
+      "n_days": 7,
+      "gap_stats": {
+        "mean": -0.245,
+        "std": 0.988,
+        "abs_mean": 0.911,
+        "min": -1.797,
+        "max": 1.097
+      },
+      "observe_predict": {
+        "3": {
+          "sample": 1,
+          "corr": null,
+          "same_dir_pct": null
+        },
+        "5": {
+          "sample": 7,
+          "corr": 0.214,
+          "same_dir_pct": 14.3,
+          "non_zero_sample": 3
+        },
+        "8": {
+          "sample": 7,
+          "corr": -0.005,
+          "same_dir_pct": 28.6,
+          "non_zero_sample": 3
+        },
+        "10": {
+          "sample": 7,
+          "corr": -0.29,
+          "same_dir_pct": 28.6,
+          "non_zero_sample": 6
+        },
+        "15": {
+          "sample": 7,
+          "corr": -0.33,
+          "same_dir_pct": 42.9,
+          "non_zero_sample": 7
+        },
+        "20": {
+          "sample": 7,
+          "corr": -0.205,
+          "same_dir_pct": 42.9,
+          "non_zero_sample": 5
+        }
+      },
+      "best_observe_min": {
+        "observe_min": 15,
+        "same_dir_pct": 42.9,
+        "corr": -0.33
+      },
+      "yoriten_pct": 14.3,
+      "vol_decay_range_pct": {
+        "3": 0.63,
+        "5": 0.274,
+        "8": 0.471,
+        "10": 0.575,
+        "15": 0.62,
+        "20": 0.763,
+        "30": 0.916
+      },
+      "bias_recommendation": "trend_follow",
+      "notes": [
+        "yoriten_pct=14.3 <= 25%, トレンド継続型"
+      ]
+    },
+    "4755.T": {
+      "symbol": "4755.T",
+      "n_days": 7,
+      "gap_stats": {
+        "mean": -0.506,
+        "std": 0.732,
+        "abs_mean": 0.621,
+        "min": -1.62,
+        "max": 0.219
+      },
+      "observe_predict": {
+        "3": {
+          "sample": 1,
+          "corr": null,
+          "same_dir_pct": null
+        },
+        "5": {
+          "sample": 7,
+          "corr": -0.052,
+          "same_dir_pct": 57.1,
+          "non_zero_sample": 5
+        },
+        "8": {
+          "sample": 7,
+          "corr": 0.211,
+          "same_dir_pct": 85.7,
+          "non_zero_sample": 4
+        },
+        "10": {
+          "sample": 7,
+          "corr": 0.018,
+          "same_dir_pct": 57.1,
+          "non_zero_sample": 6
+        },
+        "15": {
+          "sample": 7,
+          "corr": -0.112,
+          "same_dir_pct": 57.1,
+          "non_zero_sample": 6
+        },
+        "20": {
+          "sample": 7,
+          "corr": 0.272,
+          "same_dir_pct": 71.4,
+          "non_zero_sample": 7
+        }
+      },
+      "best_observe_min": {
+        "observe_min": 8,
+        "same_dir_pct": 85.7,
+        "corr": 0.211
+      },
+      "yoriten_pct": 14.3,
+      "vol_decay_range_pct": {
+        "3": 0.952,
+        "5": 0.329,
+        "8": 0.538,
+        "10": 0.56,
+        "15": 0.709,
+        "20": 0.926,
+        "30": 1.073
+      },
+      "bias_recommendation": "trend_follow",
+      "notes": [
+        "yoriten_pct=14.3 <= 25%, トレンド継続型"
+      ]
+    },
+    "485A.T": {
+      "symbol": "485A.T",
+      "n_days": 7,
+      "gap_stats": {
+        "mean": 2.065,
+        "std": 2.324,
+        "abs_mean": 2.549,
+        "min": -1.695,
+        "max": 5.049
+      },
+      "observe_predict": {
+        "3": {
+          "sample": 1,
+          "corr": null,
+          "same_dir_pct": null
+        },
+        "5": {
+          "sample": 5,
+          "corr": 0.662,
+          "same_dir_pct": 40.0,
+          "non_zero_sample": 5
+        },
+        "8": {
+          "sample": 7,
+          "corr": 0.571,
+          "same_dir_pct": 28.6,
+          "non_zero_sample": 6
+        },
+        "10": {
+          "sample": 7,
+          "corr": 0.278,
+          "same_dir_pct": 42.9,
+          "non_zero_sample": 6
+        },
+        "15": {
+          "sample": 7,
+          "corr": -0.597,
+          "same_dir_pct": 28.6,
+          "non_zero_sample": 6
+        },
+        "20": {
+          "sample": 7,
+          "corr": -0.807,
+          "same_dir_pct": 14.3,
+          "non_zero_sample": 7
+        }
+      },
+      "best_observe_min": {
+        "observe_min": 10,
+        "same_dir_pct": 42.9,
+        "corr": 0.278
+      },
+      "yoriten_pct": 0.0,
+      "vol_decay_range_pct": {
+        "3": 3.731,
+        "5": 2.252,
+        "8": 2.898,
+        "10": 3.22,
+        "15": 4.724,
+        "20": 5.044,
+        "30": 5.217
+      },
+      "bias_recommendation": "trend_follow",
+      "notes": [
+        "yoriten_pct=0.0 <= 25%, トレンド継続型",
+        "abs_gap_mean=2.549%, ギャップ大きい銘柄"
+      ]
+    },
+    "4911.T": {
+      "symbol": "4911.T",
+      "n_days": 7,
+      "gap_stats": {
+        "mean": 0.111,
+        "std": 1.615,
+        "abs_mean": 1.423,
+        "min": -2.28,
+        "max": 2.422
+      },
+      "observe_predict": {
+        "3": {
+          "sample": 1,
+          "corr": null,
+          "same_dir_pct": null
+        },
+        "5": {
+          "sample": 7,
+          "corr": -0.237,
+          "same_dir_pct": 42.9,
+          "non_zero_sample": 7
+        },
+        "8": {
+          "sample": 7,
+          "corr": -0.228,
+          "same_dir_pct": 42.9,
+          "non_zero_sample": 7
+        },
+        "10": {
+          "sample": 7,
+          "corr": 0.165,
+          "same_dir_pct": 57.1,
+          "non_zero_sample": 5
+        },
+        "15": {
+          "sample": 7,
+          "corr": -0.615,
+          "same_dir_pct": 28.6,
+          "non_zero_sample": 7
+        },
+        "20": {
+          "sample": 7,
+          "corr": -0.395,
+          "same_dir_pct": 28.6,
+          "non_zero_sample": 5
+        }
+      },
+      "best_observe_min": {
+        "observe_min": 10,
+        "same_dir_pct": 57.1,
+        "corr": 0.165
+      },
+      "yoriten_pct": 14.3,
+      "vol_decay_range_pct": {
+        "3": 0.735,
+        "5": 0.469,
+        "8": 0.663,
+        "10": 0.686,
+        "15": 0.974,
+        "20": 1.054,
+        "30": 1.198
+      },
+      "bias_recommendation": "trend_follow",
+      "notes": [
+        "yoriten_pct=14.3 <= 25%, トレンド継続型"
+      ]
+    },
+    "5020.T": {
+      "symbol": "5020.T",
+      "n_days": 7,
+      "gap_stats": {
+        "mean": -0.462,
+        "std": 0.376,
+        "abs_mean": 0.462,
+        "min": -1.039,
+        "max": 0.0
+      },
+      "observe_predict": {
+        "3": {
+          "sample": 1,
+          "corr": null,
+          "same_dir_pct": null
+        },
+        "5": {
+          "sample": 7,
+          "corr": -0.682,
+          "same_dir_pct": 42.9,
+          "non_zero_sample": 4
+        },
+        "8": {
+          "sample": 7,
+          "corr": -0.631,
+          "same_dir_pct": 42.9,
+          "non_zero_sample": 6
+        },
+        "10": {
+          "sample": 7,
+          "corr": -0.479,
+          "same_dir_pct": 28.6,
+          "non_zero_sample": 7
+        },
+        "15": {
+          "sample": 7,
+          "corr": -0.609,
+          "same_dir_pct": 14.3,
+          "non_zero_sample": 5
+        },
+        "20": {
+          "sample": 7,
+          "corr": -0.633,
+          "same_dir_pct": 14.3,
+          "non_zero_sample": 6
+        }
+      },
+      "best_observe_min": {
+        "observe_min": 5,
+        "same_dir_pct": 42.9,
+        "corr": -0.682
+      },
+      "yoriten_pct": 14.3,
+      "vol_decay_range_pct": {
+        "3": 1.905,
+        "5": 0.663,
+        "8": 0.849,
+        "10": 0.898,
+        "15": 1.089,
+        "20": 1.232,
+        "30": 1.292
+      },
+      "bias_recommendation": "neutral",
+      "notes": []
+    },
+    "6501.T": {
+      "symbol": "6501.T",
+      "n_days": 7,
+      "gap_stats": {
+        "mean": -0.164,
+        "std": 1.635,
+        "abs_mean": 1.425,
+        "min": -1.908,
+        "max": 2.424
+      },
+      "observe_predict": {
+        "3": {
+          "sample": 1,
+          "corr": null,
+          "same_dir_pct": null
+        },
+        "5": {
+          "sample": 7,
+          "corr": 0.334,
+          "same_dir_pct": 71.4,
+          "non_zero_sample": 6
+        },
+        "8": {
+          "sample": 7,
+          "corr": 0.405,
+          "same_dir_pct": 71.4,
+          "non_zero_sample": 7
+        },
+        "10": {
+          "sample": 7,
+          "corr": 0.708,
+          "same_dir_pct": 85.7,
+          "non_zero_sample": 7
+        },
+        "15": {
+          "sample": 7,
+          "corr": 0.611,
+          "same_dir_pct": 85.7,
+          "non_zero_sample": 7
+        },
+        "20": {
+          "sample": 7,
+          "corr": 0.593,
+          "same_dir_pct": 85.7,
+          "non_zero_sample": 6
+        }
+      },
+      "best_observe_min": {
+        "observe_min": 10,
+        "same_dir_pct": 85.7,
+        "corr": 0.708
+      },
+      "yoriten_pct": 14.3,
+      "vol_decay_range_pct": {
+        "3": 1.35,
+        "5": 1.309,
+        "8": 1.676,
+        "10": 1.808,
+        "15": 1.814,
+        "20": 2.12,
+        "30": 2.588
+      },
+      "bias_recommendation": "trend_follow",
+      "notes": [
+        "yoriten_pct=14.3 <= 25%, トレンド継続型"
+      ]
+    },
+    "6613.T": {
+      "symbol": "6613.T",
+      "n_days": 7,
+      "gap_stats": {
+        "mean": -0.338,
+        "std": 3.106,
+        "abs_mean": 2.503,
+        "min": -4.848,
+        "max": 5.678
+      },
+      "observe_predict": {
+        "3": {
+          "sample": 1,
+          "corr": null,
+          "same_dir_pct": null
+        },
+        "5": {
+          "sample": 6,
+          "corr": 0.126,
+          "same_dir_pct": 83.3,
+          "non_zero_sample": 6
+        },
+        "8": {
+          "sample": 7,
+          "corr": -0.481,
+          "same_dir_pct": 28.6,
+          "non_zero_sample": 6
+        },
+        "10": {
+          "sample": 7,
+          "corr": -0.682,
+          "same_dir_pct": 28.6,
+          "non_zero_sample": 7
+        },
+        "15": {
+          "sample": 7,
+          "corr": -0.52,
+          "same_dir_pct": 42.9,
+          "non_zero_sample": 7
+        },
+        "20": {
+          "sample": 7,
+          "corr": -0.193,
+          "same_dir_pct": 71.4,
+          "non_zero_sample": 7
+        }
+      },
+      "best_observe_min": {
+        "observe_min": 5,
+        "same_dir_pct": 83.3,
+        "corr": 0.126
+      },
+      "yoriten_pct": 14.3,
+      "vol_decay_range_pct": {
+        "3": 2.701,
+        "5": 1.563,
+        "8": 3.52,
+        "10": 4.763,
+        "15": 6.002,
+        "20": 6.31,
+        "30": 7.143
+      },
+      "bias_recommendation": "trend_follow",
+      "notes": [
+        "yoriten_pct=14.3 <= 25%, トレンド継続型",
+        "abs_gap_mean=2.503%, ギャップ大きい銘柄"
+      ]
+    },
+    "6645.T": {
+      "symbol": "6645.T",
+      "n_days": 7,
+      "gap_stats": {
+        "mean": 0.375,
+        "std": 0.895,
+        "abs_mean": 0.808,
+        "min": -0.965,
+        "max": 1.884
+      },
+      "observe_predict": {
+        "3": {
+          "sample": 1,
+          "corr": null,
+          "same_dir_pct": null
+        },
+        "5": {
+          "sample": 7,
+          "corr": 0.676,
+          "same_dir_pct": 57.1,
+          "non_zero_sample": 5
+        },
+        "8": {
+          "sample": 7,
+          "corr": 0.816,
+          "same_dir_pct": 71.4,
+          "non_zero_sample": 6
+        },
+        "10": {
+          "sample": 7,
+          "corr": 0.314,
+          "same_dir_pct": 57.1,
+          "non_zero_sample": 7
+        },
+        "15": {
+          "sample": 7,
+          "corr": -0.1,
+          "same_dir_pct": 42.9,
+          "non_zero_sample": 5
+        },
+        "20": {
+          "sample": 7,
+          "corr": 0.215,
+          "same_dir_pct": 57.1,
+          "non_zero_sample": 7
+        }
+      },
+      "best_observe_min": {
+        "observe_min": 8,
+        "same_dir_pct": 71.4,
+        "corr": 0.816
+      },
+      "yoriten_pct": 0.0,
+      "vol_decay_range_pct": {
+        "3": 1.165,
+        "5": 0.423,
+        "8": 0.875,
+        "10": 1.313,
+        "15": 1.792,
+        "20": 1.828,
+        "30": 2.118
+      },
+      "bias_recommendation": "trend_follow",
+      "notes": [
+        "yoriten_pct=0.0 <= 25%, トレンド継続型"
+      ]
+    },
+    "6723.T": {
+      "symbol": "6723.T",
+      "n_days": 7,
+      "gap_stats": {
+        "mean": 0.883,
+        "std": 4.905,
+        "abs_mean": 4.259,
+        "min": -6.212,
+        "max": 8.17
+      },
+      "observe_predict": {
+        "3": {
+          "sample": 1,
+          "corr": null,
+          "same_dir_pct": null
+        },
+        "5": {
+          "sample": 4,
+          "corr": 0.734,
+          "same_dir_pct": 75.0,
+          "non_zero_sample": 3
+        },
+        "8": {
+          "sample": 6,
+          "corr": -0.008,
+          "same_dir_pct": 33.3,
+          "non_zero_sample": 6
+        },
+        "10": {
+          "sample": 7,
+          "corr": 0.117,
+          "same_dir_pct": 14.3,
+          "non_zero_sample": 7
+        },
+        "15": {
+          "sample": 7,
+          "corr": 0.097,
+          "same_dir_pct": 28.6,
+          "non_zero_sample": 7
+        },
+        "20": {
+          "sample": 7,
+          "corr": -0.232,
+          "same_dir_pct": 28.6,
+          "non_zero_sample": 6
+        }
+      },
+      "best_observe_min": {
+        "observe_min": 5,
+        "same_dir_pct": 75.0,
+        "corr": 0.734
+      },
+      "yoriten_pct": 28.6,
+      "vol_decay_range_pct": {
+        "3": 1.399,
+        "5": 2.347,
+        "8": 3.125,
+        "10": 3.408,
+        "15": 3.964,
+        "20": 4.28,
+        "30": 4.561
+      },
+      "bias_recommendation": "neutral",
+      "notes": [
+        "abs_gap_mean=4.259%, ギャップ大きい銘柄"
+      ]
+    },
+    "6752.T": {
+      "symbol": "6752.T",
+      "n_days": 7,
+      "gap_stats": {
+        "mean": 0.207,
+        "std": 1.717,
+        "abs_mean": 1.531,
+        "min": -1.96,
+        "max": 2.733
+      },
+      "observe_predict": {
+        "3": {
+          "sample": 1,
+          "corr": null,
+          "same_dir_pct": null
+        },
+        "5": {
+          "sample": 7,
+          "corr": -0.504,
+          "same_dir_pct": 28.6,
+          "non_zero_sample": 6
+        },
+        "8": {
+          "sample": 7,
+          "corr": 0.616,
+          "same_dir_pct": 57.1,
+          "non_zero_sample": 6
+        },
+        "10": {
+          "sample": 7,
+          "corr": 0.21,
+          "same_dir_pct": 42.9,
+          "non_zero_sample": 6
+        },
+        "15": {
+          "sample": 7,
+          "corr": -0.12,
+          "same_dir_pct": 71.4,
+          "non_zero_sample": 7
+        },
+        "20": {
+          "sample": 7,
+          "corr": 0.013,
+          "same_dir_pct": 42.9,
+          "non_zero_sample": 7
+        }
+      },
+      "best_observe_min": {
+        "observe_min": 15,
+        "same_dir_pct": 71.4,
+        "corr": -0.12
+      },
+      "yoriten_pct": 28.6,
+      "vol_decay_range_pct": {
+        "3": 0.797,
+        "5": 0.579,
+        "8": 0.975,
+        "10": 1.167,
+        "15": 1.451,
+        "20": 1.705,
+        "30": 1.927
+      },
+      "bias_recommendation": "neutral",
+      "notes": []
+    },
+    "6753.T": {
+      "symbol": "6753.T",
+      "n_days": 7,
+      "gap_stats": {
+        "mean": -0.695,
+        "std": 0.796,
+        "abs_mean": 0.695,
+        "min": -2.43,
+        "max": 0.0
+      },
+      "observe_predict": {
+        "3": {
+          "sample": 1,
+          "corr": null,
+          "same_dir_pct": null
+        },
+        "5": {
+          "sample": 7,
+          "corr": -0.085,
+          "same_dir_pct": 42.9,
+          "non_zero_sample": 4
+        },
+        "8": {
+          "sample": 7,
+          "corr": -0.026,
+          "same_dir_pct": 57.1,
+          "non_zero_sample": 4
+        },
+        "10": {
+          "sample": 7,
+          "corr": 0.058,
+          "same_dir_pct": 71.4,
+          "non_zero_sample": 7
+        },
+        "15": {
+          "sample": 7,
+          "corr": -0.165,
+          "same_dir_pct": 42.9,
+          "non_zero_sample": 6
+        },
+        "20": {
+          "sample": 7,
+          "corr": 0.161,
+          "same_dir_pct": 57.1,
+          "non_zero_sample": 6
+        }
+      },
+      "best_observe_min": {
+        "observe_min": 10,
+        "same_dir_pct": 71.4,
+        "corr": 0.058
+      },
+      "yoriten_pct": 0.0,
+      "vol_decay_range_pct": {
+        "3": 0.871,
+        "5": 0.617,
+        "8": 0.755,
+        "10": 0.806,
+        "15": 0.984,
+        "20": 1.21,
+        "30": 1.502
+      },
+      "bias_recommendation": "trend_follow",
+      "notes": [
+        "yoriten_pct=0.0 <= 25%, トレンド継続型"
+      ]
+    },
+    "6758.T": {
+      "symbol": "6758.T",
+      "n_days": 7,
+      "gap_stats": {
+        "mean": -0.994,
+        "std": 1.171,
+        "abs_mean": 1.2,
+        "min": -2.845,
+        "max": 0.721
+      },
+      "observe_predict": {
+        "3": {
+          "sample": 1,
+          "corr": null,
+          "same_dir_pct": null
+        },
+        "5": {
+          "sample": 7,
+          "corr": -0.262,
+          "same_dir_pct": 28.6,
+          "non_zero_sample": 5
+        },
+        "8": {
+          "sample": 7,
+          "corr": -0.199,
+          "same_dir_pct": 28.6,
+          "non_zero_sample": 4
+        },
+        "10": {
+          "sample": 7,
+          "corr": -0.597,
+          "same_dir_pct": 42.9,
+          "non_zero_sample": 5
+        },
+        "15": {
+          "sample": 7,
+          "corr": -0.603,
+          "same_dir_pct": 42.9,
+          "non_zero_sample": 5
+        },
+        "20": {
+          "sample": 7,
+          "corr": -0.563,
+          "same_dir_pct": 28.6,
+          "non_zero_sample": 6
+        }
+      },
+      "best_observe_min": {
+        "observe_min": 10,
+        "same_dir_pct": 42.9,
+        "corr": -0.597
+      },
+      "yoriten_pct": 14.3,
+      "vol_decay_range_pct": {
+        "3": 0.971,
+        "5": 0.389,
+        "8": 0.551,
+        "10": 0.622,
+        "15": 0.785,
+        "20": 0.912,
+        "30": 1.011
+      },
+      "bias_recommendation": "trend_follow",
+      "notes": [
+        "yoriten_pct=14.3 <= 25%, トレンド継続型"
+      ]
+    },
+    "7201.T": {
+      "symbol": "7201.T",
+      "n_days": 7,
+      "gap_stats": {
+        "mean": -0.103,
+        "std": 2.197,
+        "abs_mean": 1.729,
+        "min": -1.946,
+        "max": 4.9
+      },
+      "observe_predict": {
+        "3": {
+          "sample": 1,
+          "corr": null,
+          "same_dir_pct": null
+        },
+        "5": {
+          "sample": 7,
+          "corr": -0.234,
+          "same_dir_pct": 14.3,
+          "non_zero_sample": 4
+        },
+        "8": {
+          "sample": 7,
+          "corr": -0.426,
+          "same_dir_pct": 57.1,
+          "non_zero_sample": 7
+        },
+        "10": {
+          "sample": 7,
+          "corr": -0.767,
+          "same_dir_pct": 42.9,
+          "non_zero_sample": 7
+        },
+        "15": {
+          "sample": 7,
+          "corr": -0.569,
+          "same_dir_pct": 42.9,
+          "non_zero_sample": 6
+        },
+        "20": {
+          "sample": 7,
+          "corr": -0.391,
+          "same_dir_pct": 42.9,
+          "non_zero_sample": 7
+        }
+      },
+      "best_observe_min": {
+        "observe_min": 8,
+        "same_dir_pct": 57.1,
+        "corr": -0.426
+      },
+      "yoriten_pct": 0.0,
+      "vol_decay_range_pct": {
+        "3": 0.8,
+        "5": 0.405,
+        "8": 0.653,
+        "10": 0.907,
+        "15": 1.128,
+        "20": 1.262,
+        "30": 1.743
+      },
+      "bias_recommendation": "trend_follow",
+      "notes": [
+        "yoriten_pct=0.0 <= 25%, トレンド継続型"
+      ]
+    },
+    "7203.T": {
+      "symbol": "7203.T",
+      "n_days": 7,
+      "gap_stats": {
+        "mean": -0.846,
+        "std": 1.227,
+        "abs_mean": 1.182,
+        "min": -2.603,
+        "max": 1.174
+      },
+      "observe_predict": {
+        "3": {
+          "sample": 1,
+          "corr": null,
+          "same_dir_pct": null
+        },
+        "5": {
+          "sample": 7,
+          "corr": 0.114,
+          "same_dir_pct": 57.1,
+          "non_zero_sample": 4
+        },
+        "8": {
+          "sample": 7,
+          "corr": -0.475,
+          "same_dir_pct": 42.9,
+          "non_zero_sample": 5
+        },
+        "10": {
+          "sample": 7,
+          "corr": -0.669,
+          "same_dir_pct": 0.0,
+          "non_zero_sample": 4
+        },
+        "15": {
+          "sample": 7,
+          "corr": -0.629,
+          "same_dir_pct": 28.6,
+          "non_zero_sample": 7
+        },
+        "20": {
+          "sample": 7,
+          "corr": -0.306,
+          "same_dir_pct": 42.9,
+          "non_zero_sample": 7
+        }
+      },
+      "best_observe_min": {
+        "observe_min": 5,
+        "same_dir_pct": 57.1,
+        "corr": 0.114
+      },
+      "yoriten_pct": 0.0,
+      "vol_decay_range_pct": {
+        "3": 0.653,
+        "5": 0.314,
+        "8": 0.394,
+        "10": 0.479,
+        "15": 0.633,
+        "20": 0.698,
+        "30": 0.766
+      },
+      "bias_recommendation": "trend_follow",
+      "notes": [
+        "yoriten_pct=0.0 <= 25%, トレンド継続型"
+      ]
+    },
+    "7211.T": {
+      "symbol": "7211.T",
+      "n_days": 7,
+      "gap_stats": {
+        "mean": -0.946,
+        "std": 1.459,
+        "abs_mean": 1.409,
+        "min": -3.354,
+        "max": 1.182
+      },
+      "observe_predict": {
+        "3": {
+          "sample": 1,
+          "corr": null,
+          "same_dir_pct": null
+        },
+        "5": {
+          "sample": 7,
+          "corr": -0.163,
+          "same_dir_pct": 42.9,
+          "non_zero_sample": 6
+        },
+        "8": {
+          "sample": 7,
+          "corr": -0.411,
+          "same_dir_pct": 42.9,
+          "non_zero_sample": 6
+        },
+        "10": {
+          "sample": 7,
+          "corr": 0.048,
+          "same_dir_pct": 57.1,
+          "non_zero_sample": 7
+        },
+        "15": {
+          "sample": 7,
+          "corr": -0.665,
+          "same_dir_pct": 42.9,
+          "non_zero_sample": 6
+        },
+        "20": {
+          "sample": 7,
+          "corr": -0.579,
+          "same_dir_pct": 42.9,
+          "non_zero_sample": 6
+        }
+      },
+      "best_observe_min": {
+        "observe_min": 10,
+        "same_dir_pct": 57.1,
+        "corr": 0.048
+      },
+      "yoriten_pct": 0.0,
+      "vol_decay_range_pct": {
+        "3": 0.545,
+        "5": 0.285,
+        "8": 0.534,
+        "10": 0.647,
+        "15": 0.806,
+        "20": 0.893,
+        "30": 1.179
+      },
+      "bias_recommendation": "trend_follow",
+      "notes": [
+        "yoriten_pct=0.0 <= 25%, トレンド継続型"
+      ]
+    },
+    "7267.T": {
+      "symbol": "7267.T",
+      "n_days": 7,
+      "gap_stats": {
+        "mean": -0.592,
+        "std": 0.729,
+        "abs_mean": 0.724,
+        "min": -1.9,
+        "max": 0.424
+      },
+      "observe_predict": {
+        "3": {
+          "sample": 1,
+          "corr": null,
+          "same_dir_pct": null
+        },
+        "5": {
+          "sample": 7,
+          "corr": 0.002,
+          "same_dir_pct": 28.6,
+          "non_zero_sample": 4
+        },
+        "8": {
+          "sample": 7,
+          "corr": -0.019,
+          "same_dir_pct": 14.3,
+          "non_zero_sample": 7
+        },
+        "10": {
+          "sample": 7,
+          "corr": 0.371,
+          "same_dir_pct": 28.6,
+          "non_zero_sample": 6
+        },
+        "15": {
+          "sample": 7,
+          "corr": -0.696,
+          "same_dir_pct": 14.3,
+          "non_zero_sample": 6
+        },
+        "20": {
+          "sample": 7,
+          "corr": -0.689,
+          "same_dir_pct": 14.3,
+          "non_zero_sample": 4
+        }
+      },
+      "best_observe_min": {
+        "observe_min": 5,
+        "same_dir_pct": 28.6,
+        "corr": 0.002
+      },
+      "yoriten_pct": 14.3,
+      "vol_decay_range_pct": {
+        "3": 0.576,
+        "5": 0.224,
+        "8": 0.459,
+        "10": 0.594,
+        "15": 0.906,
+        "20": 0.972,
+        "30": 0.983
+      },
+      "bias_recommendation": "trend_follow",
+      "notes": [
+        "yoriten_pct=14.3 <= 25%, トレンド継続型"
+      ]
+    },
+    "7269.T": {
+      "symbol": "7269.T",
+      "n_days": 7,
+      "gap_stats": {
+        "mean": 0.164,
+        "std": 1.118,
+        "abs_mean": 0.906,
+        "min": -1.444,
+        "max": 2.14
+      },
+      "observe_predict": {
+        "3": {
+          "sample": 1,
+          "corr": null,
+          "same_dir_pct": null
+        },
+        "5": {
+          "sample": 7,
+          "corr": 0.248,
+          "same_dir_pct": 42.9,
+          "non_zero_sample": 5
+        },
+        "8": {
+          "sample": 7,
+          "corr": 0.467,
+          "same_dir_pct": 100.0,
+          "non_zero_sample": 5
+        },
+        "10": {
+          "sample": 7,
+          "corr": -0.205,
+          "same_dir_pct": 57.1,
+          "non_zero_sample": 5
+        },
+        "15": {
+          "sample": 7,
+          "corr": -0.477,
+          "same_dir_pct": 42.9,
+          "non_zero_sample": 7
+        },
+        "20": {
+          "sample": 7,
+          "corr": -0.356,
+          "same_dir_pct": 57.1,
+          "non_zero_sample": 5
+        }
+      },
+      "best_observe_min": {
+        "observe_min": 8,
+        "same_dir_pct": 100.0,
+        "corr": 0.467
+      },
+      "yoriten_pct": 14.3,
+      "vol_decay_range_pct": {
+        "3": 0.42,
+        "5": 0.288,
+        "8": 0.452,
+        "10": 0.502,
+        "15": 0.781,
+        "20": 0.829,
+        "30": 0.933
+      },
+      "bias_recommendation": "trend_follow",
+      "notes": [
+        "yoriten_pct=14.3 <= 25%, トレンド継続型"
+      ]
+    },
+    "8058.T": {
+      "symbol": "8058.T",
+      "n_days": 7,
+      "gap_stats": {
+        "mean": -0.357,
+        "std": 1.347,
+        "abs_mean": 1.084,
+        "min": -2.99,
+        "max": 1.102
+      },
+      "observe_predict": {
+        "3": {
+          "sample": 0,
+          "corr": null,
+          "same_dir_pct": null
+        },
+        "5": {
+          "sample": 6,
+          "corr": 0.595,
+          "same_dir_pct": 50.0,
+          "non_zero_sample": 5
+        },
+        "8": {
+          "sample": 7,
+          "corr": 0.48,
+          "same_dir_pct": 57.1,
+          "non_zero_sample": 7
+        },
+        "10": {
+          "sample": 7,
+          "corr": 0.613,
+          "same_dir_pct": 71.4,
+          "non_zero_sample": 6
+        },
+        "15": {
+          "sample": 7,
+          "corr": -0.057,
+          "same_dir_pct": 42.9,
+          "non_zero_sample": 7
+        },
+        "20": {
+          "sample": 7,
+          "corr": 0.663,
+          "same_dir_pct": 57.1,
+          "non_zero_sample": 7
+        }
+      },
+      "best_observe_min": {
+        "observe_min": 10,
+        "same_dir_pct": 71.4,
+        "corr": 0.613
+      },
+      "yoriten_pct": 0.0,
+      "vol_decay_range_pct": {
+        "5": 0.43,
+        "8": 0.771,
+        "10": 0.795,
+        "15": 1.016,
+        "20": 1.114,
+        "30": 1.34
+      },
+      "bias_recommendation": "trend_follow",
+      "notes": [
+        "yoriten_pct=0.0 <= 25%, トレンド継続型"
+      ]
+    },
+    "8136.T": {
+      "symbol": "8136.T",
+      "n_days": 7,
+      "gap_stats": {
+        "mean": -0.456,
+        "std": 0.68,
+        "abs_mean": 0.695,
+        "min": -1.19,
+        "max": 0.835
+      },
+      "observe_predict": {
+        "3": {
+          "sample": 1,
+          "corr": null,
+          "same_dir_pct": null
+        },
+        "5": {
+          "sample": 7,
+          "corr": -0.158,
+          "same_dir_pct": 28.6,
+          "non_zero_sample": 6
+        },
+        "8": {
+          "sample": 7,
+          "corr": -0.038,
+          "same_dir_pct": 71.4,
+          "non_zero_sample": 6
+        },
+        "10": {
+          "sample": 7,
+          "corr": -0.396,
+          "same_dir_pct": 28.6,
+          "non_zero_sample": 6
+        },
+        "15": {
+          "sample": 7,
+          "corr": -0.471,
+          "same_dir_pct": 42.9,
+          "non_zero_sample": 6
+        },
+        "20": {
+          "sample": 7,
+          "corr": 0.068,
+          "same_dir_pct": 57.1,
+          "non_zero_sample": 5
+        }
+      },
+      "best_observe_min": {
+        "observe_min": 8,
+        "same_dir_pct": 71.4,
+        "corr": -0.038
+      },
+      "yoriten_pct": 28.6,
+      "vol_decay_range_pct": {
+        "3": 1.46,
+        "5": 0.619,
+        "8": 1.083,
+        "10": 1.256,
+        "15": 1.489,
+        "20": 1.674,
+        "30": 1.815
+      },
+      "bias_recommendation": "neutral",
+      "notes": []
+    },
+    "8306.T": {
+      "symbol": "8306.T",
+      "n_days": 7,
+      "gap_stats": {
+        "mean": -0.449,
+        "std": 1.042,
+        "abs_mean": 0.783,
+        "min": -2.678,
+        "max": 0.717
+      },
+      "observe_predict": {
+        "3": {
+          "sample": 1,
+          "corr": null,
+          "same_dir_pct": null
+        },
+        "5": {
+          "sample": 7,
+          "corr": -0.728,
+          "same_dir_pct": 14.3,
+          "non_zero_sample": 6
+        },
+        "8": {
+          "sample": 7,
+          "corr": -0.44,
+          "same_dir_pct": 71.4,
+          "non_zero_sample": 7
+        },
+        "10": {
+          "sample": 7,
+          "corr": -0.255,
+          "same_dir_pct": 42.9,
+          "non_zero_sample": 7
+        },
+        "15": {
+          "sample": 7,
+          "corr": -0.297,
+          "same_dir_pct": 71.4,
+          "non_zero_sample": 7
+        },
+        "20": {
+          "sample": 7,
+          "corr": 0.025,
+          "same_dir_pct": 42.9,
+          "non_zero_sample": 5
+        }
+      },
+      "best_observe_min": {
+        "observe_min": 8,
+        "same_dir_pct": 71.4,
+        "corr": -0.44
+      },
+      "yoriten_pct": 14.3,
+      "vol_decay_range_pct": {
+        "3": 0.947,
+        "5": 0.398,
+        "8": 0.592,
+        "10": 0.668,
+        "15": 0.798,
+        "20": 0.916,
+        "30": 1.044
+      },
+      "bias_recommendation": "trend_follow",
+      "notes": [
+        "yoriten_pct=14.3 <= 25%, トレンド継続型"
+      ]
+    },
+    "8604.T": {
+      "symbol": "8604.T",
+      "n_days": 7,
+      "gap_stats": {
+        "mean": -1.115,
+        "std": 1.891,
+        "abs_mean": 1.405,
+        "min": -5.03,
+        "max": 1.014
+      },
+      "observe_predict": {
+        "3": {
+          "sample": 0,
+          "corr": null,
+          "same_dir_pct": null
+        },
+        "5": {
+          "sample": 6,
+          "corr": 0.573,
+          "same_dir_pct": 33.3,
+          "non_zero_sample": 4
+        },
+        "8": {
+          "sample": 7,
+          "corr": 0.497,
+          "same_dir_pct": 42.9,
+          "non_zero_sample": 4
+        },
+        "10": {
+          "sample": 7,
+          "corr": 0.45,
+          "same_dir_pct": 42.9,
+          "non_zero_sample": 5
+        },
+        "15": {
+          "sample": 7,
+          "corr": 0.01,
+          "same_dir_pct": 42.9,
+          "non_zero_sample": 5
+        },
+        "20": {
+          "sample": 7,
+          "corr": -0.439,
+          "same_dir_pct": 14.3,
+          "non_zero_sample": 5
+        }
+      },
+      "best_observe_min": {
+        "observe_min": 8,
+        "same_dir_pct": 42.9,
+        "corr": 0.497
+      },
+      "yoriten_pct": 28.6,
+      "vol_decay_range_pct": {
+        "5": 0.548,
+        "8": 0.747,
+        "10": 0.792,
+        "15": 0.998,
+        "20": 1.032,
+        "30": 1.152
+      },
+      "bias_recommendation": "neutral",
+      "notes": []
+    },
+    "9107.T": {
+      "symbol": "9107.T",
+      "n_days": 7,
+      "gap_stats": {
+        "mean": 0.028,
+        "std": 1.135,
+        "abs_mean": 0.746,
+        "min": -2.437,
+        "max": 1.227
+      },
+      "observe_predict": {
+        "3": {
+          "sample": 1,
+          "corr": null,
+          "same_dir_pct": null
+        },
+        "5": {
+          "sample": 7,
+          "corr": -0.155,
+          "same_dir_pct": 28.6,
+          "non_zero_sample": 6
+        },
+        "8": {
+          "sample": 7,
+          "corr": 0.019,
+          "same_dir_pct": 42.9,
+          "non_zero_sample": 4
+        },
+        "10": {
+          "sample": 7,
+          "corr": 0.249,
+          "same_dir_pct": 42.9,
+          "non_zero_sample": 5
+        },
+        "15": {
+          "sample": 7,
+          "corr": -0.12,
+          "same_dir_pct": 42.9,
+          "non_zero_sample": 6
+        },
+        "20": {
+          "sample": 7,
+          "corr": -0.309,
+          "same_dir_pct": 42.9,
+          "non_zero_sample": 7
+        }
+      },
+      "best_observe_min": {
+        "observe_min": 8,
+        "same_dir_pct": 42.9,
+        "corr": 0.019
+      },
+      "yoriten_pct": 14.3,
+      "vol_decay_range_pct": {
+        "3": 1.833,
+        "5": 0.673,
+        "8": 0.814,
+        "10": 0.833,
+        "15": 0.938,
+        "20": 1.017,
+        "30": 1.26
+      },
+      "bias_recommendation": "trend_follow",
+      "notes": [
+        "yoriten_pct=14.3 <= 25%, トレンド継続型"
+      ]
+    },
+    "9432.T": {
+      "symbol": "9432.T",
+      "n_days": 7,
+      "gap_stats": {
+        "mean": -0.056,
+        "std": 0.113,
+        "abs_mean": 0.094,
+        "min": -0.261,
+        "max": 0.131
+      },
+      "observe_predict": {
+        "3": {
+          "sample": 1,
+          "corr": null,
+          "same_dir_pct": null
+        },
+        "5": {
+          "sample": 7,
+          "corr": -0.357,
+          "same_dir_pct": 0.0,
+          "non_zero_sample": 2
+        },
+        "8": {
+          "sample": 7,
+          "corr": -0.542,
+          "same_dir_pct": 28.6,
+          "non_zero_sample": 5
+        },
+        "10": {
+          "sample": 7,
+          "corr": -0.667,
+          "same_dir_pct": 28.6,
+          "non_zero_sample": 6
+        },
+        "15": {
+          "sample": 7,
+          "corr": -0.644,
+          "same_dir_pct": 28.6,
+          "non_zero_sample": 6
+        },
+        "20": {
+          "sample": 7,
+          "corr": -0.033,
+          "same_dir_pct": 28.6,
+          "non_zero_sample": 5
+        }
+      },
+      "best_observe_min": {
+        "observe_min": 8,
+        "same_dir_pct": 28.6,
+        "corr": -0.542
+      },
+      "yoriten_pct": 0.0,
+      "vol_decay_range_pct": {
+        "3": 0.396,
+        "5": 0.151,
+        "8": 0.226,
+        "10": 0.245,
+        "15": 0.254,
+        "20": 0.292,
+        "30": 0.339
+      },
+      "bias_recommendation": "neutral",
+      "notes": []
+    },
+    "9433.T": {
+      "symbol": "9433.T",
+      "n_days": 7,
+      "gap_stats": {
+        "mean": -0.259,
+        "std": 0.871,
+        "abs_mean": 0.764,
+        "min": -1.077,
+        "max": 1.767
+      },
+      "observe_predict": {
+        "3": {
+          "sample": 1,
+          "corr": null,
+          "same_dir_pct": null
+        },
+        "5": {
+          "sample": 7,
+          "corr": 0.828,
+          "same_dir_pct": 28.6,
+          "non_zero_sample": 6
+        },
+        "8": {
+          "sample": 7,
+          "corr": 0.062,
+          "same_dir_pct": 14.3,
+          "non_zero_sample": 6
+        },
+        "10": {
+          "sample": 7,
+          "corr": 0.451,
+          "same_dir_pct": 57.1,
+          "non_zero_sample": 6
+        },
+        "15": {
+          "sample": 7,
+          "corr": -0.202,
+          "same_dir_pct": 14.3,
+          "non_zero_sample": 7
+        },
+        "20": {
+          "sample": 7,
+          "corr": 0.204,
+          "same_dir_pct": 42.9,
+          "non_zero_sample": 3
+        }
+      },
+      "best_observe_min": {
+        "observe_min": 10,
+        "same_dir_pct": 57.1,
+        "corr": 0.451
+      },
+      "yoriten_pct": 28.6,
+      "vol_decay_range_pct": {
+        "3": 0.686,
+        "5": 0.384,
+        "8": 0.569,
+        "10": 0.599,
+        "15": 0.72,
+        "20": 0.737,
+        "30": 0.784
+      },
+      "bias_recommendation": "neutral",
+      "notes": []
+    },
+    "9434.T": {
+      "symbol": "9434.T",
+      "n_days": 7,
+      "gap_stats": {
+        "mean": -0.16,
+        "std": 0.347,
+        "abs_mean": 0.318,
+        "min": -0.628,
+        "max": 0.55
+      },
+      "observe_predict": {
+        "3": {
+          "sample": 1,
+          "corr": null,
+          "same_dir_pct": null
+        },
+        "5": {
+          "sample": 7,
+          "corr": 0.675,
+          "same_dir_pct": 71.4,
+          "non_zero_sample": 3
+        },
+        "8": {
+          "sample": 7,
+          "corr": -0.136,
+          "same_dir_pct": 42.9,
+          "non_zero_sample": 6
+        },
+        "10": {
+          "sample": 7,
+          "corr": -0.169,
+          "same_dir_pct": 28.6,
+          "non_zero_sample": 4
+        },
+        "15": {
+          "sample": 7,
+          "corr": -0.227,
+          "same_dir_pct": 42.9,
+          "non_zero_sample": 5
+        },
+        "20": {
+          "sample": 7,
+          "corr": 0.431,
+          "same_dir_pct": 57.1,
+          "non_zero_sample": 5
+        }
+      },
+      "best_observe_min": {
+        "observe_min": 5,
+        "same_dir_pct": 71.4,
+        "corr": 0.675
+      },
+      "yoriten_pct": 0.0,
+      "vol_decay_range_pct": {
+        "3": 0.682,
+        "5": 0.273,
+        "8": 0.371,
+        "10": 0.423,
+        "15": 0.52,
+        "20": 0.553,
+        "30": 0.611
+      },
+      "bias_recommendation": "neutral",
+      "notes": []
+    },
+    "9468.T": {
+      "symbol": "9468.T",
+      "n_days": 7,
+      "gap_stats": {
+        "mean": -0.673,
+        "std": 0.72,
+        "abs_mean": 0.673,
+        "min": -1.909,
+        "max": 0.0
+      },
+      "observe_predict": {
+        "3": {
+          "sample": 1,
+          "corr": null,
+          "same_dir_pct": null
+        },
+        "5": {
+          "sample": 7,
+          "corr": 0.45,
+          "same_dir_pct": 42.9,
+          "non_zero_sample": 7
+        },
+        "8": {
+          "sample": 7,
+          "corr": 0.203,
+          "same_dir_pct": 57.1,
+          "non_zero_sample": 6
+        },
+        "10": {
+          "sample": 7,
+          "corr": 0.375,
+          "same_dir_pct": 28.6,
+          "non_zero_sample": 5
+        },
+        "15": {
+          "sample": 7,
+          "corr": 0.11,
+          "same_dir_pct": 57.1,
+          "non_zero_sample": 6
+        },
+        "20": {
+          "sample": 7,
+          "corr": -0.166,
+          "same_dir_pct": 42.9,
+          "non_zero_sample": 4
+        }
+      },
+      "best_observe_min": {
+        "observe_min": 8,
+        "same_dir_pct": 57.1,
+        "corr": 0.203
+      },
+      "yoriten_pct": 14.3,
+      "vol_decay_range_pct": {
+        "3": 0.798,
+        "5": 0.626,
+        "8": 0.958,
+        "10": 1.112,
+        "15": 1.186,
+        "20": 1.239,
+        "30": 1.346
+      },
+      "bias_recommendation": "trend_follow",
+      "notes": [
+        "yoriten_pct=14.3 <= 25%, トレンド継続型"
+      ]
+    },
+    "9984.T": {
+      "symbol": "9984.T",
+      "n_days": 7,
+      "gap_stats": {
+        "mean": 0.48,
+        "std": 4.245,
+        "abs_mean": 3.222,
+        "min": -5.847,
+        "max": 8.488
+      },
+      "observe_predict": {
+        "3": {
+          "sample": 1,
+          "corr": null,
+          "same_dir_pct": null
+        },
+        "5": {
+          "sample": 4,
+          "corr": 0.784,
+          "same_dir_pct": 100.0,
+          "non_zero_sample": 4
+        },
+        "8": {
+          "sample": 6,
+          "corr": 0.21,
+          "same_dir_pct": 50.0,
+          "non_zero_sample": 6
+        },
+        "10": {
+          "sample": 6,
+          "corr": 0.437,
+          "same_dir_pct": 50.0,
+          "non_zero_sample": 6
+        },
+        "15": {
+          "sample": 7,
+          "corr": 0.356,
+          "same_dir_pct": 42.9,
+          "non_zero_sample": 6
+        },
+        "20": {
+          "sample": 7,
+          "corr": 0.738,
+          "same_dir_pct": 71.4,
+          "non_zero_sample": 7
+        }
+      },
+      "best_observe_min": {
+        "observe_min": 5,
+        "same_dir_pct": 100.0,
+        "corr": 0.784
+      },
+      "yoriten_pct": 0.0,
+      "vol_decay_range_pct": {
+        "3": 2.726,
+        "5": 1.736,
+        "8": 2.52,
+        "10": 2.92,
+        "15": 3.457,
+        "20": 3.581,
+        "30": 3.789
+      },
+      "bias_recommendation": "trend_follow",
+      "notes": [
+        "yoriten_pct=0.0 <= 25%, トレンド継続型",
+        "abs_gap_mean=3.222%, ギャップ大きい銘柄"
+      ]
+    }
+  },
+  "classified": {
+    "1605.T": {
+      "name": "INPEX",
+      "existing_strategies": [
+        "Breakout",
+        "MacdRci",
+        "Pullback",
+        "Scalp"
+      ],
+      "sources": [
+        "macd_rci_robust",
+        "strategy_fit_robust",
+        "universe_active"
+      ],
+      "oos_daily_max": 1220.7058025641036,
+      "micro_scalp_score": 40.0,
+      "micro_scalp_notes": [
+        "vol@30=1.62% >=1.5 (MicroScalp 適格)",
+        "abs_gap=1.19% (ギャップ豊富)"
+      ],
+      "open_bias": "trend_follow",
+      "best_observe_min": 5,
+      "best_same_dir_pct": 42.9,
+      "strategy_recommendation": [
+        "MicroScalp_pri",
+        "MacdRci_keep",
+        "Scalp_keep",
+        "Breakout_keep"
+      ]
+    },
+    "2413.T": {
+      "name": "",
+      "existing_strategies": [
+        "Scalp"
+      ],
+      "sources": [
+        "strategy_fit_robust"
+      ],
+      "oos_daily_max": null,
+      "micro_scalp_score": 30.0,
+      "micro_scalp_notes": [
+        "vol@30=1.54% >=1.5 (MicroScalp 適格)"
+      ],
+      "open_bias": "trend_follow",
+      "best_observe_min": 5,
+      "best_same_dir_pct": 57.1,
+      "strategy_recommendation": [
+        "MicroScalp_back",
+        "Scalp_keep"
+      ]
+    },
+    "2432.T": {
+      "name": "",
+      "existing_strategies": [
+        "Breakout"
+      ],
+      "sources": [
+        "strategy_fit_robust"
+      ],
+      "oos_daily_max": null,
+      "micro_scalp_score": 20.0,
+      "micro_scalp_notes": [
+        "best obs=20min same_dir=71.4% (予測力○)"
+      ],
+      "open_bias": "trend_follow",
+      "best_observe_min": 20,
+      "best_same_dir_pct": 71.4,
+      "strategy_recommendation": [
+        "MicroScalp_back"
+      ]
+    },
+    "3103.T": {
+      "name": "Unitika",
+      "existing_strategies": [
+        "Breakout",
+        "MacdRci",
+        "Pullback",
+        "Scalp"
+      ],
+      "sources": [
+        "macd_rci_robust",
+        "strategy_fit_robust",
+        "universe_active"
+      ],
+      "oos_daily_max": 27977.641990349894,
+      "micro_scalp_score": 70.0,
+      "micro_scalp_notes": [
+        "vol@30=12.15% >=1.5 (MicroScalp 適格)",
+        "best obs=10min same_dir=83.3% (予測力○)",
+        "abs_gap=5.27% (ギャップ豊富)",
+        "yoriten=57.1% (ショート優位)"
+      ],
+      "open_bias": "neutral",
+      "best_observe_min": 10,
+      "best_same_dir_pct": 83.3,
+      "strategy_recommendation": [
+        "MicroScalp_pri",
+        "Scalp_keep",
+        "Breakout_keep"
+      ]
+    },
+    "3382.T": {
+      "name": "",
+      "existing_strategies": [
+        "MacdRci",
+        "Scalp"
+      ],
+      "sources": [
+        "macd_rci_robust",
+        "strategy_fit_robust"
+      ],
+      "oos_daily_max": 1057.142857142857,
+      "micro_scalp_score": 20.0,
+      "micro_scalp_notes": [
+        "best obs=10min same_dir=71.4% (予測力○)"
+      ],
+      "open_bias": "trend_follow",
+      "best_observe_min": 10,
+      "best_same_dir_pct": 71.4,
+      "strategy_recommendation": [
+        "MicroScalp_back",
+        "MacdRci_keep",
+        "Scalp_keep"
+      ]
+    },
+    "4385.T": {
+      "name": "",
+      "existing_strategies": [
+        "Breakout",
+        "MacdRci",
+        "Scalp"
+      ],
+      "sources": [
+        "macd_rci_robust",
+        "strategy_fit_robust"
+      ],
+      "oos_daily_max": 1028.0807846153853,
+      "micro_scalp_score": 10.0,
+      "micro_scalp_notes": [
+        "abs_gap=1.59% (ギャップ豊富)"
+      ],
+      "open_bias": "trend_follow",
+      "best_observe_min": 10,
+      "best_same_dir_pct": 42.9,
+      "strategy_recommendation": [
+        "MacdRci_keep",
+        "Scalp_keep",
+        "Breakout_keep"
+      ]
+    },
+    "4568.T": {
+      "name": "",
+      "existing_strategies": [
+        "Breakout",
+        "MacdRci",
+        "Scalp"
+      ],
+      "sources": [
+        "macd_rci_robust",
+        "strategy_fit_robust"
+      ],
+      "oos_daily_max": 542.5,
+      "micro_scalp_score": 40.0,
+      "micro_scalp_notes": [
+        "vol@30=2.02% >=1.5 (MicroScalp 適格)",
+        "abs_gap=1.98% (ギャップ豊富)"
+      ],
+      "open_bias": "trend_follow",
+      "best_observe_min": 5,
+      "best_same_dir_pct": 50.0,
+      "strategy_recommendation": [
+        "MicroScalp_pri",
+        "MacdRci_keep",
+        "Scalp_keep",
+        "Breakout_keep"
+      ]
+    },
+    "4592.T": {
+      "name": "",
+      "existing_strategies": [
+        "Breakout"
+      ],
+      "sources": [
+        "strategy_fit_robust"
+      ],
+      "oos_daily_max": null,
+      "micro_scalp_score": 40.0,
+      "micro_scalp_notes": [
+        "vol@30=1.79% >=1.5 (MicroScalp 適格)",
+        "abs_gap=1.30% (ギャップ豊富)"
+      ],
+      "open_bias": "trend_follow",
+      "best_observe_min": 5,
+      "best_same_dir_pct": 42.9,
+      "strategy_recommendation": [
+        "MicroScalp_pri",
+        "Breakout_keep"
+      ]
+    },
+    "4689.T": {
+      "name": "",
+      "existing_strategies": [
+        "MacdRci"
+      ],
+      "sources": [
+        "macd_rci_robust",
+        "strategy_fit_robust"
+      ],
+      "oos_daily_max": 243.228002432105,
+      "micro_scalp_score": 0.0,
+      "micro_scalp_notes": [],
+      "open_bias": "trend_follow",
+      "best_observe_min": 15,
+      "best_same_dir_pct": 42.9,
+      "strategy_recommendation": [
+        "MacdRci_keep"
+      ]
+    },
+    "4755.T": {
+      "name": "",
+      "existing_strategies": [
+        "Breakout",
+        "Scalp"
+      ],
+      "sources": [
+        "strategy_fit_robust"
+      ],
+      "oos_daily_max": null,
+      "micro_scalp_score": 20.0,
+      "micro_scalp_notes": [
+        "best obs=8min same_dir=85.7% (予測力○)"
+      ],
+      "open_bias": "trend_follow",
+      "best_observe_min": 8,
+      "best_same_dir_pct": 85.7,
+      "strategy_recommendation": [
+        "MicroScalp_back",
+        "Scalp_keep"
+      ]
+    },
+    "485A.T": {
+      "name": "",
+      "existing_strategies": [
+        "BbShort",
+        "Breakout",
+        "MaVol"
+      ],
+      "sources": [
+        "strategy_fit_robust"
+      ],
+      "oos_daily_max": null,
+      "micro_scalp_score": 40.0,
+      "micro_scalp_notes": [
+        "vol@30=5.22% >=1.5 (MicroScalp 適格)",
+        "abs_gap=2.55% (ギャップ豊富)"
+      ],
+      "open_bias": "trend_follow",
+      "best_observe_min": 10,
+      "best_same_dir_pct": 42.9,
+      "strategy_recommendation": [
+        "MicroScalp_pri",
+        "Breakout_keep"
+      ]
+    },
+    "4911.T": {
+      "name": "Shiseido",
+      "existing_strategies": [
+        "MacdRci"
+      ],
+      "sources": [
+        "macd_rci_robust",
+        "strategy_fit_robust",
+        "universe_active"
+      ],
+      "oos_daily_max": 199.12195121953846,
+      "micro_scalp_score": 10.0,
+      "micro_scalp_notes": [
+        "abs_gap=1.42% (ギャップ豊富)"
+      ],
+      "open_bias": "trend_follow",
+      "best_observe_min": 10,
+      "best_same_dir_pct": 57.1,
+      "strategy_recommendation": [
+        "MacdRci_keep"
+      ]
+    },
+    "5020.T": {
+      "name": "",
+      "existing_strategies": [
+        "Scalp"
+      ],
+      "sources": [
+        "strategy_fit_robust"
+      ],
+      "oos_daily_max": null,
+      "micro_scalp_score": 0.0,
+      "micro_scalp_notes": [],
+      "open_bias": "neutral",
+      "best_observe_min": 5,
+      "best_same_dir_pct": 42.9,
+      "strategy_recommendation": [
+        "Scalp_keep"
+      ]
+    },
+    "6501.T": {
+      "name": "Hitachi",
+      "existing_strategies": [
+        "MacdRci",
+        "Scalp"
+      ],
+      "sources": [
+        "macd_rci_robust",
+        "strategy_fit_robust",
+        "universe_active"
+      ],
+      "oos_daily_max": 8233.866230560128,
+      "micro_scalp_score": 60.0,
+      "micro_scalp_notes": [
+        "vol@30=2.59% >=1.5 (MicroScalp 適格)",
+        "best obs=10min same_dir=85.7% (予測力○)",
+        "abs_gap=1.43% (ギャップ豊富)"
+      ],
+      "open_bias": "trend_follow",
+      "best_observe_min": 10,
+      "best_same_dir_pct": 85.7,
+      "strategy_recommendation": [
+        "MicroScalp_pri",
+        "MacdRci_keep",
+        "Scalp_keep"
+      ]
+    },
+    "6613.T": {
+      "name": "QD Laser",
+      "existing_strategies": [
+        "Breakout",
+        "EnhancedMacdRci",
+        "EnhancedScalp",
+        "MacdRci",
+        "Pullback"
+      ],
+      "sources": [
+        "macd_rci_robust",
+        "strategy_fit_robust",
+        "universe_active"
+      ],
+      "oos_daily_max": 12464.0,
+      "micro_scalp_score": 60.0,
+      "micro_scalp_notes": [
+        "vol@30=7.14% >=1.5 (MicroScalp 適格)",
+        "best obs=5min same_dir=83.3% (予測力○)",
+        "abs_gap=2.50% (ギャップ豊富)"
+      ],
+      "open_bias": "trend_follow",
+      "best_observe_min": 5,
+      "best_same_dir_pct": 83.3,
+      "strategy_recommendation": [
+        "MicroScalp_pri",
+        "MacdRci_keep",
+        "Scalp_keep",
+        "Breakout_keep"
+      ]
+    },
+    "6645.T": {
+      "name": "",
+      "existing_strategies": [
+        "Breakout",
+        "Scalp"
+      ],
+      "sources": [
+        "strategy_fit_robust"
+      ],
+      "oos_daily_max": null,
+      "micro_scalp_score": 50.0,
+      "micro_scalp_notes": [
+        "vol@30=2.12% >=1.5 (MicroScalp 適格)",
+        "best obs=8min same_dir=71.4% (予測力○)"
+      ],
+      "open_bias": "trend_follow",
+      "best_observe_min": 8,
+      "best_same_dir_pct": 71.4,
+      "strategy_recommendation": [
+        "MicroScalp_pri",
+        "Scalp_keep"
+      ]
+    },
+    "6723.T": {
+      "name": "Renesas",
+      "existing_strategies": [
+        "Breakout",
+        "MacdRci",
+        "Pullback",
+        "Scalp"
+      ],
+      "sources": [
+        "macd_rci_robust",
+        "strategy_fit_robust",
+        "universe_active"
+      ],
+      "oos_daily_max": 1632.0,
+      "micro_scalp_score": 60.0,
+      "micro_scalp_notes": [
+        "vol@30=4.56% >=1.5 (MicroScalp 適格)",
+        "best obs=5min same_dir=75.0% (予測力○)",
+        "abs_gap=4.26% (ギャップ豊富)"
+      ],
+      "open_bias": "neutral",
+      "best_observe_min": 5,
+      "best_same_dir_pct": 75.0,
+      "strategy_recommendation": [
+        "MicroScalp_pri",
+        "Scalp_keep",
+        "Breakout_keep"
+      ]
+    },
+    "6752.T": {
+      "name": "Panasonic",
+      "existing_strategies": [
+        "Breakout",
+        "EnhancedScalp",
+        "MacdRci",
+        "Scalp"
+      ],
+      "sources": [
+        "macd_rci_robust",
+        "strategy_fit_robust",
+        "universe_active"
+      ],
+      "oos_daily_max": 3072.212224591474,
+      "micro_scalp_score": 60.0,
+      "micro_scalp_notes": [
+        "vol@30=1.93% >=1.5 (MicroScalp 適格)",
+        "best obs=15min same_dir=71.4% (予測力○)",
+        "abs_gap=1.53% (ギャップ豊富)"
+      ],
+      "open_bias": "neutral",
+      "best_observe_min": 15,
+      "best_same_dir_pct": 71.4,
+      "strategy_recommendation": [
+        "MicroScalp_pri",
+        "Scalp_keep",
+        "Breakout_keep"
+      ]
+    },
+    "6753.T": {
+      "name": "",
+      "existing_strategies": [
+        "Breakout"
+      ],
+      "sources": [
+        "strategy_fit_robust"
+      ],
+      "oos_daily_max": null,
+      "micro_scalp_score": 50.0,
+      "micro_scalp_notes": [
+        "vol@30=1.50% >=1.5 (MicroScalp 適格)",
+        "best obs=10min same_dir=71.4% (予測力○)"
+      ],
+      "open_bias": "trend_follow",
+      "best_observe_min": 10,
+      "best_same_dir_pct": 71.4,
+      "strategy_recommendation": [
+        "MicroScalp_pri"
+      ]
+    },
+    "6758.T": {
+      "name": "Sony Group",
+      "existing_strategies": [
+        "Breakout",
+        "MacdRci",
+        "Pullback",
+        "Scalp"
+      ],
+      "sources": [
+        "macd_rci_robust",
+        "strategy_fit_robust",
+        "universe_active"
+      ],
+      "oos_daily_max": 602.4,
+      "micro_scalp_score": 10.0,
+      "micro_scalp_notes": [
+        "abs_gap=1.20% (ギャップ豊富)"
+      ],
+      "open_bias": "trend_follow",
+      "best_observe_min": 10,
+      "best_same_dir_pct": 42.9,
+      "strategy_recommendation": [
+        "MacdRci_keep",
+        "Scalp_keep",
+        "Breakout_keep"
+      ]
+    },
+    "7201.T": {
+      "name": "",
+      "existing_strategies": [
+        "Breakout"
+      ],
+      "sources": [
+        "strategy_fit_robust"
+      ],
+      "oos_daily_max": null,
+      "micro_scalp_score": 40.0,
+      "micro_scalp_notes": [
+        "vol@30=1.74% >=1.5 (MicroScalp 適格)",
+        "abs_gap=1.73% (ギャップ豊富)"
+      ],
+      "open_bias": "trend_follow",
+      "best_observe_min": 8,
+      "best_same_dir_pct": 57.1,
+      "strategy_recommendation": [
+        "MicroScalp_pri",
+        "Breakout_keep"
+      ]
+    },
+    "7203.T": {
+      "name": "",
+      "existing_strategies": [
+        "Breakout",
+        "Scalp"
+      ],
+      "sources": [
+        "strategy_fit_robust"
+      ],
+      "oos_daily_max": null,
+      "micro_scalp_score": 10.0,
+      "micro_scalp_notes": [
+        "abs_gap=1.18% (ギャップ豊富)"
+      ],
+      "open_bias": "trend_follow",
+      "best_observe_min": 5,
+      "best_same_dir_pct": 57.1,
+      "strategy_recommendation": [
+        "Scalp_keep",
+        "Breakout_keep"
+      ]
+    },
+    "7211.T": {
+      "name": "",
+      "existing_strategies": [
+        "Scalp"
+      ],
+      "sources": [
+        "strategy_fit_robust"
+      ],
+      "oos_daily_max": null,
+      "micro_scalp_score": 10.0,
+      "micro_scalp_notes": [
+        "abs_gap=1.41% (ギャップ豊富)"
+      ],
+      "open_bias": "trend_follow",
+      "best_observe_min": 10,
+      "best_same_dir_pct": 57.1,
+      "strategy_recommendation": [
+        "Scalp_keep"
+      ]
+    },
+    "7267.T": {
+      "name": "",
+      "existing_strategies": [
+        "Scalp"
+      ],
+      "sources": [
+        "strategy_fit_robust"
+      ],
+      "oos_daily_max": null,
+      "micro_scalp_score": -10.0,
+      "micro_scalp_notes": [],
+      "open_bias": "trend_follow",
+      "best_observe_min": 5,
+      "best_same_dir_pct": 28.6,
+      "strategy_recommendation": [
+        "MicroScalp_exclude",
+        "Scalp_keep"
+      ]
+    },
+    "7269.T": {
+      "name": "",
+      "existing_strategies": [
+        "Scalp"
+      ],
+      "sources": [
+        "strategy_fit_robust"
+      ],
+      "oos_daily_max": null,
+      "micro_scalp_score": 20.0,
+      "micro_scalp_notes": [
+        "best obs=8min same_dir=100.0% (予測力○)"
+      ],
+      "open_bias": "trend_follow",
+      "best_observe_min": 8,
+      "best_same_dir_pct": 100.0,
+      "strategy_recommendation": [
+        "MicroScalp_back",
+        "Scalp_keep"
+      ]
+    },
+    "8058.T": {
+      "name": "Mitsubishi Corp",
+      "existing_strategies": [
+        "MacdRci",
+        "Scalp"
+      ],
+      "sources": [
+        "macd_rci_robust",
+        "strategy_fit_robust",
+        "universe_active"
+      ],
+      "oos_daily_max": 446.7094377575566,
+      "micro_scalp_score": 30.0,
+      "micro_scalp_notes": [
+        "best obs=10min same_dir=71.4% (予測力○)",
+        "abs_gap=1.08% (ギャップ豊富)"
+      ],
+      "open_bias": "trend_follow",
+      "best_observe_min": 10,
+      "best_same_dir_pct": 71.4,
+      "strategy_recommendation": [
+        "MicroScalp_back",
+        "MacdRci_keep",
+        "Scalp_keep"
+      ]
+    },
+    "8136.T": {
+      "name": "Sanrio",
+      "existing_strategies": [
+        "Breakout",
+        "Pullback",
+        "Scalp"
+      ],
+      "sources": [
+        "strategy_fit_robust",
+        "universe_active"
+      ],
+      "oos_daily_max": 2456.0,
+      "micro_scalp_score": 50.0,
+      "micro_scalp_notes": [
+        "vol@30=1.81% >=1.5 (MicroScalp 適格)",
+        "best obs=8min same_dir=71.4% (予測力○)"
+      ],
+      "open_bias": "neutral",
+      "best_observe_min": 8,
+      "best_same_dir_pct": 71.4,
+      "strategy_recommendation": [
+        "MicroScalp_pri",
+        "Scalp_keep"
+      ]
+    },
+    "8306.T": {
+      "name": "MUFG",
+      "existing_strategies": [
+        "Breakout",
+        "EnhancedMacdRci",
+        "EnhancedScalp",
+        "MacdRci",
+        "Scalp"
+      ],
+      "sources": [
+        "macd_rci_robust",
+        "strategy_fit_robust",
+        "universe_active"
+      ],
+      "oos_daily_max": 2207.5,
+      "micro_scalp_score": 20.0,
+      "micro_scalp_notes": [
+        "best obs=8min same_dir=71.4% (予測力○)"
+      ],
+      "open_bias": "trend_follow",
+      "best_observe_min": 8,
+      "best_same_dir_pct": 71.4,
+      "strategy_recommendation": [
+        "MicroScalp_back",
+        "MacdRci_keep",
+        "Scalp_keep"
+      ]
+    },
+    "8604.T": {
+      "name": "",
+      "existing_strategies": [
+        "Scalp"
+      ],
+      "sources": [
+        "strategy_fit_robust"
+      ],
+      "oos_daily_max": null,
+      "micro_scalp_score": 10.0,
+      "micro_scalp_notes": [
+        "abs_gap=1.41% (ギャップ豊富)"
+      ],
+      "open_bias": "neutral",
+      "best_observe_min": 8,
+      "best_same_dir_pct": 42.9,
+      "strategy_recommendation": [
+        "Scalp_keep"
+      ]
+    },
+    "9107.T": {
+      "name": "Kawasaki Kisen",
+      "existing_strategies": [
+        "Breakout",
+        "MacdRci",
+        "Pullback"
+      ],
+      "sources": [
+        "macd_rci_robust",
+        "strategy_fit_robust",
+        "universe_active"
+      ],
+      "oos_daily_max": 1953.7,
+      "micro_scalp_score": 0.0,
+      "micro_scalp_notes": [],
+      "open_bias": "trend_follow",
+      "best_observe_min": 8,
+      "best_same_dir_pct": 42.9,
+      "strategy_recommendation": [
+        "MacdRci_keep"
+      ]
+    },
+    "9432.T": {
+      "name": "NTT",
+      "existing_strategies": [
+        "MacdRci",
+        "Scalp"
+      ],
+      "sources": [
+        "macd_rci_robust",
+        "strategy_fit_robust",
+        "universe_active"
+      ],
+      "oos_daily_max": 187.1,
+      "micro_scalp_score": -40.0,
+      "micro_scalp_notes": [
+        "vol@30=0.34% <0.5 (ボラ不足)"
+      ],
+      "open_bias": "neutral",
+      "best_observe_min": 8,
+      "best_same_dir_pct": 28.6,
+      "strategy_recommendation": [
+        "MicroScalp_exclude",
+        "MacdRci_keep",
+        "Scalp_keep"
+      ]
+    },
+    "9433.T": {
+      "name": "KDDI",
+      "existing_strategies": [
+        "MacdRci",
+        "Scalp"
+      ],
+      "sources": [
+        "macd_rci_robust",
+        "strategy_fit_robust",
+        "universe_active"
+      ],
+      "oos_daily_max": 1016.3,
+      "micro_scalp_score": 0.0,
+      "micro_scalp_notes": [],
+      "open_bias": "neutral",
+      "best_observe_min": 10,
+      "best_same_dir_pct": 57.1,
+      "strategy_recommendation": [
+        "MacdRci_keep",
+        "Scalp_keep"
+      ]
+    },
+    "9434.T": {
+      "name": "",
+      "existing_strategies": [
+        "Scalp"
+      ],
+      "sources": [
+        "strategy_fit_robust"
+      ],
+      "oos_daily_max": null,
+      "micro_scalp_score": 20.0,
+      "micro_scalp_notes": [
+        "best obs=5min same_dir=71.4% (予測力○)"
+      ],
+      "open_bias": "neutral",
+      "best_observe_min": 5,
+      "best_same_dir_pct": 71.4,
+      "strategy_recommendation": [
+        "MicroScalp_back",
+        "Scalp_keep"
+      ]
+    },
+    "9468.T": {
+      "name": "Kadokawa",
+      "existing_strategies": [
+        "MacdRci",
+        "Scalp"
+      ],
+      "sources": [
+        "macd_rci_robust",
+        "strategy_fit_robust",
+        "universe_active"
+      ],
+      "oos_daily_max": 1597.1253499999966,
+      "micro_scalp_score": 0.0,
+      "micro_scalp_notes": [],
+      "open_bias": "trend_follow",
+      "best_observe_min": 8,
+      "best_same_dir_pct": 57.1,
+      "strategy_recommendation": [
+        "MacdRci_keep",
+        "Scalp_keep"
+      ]
+    },
+    "9984.T": {
+      "name": "SoftBank Group",
+      "existing_strategies": [
+        "BbShort",
+        "Breakout",
+        "EnhancedMacdRci",
+        "EnhancedScalp",
+        "MacdRci",
+        "Pullback",
+        "Scalp"
+      ],
+      "sources": [
+        "macd_rci_robust",
+        "strategy_fit_robust",
+        "universe_active"
+      ],
+      "oos_daily_max": 12168.1,
+      "micro_scalp_score": 60.0,
+      "micro_scalp_notes": [
+        "vol@30=3.79% >=1.5 (MicroScalp 適格)",
+        "best obs=5min same_dir=100.0% (予測力○)",
+        "abs_gap=3.22% (ギャップ豊富)"
+      ],
+      "open_bias": "trend_follow",
+      "best_observe_min": 5,
+      "best_same_dir_pct": 100.0,
+      "strategy_recommendation": [
+        "MicroScalp_pri",
+        "MacdRci_keep",
+        "Scalp_keep",
+        "Breakout_keep"
+      ]
+    }
+  },
+  "summary": {
+    "by_recommendation": {
+      "MicroScalp_pri": [
+        "1605.T",
+        "3103.T",
+        "4568.T",
+        "4592.T",
+        "485A.T",
+        "6501.T",
+        "6613.T",
+        "6645.T",
+        "6723.T",
+        "6752.T",
+        "6753.T",
+        "7201.T",
+        "8136.T",
+        "9984.T"
+      ],
+      "MacdRci_keep": [
+        "1605.T",
+        "3382.T",
+        "4385.T",
+        "4568.T",
+        "4689.T",
+        "4911.T",
+        "6501.T",
+        "6613.T",
+        "6758.T",
+        "8058.T",
+        "8306.T",
+        "9107.T",
+        "9432.T",
+        "9433.T",
+        "9468.T",
+        "9984.T"
+      ],
+      "Scalp_keep": [
+        "1605.T",
+        "2413.T",
+        "3103.T",
+        "3382.T",
+        "4385.T",
+        "4568.T",
+        "4755.T",
+        "5020.T",
+        "6501.T",
+        "6613.T",
+        "6645.T",
+        "6723.T",
+        "6752.T",
+        "6758.T",
+        "7203.T",
+        "7211.T",
+        "7267.T",
+        "7269.T",
+        "8058.T",
+        "8136.T",
+        "8306.T",
+        "8604.T",
+        "9432.T",
+        "9433.T",
+        "9434.T",
+        "9468.T",
+        "9984.T"
+      ],
+      "Breakout_keep": [
+        "1605.T",
+        "3103.T",
+        "4385.T",
+        "4568.T",
+        "4592.T",
+        "485A.T",
+        "6613.T",
+        "6723.T",
+        "6752.T",
+        "6758.T",
+        "7201.T",
+        "7203.T",
+        "9984.T"
+      ],
+      "MicroScalp_back": [
+        "2413.T",
+        "2432.T",
+        "3382.T",
+        "4755.T",
+        "7269.T",
+        "8058.T",
+        "8306.T",
+        "9434.T"
+      ],
+      "MicroScalp_exclude": [
+        "7267.T",
+        "9432.T"
+      ]
+    },
+    "by_bias": {
+      "trend_follow": [
+        "1605.T",
+        "2413.T",
+        "2432.T",
+        "3382.T",
+        "4385.T",
+        "4568.T",
+        "4592.T",
+        "4689.T",
+        "4755.T",
+        "485A.T",
+        "4911.T",
+        "6501.T",
+        "6613.T",
+        "6645.T",
+        "6753.T",
+        "6758.T",
+        "7201.T",
+        "7203.T",
+        "7211.T",
+        "7267.T",
+        "7269.T",
+        "8058.T",
+        "8306.T",
+        "9107.T",
+        "9468.T",
+        "9984.T"
+      ],
+      "neutral": [
+        "3103.T",
+        "5020.T",
+        "6723.T",
+        "6752.T",
+        "8136.T",
+        "8604.T",
+        "9432.T",
+        "9433.T",
+        "9434.T"
+      ]
+    },
+    "micro_scalp_top10": [
+      {
+        "symbol": "3103.T",
+        "name": "Unitika",
+        "score": 70.0,
+        "bias": "neutral",
+        "best_observe_min": 10
+      },
+      {
+        "symbol": "6501.T",
+        "name": "Hitachi",
+        "score": 60.0,
+        "bias": "trend_follow",
+        "best_observe_min": 10
+      },
+      {
+        "symbol": "6613.T",
+        "name": "QD Laser",
+        "score": 60.0,
+        "bias": "trend_follow",
+        "best_observe_min": 5
+      },
+      {
+        "symbol": "6723.T",
+        "name": "Renesas",
+        "score": 60.0,
+        "bias": "neutral",
+        "best_observe_min": 5
+      },
+      {
+        "symbol": "6752.T",
+        "name": "Panasonic",
+        "score": 60.0,
+        "bias": "neutral",
+        "best_observe_min": 15
+      },
+      {
+        "symbol": "9984.T",
+        "name": "SoftBank Group",
+        "score": 60.0,
+        "bias": "trend_follow",
+        "best_observe_min": 5
+      },
+      {
+        "symbol": "6645.T",
+        "name": "",
+        "score": 50.0,
+        "bias": "trend_follow",
+        "best_observe_min": 8
+      },
+      {
+        "symbol": "6753.T",
+        "name": "",
+        "score": 50.0,
+        "bias": "trend_follow",
+        "best_observe_min": 10
+      },
+      {
+        "symbol": "8136.T",
+        "name": "Sanrio",
+        "score": 50.0,
+        "bias": "neutral",
+        "best_observe_min": 8
+      },
+      {
+        "symbol": "1605.T",
+        "name": "INPEX",
+        "score": 40.0,
+        "bias": "trend_follow",
+        "best_observe_min": 5
+      }
+    ]
+  }
+}

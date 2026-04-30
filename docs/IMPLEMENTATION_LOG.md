@@ -2578,3 +2578,103 @@ exclude (ボラ不足):
 銘柄別プロファイルは MicroScalp だけでなく、他の戦略 (Scalp / Breakout / MacdRci) でも
 「銘柄選定の質」を上げるための共通インフラとして使える。
 
+---
+
+## 2026-04-30 (D5): universe 全 35 銘柄プロファイル化 — 「データで勝負」の土台完成
+
+ユーザー指針 (17:23):
+> 銘柄ごとの癖って絶対あるからね。人間が感覚ならこちらはデータで勝負しなきゃ。
+
+D4 の 9 銘柄プロファイルを universe 全銘柄に拡張。`scripts/build_full_universe_profile.py`
+で `universe_active.json` + `macd_rci_params.json` (robust) + `strategy_fit_map.json` (robust)
+の和集合 35 銘柄を一気にプロファイル化 + 戦略適合性スコアリング。
+
+### 実施内容
+
+1. **35 銘柄ロード**: 3 つの canonical の和集合
+2. **各銘柄を analyze_symbol() でプロファイル化** (yfinance 1m × 7日, sleep 0.3s)
+3. **戦略推奨を機械判定** (`classify_symbol`):
+   - vol_decay@30 / best_observe_min same_dir / yoriten_pct / abs_gap で micro_scalp_score
+   - 既存戦略 (MacdRci/Scalp/Breakout) との重複を考慮した推奨タグ付与
+4. **出力**: `data/symbol_open_profile_full.json` (52KB)
+
+### 主要発見
+
+#### 1. MicroScalp 適合銘柄が機械的に抽出された (14 主力 + 8 サブ + 2 除外)
+
+```
+MicroScalp_pri (主力, score>=40): 14 銘柄
+  3103.T(70) 6501.T(60) 6613.T(60) 6723.T(60) 6752.T(60) 9984.T(60)
+  6645.T(50) 6753.T(50) 8136.T(50) 1605.T(40) 4568.T(40) 4592.T(40)
+  485A.T(40) 7201.T(40)
+
+MicroScalp_back (サブ, score 20-30): 8 銘柄
+MicroScalp_exclude (絶対 NG, score<=-10): 2 銘柄
+  7267.T (Honda)  vol@30=0.98% (TP=5円届きにくい)
+  9432.T (NTT)    vol@30=0.34% (論外)
+```
+
+→ **新規発掘候補**: 8136.T (Sanrio), 4592.T, 7201.T が浮上
+→ 4568.T は MacdRci で paused 中だが、MicroScalp なら別戦略として活用可能
+
+#### 2. open_bias 分布: 75% が順張り型 (= 固定ショートバイアスは構造的に間違い)
+
+```
+trend_follow:     26 銘柄 (75%)  ← 大多数
+neutral:           9 銘柄 (25%)
+short_pref_open:   0 銘柄        ← 7 日では寄り天 60%+ は皆無
+```
+
+D3 v4 で「GD ならショート」を全銘柄一律適用した判断が、なぜ総合 PnL を下げたかが
+完全に説明された。**75% の銘柄が順張り型** = ショートバイアス画一適用は機会損失の塊。
+
+#### 3. 戦略 × 銘柄 マトリクスが完全可視化
+
+```
+MicroScalp_pri:    14  (新主力)
+MicroScalp_back:    8  (条件付き)
+MicroScalp_exclude: 2  (絶対 NG = 9432.T NTT, 7267.T Honda)
+MacdRci_keep:      16  (既存維持)
+Scalp_keep:        27  (既存維持)
+Breakout_keep:     13  (既存維持)
+```
+
+→ 9432.T のような超低ボラ銘柄を間違って MicroScalp に入れるリスクが構造的に消えた
+
+### 設計上のメリット
+
+1. **データドリブン銘柄選定**: 「人間の感覚」ではなく数値スコアで意思決定
+2. **戦略相性が見える**: 同一銘柄が MacdRci/Scalp/MicroScalp のどれに向くか機械判定
+3. **MicroScalp 拡張の根拠**: 既存 universe (29 ペア) に MicroScalp pri 14 銘柄を追加すべき検討材料
+4. **共通インフラ**: 他戦略 (Pullback / BbShort 等) でも同じプロファイルが使える
+
+### 運用化の道筋 (M2 で実装)
+
+1. **週次 cron 化** (`scripts/setup_weekly_profile_cron.sh`):
+   - 毎週日曜 22:00 に `build_full_universe_profile.py` 実行
+   - `data/symbol_open_profile_full.json` を更新
+2. **daily_prep 統合**:
+   - 毎朝 08:30 のローダーで profile を読み込み
+   - MicroScalp 候補銘柄を universe_active に動的反映
+3. **jp_live_runner 統合**:
+   - 各 (symbol, strategy) で profile の `strategy_recommendation` を確認
+   - `MicroScalp_exclude` 該当銘柄は新規エントリー禁止
+4. **長期 1m データ蓄積**:
+   - 現在は yfinance 7 日制限でサンプル少
+   - J-Quants Premium 申請 or 自前蓄積で 30+ 日に
+   - profile スコアの信頼区間が大幅向上
+
+### 成果物
+
+- 新規: `scripts/build_full_universe_profile.py`
+- 新規: `data/symbol_open_profile_full.json` (35 銘柄プロファイル + 分類)
+- 更新: `docs/IMPLEMENTATION_LOG.md` (D5 追記)
+
+### 振り返り
+
+ユーザーの「人間が感覚ならこちらはデータで勝負しなきゃ」は、プロジェクト全体の哲学そのもの。
+今回の D5 で **35 銘柄 × 戦略適合スコア** が機械的に出るようになり、これからの銘柄選定は
+「感覚」ではなく「スコア + 信頼区間」で判断できる土台ができた。
+9432.T (NTT, vol@30=0.34%) を MicroScalp に入れたら絶対損する、という当たり前を
+データで明示できることが、アルゴの真の強み。
+
