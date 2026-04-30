@@ -1,0 +1,516 @@
+{
+  "updated": "2026-04-30",
+  "updated_at": "2026-04-30T16:30:00.000000+09:00",
+  "active_count": 29,
+  "symbols": [
+    {
+      "symbol": "3103.T",
+      "name": "Unitika",
+      "strategy": "MacdRci",
+      "score": 13210.7,
+      "is_daily": 789.7,
+      "oos_daily": 18248.2,
+      "is_pf": 1.09,
+      "is_trades": 42,
+      "robust": true,
+      "is_oos_pass": true,
+      "calmar": 5000.93,
+      "source": "macd_rci_params.robust_merge"
+    },
+    {
+      "symbol": "6613.T",
+      "name": "QD Laser",
+      "strategy": "MacdRci",
+      "score": 9900.5,
+      "is_daily": 3252.4,
+      "oos_daily": 12464.0,
+      "is_pf": 1.197,
+      "is_trades": 67,
+      "robust": true,
+      "is_oos_pass": true,
+      "calmar": 4233.916,
+      "source": "macd_rci_params.robust_merge"
+    },
+    {
+      "symbol": "9984.T",
+      "name": "SoftBank Group",
+      "strategy": "MacdRci",
+      "score": 7509.2,
+      "is_daily": 3511.1,
+      "oos_daily": 8936.9,
+      "is_pf": 1.899,
+      "is_trades": 97,
+      "robust": true,
+      "is_oos_pass": false,
+      "calmar": 1243.949,
+      "source": "macd_rci_params.robust_merge"
+    },
+    {
+      "symbol": "6752.T",
+      "name": "Panasonic",
+      "strategy": "MacdRci",
+      "score": 2683.3,
+      "is_daily": 1109.2,
+      "oos_daily": 3072.2,
+      "is_pf": 1.415,
+      "is_trades": 66,
+      "robust": true,
+      "is_oos_pass": true,
+      "calmar": 206.656,
+      "source": "macd_rci_params.robust_merge"
+    },
+    {
+      "symbol": "9107.T",
+      "name": "Kawasaki Kisen",
+      "strategy": "MacdRci",
+      "score": 1923.7,
+      "is_daily": 1186.9,
+      "oos_daily": 1953.7,
+      "is_pf": 1.68,
+      "is_trades": 41,
+      "robust": true,
+      "is_oos_pass": false,
+      "calmar": 104.211,
+      "source": "macd_rci_params.robust_merge"
+    },
+    {
+      "symbol": "9468.T",
+      "name": "Kadokawa",
+      "strategy": "MacdRci",
+      "score": 1917.4,
+      "is_daily": 1997.9,
+      "oos_daily": 1597.1,
+      "is_pf": 4.232,
+      "is_trades": 40,
+      "robust": true,
+      "is_oos_pass": false,
+      "calmar": 0.0
+    },
+    {
+      "symbol": "8306.T",
+      "name": "MUFG",
+      "strategy": "MacdRci",
+      "score": 1832.6,
+      "is_daily": 291.1,
+      "oos_daily": 2207.5,
+      "is_pf": 1.166,
+      "is_trades": 40,
+      "robust": true,
+      "is_oos_pass": false,
+      "calmar": 123.851,
+      "source": "macd_rci_params.robust_merge"
+    },
+    {
+      "symbol": "9433.T",
+      "name": "KDDI",
+      "strategy": "MacdRci",
+      "score": 1069.3,
+      "is_daily": 526.4,
+      "oos_daily": 1016.3,
+      "is_pf": 1.369,
+      "is_trades": 122,
+      "robust": true,
+      "is_oos_pass": false,
+      "calmar": 0.0
+    },
+    {
+      "symbol": "6501.T",
+      "name": "Hitachi",
+      "strategy": "MacdRci",
+      "score": 823.0,
+      "is_daily": 1163.9,
+      "oos_daily": 391.3,
+      "is_pf": 1.399,
+      "is_trades": 60,
+      "robust": true,
+      "is_oos_pass": false,
+      "calmar": 6.659,
+      "source": "macd_rci_params.robust_merge"
+    },
+    {
+      "symbol": "8058.T",
+      "name": "Mitsubishi Corp",
+      "strategy": "MacdRci",
+      "score": 543.0,
+      "is_daily": 100.9,
+      "oos_daily": 446.7,
+      "is_pf": 1.039,
+      "is_trades": 55,
+      "robust": true,
+      "is_oos_pass": true,
+      "calmar": 17.735,
+      "source": "macd_rci_params.robust_merge"
+    },
+    {
+      "symbol": "9432.T",
+      "name": "NTT",
+      "strategy": "MacdRci",
+      "score": 428.7,
+      "is_daily": 325.7,
+      "oos_daily": 187.1,
+      "is_pf": 1.096,
+      "is_trades": 257,
+      "robust": true,
+      "is_oos_pass": false,
+      "calmar": 0.0,
+      "source": "macd_rci_params.robust_merge"
+    },
+    {
+      "symbol": "4911.T",
+      "name": "Shiseido",
+      "strategy": "MacdRci",
+      "score": 357.0,
+      "is_daily": 58.7,
+      "oos_daily": 199.1,
+      "is_pf": 1.016,
+      "is_trades": 450,
+      "robust": true,
+      "is_oos_pass": false,
+      "calmar": 0.0,
+      "source": "macd_rci_params.robust_merge"
+    },
+    {
+      "symbol": "9984.T",
+      "name": "SoftBank Group",
+      "strategy": "EnhancedMacdRci",
+      "score": 186.3,
+      "is_daily": 1817.1,
+      "oos_daily": 12168.1,
+      "is_pf": 2.258,
+      "is_trades": 138,
+      "robust": true,
+      "is_oos_pass": true,
+      "calmar": 0.0,
+      "source": "augment_alt_strategies",
+      "alt_meta": {
+        "experiment_id": 235424,
+        "oos_trades": 47,
+        "oos_pf": 8.491156721659536,
+        "oos_win_rate": 48.93617021276596
+      }
+    },
+    {
+      "symbol": "3103.T",
+      "name": "Unitika",
+      "strategy": "Breakout",
+      "score": 114.8,
+      "is_daily": 291.0,
+      "oos_daily": 4856.5,
+      "is_pf": 1.197,
+      "is_trades": 36,
+      "robust": true,
+      "is_oos_pass": true,
+      "calmar": 0.0,
+      "source": "augment_alt_strategies",
+      "alt_meta": {
+        "experiment_id": 215514,
+        "oos_trades": 11,
+        "oos_pf": 12.660527870984788,
+        "oos_win_rate": 54.54545454545454
+      }
+    },
+    {
+      "symbol": "6758.T",
+      "name": "Sony Group",
+      "strategy": "Breakout",
+      "score": 76.0,
+      "is_daily": 222.2,
+      "oos_daily": 602.4,
+      "is_pf": 1.784,
+      "is_trades": 39,
+      "robust": true,
+      "is_oos_pass": true,
+      "calmar": 0.0,
+      "source": "augment_alt_strategies",
+      "alt_meta": {
+        "experiment_id": 170131,
+        "oos_trades": 9,
+        "oos_pf": 7.518246191843626,
+        "oos_win_rate": 66.66666666666666
+      }
+    },
+    {
+      "symbol": "1605.T",
+      "name": "INPEX",
+      "strategy": "Pullback",
+      "score": 73.9,
+      "is_daily": 23.1,
+      "oos_daily": 1080.6,
+      "is_pf": 1.045,
+      "is_trades": 35,
+      "robust": true,
+      "is_oos_pass": true,
+      "calmar": 0.0,
+      "source": "augment_alt_strategies",
+      "alt_meta": {
+        "experiment_id": 208970,
+        "oos_trades": 13,
+        "oos_pf": 4.482538059689375,
+        "oos_win_rate": 61.53846153846154
+      }
+    },
+    {
+      "symbol": "1605.T",
+      "name": "INPEX",
+      "strategy": "Scalp",
+      "score": 70.2,
+      "is_daily": 315.9,
+      "oos_daily": 1110.4,
+      "is_pf": 1.837,
+      "is_trades": 17,
+      "robust": true,
+      "is_oos_pass": true,
+      "calmar": 0.0,
+      "source": "augment_alt_strategies",
+      "alt_meta": {
+        "experiment_id": 225700,
+        "oos_trades": 8,
+        "oos_pf": 4.04317036641326,
+        "oos_win_rate": 62.5
+      }
+    },
+    {
+      "symbol": "6613.T",
+      "name": "QD Laser",
+      "strategy": "EnhancedMacdRci",
+      "oos_daily": 5464.0,
+      "oos_pf": 4.85,
+      "oos_win_rate": 18.2,
+      "robust": true,
+      "is_oos_pass": true,
+      "source": "manual_robust_promotion_2026-04-30",
+      "promotion_note": "fit_map robust=true 拾い。シグナル発生密度向上目的"
+    },
+    {
+      "symbol": "9984.T",
+      "name": "SoftBank Group",
+      "strategy": "Breakout",
+      "oos_daily": 4803.0,
+      "oos_pf": 7.35,
+      "oos_win_rate": 40.9,
+      "robust": true,
+      "is_oos_pass": true,
+      "source": "manual_robust_promotion_2026-04-30"
+    },
+    {
+      "symbol": "6613.T",
+      "name": "QD Laser",
+      "strategy": "Pullback",
+      "oos_daily": 3954.0,
+      "oos_pf": 4.14,
+      "oos_win_rate": 42.3,
+      "robust": true,
+      "is_oos_pass": true,
+      "source": "manual_robust_promotion_2026-04-30"
+    },
+    {
+      "symbol": "6613.T",
+      "name": "QD Laser",
+      "strategy": "Breakout",
+      "oos_daily": 3767.0,
+      "oos_pf": 3.72,
+      "oos_win_rate": 38.9,
+      "robust": true,
+      "is_oos_pass": true,
+      "source": "manual_robust_promotion_2026-04-30"
+    },
+    {
+      "symbol": "9984.T",
+      "name": "SoftBank Group",
+      "strategy": "Pullback",
+      "oos_daily": 3300.0,
+      "oos_pf": 11.40,
+      "oos_win_rate": 50.0,
+      "robust": true,
+      "is_oos_pass": true,
+      "source": "manual_robust_promotion_2026-04-30"
+    },
+    {
+      "symbol": "3103.T",
+      "name": "Unitika",
+      "strategy": "Pullback",
+      "oos_daily": 2696.0,
+      "oos_pf": 3.00,
+      "oos_win_rate": 33.3,
+      "robust": true,
+      "is_oos_pass": true,
+      "source": "manual_robust_promotion_2026-04-30"
+    },
+    {
+      "symbol": "8136.T",
+      "name": "Sanrio",
+      "strategy": "Pullback",
+      "oos_daily": 2456.0,
+      "oos_pf": 3.10,
+      "oos_win_rate": 66.7,
+      "robust": true,
+      "is_oos_pass": true,
+      "source": "manual_robust_promotion_2026-04-30"
+    },
+    {
+      "symbol": "9984.T",
+      "name": "SoftBank Group",
+      "strategy": "EnhancedScalp",
+      "oos_daily": 2129.0,
+      "oos_pf": 2.52,
+      "oos_win_rate": 47.2,
+      "robust": true,
+      "is_oos_pass": true,
+      "source": "manual_robust_promotion_2026-04-30"
+    },
+    {
+      "symbol": "9984.T",
+      "name": "SoftBank Group",
+      "strategy": "Scalp",
+      "oos_daily": 2052.0,
+      "oos_pf": 62.14,
+      "oos_win_rate": 71.4,
+      "robust": true,
+      "is_oos_pass": true,
+      "source": "manual_robust_promotion_2026-04-30"
+    },
+    {
+      "symbol": "6723.T",
+      "name": "Renesas",
+      "strategy": "Breakout",
+      "oos_daily": 1632.0,
+      "oos_pf": 5.99,
+      "oos_win_rate": 58.8,
+      "robust": true,
+      "is_oos_pass": true,
+      "source": "manual_robust_promotion_2026-04-30"
+    },
+    {
+      "symbol": "8306.T",
+      "name": "MUFG",
+      "strategy": "Breakout",
+      "oos_daily": 1564.0,
+      "oos_pf": 8.24,
+      "oos_win_rate": 75.0,
+      "robust": true,
+      "is_oos_pass": true,
+      "source": "manual_robust_promotion_2026-04-30"
+    },
+    {
+      "symbol": "8136.T",
+      "name": "Sanrio",
+      "strategy": "Breakout",
+      "oos_daily": 1288.0,
+      "oos_pf": 13.96,
+      "oos_win_rate": 75.0,
+      "robust": true,
+      "is_oos_pass": true,
+      "source": "manual_robust_promotion_2026-04-30"
+    }
+  ],
+  "last_merge": {
+    "at": "2026-04-25T07:44:19.461836+09:00",
+    "source": "macd_rci_params.robust",
+    "added": [
+      "6501.T"
+    ],
+    "promoted": [
+      "3103.T",
+      "9984.T"
+    ],
+    "robust_count": 18
+  },
+  "last_low_yield_prune": {
+    "computed_at": "2026-04-25T09:56:40.105671+09:00",
+    "thresholds": {
+      "threshold_rate": 0.01,
+      "min_trials": 200,
+      "require_is_oos_pass_false": true,
+      "audit_avg_pnl_max": null,
+      "explicit_symbols": [
+        "3382.T:MacdRci",
+        "4385.T:MacdRci",
+        "6758.T:MacdRci"
+      ]
+    },
+    "removed": [
+      {
+        "symbol": "4385.T",
+        "strategy": "MacdRci",
+        "name": "Mercari",
+        "robust_rate_pct": 0.22,
+        "is_oos_pass": false,
+        "oos_daily": 1028.1,
+        "audit_avg_oos_daily": 15.9,
+        "reason": "explicit_symbols"
+      },
+      {
+        "symbol": "3382.T",
+        "strategy": "MacdRci",
+        "name": "Seven & i",
+        "robust_rate_pct": 0.51,
+        "is_oos_pass": false,
+        "oos_daily": 1057.1,
+        "audit_avg_oos_daily": 365.3,
+        "reason": "explicit_symbols"
+      },
+      {
+        "symbol": "6758.T",
+        "strategy": "MacdRci",
+        "name": "Sony Group",
+        "robust_rate_pct": 0.84,
+        "is_oos_pass": false,
+        "oos_daily": 81.8,
+        "audit_avg_oos_daily": 81.3,
+        "reason": "explicit_symbols"
+      }
+    ]
+  },
+  "last_manual_promotion": {
+    "computed_at": "2026-04-30T16:30:00.000000+09:00",
+    "reason": "シグナル発生密度向上 (本日 active 4 銘柄→27→29目標)。strategy_fit_map.robust=true で universe 外だった oos_pf>=2.0 高 PF 候補 12 ペアを手動 promotion。目標は信用 99 万を主軸にした +3%/日 (≒ +30,000円/日) の達成。",
+    "added_count": 12,
+    "expected_oos_daily_jpy_total": 35105,
+    "added_pairs": [
+      "6613.T:EnhancedMacdRci",
+      "9984.T:Breakout",
+      "6613.T:Pullback",
+      "6613.T:Breakout",
+      "9984.T:Pullback",
+      "3103.T:Pullback",
+      "8136.T:Pullback",
+      "9984.T:EnhancedScalp",
+      "9984.T:Scalp",
+      "6723.T:Breakout",
+      "8306.T:Breakout",
+      "8136.T:Breakout"
+    ],
+    "excluded_due_to_past_prune": [
+      "4385.T:MacdRci",
+      "3382.T:MacdRci",
+      "6758.T:MacdRci"
+    ]
+  },
+  "last_alt_augment": {
+    "computed_at": "2026-04-25T09:56:39.978024+09:00",
+    "min_oos_pf": 1.5,
+    "added": [
+      {
+        "symbol": "6758.T",
+        "name": "Sony Group",
+        "strategy": "Breakout",
+        "score": 76.0,
+        "is_daily": 222.2,
+        "oos_daily": 602.4,
+        "is_pf": 1.784,
+        "is_trades": 39,
+        "robust": true,
+        "is_oos_pass": true,
+        "calmar": 0.0,
+        "source": "augment_alt_strategies",
+        "alt_meta": {
+          "experiment_id": 170131,
+          "oos_trades": 9,
+          "oos_pf": 7.518246191843626,
+          "oos_win_rate": 66.66666666666666
+        }
+      }
+    ],
+    "skipped": []
+  }
+}

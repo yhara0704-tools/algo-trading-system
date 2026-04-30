@@ -44,6 +44,10 @@ class CapitalTier:
     excluded_symbols:  list[str] = field(default_factory=list)  # 流動性不足で除外
     daily_target_jpy:  float    = 1_000  # 日次目標P&L（円）
     note:              str      = ""
+    # Phase D1: Tier ごとのスリッページ増分（bps）。資金が大きくなるほど板影響でスリッページが増えるため。
+    slippage_bps:      float    = 0.0
+    # Phase D1: Tier ごとの推奨戦略スタイル（バックテスト promotion ガイダンスに使う）
+    preferred_styles:  list[str] = field(default_factory=list)
 
     @property
     def buying_power(self) -> float:
@@ -86,20 +90,30 @@ TIERS: list[CapitalTier] = [
         capital_min     = 300_000,
         capital_max     = 1_000_000,
         margin          = 3.3,
-        position_pct    = 0.33,   # 買付余力の33%（1ポジ = 99万×33% ≒ 32.7万 ≈ 実質1倍）
-        max_concurrent  = 3,      # 同時3銘柄（4銘柄目のチャンスに備えて余力を残す）
+        # 2026-04-30: 0.50 → 0.70 に拡大。`oos_daily 平均 1,000 円/銘柄` で 4 銘柄
+        # paper エントリーしても +4,000 円/日 (ROI 1.3%) しか取れず、信用 99 万を
+        # 活用しきれていなかった (1ポジ ~30 万、qty=100株固定) ため。`position_pct=0.70`
+        # で 1ポジ ~69万 (株価 2,500-3,800円なら 200-300株) に拡大。daily_loss_guard
+        # は元本 30万×3% = -9,000円 固定のままなので最大損失上限は変わらない。
+        position_pct    = 0.70,
+        # 2026-04-30: 3 → 5 に拡大。本日 paper signal_skip_events=0 で max_concurrent
+        # 起因の reject は無いが、`universe_active` を 17→29 ペアに拡張する以上、
+        # 同日 5 銘柄まで同時保有できる枠が必要 (cash 99万 / 1ポジ ~70万 = 1.4 ポジ
+        # 同時で cash 上限なので、4-5 ポジ目以降は cash 制約で圧縮されるが、機会
+        # ロスは最小化)。
+        max_concurrent  = 5,
         allowed_symbols = None,   # スクリーナーに任せる
-        excluded_symbols= ["4369.T"],  # TriChem: 上限20万円 < 32.7万ポジ → 除外
-        daily_target_jpy= 1_000,
-        note            = "1ポジ≒実質1倍レバ。3銘柄分散で余力を常に確保。集中したい時はロット増しで対応。",
+        excluded_symbols= ["4369.T"],  # TriChem: 流動性上限20万円がベースポジより低い → 除外
+        daily_target_jpy= 5_000,  # 2026-04-30: 1,000 → 5,000 (信用枠フル活用想定の +1.7%/日)
+        note            = "70%ポジ・5並列・信用 99 万円を主軸利用 (旧 50%ポジ・3並列)。daily_loss_guard は -9,000円固定。",
     ),
     CapitalTier(
         name            = "T2: 安定稼働",
         capital_min     = 1_000_000,
         capital_max     = 3_000_000,
         margin          = 3.3,
-        position_pct    = 0.33,   # 1ポジ = 330万×33% = 109万
-        max_concurrent  = 3,      # 同時3銘柄（330万÷109万≒3）
+        position_pct    = 0.50,   # 1ポジ = 買付余力×50%（EXP-001 B・ラボ既定に合わせる）
+        max_concurrent  = 3,      # 同時3銘柄（allocation 時は余力クランプあり）
         allowed_symbols = None,
         excluded_symbols= ["4369.T","3697.T"],  # SHIFT・TriChem: 上限割れ
         daily_target_jpy= 3_000,
@@ -120,14 +134,46 @@ TIERS: list[CapitalTier] = [
     CapitalTier(
         name            = "T4: プロ水準",
         capital_min     = 10_000_000,
-        capital_max     = float("inf"),
+        capital_max     = 30_000_000,
         margin          = 3.3,
         position_pct    = 0.10,   # 1ポジ = 3,300万×10% = 330万
         max_concurrent  = 10,
         allowed_symbols = ["8306.T","9432.T","7203.T","7267.T","4568.T","9433.T"],
         excluded_symbols= [],
         daily_target_jpy= 50_000,
+        slippage_bps    = 3.0,
+        preferred_styles= ["scalp", "breakout", "swing"],
         note            = "超大型株のみ（MUFG・NTT・Toyota・Honda・DaiichiSankyo・KDDI）。J-Quants Premium推奨。",
+    ),
+    # Phase D1: T5/T6 — 資金が大きくなるほど日中スキャルピングは板影響で効きにくくなり、
+    # swing（日足）/ breakout（出来高先行）へ比率をシフトする。position_pct は自然に逓減。
+    CapitalTier(
+        name            = "T5: 大型スイング",
+        capital_min     = 30_000_000,
+        capital_max     = 100_000_000,
+        margin          = 3.3,
+        position_pct    = 0.05,   # 1ポジ = 9,900万×5% ≒ 495万
+        max_concurrent  = 10,
+        allowed_symbols = ["8306.T","9432.T","7203.T","7267.T","4568.T","9433.T"],
+        excluded_symbols= [],
+        daily_target_jpy= 150_000,
+        slippage_bps    = 6.0,
+        preferred_styles= ["swing", "breakout"],
+        note            = "3,000万円超の資金帯。スキャル比率を下げ、日足スイング中心に切替える想定。",
+    ),
+    CapitalTier(
+        name            = "T6: 最終目標",
+        capital_min     = 100_000_000,
+        capital_max     = float("inf"),
+        margin          = 3.3,
+        position_pct    = 0.03,   # 1ポジ = 3.3億×3% ≒ 990万
+        max_concurrent  = 12,
+        allowed_symbols = ["8306.T","9432.T","7203.T","7267.T","4568.T","9433.T"],
+        excluded_symbols= [],
+        daily_target_jpy= 500_000,
+        slippage_bps    = 10.0,
+        preferred_styles= ["swing"],
+        note            = "1億円到達以降。スイング日足中心、寄付/引けの出来高で建玉を分散させる想定。",
     ),
 ]
 
@@ -197,6 +243,10 @@ def print_tier_summary() -> None:
         print(f"  1ポジション上限: {pos/10000:.0f}万円")
         print(f"  同時保有上限   : {t.max_concurrent}銘柄")
         print(f"  日次目標       : {t.daily_target_jpy:,.0f}円/日")
+        if t.slippage_bps:
+            print(f"  スリッページ   : +{t.slippage_bps:.1f} bps")
+        if t.preferred_styles:
+            print(f"  推奨スタイル   : {', '.join(t.preferred_styles)}")
         if t.excluded_symbols:
             print(f"  除外銘柄       : {', '.join(t.excluded_symbols)}（流動性不足）")
         print(f"  メモ           : {t.note}")

@@ -1,5 +1,99 @@
 # Phase1 実装ログ
 
+## 2026-04-30 (夕方) Phase1 攻めシフト: position_pct 0.5→0.7 / max_concurrent 3→5 / universe 17→29 ペア
+
+### 背景
+
+A 案 (active_sum_oos 併記) で paper の正味成果を可視化したところ、本日 4/30 は **active 4 銘柄期待 +4,058 円/日 (元本 30万 ROI 1.35%、信用 99 万 ROI 0.41%)** に対して paper +3,000 円。「立った銘柄では概ね期待通り取れている」が、そもそも信用 99 万を活用しきれていない (1ポジ ~30 万、qty=100 株固定) ことと、シグナル発生密度が極端に低い (universe 17 ペア中 4 ペアしか発生) 構造的問題が露呈。
+
+ユーザーの目標 = **元本 30万 / 信用 99 万で +3%/日 (≒ 約 30,000 円/日)**、上振れで +10%/日 (≒ 99,000 円/日)。
+
+### (G1) 現状診断 — qty=100 固定の真因
+
+`backend/lab/jp_live_runner.py:1614-1633`:
+
+```
+position_value = _JP_CAPITAL_JPY * tier.margin * tier.position_pct
+                = 300,000 × 3.3 × 0.50 = 495,000 円/ポジ
+qty = int(position_value / latest_price / 100) * 100
+```
+
+→ 株価 2,500-3,800 円帯では `int(495k/価格/100) × 100 = 100 株` 固定になる構造。`paper_broker` の cash は 99 万で初期化済 (`backend/main.py:159`) のため信用倍率自体は使えていたが、`tier.position_pct=0.50` が真のボトルネック。本日同時保有 peak 95.8 万円 = 99 万 cash 上限ギリギリで、3 ポジ持つと cash 制約で後続が圧縮されていた。
+
+`daily_loss_guard` は `_JP_RISK_BASE_JPY (=30万) × _JP_DAILY_LOSS_LIMIT_PCT (=0.03) = 9,000 円` 固定 (元本基準) なので、`position_pct` を上げても 1 日最大損失上限は不変。安全に攻められる。
+
+### (G2) 現状診断 — 本日 `jp_signal_skip_events` は 0 件
+
+`max_concurrent=3` 起因の reject も `daily_loss_guard` 起因の reject も発生しておらず、純粋に **「シグナル自体が立たなかった」** = エントリーロジック / universe / 戦略パラメータの問題と確定。
+
+### (G3) 現状診断 — universe_active 17 ペアの理論 oos_daily 合計は +70,538 円/日
+
+既存 17 ペアでも oos_daily 合計は +70,538 円/日 = 信用基準 +7%/日の理論ポテンシャル。実際の active が +4,058 円/日 と乖離するのは「シグナル発生確率 ~24%」のため。canonical (`macd_rci_params.json` + `strategy_fit_map.json`) の robust=true 集合と universe_active を比較すると、**universe 外に 66 ペアの robust 候補が放置** されていた (上位: 6613.T EnhancedMacdRci +5,464 円/日 pf 4.85, 9984.T Breakout +4,803 pf 7.35, 6613.T Pullback +3,954 pf 4.14 など)。
+
+### (G4) reverse 戦略は本格採用見送り
+
+ユーザー提案の「`-3%` を取れる戦略を反転すれば `+3%`」は数学的には正しいが、`experiments` テーブル調査で `is_pf<0.85 + is_daily<-200 + oos_pf<0.85 + oos_daily<-300` の「真の reverse 候補」を抽出したところ **0 件**。理由は最適化メカニズム上「is で勝てるよう探索する」ため、`is も oos も両方負け` パターンは optimizer が除外する。`is で大勝・oos で大負け` パターン (overfit) は多数あるが、これを反転しても is で大負けするだけで oos の汎化は保証されない (ランダム性が高い)。
+
+→ 今回は別軸 (lot 拡大 + universe 拡張 + max_concurrent UP) に集中。reverse 戦略は今後も継続検討するが、汎化リスクが高いため即採用はしない。
+
+### (G5) 実装 — 4 軸並行で攻めシフト
+
+| 軸 | 変更箇所 | 旧 → 新 | 期待効果 |
+|---|---|---|---|
+| A | `backend/capital_tier.py` T1 `position_pct` | 0.50 → **0.70** | 1ポジ 495k → **693k 円** |
+| B | `backend/capital_tier.py` T1 `max_concurrent` | 3 → **5** | 同時保有枠拡大 (cash 99万を超える分は自然圧縮) |
+| C | `data/universe_active.json` (手動 promotion) | 17 → **29 ペア** | シグナル発生機会増 (oos_daily sum +70,538 → +105,643) |
+| D | `backend/lab/runner.py` `POSITION_PCT` (backtest engine 同期) | 0.50 → **0.70** | canonical 再計算で oos_daily が同基準で更新される |
+
+`daily_target_jpy` も `1,000 → 5,000` に引き上げ (目線更新)。
+
+### universe 拡張の選定基準
+
+`oos_pf >= 2.0` & 過去 prune 履歴に無いものを oos_daily 降順で 12 件追加:
+
+```
+6613.T EnhancedMacdRci  +5,464  pf  4.85
+9984.T Breakout         +4,803  pf  7.35
+6613.T Pullback         +3,954  pf  4.14
+6613.T Breakout         +3,767  pf  3.72
+9984.T Pullback         +3,300  pf 11.40
+3103.T Pullback         +2,696  pf  3.00
+8136.T Pullback         +2,456  pf  3.10
+9984.T EnhancedScalp    +2,129  pf  2.52
+9984.T Scalp            +2,052  pf 62.14
+6723.T Breakout         +1,632  pf  5.99
+8306.T Breakout         +1,564  pf  8.24
+8136.T Breakout         +1,288  pf 13.96
+                       ─────────
+                       +35,105 円/日 (理論加算)
+```
+
+過去 `last_low_yield_prune` (4/25) で `robust_rate_pct < 1%` で除外された 4385.T MacdRci / 3382.T MacdRci / 6758.T MacdRci は除外。`universe_active.json` の `last_manual_promotion` セクションに履歴を残す。
+
+### 期待値 (理論)
+
+- backtest_sum_oos_jpy: 70,538 → **+105,643 円/日** (信用 99万 ROI 10.7%)
+- 本日と同じシグナル発生率 24% を仮定すると active 期待 ≈ 25,354 円/日 = 信用基準 **+2.6%/日**
+- lot 1.4 倍効果込みで **+3-4%/日 (約 +9,000 〜 13,000 円/日, 元本基準)** が現実的な上振れレンジ
+
+5/1 (金) の paper で active_sum_oos と実 PnL を観測し、+3% (信用基準) に届くかを評価する。
+
+### デプロイ
+
+- `make deploy-vps`: `capital_tier.py`, `runner.py` 反映
+- `scp data/universe_active.json bullvps:/root/algo-trading-system/data/`
+- `systemctl restart algo-trading.service backtest-daemon.service` (両方とも 16:29 JST)
+- VPS 検算: T1 (position_pct=0.7, max_concurrent=5, max_position_jpy=693,000), universe (29 ペア, oos_daily sum +105,643) を確認
+
+### フォローアップ
+
+- 5/1 paper 観測: active_pair_count が 4 → 8 前後に増えるか / paper PnL が +9,000 円/日 を超えるか / `daily_loss_guard` (-9,000 円) に当たる日が増えないか
+- canonical 再計算: backtest-daemon が新 POSITION_PCT=0.7 で oos_daily を再算出し始めるので、数日後に `paper_low_sample_excluded_latest.json` の閾値判定も自動更新される
+- `max_concurrent=5` で cash 制約圧縮が頻繁になる場合は `position_pct` を 0.7 → 0.6 に下げて 5 並列保証する選択肢も検討
+- 上振れ目標 +10%/日 (= 信用基準) は今回の lot 拡大 + universe 拡張だけでは届かない可能性が高い。次フェーズは「シグナル発生密度を上げる戦略パラメータ緩和」or「新戦略 (例: Reverse Pullback / Donchian Short Squeeze) の追加」を検討
+
+---
+
 ## 2026-04-30 (午後 part 2) `paper_vs_backtest` 乖離指標を A 案 (active universe) に拡張 + low_sample 評価穴の修正
 
 ### 背景
