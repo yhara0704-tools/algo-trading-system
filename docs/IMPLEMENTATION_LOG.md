@@ -1,5 +1,68 @@
 # Phase1 実装ログ
 
+## 2026-04-30 (午後) ペーパーテスト報告 — 連続 critical 乖離 + halt.json 同期不全 + 4568.T paused 追加
+
+### 背景
+
+- 大引け後 (15:30 finalize) の paper observability で、**4/29 (-100%) と 4/30 (-81.6%) の 2 営業日連続 critical 乖離** を検知。`paper_promoted_floor_jpy=24,350` (4/28 達成額) に対し本日 +3,000 で 21,350 円不足。
+- 同時に判明した運用 4 件:
+  1. `data/jp_paper_trading_halt.json` の **VPS 同期不全** (mtime 4/27、ローカルの 5/25 延長 + renewed_at 入り版が `Makefile` の `--exclude data/` で送信されておらず、5/11 で `1605.T MacdRci` が自動解除されてしまうリスク)
+  2. `unknown_regime_guard` の機能確認: 「unknown 9 件全敗 -15,570 円」は **過去日 (4/24, 4/27) の損失で確定済**、4/30 は guard が 15 件正しく発火 (bar=12〜19, 9:31-9:39) → guard 緩和不要
+  3. `4568.T MacdRci` が `paper_low_sample_excluded` の閾値 (oos_trades=17 < 20 wf_relaxed) を割っているのに除外されていない (universe_active 経由で評価される設計のため、`macd_rci_params.json` 直接拾いは穴)
+  4. `paper_backtest_sync.py` の critical 検知に **auto-pause なし** (txt 保存 + Pushover 通知のみ) → 連続 critical でも paused 化は手動
+
+### (E1) A1: VPS `jp_paper_trading_halt.json` 即時同期 + Makefile 改修
+
+- ローカルの `1605.T MacdRci until=2026-05-25 + renewed_at=2026-04-29T22:10` 版を `scp` で VPS に手動上書き (mtime 4/27 → 4/30 15:48 に更新確認)。
+- `Makefile` の `PAPER_DATA_FILES` に `data/jp_paper_trading_halt.json` を追加 (NOTE コメントで「`deploy-vps` は `data/` を一括除外するため `sync-vps-paper-data` 経由で同期必須」を明記)。
+
+### (E2) B1+B2: unknown_regime_guard 仕様確認 — 緩和不要と判断
+
+- `backend/lab/jp_live_runner.py` の `_detect_entry_regime` は多段判定:
+  - `bars < _REGIME_MIN_BARS_HARD` (env `JP_REGIME_MIN_BARS_HARD`, default `20`) → `unknown` で block
+  - `20 <= bars < 50` → 簡易判定 (EMA20 傾き + close 位置)
+  - `bars >= 50` → `market_regime._detect` (ADX/ATR)
+- `_UNKNOWN_REGIME_GUARD_ENABLED` (env `JP_UNKNOWN_REGIME_GUARD`, default `1`) → 既定で ON 稼働中。
+- SQL で確認した unknown 9 件全敗の正体:
+  - **4/24 6 件 (-9,270 円)**: 6613.T, 9432.T, 4568.T, 9433.T, 6758.T, 3382.T (9:32-9:37 の MacdRci 連続発注)
+  - **4/27 3 件 (-6,300 円)**: 6613.T, 9433.T, 4568.T (9:31-9:32)
+  - 4/28-30 の 3 営業日は **0 件** = guard が機能して unknown entry を完全に止めている
+- 4/30 の guard 発火 15 件は **すべて 9:31-9:39 (bar=12-19)** で抑止 → 期待通り。緩和すれば過去 -15,570 円のような損失が再発する側に振れるため、**現行設定 (HARD=20, FULL=50) を維持**。
+
+### (E3) C1+C3: `4568.T MacdRci` を `paused_pairs` に追加 (until=2026-05-14)
+
+調査結果:
+- `experiments` の最新 robust id=249257 (4/24 21:37 created): `oos_trades=17, oos_daily_pnl=+46.5円/日, oos_pf=1.025, oos_win_rate=41.2%, wf_window_total=1, pass_ratio=1.0`
+- `paper_low_sample_excluded_latest.json` の閾値 (`min_oos_trades_for_live=30, _wf_relaxed=20`) を割っているが、**universe_active.json (17 銘柄) に居ないため評価対象外** (4568.T は `macd_rci_params.json` の `robust=true` から `jp_live_runner` が直接拾う設計)
+- 本日 4/30 paper executions 6 件詳細:
+  | 時刻 | side | regime in→out | 結果 | hold |
+  |---|---|---|---|---|
+  | 09:42 | long | ranging→unknown | stop -2,150 | 16m |
+  | 09:59 | long | ranging→unknown | **target +2,850** | 3m |
+  | 10:40 | long | low_vol→low_vol | stop -1,600 | 19m |
+  | 11:00 | long | low_vol→trending_down | stop -1,550 | 27m |
+  | 11:28 | long | trending_down→high_vol | **stop -3,500** | 77m |
+  | 13:34 | long | low_vol→low_vol | target +2,600 | 59m |
+  → **4 連続 stop (-8,800 円) を 2 target (+5,450 円) で部分回収して -3,350 円**。連敗時のリベンジエントリー的な挙動。
+- 4/27 にも -2,650 円失点 (4/27 全敗 5 銘柄の一部) → 直近で安定していない。
+- 暫定対策: `paused_pairs` に `4568.T MacdRci, until=2026-05-14, reason=oos_low_sample+4/30 6 trades -3,350円` を追加。`make sync-vps-paper-data` で VPS にも即時反映 (paused_pair_count: 1 → 2)。
+
+### (E4) C2: `paper_backtest_sync.py` の critical 検知に auto-pause なし
+
+- `_write_divergence_report_file` は txt 保存のみ、`_notify_divergence` は Pushover 通知のみ。
+- `paused_pairs` 自動追加ロジックは存在しない → **連続 critical (4/29 -100% / 4/30 -81.6%) でも自動対応されず**、手動運用が必須。
+- 将来課題 (本ログでは未着手): `finalize_paper_session` 内で「N 営業日連続 critical かつ特定銘柄の連敗が閾値超過」なら `paused_pairs` に提案エントリを追記するロジックを検討。ただし誤検知での過剰停止リスクがあるため、提案 → 通知 → 翌朝判断 のワークフローが安全。
+
+### 結論
+
+- VPS halt.json 同期不全は即時解消 (1605.T までの 5/25 延長を反映、5/11 解除リスクを除去)
+- `Makefile` 改修で今後ローカル halt.json 編集時は `make sync-vps-paper-data` 一発で VPS 反映可
+- `4568.T MacdRci` は **paused_pair で当面停止**、5/14 までに再評価
+- unknown_regime_guard は引き続き機能継続中 (緩和なし)
+- auto-pause 機能化は別タスクに切り出し (誤検知リスクのため即時実装はせず)
+
+---
+
 ## 2026-04-30 (午前) `data/sector_map.json` メタキー混入による backtest-daemon クラッシュループ — 緊急復旧 + 二重防御
 
 ### 背景

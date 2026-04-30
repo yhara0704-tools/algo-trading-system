@@ -10,6 +10,14 @@
       "added_at": "2026-04-27T19:50:00+09:00",
       "renewed_at": "2026-04-29T22:10:00+09:00",
       "evidence": "data/snapshots/walkforward_compare_1605_macdrci_vs_scalp_pullback.json"
+    },
+    {
+      "symbol": "4568.T",
+      "strategy_name": "MacdRci",
+      "reason": "OOS 実績が極めて薄い: 最新 robust experiments id=249257 で oos_trades=17 (paper_low_sample 閾値 20 wf_relaxed 未満)、oos_daily_pnl=+46.5円/日, oos_pf=1.025 のほぼブレイクイーブン。4/30 paper で 6 trades -3,350円 (4連続 stop / WR 33.3%, 4/27 にも -2,650円)。macd_rci_params.json の robust=true で jp_live_runner が直接拾うが universe_active.json には居ないため paper_low_sample_excluded の評価対象外という穴 (将来要修正)。当面 paused でカバー。",
+      "until": "2026-05-14",
+      "added_at": "2026-04-30T15:50:00+09:00",
+      "evidence": "data/algo_trading.db experiments id=249257 (created_at 2026-04-24 21:37) + jp_trade_executions 4/30 6件"
     }
   ]
 }
