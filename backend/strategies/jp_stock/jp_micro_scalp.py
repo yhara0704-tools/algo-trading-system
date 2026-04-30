@@ -69,6 +69,13 @@ class JPMicroScalp(StrategyBase):
         open_bias_mode:   bool = False,   # ON にすると 9:10 までの動きで 9:10-9:30 の方向を制限
         bias_observe_min: int  = 10,      # 9:00 から N 分観察してバイアスを決定
         bias_apply_until_min: int = 30,   # バイアスを 9:00+N 分まで適用 (9:30 まで)
+        # 2026-04-30 D9 Phase 2: Multi-Timeframe Regime Alignment (MTFRA) フィルタ
+        # 既存検証 (data/mtfra_combination_results.json) で判明:
+        #   - default モード (3m+30m+60m 整合) で WR 54.2% (Δ+7.1%pt vs ベンチ)
+        #   - per_symbol モード (data/mtfra_optimal_per_symbol.json) で銘柄別最適化
+        #   - 17/35 銘柄は MTFRA 自体が逆効果 → per_symbol で disable 設定
+        # mtfra_mode = "off" / "default" / "aggressive" / "per_symbol"
+        mtfra_mode:       str = "off",
         interval:         str   = "1m",
     ) -> None:
         self.meta = StrategyMeta(
@@ -99,6 +106,7 @@ class JPMicroScalp(StrategyBase):
                 "open_bias_mode":      open_bias_mode,
                 "bias_observe_min":    bias_observe_min,
                 "bias_apply_until_min": bias_apply_until_min,
+                "mtfra_mode":          mtfra_mode,
             },
         )
         self.tp_jpy             = float(tp_jpy)
@@ -129,6 +137,8 @@ class JPMicroScalp(StrategyBase):
         self.open_bias_mode = bool(open_bias_mode)
         self.bias_observe_min = max(1, int(bias_observe_min))
         self.bias_apply_until_min = max(self.bias_observe_min + 1, int(bias_apply_until_min))
+        self.mtfra_mode = str(mtfra_mode or "off").strip().lower()
+        self._mtfra_detector = None  # lazy init (engine 側で必要時に呼ばれる)
 
     def generate_signals(self, df: pd.DataFrame) -> pd.DataFrame:
         d = df.copy()
@@ -212,6 +222,15 @@ class JPMicroScalp(StrategyBase):
             long_raw = d["_long_raw_after_bias"]
             short_raw = d["_short_raw_after_bias"]
 
+        # ── MTFRA フィルタ (D9 Phase 2) ─────────────────────────────────
+        # 各バーで「3m+30m+60m」(default モード) などの整合状態を判定し、
+        # aligned_up なら long のみ許可、aligned_down なら short のみ許可、
+        # それ以外は両方ブロック。partial 整合は逆効果なので bool 判定にする。
+        if self.mtfra_mode and self.mtfra_mode != "off":
+            self._apply_mtfra_filter(d, long_raw, short_raw)
+            long_raw = d["_long_raw_after_mtfra"]
+            short_raw = d["_short_raw_after_mtfra"]
+
         d["signal"] = 0
         d["stop_loss"] = np.nan
         d["take_profit"] = np.nan
@@ -268,10 +287,120 @@ class JPMicroScalp(StrategyBase):
                     d.iloc[exit_pos, d.columns.get_loc("signal")] = -1
 
         # クリーンアップ
-        for col in ("_day", "_cum_tpv", "_cum_vol", "_long_raw_after_bias", "_short_raw_after_bias"):
+        for col in ("_day", "_cum_tpv", "_cum_vol",
+                    "_long_raw_after_bias", "_short_raw_after_bias",
+                    "_long_raw_after_mtfra", "_short_raw_after_mtfra"):
             if col in d.columns:
                 d.drop(columns=col, inplace=True)
         return d
+
+    # ── MTFRA フィルタ (D9 Phase 2) ─────────────────────────
+    def _apply_mtfra_filter(
+        self,
+        d: pd.DataFrame,
+        long_raw: pd.Series,
+        short_raw: pd.Series,
+    ) -> None:
+        """マルチタイムフレーム整合に基づき long/short をフィルタ.
+
+        各バー時点で 1m データから {3m, 30m, 60m} (default モード) のレジームを
+        計算し、全軸 up なら long のみ許可、全軸 down なら short のみ許可。
+        partial 整合・mixed・unknown は両方ブロック (D9 Phase 1 で逆効果と判明)。
+
+        実装: 1m バー × 全候補時間足のローリング判定はコスト高なので、
+        5 分刻み (バーの timestamp.minute % 5 == 0) でしか評価しない。
+        評価しない時刻は直前の整合状態を継承。
+        """
+        from backend.multi_timeframe_regime import MTFRADetector
+
+        if self._mtfra_detector is None:
+            self._mtfra_detector = MTFRADetector(mode=self.mtfra_mode)
+
+        n = len(d)
+        long_after = long_raw.copy()
+        short_after = short_raw.copy()
+        if n == 0:
+            d["_long_raw_after_mtfra"] = long_after
+            d["_short_raw_after_mtfra"] = short_after
+            return
+
+        # ── 高速化バルク評価 ───────────────────────────────────────────
+        # 各バーで全時間足を resample するのは O(n^2) でコスト高。
+        # 一度だけ全時間足を resample して、ローリング判定を効率化する。
+        from backend.multi_timeframe_regime import (
+            DEFAULT_TF_COMBO, AGGRESSIVE_TF_COMBO, TF_RULE, MIN_BARS,
+            _resample, _detect_dir,
+        )
+        # 使用する combo を resolve (per_symbol も対応)
+        combo, mode_used = self._mtfra_detector._resolve_combo(self.meta.symbol)
+        if not combo:
+            # off / disabled = 全許可
+            d["_long_raw_after_mtfra"] = long_after
+            d["_short_raw_after_mtfra"] = short_after
+            return
+
+        # 全時間足を一度だけ resample
+        tf_dfs = {}
+        for tf in combo:
+            if tf == "1m":
+                tf_dfs[tf] = d
+            else:
+                tf_dfs[tf] = _resample(d[["open", "high", "low", "close", "volume"]],
+                                         TF_RULE[tf])
+
+        # 5 分刻みのバー位置を抽出 (i, ts) のリスト
+        eval_indices = []
+        for i in range(n):
+            ts = d.index[i]
+            if i == 0 or (hasattr(ts, "minute") and ts.minute % 5 == 0):
+                eval_indices.append((i, ts))
+        # 各評価点で各時間足の direction を計算
+        # tf_dfs[tf] の最後 60 本を使う (時間ベースで切り出し)
+        allow_long_arr = np.zeros(n, dtype=bool)
+        allow_short_arr = np.zeros(n, dtype=bool)
+        prev_long = False
+        prev_short = False
+        last_eval_i = 0
+        for i, ts in eval_indices:
+            # 各時間足について ts 以下のバーを取って tail(60)
+            dirs = {}
+            ok = True
+            for tf in combo:
+                df_tf = tf_dfs[tf]
+                # 評価対象の 1m bar が 60 本以上あるか
+                if i < 60 and tf == "1m":
+                    ok = False
+                    break
+                sub_tf = df_tf[df_tf.index <= ts].tail(60)
+                if len(sub_tf) < MIN_BARS.get(tf, 14):
+                    ok = False
+                    break
+                dirs[tf] = _detect_dir(sub_tf)
+            if not ok or any(d_ == "unknown" for d_ in dirs.values()):
+                prev_long = False
+                prev_short = False
+            else:
+                ups = sum(1 for d_ in dirs.values() if d_ == "up")
+                downs = sum(1 for d_ in dirs.values() if d_ == "down")
+                m = len(dirs)
+                if ups == m:
+                    prev_long, prev_short = True, False
+                elif downs == m:
+                    prev_long, prev_short = False, True
+                else:
+                    prev_long, prev_short = False, False
+            # 前回評価点 ~ 今回評価点までを prev で埋める
+            allow_long_arr[last_eval_i:i + 1] = prev_long
+            allow_short_arr[last_eval_i:i + 1] = prev_short
+            last_eval_i = i + 1
+        # 残り
+        allow_long_arr[last_eval_i:n] = prev_long
+        allow_short_arr[last_eval_i:n] = prev_short
+
+        long_after &= allow_long_arr
+        short_after &= allow_short_arr
+        d["_long_raw_after_mtfra"] = long_after
+        d["_short_raw_after_mtfra"] = short_after
 
     # ── 寄り付きパターン分析に基づく方向バイアス ─────────────────────────
     def _apply_open_bias(

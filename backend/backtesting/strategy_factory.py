@@ -81,6 +81,9 @@ STRATEGY_DEFAULTS = {
         "open_bias_mode": False,
         "bias_observe_min": 10,
         "bias_apply_until_min": 30,
+        # 2026-04-30 D9 Phase 2: MTFRA フィルタ既定 OFF (バックテストで個別有効化)
+        # "off" / "default" (3m+30m+60m) / "aggressive" (1m+3m+15m+60m) / "per_symbol"
+        "mtfra_mode": "off",
     },
     # BB 上端(3σ)タッチでショートのみ（ロング新規なし）
     "BbShort": {
@@ -422,6 +425,7 @@ def create(strategy_name: str, symbol: str, name: str = "",
             open_bias_mode=bool(p.get("open_bias_mode", False)),
             bias_observe_min=int(p.get("bias_observe_min", 10)),
             bias_apply_until_min=int(p.get("bias_apply_until_min", 30)),
+            mtfra_mode=str(p.get("mtfra_mode", "off") or "off"),
         )
     elif strategy_name == "EnhancedScalp":
         return EnhancedScalp(
