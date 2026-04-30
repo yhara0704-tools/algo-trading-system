@@ -2678,3 +2678,148 @@ Breakout_keep:     13  (既存維持)
 9432.T (NTT, vol@30=0.34%) を MicroScalp に入れたら絶対損する、という当たり前を
 データで明示できることが、アルゴの真の強み。
 
+---
+
+## 2026-04-30 (D6): データ蓄積 + 銘柄カテゴライズ + 新規銘柄マッチャー — 「最短で最適手法」
+
+ユーザー指針 (17:34):
+> やっとスタートしたって感じですね。これから 1 分足データも蓄積。
+> 銘柄の癖をカテゴライズすることでこういう銘柄はこうカテゴライズされやすい
+> みたいなのが見えてこれば、新規で良さそうな銘柄を見つけた時に最短で
+> 最適手法に辿り着く可能性もあります。データは活用してナンボです。
+
+D5 で「データドリブン銘柄選定」の土台ができたので、それを活用するインフラを 3 段階で整備:
+
+  **段階 1**: 1m データ永続化パイプライン (蓄積開始)
+  **段階 2**: 銘柄カテゴライザー (癖を 6 カテゴリに分類 + テンプレ戦略)
+  **段階 3**: 新規銘柄マッチャー (シンボル指定で即座に推奨戦略)
+
+### 段階 1: 1m データ蓄積パイプライン
+
+`scripts/daily_1m_snapshot.py` を新規実装。
+
+  - 毎営業日 15:30 以降に universe 全 35 銘柄の 1m データを取得
+  - `data/ohlcv_1m/<symbol>/<YYYY-MM-DD>.parquet` (zstd 圧縮) に永続化
+  - `data/ohlcv_1m/_index.json` で全体の蓄積状況を管理
+  - **冪等**: 既存ファイルがある日はスキップ (`--force` で上書き)
+  - **失敗耐性**: 1 銘柄失敗しても他は継続
+
+初回バックフィル結果:
+  - 245 ファイル (35 銘柄 × 7 日) 保存成功、failed=0
+  - 容量: **2.9MB** = 1 日あたり ~415KB
+  - 30 日後: ~12MB / 90 日後: ~37MB / 1 年後: ~150MB (極めてコンパクト)
+
+データ品質確認:
+  - 4568.T 4/30 のサンプル: 321 bars (9:05-15:24)、tz=Asia/Tokyo
+  - 9:00 ジャストのバーは yfinance では存在しない日が多い (既知の制約、analyze 側でケア済み)
+
+### 段階 2: 銘柄カテゴライザー
+
+`scripts/categorize_symbols.py` を新規実装。`data/symbol_open_profile_full.json` を読み込み、
+ルールベースで 6 カテゴリに分類 + 各カテゴリにテンプレ戦略を付与。
+
+カテゴリ判定軸: `vol_decay@30min` × `yoriten_pct`
+
+```
+A_high_vol_short_pref:    vol>=2.5 AND yoriten>=50  ← MicroScalp_short / BbShort
+B_high_vol_trend_follow:  vol>=2.5 AND yoriten<50   ← MicroScalp / Breakout / MacdRci
+C_mid_vol_trend:          1.5<=vol<2.5 AND yoriten<30 ← MicroScalp_back / Scalp / Breakout
+D_mid_vol_neutral:        1.0<=vol<2.5 AND 25<=yoriten<50 ← Scalp / MacdRci
+E_low_vol_trend:          0.6<=vol<1.5 AND yoriten<30 ← MacdRci / Scalp_low_freq
+F_low_vol_or_ng:          vol<0.6                   ← 除外推奨
+```
+
+35 銘柄の分布:
+```
+A: 1 銘柄  (3103.T Unitika)
+B: 5 銘柄  (Hitachi, QD Laser, Renesas, SoftBank, 485A)
+C: 9 銘柄  (Panasonic, INPEX, 4568, Sanrio, 4592, 7201 等)
+D: 1 銘柄  (8604.T)
+E: 18 銘柄 (大半 MacdRci 専用ゾーン)
+F: 1 銘柄  (NTT vol=0.34% で論外)
+```
+
+各カテゴリに「推奨戦略 + テンプレパラメータ」がついており、`data/symbol_categories.json` に
+保存される。今後は profile 更新後に再実行するだけで分類が自動更新される。
+
+実装の途中で発見したバグ (修正済):
+  - profile JSON シリアライズで int キーが str に変換されていた
+    → `_vol30()` ヘルパで `vd.get(30) or vd.get("30")` の両対応
+  - 6723.T (vol=4.56%, yoriten=28.6%) が漏れた → B カテゴリのルールを `yoriten<50` に緩和
+
+### 段階 3: 新規銘柄マッチャー
+
+`scripts/match_new_symbol.py` を新規実装。シンボル指定 1 つで:
+
+  1. yfinance から 7 日分の 1m データ取得
+  2. プロファイル分析 (vol/yoriten/observe_min/sd/...)
+  3. カテゴリ判定 (A-F)
+  4. 同カテゴリの既存銘柄ベンチマーク + 推奨戦略 + テンプレパラメータ表示
+  5. 次のステップ (strategy_lab → scan_full_pool → WF → paper) を提示
+
+3 銘柄でデモ実行:
+
+| 銘柄 | カテゴリ | 推奨戦略 |
+|---|---|---|
+| 7974.T 任天堂 | E (低ボラ+順張り) | MacdRci 専用 (MicroScalp 不適合) |
+| 6920.T レーザーテック | C (中ボラ+順張り) | Scalp/MacdRci/Breakout + MicroScalp 補助 |
+| 4180.T Appier | C (中ボラ+順張り) | 同上 |
+
+→ 異なるキャラの銘柄が異なる戦略推奨を受け、マッチャーが正しく機能。
+→ **「人間の感覚で銘柄選定 → 戦略あれこれ試す」** のサイクルを
+   **「アルゴが 60 秒で カテゴリ + 推奨戦略 + ベンチマーク提示」** に置き換え可能に。
+
+### 段階 4: VPS cron 設計 (M2 で適用)
+
+`scripts/setup_data_pipeline_cron.sh` を新規作成 (まだ VPS 適用していない、設計のみ):
+
+```cron
+# 毎営業日 15:35 に 1m データ蓄積
+35 15 * * 1-5 cd /root/algo-trading-system && .venv/bin/python scripts/daily_1m_snapshot.py
+
+# 毎週日曜 22:00 にプロファイル + カテゴリ更新
+0  22 * * 0 cd /root/algo-trading-system && .venv/bin/python scripts/build_full_universe_profile.py
+5  22 * * 0 cd /root/algo-trading-system && .venv/bin/python scripts/categorize_symbols.py
+```
+
+VPS で `bash scripts/setup_data_pipeline_cron.sh` を実行すると上記が登録される。
+ただし pyarrow を `.venv` にインストールする必要あり (`pip install pyarrow`)。
+
+### 全体の意義
+
+これで **「データドリブン銘柄選定」のフルパイプライン** が完成:
+
+```
+[毎営業日 15:35] 1m データ取得 → ohlcv_1m/ 蓄積
+[毎週日曜 22:00] profile 再計算 → categorize 再実行
+[新規銘柄あり]   match_new_symbol.py SYMBOL で 60 秒で推奨戦略
+[四半期]         長期データ蓄積で profile の信頼区間が向上
+```
+
+3-6 ヶ月続ければ:
+  - 1m データ 90+ 日分蓄積 (現在 7 日)
+  - 銘柄カテゴリの精度大幅向上
+  - 「カテゴリ A 銘柄は MicroScalp_short で WR 平均 X%」みたいな統計が出せる
+  - 新規銘柄を見つけたら **5 分で本番投入判断** が可能に
+
+### 成果物
+
+- 新規: `scripts/daily_1m_snapshot.py` (1m データ蓄積)
+- 新規: `scripts/categorize_symbols.py` (6 カテゴリ分類)
+- 新規: `scripts/match_new_symbol.py` (新規銘柄マッチャー)
+- 新規: `scripts/setup_data_pipeline_cron.sh` (VPS cron セットアップ)
+- 新規: `data/symbol_categories.json` (35 銘柄分類結果)
+- 新規: `data/ohlcv_1m/` ディレクトリ (245 parquet ファイル + _index.json)
+- 更新: `docs/IMPLEMENTATION_LOG.md` (D6 追記)
+
+### 振り返り
+
+ユーザーの「データは活用してナンボ」は本当にその通りで、プロファイルを取っただけでは
+何も生まれない。それを **「カテゴライズ → 新規銘柄マッチング」** という具体的な意思決定支援に
+落とし込むのが価値。今回の段階 3 (マッチャー) は、新規銘柄を見つけた時の
+「迷い時間」を ほぼゼロ にする道具として、これから運用で日常的に使えるはず。
+
+D2-D6 の 6 ステップで、MicroScalp の単一機能から「データドリブン銘柄選定インフラ」
+にまで発展した。ユーザーの提案がすべて正しい方向に向いていたので、
+実装側も迷いなく進められた。
+

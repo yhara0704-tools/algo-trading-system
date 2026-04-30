@@ -1,0 +1,696 @@
+{
+  "generated_at": "2026-04-30T17:41:09.269299",
+  "source": "data/symbol_open_profile_full.json",
+  "n_symbols": 35,
+  "categories": {
+    "A_high_vol_short_pref": {
+      "label": "高ボラ + ショート優位 (寄り天高い)",
+      "template_strategies": [
+        "MicroScalp_short",
+        "BbShort",
+        "Scalp"
+      ],
+      "template_params": {
+        "MicroScalp": {
+          "tp_jpy": 10,
+          "sl_jpy": 5,
+          "cooldown_bars": 5,
+          "max_trades_per_day": 25,
+          "allow_short": true,
+          "allow_long": false,
+          "allowed_time_windows": [
+            "09:00-09:30",
+            "12:30-15:00"
+          ],
+          "open_bias_mode": true
+        }
+      },
+      "color": "red",
+      "n_members": 1,
+      "members": [
+        {
+          "symbol": "3103.T",
+          "name": "Unitika",
+          "vol30": 12.15,
+          "yoriten": 57.1,
+          "abs_gap": 5.27,
+          "best_observe_min": 10,
+          "best_same_dir_pct": 83.3,
+          "micro_scalp_score": 70.0,
+          "existing_strategies": [
+            "Breakout",
+            "MacdRci",
+            "Pullback",
+            "Scalp"
+          ],
+          "open_bias": "neutral"
+        }
+      ]
+    },
+    "B_high_vol_trend_follow": {
+      "label": "高ボラ + 順張り/中立 (寄り天 50% 未満)",
+      "template_strategies": [
+        "MicroScalp",
+        "Breakout",
+        "MacdRci"
+      ],
+      "template_params": {
+        "MicroScalp": {
+          "tp_jpy": 10,
+          "sl_jpy": 5,
+          "cooldown_bars": 5,
+          "max_trades_per_day": 20,
+          "allow_short": true,
+          "allow_long": true,
+          "allowed_time_windows": [
+            "09:00-09:30",
+            "12:30-15:00"
+          ],
+          "open_bias_mode": false
+        }
+      },
+      "color": "orange",
+      "n_members": 5,
+      "members": [
+        {
+          "symbol": "6501.T",
+          "name": "Hitachi",
+          "vol30": 2.59,
+          "yoriten": 14.3,
+          "abs_gap": 1.425,
+          "best_observe_min": 10,
+          "best_same_dir_pct": 85.7,
+          "micro_scalp_score": 60.0,
+          "existing_strategies": [
+            "MacdRci",
+            "Scalp"
+          ],
+          "open_bias": "trend_follow"
+        },
+        {
+          "symbol": "6613.T",
+          "name": "QD Laser",
+          "vol30": 7.14,
+          "yoriten": 14.3,
+          "abs_gap": 2.503,
+          "best_observe_min": 5,
+          "best_same_dir_pct": 83.3,
+          "micro_scalp_score": 60.0,
+          "existing_strategies": [
+            "Breakout",
+            "EnhancedMacdRci",
+            "EnhancedScalp",
+            "MacdRci",
+            "Pullback"
+          ],
+          "open_bias": "trend_follow"
+        },
+        {
+          "symbol": "6723.T",
+          "name": "Renesas",
+          "vol30": 4.56,
+          "yoriten": 28.6,
+          "abs_gap": 4.259,
+          "best_observe_min": 5,
+          "best_same_dir_pct": 75.0,
+          "micro_scalp_score": 60.0,
+          "existing_strategies": [
+            "Breakout",
+            "MacdRci",
+            "Pullback",
+            "Scalp"
+          ],
+          "open_bias": "neutral"
+        },
+        {
+          "symbol": "9984.T",
+          "name": "SoftBank Group",
+          "vol30": 3.79,
+          "yoriten": 0.0,
+          "abs_gap": 3.222,
+          "best_observe_min": 5,
+          "best_same_dir_pct": 100.0,
+          "micro_scalp_score": 60.0,
+          "existing_strategies": [
+            "BbShort",
+            "Breakout",
+            "EnhancedMacdRci",
+            "EnhancedScalp",
+            "MacdRci",
+            "Pullback",
+            "Scalp"
+          ],
+          "open_bias": "trend_follow"
+        },
+        {
+          "symbol": "485A.T",
+          "name": "",
+          "vol30": 5.22,
+          "yoriten": 0.0,
+          "abs_gap": 2.549,
+          "best_observe_min": 10,
+          "best_same_dir_pct": 42.9,
+          "micro_scalp_score": 40.0,
+          "existing_strategies": [
+            "BbShort",
+            "Breakout",
+            "MaVol"
+          ],
+          "open_bias": "trend_follow"
+        }
+      ]
+    },
+    "C_mid_vol_trend": {
+      "label": "中ボラ + 順張り (universe 主力)",
+      "template_strategies": [
+        "MicroScalp_back",
+        "Scalp",
+        "MacdRci",
+        "Breakout"
+      ],
+      "template_params": {
+        "MicroScalp": {
+          "tp_jpy": 8,
+          "sl_jpy": 4,
+          "cooldown_bars": 5,
+          "max_trades_per_day": 15,
+          "allow_short": true,
+          "allow_long": true,
+          "allowed_time_windows": [
+            "09:00-09:30"
+          ],
+          "open_bias_mode": false
+        }
+      },
+      "color": "yellow",
+      "n_members": 9,
+      "members": [
+        {
+          "symbol": "6752.T",
+          "name": "Panasonic",
+          "vol30": 1.93,
+          "yoriten": 28.6,
+          "abs_gap": 1.531,
+          "best_observe_min": 15,
+          "best_same_dir_pct": 71.4,
+          "micro_scalp_score": 60.0,
+          "existing_strategies": [
+            "Breakout",
+            "EnhancedScalp",
+            "MacdRci",
+            "Scalp"
+          ],
+          "open_bias": "neutral"
+        },
+        {
+          "symbol": "6645.T",
+          "name": "",
+          "vol30": 2.12,
+          "yoriten": 0.0,
+          "abs_gap": 0.808,
+          "best_observe_min": 8,
+          "best_same_dir_pct": 71.4,
+          "micro_scalp_score": 50.0,
+          "existing_strategies": [
+            "Breakout",
+            "Scalp"
+          ],
+          "open_bias": "trend_follow"
+        },
+        {
+          "symbol": "6753.T",
+          "name": "",
+          "vol30": 1.5,
+          "yoriten": 0.0,
+          "abs_gap": 0.695,
+          "best_observe_min": 10,
+          "best_same_dir_pct": 71.4,
+          "micro_scalp_score": 50.0,
+          "existing_strategies": [
+            "Breakout"
+          ],
+          "open_bias": "trend_follow"
+        },
+        {
+          "symbol": "8136.T",
+          "name": "Sanrio",
+          "vol30": 1.81,
+          "yoriten": 28.6,
+          "abs_gap": 0.695,
+          "best_observe_min": 8,
+          "best_same_dir_pct": 71.4,
+          "micro_scalp_score": 50.0,
+          "existing_strategies": [
+            "Breakout",
+            "Pullback",
+            "Scalp"
+          ],
+          "open_bias": "neutral"
+        },
+        {
+          "symbol": "1605.T",
+          "name": "INPEX",
+          "vol30": 1.62,
+          "yoriten": 14.3,
+          "abs_gap": 1.19,
+          "best_observe_min": 5,
+          "best_same_dir_pct": 42.9,
+          "micro_scalp_score": 40.0,
+          "existing_strategies": [
+            "Breakout",
+            "MacdRci",
+            "Pullback",
+            "Scalp"
+          ],
+          "open_bias": "trend_follow"
+        },
+        {
+          "symbol": "4568.T",
+          "name": "",
+          "vol30": 2.02,
+          "yoriten": 0.0,
+          "abs_gap": 1.981,
+          "best_observe_min": 5,
+          "best_same_dir_pct": 50.0,
+          "micro_scalp_score": 40.0,
+          "existing_strategies": [
+            "Breakout",
+            "MacdRci",
+            "Scalp"
+          ],
+          "open_bias": "trend_follow"
+        },
+        {
+          "symbol": "4592.T",
+          "name": "",
+          "vol30": 1.79,
+          "yoriten": 0.0,
+          "abs_gap": 1.296,
+          "best_observe_min": 5,
+          "best_same_dir_pct": 42.9,
+          "micro_scalp_score": 40.0,
+          "existing_strategies": [
+            "Breakout"
+          ],
+          "open_bias": "trend_follow"
+        },
+        {
+          "symbol": "7201.T",
+          "name": "",
+          "vol30": 1.74,
+          "yoriten": 0.0,
+          "abs_gap": 1.729,
+          "best_observe_min": 8,
+          "best_same_dir_pct": 57.1,
+          "micro_scalp_score": 40.0,
+          "existing_strategies": [
+            "Breakout"
+          ],
+          "open_bias": "trend_follow"
+        },
+        {
+          "symbol": "2413.T",
+          "name": "",
+          "vol30": 1.54,
+          "yoriten": 14.3,
+          "abs_gap": 0.725,
+          "best_observe_min": 5,
+          "best_same_dir_pct": 57.1,
+          "micro_scalp_score": 30.0,
+          "existing_strategies": [
+            "Scalp"
+          ],
+          "open_bias": "trend_follow"
+        }
+      ]
+    },
+    "D_mid_vol_neutral": {
+      "label": "中ボラ + 中立 (寄り天やや高い)",
+      "template_strategies": [
+        "Scalp",
+        "MacdRci"
+      ],
+      "template_params": {},
+      "color": "green",
+      "n_members": 1,
+      "members": [
+        {
+          "symbol": "8604.T",
+          "name": "",
+          "vol30": 1.15,
+          "yoriten": 28.6,
+          "abs_gap": 1.405,
+          "best_observe_min": 8,
+          "best_same_dir_pct": 42.9,
+          "micro_scalp_score": 10.0,
+          "existing_strategies": [
+            "Scalp"
+          ],
+          "open_bias": "neutral"
+        }
+      ]
+    },
+    "E_low_vol_trend": {
+      "label": "低ボラ + 順張り (MacdRci 専用)",
+      "template_strategies": [
+        "MacdRci",
+        "Scalp_low_freq"
+      ],
+      "template_params": {},
+      "color": "blue",
+      "n_members": 18,
+      "members": [
+        {
+          "symbol": "8058.T",
+          "name": "Mitsubishi Corp",
+          "vol30": 1.34,
+          "yoriten": 0.0,
+          "abs_gap": 1.084,
+          "best_observe_min": 10,
+          "best_same_dir_pct": 71.4,
+          "micro_scalp_score": 30.0,
+          "existing_strategies": [
+            "MacdRci",
+            "Scalp"
+          ],
+          "open_bias": "trend_follow"
+        },
+        {
+          "symbol": "2432.T",
+          "name": "",
+          "vol30": 1.1,
+          "yoriten": 0.0,
+          "abs_gap": 0.687,
+          "best_observe_min": 20,
+          "best_same_dir_pct": 71.4,
+          "micro_scalp_score": 20.0,
+          "existing_strategies": [
+            "Breakout"
+          ],
+          "open_bias": "trend_follow"
+        },
+        {
+          "symbol": "3382.T",
+          "name": "",
+          "vol30": 1.12,
+          "yoriten": 14.3,
+          "abs_gap": 0.583,
+          "best_observe_min": 10,
+          "best_same_dir_pct": 71.4,
+          "micro_scalp_score": 20.0,
+          "existing_strategies": [
+            "MacdRci",
+            "Scalp"
+          ],
+          "open_bias": "trend_follow"
+        },
+        {
+          "symbol": "4755.T",
+          "name": "",
+          "vol30": 1.07,
+          "yoriten": 14.3,
+          "abs_gap": 0.621,
+          "best_observe_min": 8,
+          "best_same_dir_pct": 85.7,
+          "micro_scalp_score": 20.0,
+          "existing_strategies": [
+            "Breakout",
+            "Scalp"
+          ],
+          "open_bias": "trend_follow"
+        },
+        {
+          "symbol": "7269.T",
+          "name": "",
+          "vol30": 0.93,
+          "yoriten": 14.3,
+          "abs_gap": 0.906,
+          "best_observe_min": 8,
+          "best_same_dir_pct": 100.0,
+          "micro_scalp_score": 20.0,
+          "existing_strategies": [
+            "Scalp"
+          ],
+          "open_bias": "trend_follow"
+        },
+        {
+          "symbol": "8306.T",
+          "name": "MUFG",
+          "vol30": 1.04,
+          "yoriten": 14.3,
+          "abs_gap": 0.783,
+          "best_observe_min": 8,
+          "best_same_dir_pct": 71.4,
+          "micro_scalp_score": 20.0,
+          "existing_strategies": [
+            "Breakout",
+            "EnhancedMacdRci",
+            "EnhancedScalp",
+            "MacdRci",
+            "Scalp"
+          ],
+          "open_bias": "trend_follow"
+        },
+        {
+          "symbol": "9434.T",
+          "name": "",
+          "vol30": 0.61,
+          "yoriten": 0.0,
+          "abs_gap": 0.318,
+          "best_observe_min": 5,
+          "best_same_dir_pct": 71.4,
+          "micro_scalp_score": 20.0,
+          "existing_strategies": [
+            "Scalp"
+          ],
+          "open_bias": "neutral"
+        },
+        {
+          "symbol": "4385.T",
+          "name": "",
+          "vol30": 1.47,
+          "yoriten": 0.0,
+          "abs_gap": 1.594,
+          "best_observe_min": 10,
+          "best_same_dir_pct": 42.9,
+          "micro_scalp_score": 10.0,
+          "existing_strategies": [
+            "Breakout",
+            "MacdRci",
+            "Scalp"
+          ],
+          "open_bias": "trend_follow"
+        },
+        {
+          "symbol": "4911.T",
+          "name": "Shiseido",
+          "vol30": 1.2,
+          "yoriten": 14.3,
+          "abs_gap": 1.423,
+          "best_observe_min": 10,
+          "best_same_dir_pct": 57.1,
+          "micro_scalp_score": 10.0,
+          "existing_strategies": [
+            "MacdRci"
+          ],
+          "open_bias": "trend_follow"
+        },
+        {
+          "symbol": "6758.T",
+          "name": "Sony Group",
+          "vol30": 1.01,
+          "yoriten": 14.3,
+          "abs_gap": 1.2,
+          "best_observe_min": 10,
+          "best_same_dir_pct": 42.9,
+          "micro_scalp_score": 10.0,
+          "existing_strategies": [
+            "Breakout",
+            "MacdRci",
+            "Pullback",
+            "Scalp"
+          ],
+          "open_bias": "trend_follow"
+        },
+        {
+          "symbol": "7203.T",
+          "name": "",
+          "vol30": 0.77,
+          "yoriten": 0.0,
+          "abs_gap": 1.182,
+          "best_observe_min": 5,
+          "best_same_dir_pct": 57.1,
+          "micro_scalp_score": 10.0,
+          "existing_strategies": [
+            "Breakout",
+            "Scalp"
+          ],
+          "open_bias": "trend_follow"
+        },
+        {
+          "symbol": "7211.T",
+          "name": "",
+          "vol30": 1.18,
+          "yoriten": 0.0,
+          "abs_gap": 1.409,
+          "best_observe_min": 10,
+          "best_same_dir_pct": 57.1,
+          "micro_scalp_score": 10.0,
+          "existing_strategies": [
+            "Scalp"
+          ],
+          "open_bias": "trend_follow"
+        },
+        {
+          "symbol": "4689.T",
+          "name": "",
+          "vol30": 0.92,
+          "yoriten": 14.3,
+          "abs_gap": 0.911,
+          "best_observe_min": 15,
+          "best_same_dir_pct": 42.9,
+          "micro_scalp_score": 0.0,
+          "existing_strategies": [
+            "MacdRci"
+          ],
+          "open_bias": "trend_follow"
+        },
+        {
+          "symbol": "5020.T",
+          "name": "",
+          "vol30": 1.29,
+          "yoriten": 14.3,
+          "abs_gap": 0.462,
+          "best_observe_min": 5,
+          "best_same_dir_pct": 42.9,
+          "micro_scalp_score": 0.0,
+          "existing_strategies": [
+            "Scalp"
+          ],
+          "open_bias": "neutral"
+        },
+        {
+          "symbol": "9107.T",
+          "name": "Kawasaki Kisen",
+          "vol30": 1.26,
+          "yoriten": 14.3,
+          "abs_gap": 0.746,
+          "best_observe_min": 8,
+          "best_same_dir_pct": 42.9,
+          "micro_scalp_score": 0.0,
+          "existing_strategies": [
+            "Breakout",
+            "MacdRci",
+            "Pullback"
+          ],
+          "open_bias": "trend_follow"
+        },
+        {
+          "symbol": "9433.T",
+          "name": "KDDI",
+          "vol30": 0.78,
+          "yoriten": 28.6,
+          "abs_gap": 0.764,
+          "best_observe_min": 10,
+          "best_same_dir_pct": 57.1,
+          "micro_scalp_score": 0.0,
+          "existing_strategies": [
+            "MacdRci",
+            "Scalp"
+          ],
+          "open_bias": "neutral"
+        },
+        {
+          "symbol": "9468.T",
+          "name": "Kadokawa",
+          "vol30": 1.35,
+          "yoriten": 14.3,
+          "abs_gap": 0.673,
+          "best_observe_min": 8,
+          "best_same_dir_pct": 57.1,
+          "micro_scalp_score": 0.0,
+          "existing_strategies": [
+            "MacdRci",
+            "Scalp"
+          ],
+          "open_bias": "trend_follow"
+        },
+        {
+          "symbol": "7267.T",
+          "name": "",
+          "vol30": 0.98,
+          "yoriten": 14.3,
+          "abs_gap": 0.724,
+          "best_observe_min": 5,
+          "best_same_dir_pct": 28.6,
+          "micro_scalp_score": -10.0,
+          "existing_strategies": [
+            "Scalp"
+          ],
+          "open_bias": "trend_follow"
+        }
+      ]
+    },
+    "F_low_vol_or_ng": {
+      "label": "低ボラ / 不適合 (除外推奨)",
+      "template_strategies": [],
+      "template_params": {},
+      "color": "gray",
+      "n_members": 1,
+      "members": [
+        {
+          "symbol": "9432.T",
+          "name": "NTT",
+          "vol30": 0.34,
+          "yoriten": 0.0,
+          "abs_gap": 0.094,
+          "best_observe_min": 8,
+          "best_same_dir_pct": 28.6,
+          "micro_scalp_score": -40.0,
+          "existing_strategies": [
+            "MacdRci",
+            "Scalp"
+          ],
+          "open_bias": "neutral"
+        }
+      ]
+    }
+  },
+  "symbol_to_category": {
+    "1605.T": "C_mid_vol_trend",
+    "2413.T": "C_mid_vol_trend",
+    "2432.T": "E_low_vol_trend",
+    "3103.T": "A_high_vol_short_pref",
+    "3382.T": "E_low_vol_trend",
+    "4385.T": "E_low_vol_trend",
+    "4568.T": "C_mid_vol_trend",
+    "4592.T": "C_mid_vol_trend",
+    "4689.T": "E_low_vol_trend",
+    "4755.T": "E_low_vol_trend",
+    "485A.T": "B_high_vol_trend_follow",
+    "4911.T": "E_low_vol_trend",
+    "5020.T": "E_low_vol_trend",
+    "6501.T": "B_high_vol_trend_follow",
+    "6613.T": "B_high_vol_trend_follow",
+    "6645.T": "C_mid_vol_trend",
+    "6723.T": "B_high_vol_trend_follow",
+    "6752.T": "C_mid_vol_trend",
+    "6753.T": "C_mid_vol_trend",
+    "6758.T": "E_low_vol_trend",
+    "7201.T": "C_mid_vol_trend",
+    "7203.T": "E_low_vol_trend",
+    "7211.T": "E_low_vol_trend",
+    "7267.T": "E_low_vol_trend",
+    "7269.T": "E_low_vol_trend",
+    "8058.T": "E_low_vol_trend",
+    "8136.T": "C_mid_vol_trend",
+    "8306.T": "E_low_vol_trend",
+    "8604.T": "D_mid_vol_neutral",
+    "9107.T": "E_low_vol_trend",
+    "9432.T": "F_low_vol_or_ng",
+    "9433.T": "E_low_vol_trend",
+    "9434.T": "E_low_vol_trend",
+    "9468.T": "E_low_vol_trend",
+    "9984.T": "B_high_vol_trend_follow"
+  }
+}
