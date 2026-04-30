@@ -283,7 +283,116 @@ def mtfra_allow(symbol: str, df_1m: pd.DataFrame, side: str,
     return decision.allow_short, decision.skip_reason
 
 
+@dataclass
+class MTFRATransition:
+    """整合状態の遷移検出結果 (D9 Phase 3 案 B 用)."""
+    symbol: str
+    timestamp: pd.Timestamp | None
+    current_alignment: str       # "aligned_up" / "aligned_down" / "mixed" / "unknown"
+    previous_alignment: str
+    transition: str              # "down→up" / "flat→up" / "up→down" / "up→flat" / "stable" / "unknown"
+    transition_strength: float   # 0.0-1.0: 何軸が同時に変化したか
+    bars_since_transition: int   # 直近の transition から何バー経過したか
+    directions_now: dict[str, Direction]
+    directions_prev: dict[str, Direction]
+
+
+def _classify_alignment(directions: dict[str, Direction]) -> str:
+    """全軸 up / 全軸 down / それ以外を分類."""
+    if not directions or any(d == "unknown" for d in directions.values()):
+        return "unknown"
+    n = len(directions)
+    ups = sum(1 for d in directions.values() if d == "up")
+    downs = sum(1 for d in directions.values() if d == "down")
+    if ups == n:
+        return "aligned_up"
+    if downs == n:
+        return "aligned_down"
+    return "mixed"
+
+
+def _classify_transition(prev_align: str, curr_align: str) -> str:
+    """整合状態の遷移を分類 (D9 Phase 3 案 B コア)."""
+    if prev_align == "unknown" or curr_align == "unknown":
+        return "unknown"
+    if prev_align == curr_align:
+        return "stable"
+    # 主要な遷移
+    if prev_align == "aligned_down" and curr_align == "aligned_up":
+        return "down→up"
+    if prev_align == "aligned_up" and curr_align == "aligned_down":
+        return "up→down"
+    if prev_align == "mixed" and curr_align == "aligned_up":
+        return "flat→up"
+    if prev_align == "mixed" and curr_align == "aligned_down":
+        return "flat→down"
+    if prev_align == "aligned_up" and curr_align == "mixed":
+        return "up→flat"
+    if prev_align == "aligned_down" and curr_align == "mixed":
+        return "down→flat"
+    return "other"
+
+
+def detect_transition(
+    detector: "MTFRADetector",
+    symbol: str,
+    df_now: pd.DataFrame,
+    df_prev: pd.DataFrame | None = None,
+    lookback_bars: int = 6,
+) -> MTFRATransition:
+    """整合状態の遷移を検出する (D9 Phase 3 案 B 用).
+
+    Args:
+        detector: MTFRADetector インスタンス
+        symbol: "9984.T" など
+        df_now: 現在時点までの 1m or 5m OHLCV
+        df_prev: lookback_bars 本前までの OHLCV (None なら df_now から自動切り出し)
+        lookback_bars: 「以前」 の判定に使う何バー前か (default 6 本)
+
+    Returns:
+        MTFRATransition: 遷移情報
+    """
+    # 現在の整合判定
+    decision_now = detector.evaluate(symbol, df_now)
+    if df_prev is None:
+        if len(df_now) > lookback_bars + 60:
+            df_prev = df_now.iloc[:-lookback_bars]
+        else:
+            df_prev = df_now
+    decision_prev = detector.evaluate(symbol, df_prev)
+
+    align_now = _classify_alignment(decision_now.directions)
+    align_prev = _classify_alignment(decision_prev.directions)
+    transition = _classify_transition(align_prev, align_now)
+
+    # 遷移強度: 方向が変わった軸の数 / 全軸数
+    common_keys = set(decision_now.directions.keys()) & set(decision_prev.directions.keys())
+    if common_keys:
+        n_changed = sum(
+            1 for k in common_keys
+            if decision_now.directions[k] != decision_prev.directions[k]
+            and decision_now.directions[k] != "unknown"
+            and decision_prev.directions[k] != "unknown"
+        )
+        strength = n_changed / max(1, len(common_keys))
+    else:
+        strength = 0.0
+
+    return MTFRATransition(
+        symbol=symbol,
+        timestamp=df_now.index[-1] if len(df_now) > 0 else None,
+        current_alignment=align_now,
+        previous_alignment=align_prev,
+        transition=transition,
+        transition_strength=round(strength, 3),
+        bars_since_transition=lookback_bars,
+        directions_now=dict(decision_now.directions),
+        directions_prev=dict(decision_prev.directions),
+    )
+
+
 __all__ = [
-    "MTFRADetector", "MTFRADecision", "mtfra_allow",
+    "MTFRADetector", "MTFRADecision", "MTFRATransition", "mtfra_allow",
+    "detect_transition", "_classify_alignment", "_classify_transition",
     "DEFAULT_TF_COMBO", "AGGRESSIVE_TF_COMBO",
 ]
