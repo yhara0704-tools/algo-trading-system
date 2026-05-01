@@ -3872,3 +3872,73 @@ VPS deploy 内容:
 3. `multi_timeframe_regime.py` custom_combo オプション追加
 4. `data/universe_active.json` 24 ペア (新形)
 
+
+## 2026-05-02 (土) GW Day 1: 5/1 paper divergence 構造分析 — 真犯人 2 件特定
+
+### 真犯人 1: 余力枯渇で OOS 機会の 97% を逃失
+
+5/1 paper の skip_events 全 509 件を構造分析した結果、**真の divergence 原因** が判明。
+
+#### 数値証拠
+9984.T MacdRci `insufficient_lot` 62 件の `detail_json`:
+```json
+{"cash": 128800, "position_value": 126224, "required_min_cash": 533600}
+```
+
+paper は 99 万円スタート (`starting_cash=JP_MAX_POSITION_JPY`)だが、5/1 中に同時 3 銘柄保有で約 86 万円拘束されると、**残現金 12.8 万円** で **9984.T の 100 株 (53 万円) に届かず**、long signal 62 回 skip。9468/6723/8316/9433/4911 でも同様に発生し、合計 **insufficient_lot 153 件**。
+
+#### 機会逸失試算
+
+| 戦略 | OOS 期待/日 | 実 PnL | 原因 |
+|---|---|---|---|
+| 9984.T MacdRci | +8,937 | -600 | insufficient_lot×62 |
+| 9984.T EnhancedMacdRci | +12,168 | 0 | universe 不在 (修正済) |
+| 9468.T MacdRci | +1,597 | 0 | insufficient_lot×17 |
+| 6723.T MacdRci | +1,471 | -1,700 | 余力で良 entry skip 後遅延 entry |
+| その他 5 銘柄 | +5-7,000 | -200〜+5,500 | 一部実現 |
+| **合計** | **+27,000-30,000** | **+800** | **余力枯渇 97%** |
+
+→ paper +800 / 期待 +30,000 = **97% を余力枯渇で逃失**。**divergence -95% の真犯人**。
+
+#### 解決策候補 (D2 で着手)
+1. **rank_allocator に max_pos_size_per_pair 制約**: 1 ポジ最大 30 万円 → 同時 3-4 銘柄並行可能
+2. **expected-value 優先 entry queue**: 余力不足時、低 OOS の entry を skip して高 OOS entry を待つ
+3. **9984.T 高額銘柄の lot 縮小** (S 株 / 50 株単位対応): 100 → 50 で 27.5 万円
+4. **MicroScalp 用 30% 余力隔離**: 高額銘柄が枠を食わない設計
+
+### 真犯人 2: paper SL slippage が backtest より構造的に悪化
+
+5/1 paper の 8 件 trade を 5m バー OHLC と照合した結果、3 件で **5m データで再現不可な SL hit** が発生:
+
+| Trade | entry@ | 5m bar 範囲 | 期待 SL | paper exit | 乖離 |
+|---|---|---|---|---|---|
+| 4911 short | @3140 | 09:45 H=3154 | 3146.3 | **3154** | +7.7 円 (+0.25%) |
+| 9433 short | @2547.5 | **09:45 H=2543.5** | 2552.6 | **2551.5** | **5m データで再現不可** |
+| 6723 long | @3217 | 14:15 C=3208 → 14:20 L=3194 | - | **fill @3217** | +9 円 slippage |
+
+#### 仮説
+- **paper trader は 1m リアルタイム実行** → 5m バー範囲内の wick (1m スパイク) で SL/TP trigger
+- **backtest は 5m バー解像度** → 5m バー高値/安値しか見ない (低解像度)
+- → **paper の方が SL hit 率が構造的に高い**
+
+特に 9433.T の 09:45 5m バー高値=2543.5 (entry 2547.5 より低い) なのに paper は 09:46:30 に **2551.5 で stop** = **5m バー外で価格が一瞬 8 円スパイク** したと推定される。
+
+#### 解決策候補 (D5 ＋月曜実装)
+1. **backtest を 1m 解像度で再シミュレート**: 全 OOS expected を 1m で再評価し、より現実的な期待値に補正
+2. **5m signal × 1m execution の TP/SL マージン拡張**: SL を `sl_pct + slippage_buffer` (例: +0.1%) に
+3. **paper broker の slippage model 検証**: 実際の松井/三菱 e スマートの約定特性と乖離していないか
+
+### 9:39-9:43 short cluster の市場 context 分析
+
+N225 5m バー (09:00-10:00):
+- ほぼ凪 (-0.20% 〜 +0.27%) → 明確な下落トレンドなし
+- 4911/9984/9433 個別も -0.17% 〜 -0.35% で大幅下げなし
+
+3 銘柄が同時刻に bearish MACD/RCI signal → 3-4 分後に反発スパイクで全 SL hit。
+**結論**: 個別戦略の問題ではなく、**寄り直後の市場全体偽陽性 short signal** = 時間帯特性。F8 (morning_first_30min_short_block) の opt-in 適用が有効候補。
+
+### 8316.T 大勝の構造 (+5,500 円)
+
+09:46 entry @5474 → 09:50 以降 **5478〜5529 まで一方的上昇** → 11:00 で TP hit (target reason)。
+OOS expected +845 円 → 実 +5,500 = **6.5 倍超過**。これは **戦略の質ではなく当日の銘柄ムーブのラッキー要素**。普段の OOS と同じレベルの期待値で運用すべき。
+
