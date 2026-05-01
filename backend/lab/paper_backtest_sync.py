@@ -538,6 +538,7 @@ _LIVE_PREFIX_TO_STRATEGY: tuple[tuple[str, str], ...] = (
     ("enhanced_macd_rci_",  "EnhancedMacdRci"),
     ("enhanced_scalp_",     "EnhancedScalp"),
     ("jp_macd_rci_",        "MacdRci"),
+    ("jp_micro_scalp_",     "MicroScalp"),
     ("jp_scalp_",           "Scalp"),
     ("jp_breakout_",        "Breakout"),
     ("jp_bb_short_",        "BbShort"),

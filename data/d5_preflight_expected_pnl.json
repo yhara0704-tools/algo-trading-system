@@ -1,0 +1,83 @@
+{
+  "generated_at": "2026-05-01T19:27:43.801259+09:00",
+  "active_count": 32,
+  "total_count": 33,
+  "grand_total_oos": 64881.9,
+  "realistic_compression": 0.4,
+  "realistic_pnl_per_day": 25952.760000000002,
+  "target_pnl_per_day": 29700,
+  "achievement_pct": 87.38303030303031,
+  "by_strategy": {
+    "MacdRci": {
+      "n": 12,
+      "total_oos": 33943.3
+    },
+    "EnhancedMacdRci": {
+      "n": 1,
+      "total_oos": 12168.1
+    },
+    "Breakout": {
+      "n": 3,
+      "total_oos": 7090.9
+    },
+    "Pullback": {
+      "n": 4,
+      "total_oos": 4213.6
+    },
+    "ORB": {
+      "n": 3,
+      "total_oos": 0.0
+    },
+    "Momentum5Min": {
+      "n": 2,
+      "total_oos": 0.0
+    },
+    "MicroScalp": {
+      "n": 4,
+      "total_oos": 6131.0
+    },
+    "BBShort": {
+      "n": 3,
+      "total_oos": 1335.0
+    }
+  },
+  "multi_strategy_symbols": {
+    "9984.T": [
+      "MacdRci",
+      "EnhancedMacdRci"
+    ],
+    "9468.T": [
+      "MacdRci",
+      "MicroScalp",
+      "Pullback"
+    ],
+    "8306.T": [
+      "MacdRci",
+      "Pullback"
+    ],
+    "6723.T": [
+      "MacdRci",
+      "Breakout"
+    ],
+    "9433.T": [
+      "MacdRci",
+      "MicroScalp",
+      "BBShort"
+    ],
+    "6501.T": [
+      "MacdRci",
+      "MicroScalp",
+      "BBShort"
+    ],
+    "3103.T": [
+      "Breakout",
+      "BBShort"
+    ],
+    "1605.T": [
+      "Pullback",
+      "MicroScalp"
+    ]
+  },
+  "d5_added_count": 9,
+  "d5_added_total_oos": 8143.0
+}

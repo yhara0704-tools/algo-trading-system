@@ -412,6 +412,7 @@ class JPLiveRunner:
         ("enhanced_macd_rci_", "EnhancedMacdRci"),
         ("enhanced_scalp_", "EnhancedScalp"),
         ("jp_breakout_", "Breakout"),
+        ("jp_micro_scalp_", "MicroScalp"),
         ("jp_scalp_", "Scalp"),
         ("jp_bb_short_", "BbShort"),
         ("jp_pullback_", "Pullback"),
@@ -1634,6 +1635,17 @@ class JPLiveRunner:
             total_budget = _JP_CAPITAL_JPY * tier.margin * min(max(tier.position_pct * tier.max_concurrent, tier.position_pct), 1.0)
             position_value = total_budget * alloc_w
         position_value *= _LIVE_POSITION_SCALE
+
+        # 2026-05-02: D5 — MicroScalp 専用 lot 縮小。MicroScalp は 1m スキャル
+        # で短期決着 (timeout 2 分) のため、1 銘柄に大きな余力を割り当てる必要が
+        # ない。むしろ 4-6 銘柄並走で signal 数を稼ぐ方が PnL 期待値が高い
+        # (D3 検証結果: per-symbol +1,000-7,500 円/日 × 余力圧縮で +1,500-3,000 円/日)。
+        # `_JP_MICRO_SCALP_POSITION_PCT` (default 0.30 = 1 銘柄 99 万 × 0.30 = 29.7 万)
+        # で固定し、高額銘柄 (株価 3,000 円超) は構造的に 100 株未達で skip される。
+        if "jp_micro_scalp_" in sid.lower():
+            ms_pct = float(os.getenv("JP_MICRO_SCALP_POSITION_PCT", "0.30"))
+            ms_pct = max(0.10, min(0.50, ms_pct))
+            position_value = _JP_CAPITAL_JPY * tier.margin * ms_pct * _LIVE_POSITION_SCALE
         liq_cap = LIQUIDITY_MAX_POSITION.get(symbol)
         if liq_cap is not None:
             position_value = min(position_value, liq_cap)

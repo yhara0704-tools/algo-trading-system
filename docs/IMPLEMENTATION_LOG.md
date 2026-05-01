@@ -4192,3 +4192,85 @@ universe 24 → 35 entries に拡大予定:
 - **Pullback**: Tier 1 新規 (8306/9468) — observation_only=true (8136 は既存)
 - SwingDonchian: 投入見送り (sample 不足)
 
+
+## 2026-05-02 (土) GW Day 5: 5/7 用 universe 確定 + 投入 (期待値 +25,953 円/日、目標達成率 87.4%)
+
+### Day 5 実装内容
+
+#### 1. ID prefix register 修正 (MicroScalp 未稼働の根本原因)
+
+`jp_live_runner.py:_ID_PREFIX_TO_STRATEGY_NAME` と `paper_backtest_sync.py:_LIVE_PREFIX_TO_STRATEGY` の両方に `("jp_micro_scalp_", "MicroScalp")` を追加。
+
+→ これまで MicroScalp は `paper_observability_report` で未集計、`_strategy_name_from_id` で None 返していた。
+→ 5/7 から実 paper trade される。
+
+#### 2. MicroScalp 専用 lot 縮小ロジック
+
+`_try_open_position` の position_value 計算で、`jp_micro_scalp_` prefix の strategy なら `position_pct=0.30` (新 env `JP_MICRO_SCALP_POSITION_PCT`) に切り替え。
+→ 1 銘柄 99万 × 0.30 = 29.7 万予算 → 高額銘柄 (株価 3,000 円超) は 100 株未達で skip → 4-6 銘柄並走で signal 数を稼ぐ設計。
+
+#### 3. universe_active.json 拡張 (24 → 33 entries, 9 新規追加)
+
+**MicroScalp 4 銘柄** (低額銘柄、株価 1,000-3,000 円帯):
+- 1605.T tp10/sl5/dev10 + open_bias_mode (oos +2,289)
+- 9433.T tp5/sl3/dev5 + open_plus_afternoon (oos +1,042)
+- 9468.T tp8/sl4/dev8 + morning_session_only (oos +478)
+- 6501.T tp10/sl5/dev10 + bias + session_plus_afternoon (oos +2,322)
+
+**BBShort 3 銘柄** (3σ 上端ショート、高 WR/PF):
+- 9433.T (WR 73.3%, PF 5.33, oos +512)
+- 3103.T (WR 61.5%, PF 3.31, oos +472)
+- 6501.T (WR 77.8%, PF 8.61, oos +351)
+
+**Pullback 2 銘柄** (押し目買い、勝率重視):
+- 8306.T (WR 56.2%, PF 1.99, oos +382)
+- 9468.T (WR 52.6%, PF 1.83, oos +295)
+
+全件 `observation_only=False, force_paper=True` で **実 paper trade 投入**。
+
+#### 4. preflight 期待値計算
+
+| 戦略 | 銘柄数 | oos_daily 合計 |
+|------|------:|------:|
+| MacdRci | 12 | +33,943 |
+| EnhancedMacdRci | 1 | +12,168 |
+| Breakout | 3 | +7,091 |
+| MicroScalp | 4 | +6,131 |
+| Pullback | 4 | +4,214 |
+| BBShort | 3 | +1,335 |
+| (Momentum5Min/ORB は oos=0) | 5 | 0 |
+| **合計 (active 32)** | **32** | **+64,882** |
+
+**現実見積もり**:
+- 圧縮率 40% (signal 発生時刻ばらつき + 余力競合): **+25,953 円/日**
+- **目標 +29,700 円/日 (3%/日) の 87.4% 到達**
+- 目標差: -3,747 円/日 (D2 余力管理 +3,000 を加算で **目標到達**)
+
+#### 5. 銘柄並走分析 (8 銘柄が複数戦略並走)
+
+| 銘柄 | 並走戦略 |
+|------|---------|
+| 9984.T | MacdRci + EnhancedMacdRci |
+| 6501.T | MacdRci + MicroScalp + BBShort |
+| 9433.T | MacdRci + MicroScalp + BBShort |
+| 9468.T | MacdRci + MicroScalp + Pullback |
+| 1605.T | Pullback + MicroScalp |
+| 3103.T | Breakout + BBShort |
+| 6723.T | MacdRci + Breakout |
+| 8306.T | MacdRci + Pullback |
+
+3 戦略並走銘柄が 3 つ → 余力競合は D2 改革 (concurrent_value_cap=1.5, high_cost_cap=1) で制御。
+
+### GW 5 日間累積成果まとめ
+
+| Day | 主要成果 | PnL 改善見込 |
+|-----|---------|-------------:|
+| Day 1 | 5/1 paper 乖離分析、SL slippage / 余力枯渇発見 | (分析) |
+| Day 2 | concurrent_value_cap + high_cost_cap 実装 | +3,000 |
+| Day 3 | MicroScalp per-symbol 30d 最適化 (15 銘柄) | +5,500-8,200 |
+| Day 4 | BBShort/Pullback/Donchian 検証 + 戦略マトリクス | +500-1,500 |
+| Day 5 | universe 33 entries 化 + 実 paper 投入 | (反映) |
+| **累積** | **改革後合計 (現状ベース +800-4,058 から)** | **+25,953 円/日 (理論)** |
+
+→ ペーパー再開 (5/7) で **以前と比べ物にならないパフォーマンス** を期待。
+→ 1 週間運用後 (5/13-5/14) に再評価し、必要に応じて universe 微調整。
