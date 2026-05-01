@@ -1,0 +1,258 @@
+{
+  "generated_at": "2026-05-02T08:35:00.837427+09:00",
+  "n_active": 27,
+  "rows": [
+    {
+      "symbol": "9984.T",
+      "strategy": "MacdRci",
+      "expected_value": 1534.0,
+      "lot_multiplier": 0.86,
+      "ev_mech": 1534.0,
+      "ev_d7": 1319.0,
+      "delta": -215.0
+    },
+    {
+      "symbol": "6752.T",
+      "strategy": "MacdRci",
+      "expected_value": 8348.0,
+      "lot_multiplier": 3.0,
+      "ev_mech": 8348.0,
+      "ev_d7": 25044.0,
+      "delta": 16696.0
+    },
+    {
+      "symbol": "9107.T",
+      "strategy": "MacdRci",
+      "expected_value": 1162.0,
+      "lot_multiplier": 0.65,
+      "ev_mech": 1162.0,
+      "ev_d7": 755.0,
+      "delta": -407.0
+    },
+    {
+      "symbol": "9468.T",
+      "strategy": "MacdRci",
+      "expected_value": 483.0,
+      "lot_multiplier": 0.5,
+      "ev_mech": 483.0,
+      "ev_d7": 241.0,
+      "delta": -241.0
+    },
+    {
+      "symbol": "6723.T",
+      "strategy": "MacdRci",
+      "expected_value": 2154.0,
+      "lot_multiplier": 1.21,
+      "ev_mech": 2154.0,
+      "ev_d7": 2607.0,
+      "delta": 452.0
+    },
+    {
+      "symbol": "8058.T",
+      "strategy": "MacdRci",
+      "expected_value": 1792.0,
+      "lot_multiplier": 1.0,
+      "ev_mech": 1792.0,
+      "ev_d7": 1792.0,
+      "delta": 0.0
+    },
+    {
+      "symbol": "9432.T",
+      "strategy": "MacdRci",
+      "expected_value": 1771.0,
+      "lot_multiplier": 0.99,
+      "ev_mech": 1771.0,
+      "ev_d7": 1753.0,
+      "delta": -18.0
+    },
+    {
+      "symbol": "9984.T",
+      "strategy": "EnhancedMacdRci",
+      "expected_value": 12168.0,
+      "lot_multiplier": 3.0,
+      "ev_mech": 12168.0,
+      "ev_d7": 36504.0,
+      "delta": 24336.0
+    },
+    {
+      "symbol": "3103.T",
+      "strategy": "Breakout",
+      "expected_value": 4856.0,
+      "lot_multiplier": 2.72,
+      "ev_mech": 4856.0,
+      "ev_d7": 13210.0,
+      "delta": 8353.0
+    },
+    {
+      "symbol": "6758.T",
+      "strategy": "Breakout",
+      "expected_value": 602.0,
+      "lot_multiplier": 0.5,
+      "ev_mech": 602.0,
+      "ev_d7": 301.0,
+      "delta": -301.0
+    },
+    {
+      "symbol": "1605.T",
+      "strategy": "Pullback",
+      "expected_value": 1081.0,
+      "lot_multiplier": 0.61,
+      "ev_mech": 1081.0,
+      "ev_d7": 659.0,
+      "delta": -421.0
+    },
+    {
+      "symbol": "6723.T",
+      "strategy": "Breakout",
+      "expected_value": 1632.0,
+      "lot_multiplier": 0.91,
+      "ev_mech": 1632.0,
+      "ev_d7": 1485.0,
+      "delta": -147.0
+    },
+    {
+      "symbol": "8136.T",
+      "strategy": "Pullback",
+      "expected_value": 2456.0,
+      "lot_multiplier": 1.38,
+      "ev_mech": 2456.0,
+      "ev_d7": 3389.0,
+      "delta": 933.0
+    },
+    {
+      "symbol": "5985.T",
+      "strategy": "ORB",
+      "expected_value": 0.0,
+      "lot_multiplier": 0.5,
+      "ev_mech": 0.0,
+      "ev_d7": 0.0,
+      "delta": 0.0
+    },
+    {
+      "symbol": "6522.T",
+      "strategy": "ORB",
+      "expected_value": 0.0,
+      "lot_multiplier": 0.5,
+      "ev_mech": 0.0,
+      "ev_d7": 0.0,
+      "delta": 0.0
+    },
+    {
+      "symbol": "6433.T",
+      "strategy": "ORB",
+      "expected_value": 0.0,
+      "lot_multiplier": 0.5,
+      "ev_mech": 0.0,
+      "ev_d7": 0.0,
+      "delta": 0.0
+    },
+    {
+      "symbol": "247A.T",
+      "strategy": "Momentum5Min",
+      "expected_value": 0.0,
+      "lot_multiplier": 0.5,
+      "ev_mech": 0.0,
+      "ev_d7": 0.0,
+      "delta": 0.0
+    },
+    {
+      "symbol": "5243.T",
+      "strategy": "Momentum5Min",
+      "expected_value": 0.0,
+      "lot_multiplier": 0.5,
+      "ev_mech": 0.0,
+      "ev_d7": 0.0,
+      "delta": 0.0
+    },
+    {
+      "symbol": "1605.T",
+      "strategy": "MicroScalp",
+      "expected_value": 2289.0,
+      "lot_multiplier": 1.28,
+      "ev_mech": 2289.0,
+      "ev_d7": 2930.0,
+      "delta": 641.0
+    },
+    {
+      "symbol": "9433.T",
+      "strategy": "MicroScalp",
+      "expected_value": 1042.0,
+      "lot_multiplier": 0.58,
+      "ev_mech": 1042.0,
+      "ev_d7": 604.0,
+      "delta": -438.0
+    },
+    {
+      "symbol": "9468.T",
+      "strategy": "MicroScalp",
+      "expected_value": 478.0,
+      "lot_multiplier": 0.5,
+      "ev_mech": 478.0,
+      "ev_d7": 239.0,
+      "delta": -239.0
+    },
+    {
+      "symbol": "6501.T",
+      "strategy": "MicroScalp",
+      "expected_value": 2322.0,
+      "lot_multiplier": 1.3,
+      "ev_mech": 2322.0,
+      "ev_d7": 3019.0,
+      "delta": 697.0
+    },
+    {
+      "symbol": "9433.T",
+      "strategy": "BBShort",
+      "expected_value": 512.0,
+      "lot_multiplier": 0.5,
+      "ev_mech": 512.0,
+      "ev_d7": 256.0,
+      "delta": -256.0
+    },
+    {
+      "symbol": "3103.T",
+      "strategy": "BBShort",
+      "expected_value": 472.0,
+      "lot_multiplier": 0.5,
+      "ev_mech": 472.0,
+      "ev_d7": 236.0,
+      "delta": -236.0
+    },
+    {
+      "symbol": "6501.T",
+      "strategy": "BBShort",
+      "expected_value": 351.0,
+      "lot_multiplier": 0.5,
+      "ev_mech": 351.0,
+      "ev_d7": 176.0,
+      "delta": -176.0
+    },
+    {
+      "symbol": "8306.T",
+      "strategy": "Pullback",
+      "expected_value": 382.0,
+      "lot_multiplier": 0.5,
+      "ev_mech": 382.0,
+      "ev_d7": 191.0,
+      "delta": -191.0
+    },
+    {
+      "symbol": "9468.T",
+      "strategy": "Pullback",
+      "expected_value": 295.0,
+      "lot_multiplier": 0.5,
+      "ev_mech": 295.0,
+      "ev_d7": 148.0,
+      "delta": -148.0
+    }
+  ],
+  "grand_ev_mech": 48182.39487179487,
+  "grand_ev_d7": 96858.69446153844,
+  "real_mech_per_day": 22272.95794871795,
+  "real_d7_per_day": 41743.47778461538,
+  "target_per_day": 29700,
+  "achievement_rate_d7": 140.55043025123024,
+  "uplift_d7_vs_mech": 19470.51983589743,
+  "compression": 0.4,
+  "d2_uplift": 3000
+}

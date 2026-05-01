@@ -1,0 +1,229 @@
+{
+  "generated_at": "2026-05-02T08:31:47.106826+09:00",
+  "lot_mult_min": 0.5,
+  "lot_mult_max": 3.0,
+  "n_active": 27,
+  "total_ev": 48182.39487179487,
+  "mean_share": 0.037037037037037035,
+  "rows": [
+    {
+      "symbol": "9984.T",
+      "strategy": "MacdRci",
+      "expected_value": 1534.0,
+      "share": 3.18,
+      "lot_multiplier": 0.86,
+      "source": "60d_actual"
+    },
+    {
+      "symbol": "6752.T",
+      "strategy": "MacdRci",
+      "expected_value": 8348.0,
+      "share": 17.33,
+      "lot_multiplier": 3.0,
+      "source": "60d_actual"
+    },
+    {
+      "symbol": "9107.T",
+      "strategy": "MacdRci",
+      "expected_value": 1162.0,
+      "share": 2.41,
+      "lot_multiplier": 0.65,
+      "source": "60d_actual"
+    },
+    {
+      "symbol": "9468.T",
+      "strategy": "MacdRci",
+      "expected_value": 483.0,
+      "share": 1.0,
+      "lot_multiplier": 0.5,
+      "source": "60d_actual"
+    },
+    {
+      "symbol": "6723.T",
+      "strategy": "MacdRci",
+      "expected_value": 2154.0,
+      "share": 4.47,
+      "lot_multiplier": 1.21,
+      "source": "60d_actual"
+    },
+    {
+      "symbol": "8058.T",
+      "strategy": "MacdRci",
+      "expected_value": 1792.0,
+      "share": 3.72,
+      "lot_multiplier": 1.0,
+      "source": "60d_actual"
+    },
+    {
+      "symbol": "9432.T",
+      "strategy": "MacdRci",
+      "expected_value": 1771.0,
+      "share": 3.68,
+      "lot_multiplier": 0.99,
+      "source": "60d_actual"
+    },
+    {
+      "symbol": "9984.T",
+      "strategy": "EnhancedMacdRci",
+      "expected_value": 12168.0,
+      "share": 25.25,
+      "lot_multiplier": 3.0,
+      "source": "oos_daily"
+    },
+    {
+      "symbol": "3103.T",
+      "strategy": "Breakout",
+      "expected_value": 4856.0,
+      "share": 10.08,
+      "lot_multiplier": 2.72,
+      "source": "oos_daily"
+    },
+    {
+      "symbol": "6758.T",
+      "strategy": "Breakout",
+      "expected_value": 602.0,
+      "share": 1.25,
+      "lot_multiplier": 0.5,
+      "source": "oos_daily"
+    },
+    {
+      "symbol": "1605.T",
+      "strategy": "Pullback",
+      "expected_value": 1081.0,
+      "share": 2.24,
+      "lot_multiplier": 0.61,
+      "source": "oos_daily"
+    },
+    {
+      "symbol": "6723.T",
+      "strategy": "Breakout",
+      "expected_value": 1632.0,
+      "share": 3.39,
+      "lot_multiplier": 0.91,
+      "source": "oos_daily"
+    },
+    {
+      "symbol": "8136.T",
+      "strategy": "Pullback",
+      "expected_value": 2456.0,
+      "share": 5.1,
+      "lot_multiplier": 1.38,
+      "source": "oos_daily"
+    },
+    {
+      "symbol": "5985.T",
+      "strategy": "ORB",
+      "expected_value": 0.0,
+      "share": 0.0,
+      "lot_multiplier": 0.5,
+      "source": "oos_daily"
+    },
+    {
+      "symbol": "6522.T",
+      "strategy": "ORB",
+      "expected_value": 0.0,
+      "share": 0.0,
+      "lot_multiplier": 0.5,
+      "source": "oos_daily"
+    },
+    {
+      "symbol": "6433.T",
+      "strategy": "ORB",
+      "expected_value": 0.0,
+      "share": 0.0,
+      "lot_multiplier": 0.5,
+      "source": "oos_daily"
+    },
+    {
+      "symbol": "247A.T",
+      "strategy": "Momentum5Min",
+      "expected_value": 0.0,
+      "share": 0.0,
+      "lot_multiplier": 0.5,
+      "source": "oos_daily"
+    },
+    {
+      "symbol": "5243.T",
+      "strategy": "Momentum5Min",
+      "expected_value": 0.0,
+      "share": 0.0,
+      "lot_multiplier": 0.5,
+      "source": "oos_daily"
+    },
+    {
+      "symbol": "1605.T",
+      "strategy": "MicroScalp",
+      "expected_value": 2289.0,
+      "share": 4.75,
+      "lot_multiplier": 1.28,
+      "source": "oos_daily"
+    },
+    {
+      "symbol": "9433.T",
+      "strategy": "MicroScalp",
+      "expected_value": 1042.0,
+      "share": 2.16,
+      "lot_multiplier": 0.58,
+      "source": "oos_daily"
+    },
+    {
+      "symbol": "9468.T",
+      "strategy": "MicroScalp",
+      "expected_value": 478.0,
+      "share": 0.99,
+      "lot_multiplier": 0.5,
+      "source": "oos_daily"
+    },
+    {
+      "symbol": "6501.T",
+      "strategy": "MicroScalp",
+      "expected_value": 2322.0,
+      "share": 4.82,
+      "lot_multiplier": 1.3,
+      "source": "oos_daily"
+    },
+    {
+      "symbol": "9433.T",
+      "strategy": "BBShort",
+      "expected_value": 512.0,
+      "share": 1.06,
+      "lot_multiplier": 0.5,
+      "source": "oos_daily"
+    },
+    {
+      "symbol": "3103.T",
+      "strategy": "BBShort",
+      "expected_value": 472.0,
+      "share": 0.98,
+      "lot_multiplier": 0.5,
+      "source": "oos_daily"
+    },
+    {
+      "symbol": "6501.T",
+      "strategy": "BBShort",
+      "expected_value": 351.0,
+      "share": 0.73,
+      "lot_multiplier": 0.5,
+      "source": "oos_daily"
+    },
+    {
+      "symbol": "8306.T",
+      "strategy": "Pullback",
+      "expected_value": 382.0,
+      "share": 0.79,
+      "lot_multiplier": 0.5,
+      "source": "oos_daily"
+    },
+    {
+      "symbol": "9468.T",
+      "strategy": "Pullback",
+      "expected_value": 295.0,
+      "share": 0.61,
+      "lot_multiplier": 0.5,
+      "source": "oos_daily"
+    }
+  ],
+  "mech_pnl_per_day": 19272.95794871795,
+  "weighted_pnl_per_day": 38743.47778461539,
+  "uplift_per_day": 19470.519835897438
+}

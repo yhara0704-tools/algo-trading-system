@@ -4407,3 +4407,101 @@ active_count: 33 → **27 entries** (-6: 5 demote + 1 重複)
 - ✅ afternoon_late_long_block 機能追加 (将来の opt-in)
 - 残課題: 9700 円/日 (33%) のギャップ → 6752.T 重点活用、新銘柄 healthy 候補の発掘 (Day 7)
 
+
+---
+
+## 2026-05-02 Day 7 — 期待値駆動 lot_multiplier (静的) 実装
+
+### 背景 (ユーザー提案)
+
+> 「リスク管理として銘柄を分散させることはもちろん考慮すべきではあるものの、
+> 1 日損益目標を達成するために手段を選ばないのであれば、機械的な分散エントリー
+> は避け、その日一番動きが良い (期待値の高い) 銘柄のロットをあげたり、
+> ピラミッティングする方が有効な場合もある。
+> 監視銘柄の期待値が A=80%、B=40% としたとき、B を捨て A にロットを振る。」
+
+→ 機械的な 1/N 均等分散から、**期待値駆動の選択と集中** へ転換。
+
+### D7a: lot_multiplier 自動割当
+
+`scripts/d7_assign_lot_multiplier.py`:
+- 各 active entry の expected_value (MacdRci は 60d 実測、その他は oos_daily) から
+  期待値シェアを算出: `share = ev / sum(ev_active)`
+- `mean_share = 1/N` を baseline、`mult = share / mean_share` で算出
+- `[0.5, 3.0]` でクリップ (1 銘柄独占を防ぐ + 弱小でも 0 にしない)
+- universe_active.json の各 entry に `lot_multiplier` / `expected_value_per_day` を書き込み
+
+ロット倍率分布:
+
+| bucket | n |
+|--------|--:|
+| ≥2.5 | 3 (9984, 6752, 3103) |
+| 1.5-2.5 | 0 |
+| 1.0-1.5 | 5 |
+| 0.5-1.0 | 19 |
+| <0.5 | 0 |
+
+トップ 5:
+- 9984.T EnhancedMacdRci: ev=12,168 → mult=3.00 (cap)
+- 6752.T MacdRci: ev=8,348 → mult=3.00 (cap)
+- 3103.T Breakout: ev=4,856 → mult=2.72
+- 8136.T Pullback: ev=2,456 → mult=1.38
+- 6501.T MicroScalp: ev=2,322 → mult=1.30
+
+### D7b: jp_live_runner で lot_multiplier 反映
+
+`backend/lab/jp_live_runner.py`:
+- 環境変数追加:
+  - `JP_LOT_MULTIPLIER_ENABLED` (default 1)
+  - `JP_LOT_MULTIPLIER_GLOBAL_SCALE` (default 1.0、緊急時に全体縮小可)
+  - `JP_LOT_MULTIPLIER_MIN` / `JP_LOT_MULTIPLIER_MAX` (0.5 / 3.0)
+- `_load_lot_multipliers()` で起動時に universe から (sym, strat_lower) → mult を
+  キャッシュ
+- `_resolve_lot_multiplier(symbol, sid)` で sid から strategy 名を解決し mult を返す
+  (BBShort vs BbShort 等の表記揺れは lower() で吸収)
+- `_try_open_position` 内、MicroScalp 専用 lot 縮小後、cap (concurrent_value_cap /
+  high_cost_cap / liquidity / cash) 適用前に `position_value *= lot_mult` を適用
+
+ログ出力: `D7 lot_multiplier applied: 9984.T [...] mult=3.00 → position_value=891000`
+
+### D7c: preflight v3 (lot_multiplier 反映)
+
+`scripts/d7_preflight_v3.py`:
+
+| | 機械分散 | D7 期待値駆動 |
+|---|---:|---:|
+| 理論最大 | +48,182 | **+96,859** |
+| 圧縮 (40%) + D2 +3,000 | +22,273 | **+41,743** |
+| 目標 (3%/日) | +29,700 | +29,700 |
+| 目標達成率 | 75.0% | **140.6%** |
+
+**+19,471 円/日 の uplift** = 機械分散から **+87% の改善**。
+
+### 信用枠 cap の留意点
+
+mult=3.0 適用銘柄は単独で信用枠の ~90% を占める可能性あり:
+- 9984.T mult=3.0: max_pos_val=891,000 JPY (信用枠 990,000 × 0.30 × 3.0)
+- 6752.T mult=3.0: max_pos_val=891,000 JPY
+- 3103.T mult=2.72: max_pos_val=807,840 JPY
+
+これは `concurrent_value_cap = 1.5 × buying_power = 1,485,000` で 2 銘柄同時保有
+時に block される設計 = **意図通り「期待値の高い 2 銘柄に集中」** を実現する。
+
+### Phase 2 (動的化) 設計メモ
+
+`docs/D7_DYNAMIC_LOT_PHASE2.md` に詳細記載:
+- **朝の動意スコア** (9:00-9:30 ATR / 出来高 / 方向性) で当日 mult 補正
+- **TDnet / テーマ強度** で材料銘柄に追加 mult (×1.3-1.5)
+- **連敗 / 当日累積損失** で動的縮小 (リアルタイム loss tracking)
+- **ピラミッディング** (勝ちポジに追加 entry) は max_pyramid で per-strategy 拡張
+
+Phase 2 着手判断: 5/7 paper で Phase 1 効果確認後、必要なら 3-5 日で実装。
+
+### Day 7 Phase 1 サマリ
+
+- ✅ 期待値駆動 lot_multiplier 実装 (static, 27 entries 全自動算出)
+- ✅ 機械分散 → 期待値駆動で **+19,471 円/日 uplift** 試算 (目標 140%)
+- ✅ 9984/6752/3103 が mult=2.7-3.0 で集中、弱小は 0.5 で観察維持
+- ✅ Phase 2 (動的化) 設計メモ完備
+- 残課題: 5/7 実 paper で効果検証、線形試算は楽観的 (実効率 60-80%)
+

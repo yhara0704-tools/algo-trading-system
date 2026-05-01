@@ -55,6 +55,17 @@ _MAX_CONCURRENT_VALUE_RATIO = float(os.getenv("JP_MAX_CONCURRENT_VALUE_RATIO", "
 # これらが余力を一気に食い、低額銘柄の並走機会を奪うため、既定 1 つまで。
 _HIGH_COST_THRESHOLD_JPY = float(os.getenv("JP_HIGH_COST_THRESHOLD_JPY", "500000"))
 _HIGH_COST_MAX_CONCURRENT = int(os.getenv("JP_HIGH_COST_MAX_CONCURRENT", "1"))
+# 2026-05-02: D7 改革 — 期待値駆動 lot 配分。universe_active.json の
+# `lot_multiplier` (D7a で expected_value/share ベース自動算出、[0.5, 3.0])
+# を position_value に乗じ、機械的均等分散ではなく「動きの良い銘柄 = 期待値の
+# 高い銘柄」 にロットを集中させる。
+# - mult >= 2.0 (top-tier 9984/6752/3103 等): 通常の 2-3 倍
+# - mult <= 0.5 (oos=0 / 弱小銘柄): 通常の半分
+# - 環境変数で全体を縮小可: JP_LOT_MULTIPLIER_GLOBAL_SCALE (default 1.0)
+_LOT_MULTIPLIER_ENABLED = os.getenv("JP_LOT_MULTIPLIER_ENABLED", "1").strip() not in {"0", "false", "False"}
+_LOT_MULTIPLIER_GLOBAL_SCALE = float(os.getenv("JP_LOT_MULTIPLIER_GLOBAL_SCALE", "1.0"))
+_LOT_MULTIPLIER_MIN = float(os.getenv("JP_LOT_MULTIPLIER_MIN", "0.5"))
+_LOT_MULTIPLIER_MAX = float(os.getenv("JP_LOT_MULTIPLIER_MAX", "3.0"))
 _RECHECK_VOL_MIN_PCT = float(os.getenv("JP_RECHECK_VOL_MIN_PCT", "0.08"))
 _RECHECK_VOL_MAX_PCT = float(os.getenv("JP_RECHECK_VOL_MAX_PCT", "1.8"))
 _RECHECK_LUNCH_BLOCK = os.getenv("JP_RECHECK_LUNCH_BLOCK", "1").strip() not in {"0", "false", "False"}
@@ -428,6 +439,59 @@ class JPLiveRunner:
             if sid.startswith(prefix):
                 return name
         return ""
+
+    # 2026-05-02 D7: universe_active.json から lot_multiplier をロードしてキャッシュ。
+    # (symbol, normalized_strategy) -> lot_multiplier。プロセス起動中は再読込しない
+    # (univer 配信は別 cron なので、再起動で反映される設計)。
+    _LOT_MULTIPLIER_CACHE: dict[tuple[str, str], float] | None = None
+
+    @classmethod
+    def _load_lot_multipliers(cls) -> dict[tuple[str, str], float]:
+        if cls._LOT_MULTIPLIER_CACHE is not None:
+            return cls._LOT_MULTIPLIER_CACHE
+        out: dict[tuple[str, str], float] = {}
+        try:
+            p = Path("data/universe_active.json")
+            if p.exists():
+                u = json.loads(p.read_text(encoding="utf-8"))
+                for s in u.get("symbols", []) or []:
+                    sym = str(s.get("symbol", "")).strip()
+                    strat = str(s.get("strategy", "")).strip().lower()
+                    mult = s.get("lot_multiplier")
+                    if not sym or not strat or mult is None:
+                        continue
+                    try:
+                        m = float(mult)
+                    except Exception:
+                        continue
+                    out[(sym, strat)] = max(_LOT_MULTIPLIER_MIN, min(_LOT_MULTIPLIER_MAX, m))
+        except Exception as e:
+            logger.warning("lot_multiplier load failed: %s", e)
+        cls._LOT_MULTIPLIER_CACHE = out
+        if out:
+            logger.info(
+                "D7 lot_multiplier loaded: %d entries (min=%.2f max=%.2f scale=%.2f)",
+                len(out), _LOT_MULTIPLIER_MIN, _LOT_MULTIPLIER_MAX, _LOT_MULTIPLIER_GLOBAL_SCALE,
+            )
+        return out
+
+    @classmethod
+    def _resolve_lot_multiplier(cls, symbol: str, sid: str) -> float:
+        """Sid (= strategy.meta.id) と symbol から lot_multiplier を引く。
+        - universe にない / 0 のときは 1.0 (中立)。
+        - 大文字小文字 / `BBShort` vs `BbShort` の表記揺れを吸収するため、
+          strategy 名は normalize して照合。
+        """
+        if not _LOT_MULTIPLIER_ENABLED:
+            return 1.0
+        strat = cls._strategy_name_from_meta(sid)
+        if not strat:
+            return 1.0
+        key = (str(symbol).strip(), strat.lower())
+        m = cls._load_lot_multipliers().get(key)
+        if m is None or m <= 0:
+            return 1.0
+        return float(m) * _LOT_MULTIPLIER_GLOBAL_SCALE
 
     def _apply_low_sample_second_filter(
         self, strategies: list[StrategyBase]
@@ -1646,6 +1710,21 @@ class JPLiveRunner:
             ms_pct = float(os.getenv("JP_MICRO_SCALP_POSITION_PCT", "0.30"))
             ms_pct = max(0.10, min(0.50, ms_pct))
             position_value = _JP_CAPITAL_JPY * tier.margin * ms_pct * _LIVE_POSITION_SCALE
+
+        # 2026-05-02: D7 — 期待値駆動 lot_multiplier 適用。
+        # universe_active.json の (symbol, strategy) ごとに 0.5–3.0 のロット
+        # 倍率を持ち、機械的均等分散を捨てて期待値の高い銘柄に余力を集中する。
+        # MicroScalp 専用の lot 縮小 (0.30) と乗算で適用 (短期スキャル × 期待値高
+        # の銘柄は更に 2-3 倍まで膨らむ)。最終的な qty は cap (concurrent_value_cap /
+        # high_cost_cap / liquidity / cash) で再制限される。
+        lot_mult = self._resolve_lot_multiplier(symbol, sid)
+        if abs(lot_mult - 1.0) > 1e-9:
+            position_value = position_value * lot_mult
+            logger.info(
+                "D7 lot_multiplier applied: %s [%s] mult=%.2f → position_value=%.0f",
+                symbol, sid, lot_mult, position_value,
+            )
+
         liq_cap = LIQUIDITY_MAX_POSITION.get(symbol)
         if liq_cap is not None:
             position_value = min(position_value, liq_cap)
