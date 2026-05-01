@@ -108,6 +108,13 @@ class JPMacdRci(StrategyBase):
         # 禁止する。long は据え置き (寄付き直後の上昇順張りは温存)。
         morning_first_30min_short_block: int = 0,
         morning_block_until_min: int = 30,
+        # F9 (2026-05-01): 後場終盤の long エントリーを禁止する。
+        # D6a 60日 5m 解析で 3103.T (long -187,496 円), 6723.T (-70,339 円),
+        # 9468.T (-13,423 円) など 14:00 以降の long が大幅敗北パターンが多発。
+        # 大引け前の利益確定売り → 連れ安 → SL hit / EOD 強制決済 で損失が膨らむ。
+        # 14:00 以降の long entry を打ち切り、short / 既存ポジは据え置く。
+        afternoon_late_long_block: int = 0,
+        afternoon_late_block_from_min: int = 14 * 60,  # 14:00 JST
         interval:     str   = "5m",
     ) -> None:
         rci_periods = rci_periods or [10, 12, 15]
@@ -139,6 +146,8 @@ class JPMacdRci(StrategyBase):
                 "volume_surge_lookback": volume_surge_lookback,
                 "morning_first_30min_short_block": morning_first_30min_short_block,
                 "morning_block_until_min": morning_block_until_min,
+                "afternoon_late_long_block": afternoon_late_long_block,
+                "afternoon_late_block_from_min": afternoon_late_block_from_min,
             },
             max_pyramid=max_pyramid,
         )
@@ -173,6 +182,8 @@ class JPMacdRci(StrategyBase):
         self.volume_surge_lookback = max(1, int(volume_surge_lookback))
         self.morning_first_30min_short_block = bool(int(morning_first_30min_short_block))
         self.morning_block_until_min = max(0, int(morning_block_until_min))
+        self.afternoon_late_long_block = bool(int(afternoon_late_long_block))
+        self.afternoon_late_block_from_min = max(0, int(afternoon_late_block_from_min))
 
     def generate_signals(self, df: pd.DataFrame) -> pd.DataFrame:
         d = df.copy()
@@ -356,6 +367,14 @@ class JPMacdRci(StrategyBase):
                 time_min < 9 * 60 + self.morning_block_until_min
             )
             short_entry = short_entry & ~morning_block_zone
+
+        # F9: 後場終盤 (14:00 以降) の long エントリー禁止
+        # D6a 60日 5m 解析で 3103.T (-187,496 円) / 6723.T (-70,339 円) /
+        # 9468.T (-13,423 円) など終盤 long 大敗パターンを構造的に避ける。
+        # short / EOD 強制決済は据え置き。
+        if self.afternoon_late_long_block and self.afternoon_late_block_from_min > 0:
+            late_block_zone = time_min >= self.afternoon_late_block_from_min
+            long_entry = long_entry & ~late_block_zone
 
         # ── エグジット（profile別） ────────────────────────────────────────────
         weaken_long = hist_weakening_long

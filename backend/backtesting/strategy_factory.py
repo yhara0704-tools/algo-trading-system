@@ -43,6 +43,9 @@ STRATEGY_DEFAULTS = {
         # F8 (2026-05-01): 寄付直後 short 禁止 (デフォルト OFF、PoC で個別 ON)
         "morning_first_30min_short_block": 0,
         "morning_block_until_min": 30,
+        # F9 (2026-05-01): 後場終盤 long 禁止 (D6a 解析で 3103.T 等が 14:00 以降大敗)
+        "afternoon_late_long_block": 0,
+        "afternoon_late_block_from_min": 14 * 60,
     },
     "Breakout": {
         "interval": "5m",
@@ -386,6 +389,8 @@ def create(strategy_name: str, symbol: str, name: str = "",
             volume_surge_lookback=int(p.get("volume_surge_lookback", 5)),
             morning_first_30min_short_block=int(p.get("morning_first_30min_short_block", 0)),
             morning_block_until_min=int(p.get("morning_block_until_min", 30)),
+            afternoon_late_long_block=int(p.get("afternoon_late_long_block", 0)),
+            afternoon_late_block_from_min=int(p.get("afternoon_late_block_from_min", 14 * 60)),
             max_pyramid=int(p.get("max_pyramid", 0)),
         )
     elif strategy_name == "Breakout":

@@ -1,0 +1,185 @@
+{
+  "generated_at": "2026-05-01T20:00:54.169400+09:00",
+  "results": {
+    "3103.T": {
+      "n_days": 39,
+      "baseline": {
+        "n": 465,
+        "wr": 37.4,
+        "pf": 1.04,
+        "pnl": 59417.0,
+        "long_pnl": 17399.0,
+        "short_pnl": 42017.0,
+        "long_n": 378,
+        "short_n": 87
+      },
+      "blk_14": {
+        "n": 462,
+        "wr": 37.4,
+        "pf": 1.03,
+        "pnl": 49573.0,
+        "long_pnl": 7663.0,
+        "short_pnl": 41910.0,
+        "long_n": 375,
+        "short_n": 87
+      },
+      "blk_1330": {
+        "n": 460,
+        "wr": 37.4,
+        "pf": 1.03,
+        "pnl": 45336.0,
+        "long_pnl": 3185.0,
+        "short_pnl": 42150.0,
+        "long_n": 373,
+        "short_n": 87
+      },
+      "delta_14": -9844.0,
+      "delta_1330": -14081.0,
+      "recommend": null
+    },
+    "6723.T": {
+      "n_days": 39,
+      "baseline": {
+        "n": 657,
+        "wr": 37.7,
+        "pf": 1.08,
+        "pnl": 84023.0,
+        "long_pnl": 56761.0,
+        "short_pnl": 27262.0,
+        "long_n": 532,
+        "short_n": 125
+      },
+      "blk_14": {
+        "n": 650,
+        "wr": 37.7,
+        "pf": 1.08,
+        "pnl": 79499.0,
+        "long_pnl": 52237.0,
+        "short_pnl": 27262.0,
+        "long_n": 525,
+        "short_n": 125
+      },
+      "blk_1330": {
+        "n": 647,
+        "wr": 38.2,
+        "pf": 1.08,
+        "pnl": 79112.0,
+        "long_pnl": 51850.0,
+        "short_pnl": 27262.0,
+        "long_n": 522,
+        "short_n": 125
+      },
+      "delta_14": -4524.0,
+      "delta_1330": -4911.0,
+      "recommend": null
+    },
+    "9468.T": {
+      "n_days": 39,
+      "baseline": {
+        "n": 655,
+        "wr": 41.5,
+        "pf": 1.04,
+        "pnl": 18820.0,
+        "long_pnl": 10141.0,
+        "short_pnl": 8679.0,
+        "long_n": 520,
+        "short_n": 135
+      },
+      "blk_14": {
+        "n": 653,
+        "wr": 41.5,
+        "pf": 1.03,
+        "pnl": 17575.0,
+        "long_pnl": 8896.0,
+        "short_pnl": 8679.0,
+        "long_n": 518,
+        "short_n": 135
+      },
+      "blk_1330": {
+        "n": 650,
+        "wr": 41.7,
+        "pf": 1.03,
+        "pnl": 14442.0,
+        "long_pnl": 5764.0,
+        "short_pnl": 8679.0,
+        "long_n": 515,
+        "short_n": 135
+      },
+      "delta_14": -1245.0,
+      "delta_1330": -4378.0,
+      "recommend": null
+    },
+    "9433.T": {
+      "n_days": 39,
+      "baseline": {
+        "n": 688,
+        "wr": 41.4,
+        "pf": 0.88,
+        "pnl": -53479.0,
+        "long_pnl": -74020.0,
+        "short_pnl": 20541.0,
+        "long_n": 537,
+        "short_n": 151
+      },
+      "blk_14": {
+        "n": 686,
+        "wr": 41.7,
+        "pf": 0.88,
+        "pnl": -54003.0,
+        "long_pnl": -74544.0,
+        "short_pnl": 20541.0,
+        "long_n": 535,
+        "short_n": 151
+      },
+      "blk_1330": {
+        "n": 683,
+        "wr": 41.9,
+        "pf": 0.88,
+        "pnl": -55334.0,
+        "long_pnl": -75875.0,
+        "short_pnl": 20541.0,
+        "long_n": 532,
+        "short_n": 151
+      },
+      "delta_14": -524.0,
+      "delta_1330": -1855.0,
+      "recommend": null
+    },
+    "8306.T": {
+      "n_days": 39,
+      "baseline": {
+        "n": 660,
+        "wr": 39.2,
+        "pf": 0.95,
+        "pnl": -26841.0,
+        "long_pnl": -43400.0,
+        "short_pnl": 16559.0,
+        "long_n": 521,
+        "short_n": 139
+      },
+      "blk_14": {
+        "n": 653,
+        "wr": 39.5,
+        "pf": 0.96,
+        "pnl": -21887.0,
+        "long_pnl": -39070.0,
+        "short_pnl": 17182.0,
+        "long_n": 515,
+        "short_n": 138
+      },
+      "blk_1330": {
+        "n": 651,
+        "wr": 39.5,
+        "pf": 0.96,
+        "pnl": -23886.0,
+        "long_pnl": -41068.0,
+        "short_pnl": 17182.0,
+        "long_n": 513,
+        "short_n": 138
+      },
+      "delta_14": 4954.0,
+      "delta_1330": 2955.0,
+      "recommend": null
+    }
+  }
+}

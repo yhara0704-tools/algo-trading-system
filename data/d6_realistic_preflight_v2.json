@@ -1,0 +1,223 @@
+{
+  "generated_at": "2026-05-02T08:20:03.570490+09:00",
+  "active_entries": 27,
+  "rows": [
+    {
+      "symbol": "9984.T",
+      "strategy": "MacdRci",
+      "oos_daily": 8936.9,
+      "real_pnl_per_day": 1533.7948717948718,
+      "source": "60d_actual"
+    },
+    {
+      "symbol": "6752.T",
+      "strategy": "MacdRci",
+      "oos_daily": 3072.2,
+      "real_pnl_per_day": 8348.128205128205,
+      "source": "60d_actual"
+    },
+    {
+      "symbol": "9107.T",
+      "strategy": "MacdRci",
+      "oos_daily": 1953.7,
+      "real_pnl_per_day": 1161.974358974359,
+      "source": "60d_actual"
+    },
+    {
+      "symbol": "9468.T",
+      "strategy": "MacdRci",
+      "oos_daily": 1597.1,
+      "real_pnl_per_day": 482.56410256410254,
+      "source": "60d_actual"
+    },
+    {
+      "symbol": "6723.T",
+      "strategy": "MacdRci",
+      "oos_daily": 1471.4,
+      "real_pnl_per_day": 2154.4358974358975,
+      "source": "60d_actual"
+    },
+    {
+      "symbol": "8058.T",
+      "strategy": "MacdRci",
+      "oos_daily": 446.7,
+      "real_pnl_per_day": 1791.8974358974358,
+      "source": "60d_actual"
+    },
+    {
+      "symbol": "9432.T",
+      "strategy": "MacdRci",
+      "oos_daily": 187.1,
+      "real_pnl_per_day": 1771.0,
+      "source": "60d_actual"
+    },
+    {
+      "symbol": "9984.T",
+      "strategy": "EnhancedMacdRci",
+      "oos_daily": 12168.1,
+      "real_pnl_per_day": 12168.1,
+      "source": "oos_daily"
+    },
+    {
+      "symbol": "3103.T",
+      "strategy": "Breakout",
+      "oos_daily": 4856.5,
+      "real_pnl_per_day": 4856.5,
+      "source": "oos_daily"
+    },
+    {
+      "symbol": "6758.T",
+      "strategy": "Breakout",
+      "oos_daily": 602.4,
+      "real_pnl_per_day": 602.4,
+      "source": "oos_daily"
+    },
+    {
+      "symbol": "1605.T",
+      "strategy": "Pullback",
+      "oos_daily": 1080.6,
+      "real_pnl_per_day": 1080.6,
+      "source": "oos_daily"
+    },
+    {
+      "symbol": "6723.T",
+      "strategy": "Breakout",
+      "oos_daily": 1632.0,
+      "real_pnl_per_day": 1632.0,
+      "source": "oos_daily"
+    },
+    {
+      "symbol": "8136.T",
+      "strategy": "Pullback",
+      "oos_daily": 2456.0,
+      "real_pnl_per_day": 2456.0,
+      "source": "oos_daily"
+    },
+    {
+      "symbol": "5985.T",
+      "strategy": "ORB",
+      "oos_daily": 0.0,
+      "real_pnl_per_day": 0.0,
+      "source": "oos_daily"
+    },
+    {
+      "symbol": "6522.T",
+      "strategy": "ORB",
+      "oos_daily": 0.0,
+      "real_pnl_per_day": 0.0,
+      "source": "oos_daily"
+    },
+    {
+      "symbol": "6433.T",
+      "strategy": "ORB",
+      "oos_daily": 0.0,
+      "real_pnl_per_day": 0.0,
+      "source": "oos_daily"
+    },
+    {
+      "symbol": "247A.T",
+      "strategy": "Momentum5Min",
+      "oos_daily": 0.0,
+      "real_pnl_per_day": 0.0,
+      "source": "oos_daily"
+    },
+    {
+      "symbol": "5243.T",
+      "strategy": "Momentum5Min",
+      "oos_daily": 0.0,
+      "real_pnl_per_day": 0.0,
+      "source": "oos_daily"
+    },
+    {
+      "symbol": "1605.T",
+      "strategy": "MicroScalp",
+      "oos_daily": 2289.0,
+      "real_pnl_per_day": 2289.0,
+      "source": "oos_daily"
+    },
+    {
+      "symbol": "9433.T",
+      "strategy": "MicroScalp",
+      "oos_daily": 1042.0,
+      "real_pnl_per_day": 1042.0,
+      "source": "oos_daily"
+    },
+    {
+      "symbol": "9468.T",
+      "strategy": "MicroScalp",
+      "oos_daily": 478.0,
+      "real_pnl_per_day": 478.0,
+      "source": "oos_daily"
+    },
+    {
+      "symbol": "6501.T",
+      "strategy": "MicroScalp",
+      "oos_daily": 2322.0,
+      "real_pnl_per_day": 2322.0,
+      "source": "oos_daily"
+    },
+    {
+      "symbol": "9433.T",
+      "strategy": "BBShort",
+      "oos_daily": 512.0,
+      "real_pnl_per_day": 512.0,
+      "source": "oos_daily"
+    },
+    {
+      "symbol": "3103.T",
+      "strategy": "BBShort",
+      "oos_daily": 472.0,
+      "real_pnl_per_day": 472.0,
+      "source": "oos_daily"
+    },
+    {
+      "symbol": "6501.T",
+      "strategy": "BBShort",
+      "oos_daily": 351.0,
+      "real_pnl_per_day": 351.0,
+      "source": "oos_daily"
+    },
+    {
+      "symbol": "8306.T",
+      "strategy": "Pullback",
+      "oos_daily": 382.0,
+      "real_pnl_per_day": 382.0,
+      "source": "oos_daily"
+    },
+    {
+      "symbol": "9468.T",
+      "strategy": "Pullback",
+      "oos_daily": 295.0,
+      "real_pnl_per_day": 295.0,
+      "source": "oos_daily"
+    }
+  ],
+  "by_strategy_real": {
+    "MacdRci": 17243.79487179487,
+    "EnhancedMacdRci": 12168.1,
+    "Breakout": 7090.9,
+    "Pullback": 4213.6,
+    "ORB": 0.0,
+    "Momentum5Min": 0.0,
+    "MicroScalp": 6131.0,
+    "BBShort": 1335.0
+  },
+  "by_strategy_oos": {
+    "MacdRci": 17665.1,
+    "EnhancedMacdRci": 12168.1,
+    "Breakout": 7090.9,
+    "Pullback": 4213.6,
+    "ORB": 0.0,
+    "Momentum5Min": 0.0,
+    "MicroScalp": 6131.0,
+    "BBShort": 1335.0
+  },
+  "grand_real_per_day": 48182.39487179487,
+  "grand_oos_per_day": 48603.7,
+  "compressed_real_per_day": 19272.95794871795,
+  "compressed_oos_per_day": 19441.48,
+  "d2_uplift_per_day": 3000,
+  "final_estimate_per_day": 22272.95794871795,
+  "target_per_day": 29700,
+  "achievement_rate": 74.99312440645774
+}

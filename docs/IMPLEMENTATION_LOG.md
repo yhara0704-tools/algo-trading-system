@@ -4274,3 +4274,136 @@ universe 24 → 35 entries に拡大予定:
 
 → ペーパー再開 (5/7) で **以前と比べ物にならないパフォーマンス** を期待。
 → 1 週間運用後 (5/13-5/14) に再評価し、必要に応じて universe 微調整。
+
+---
+
+## 2026-05-01 Day 6 — MacdRci 健全性監査 + 構造的負け銘柄を observation 化
+
+### 背景
+
+Day 5 までの preflight は universe の `oos_daily` (walkforward 局所値) ベース。
+これが直近 60 日 5m 実測と乖離している可能性を懸念し、全 MacdRci 銘柄の
+**60 日実測 PnL** を取得し、universe 値と比較する健全性監査を実施した。
+
+### D6a: MacdRci 時間帯別 WR 分析 (60 日 5m)
+
+`scripts/d6_macd_rci_time_window_analysis.py`:
+- universe 内 13 銘柄の MacdRci を 60 日 5m で再 backtest
+- entry_time を 5 区分 (T_open / T_morning_a/b / T_afternoon_a/b / T_other) に分類
+- 各時間帯の trades / WR / PF / PnL / long_pnl / short_pnl を集計
+
+主要発見 (時間帯別の負けパターン):
+
+| 銘柄 | 時間帯 | long PnL | 備考 |
+|------|--------|---------:|------|
+| 3103.T | T_afternoon_b | -187,496 | 大引け前連れ安 |
+| 6723.T | T_afternoon_b | -70,339 | 大引け前連れ安 |
+| 9433.T | T_morning_b | -40,472 | 寄り後反落 |
+| 9468.T | T_afternoon_b | -13,423 | 大引け前 |
+
+### D6b: afternoon_late_long_block 機能追加
+
+新パラメータ `afternoon_late_long_block` / `afternoon_late_block_from_min`
+(デフォルト 14:00 JST) を `JPMacdRci` に追加。
+14:00 以降の long entry を構造的に禁止し、大引け前の連れ安 stop hit を回避する設計。
+
+`scripts/d6_afternoon_late_block_poc.py` で 5 銘柄 PoC:
+
+| 銘柄 | base PnL | block@14:00 Δ | block@13:30 Δ |
+|------|---------:|--------------:|---------------:|
+| 3103.T | +59,417 | -9,844 | -14,081 |
+| 6723.T | +84,023 | -4,524 | -4,911 |
+| 9468.T | +18,820 | -1,245 | -4,378 |
+| 9433.T | -53,479 | -524 | -1,855 |
+| 8306.T | -26,841 | +4,954 | +2,955 |
+
+→ 終盤 long block は **勝ちトレードも消す** ため純改善は出ず、universe 適用は見送り。
+   機能としては実装済み (将来の opt-in 用)。
+
+### D6c-d: 全 MacdRci 60 日健全性監査
+
+`scripts/d6_health_check_all_macd_rci.py` で実測 PnL/日 vs universe oos_daily を比較:
+
+| 銘柄 | 実測 PnL/日 | oos_daily | ratio | 判定 |
+|------|-----------:|----------:|------:|------|
+| 6613.T | -1,487 | +12,464 | -0.12 | **UNHEALTHY** |
+| 9984.T | +1,534 | +8,937 | 0.17 | OVERESTIMATE |
+| 6752.T | +8,348 | +3,072 | 2.72 | OK (大上振れ) |
+| 9107.T | +1,162 | +1,954 | 0.59 | OK |
+| 9468.T | +483 | +1,597 | 0.30 | OK |
+| 8306.T | -688 | +2,208 | -0.31 | **UNHEALTHY** |
+| 6723.T | +2,154 | +1,471 | 1.46 | OK |
+| 3103.T | +1,524 | +18,248 | 0.08 | OVERESTIMATE |
+| 9433.T | -1,371 | +1,016 | -1.35 | **UNHEALTHY** |
+| 6501.T | -439 | +391 | -1.12 | **UNHEALTHY** |
+| 8058.T | +1,792 | +447 | 4.01 | OK (上振れ) |
+| 9432.T | +1,771 | +187 | 9.47 | OK (上振れ) |
+| 4911.T | -150 | +199 | -0.75 | **UNHEALTHY** |
+
+**衝撃**: oos_daily=12,464 (universe 最大級) の **6613.T MacdRci が実測 -1,487 円/日**。
+preflight が極端に過大評価していた構造的問題を発見。
+
+### D6 demote (`scripts/d6_demote_unhealthy_macd_rci.py`)
+
+`observation_only=true / force_paper=false` 化した銘柄:
+
+| 銘柄 | 実測 PnL/日 | 損失回避 |
+|------|-----------:|---------:|
+| 6613.T MacdRci | -1,487 | +1,487 |
+| 8306.T MacdRci | -688 | +688 (※ -447 推定値) |
+| 9433.T MacdRci | -1,371 | +1,371 (※ -891 推定値) |
+| 6501.T MacdRci | -439 | +439 |
+| 4911.T MacdRci | -150 | +150 |
+| **合計** | | **+3,414/日** |
+
+active_count: 33 → **27 entries** (-6: 5 demote + 1 重複)
+
+代替: 6501.T は MicroScalp + BBShort、8306.T は Pullback、9433.T は MicroScalp + BBShort
+で既に Day 5 universe 拡張時にカバー済み。6613.T と 4911.T は代替なし (今後検討)。
+
+### D6e: 実測値ベース preflight v2
+
+`scripts/d6_realistic_preflight_v2.py` で MacdRci のみ実測値、その他は oos_daily を採用:
+
+| 戦略 | n | real | oos_daily | delta |
+|------|--:|-----:|----------:|------:|
+| MacdRci | 7 | +17,244 | +17,665 | -421 |
+| EnhancedMacdRci | 1 | +12,168 | +12,168 | 0 |
+| Breakout | 3 | +7,091 | +7,091 | 0 |
+| MicroScalp | 4 | +6,131 | +6,131 | 0 |
+| Pullback | 4 | +4,214 | +4,214 | 0 |
+| BBShort | 3 | +1,335 | +1,335 | 0 |
+| Momentum5Min/ORB | 5 | 0 | 0 | 0 |
+| **TOTAL** | **27** | **+48,182** | **+48,604** | **-421** |
+
+**真の期待値**:
+- 理論最大 (実測ベース): +48,182 円/日
+- 現実見積 (圧縮 40%): **+19,273 円/日**
+- D2 capital guard uplift: +3,000 円/日
+- **最終期待値: +22,273 円/日 (目標 29,700 円/日 の 75.0%)**
+
+### 実測トップ 10 銘柄 × 戦略
+
+| rank | symbol | strategy | PnL/日 | source |
+|-----:|--------|----------|-------:|--------|
+| 1 | 9984.T | EnhancedMacdRci | +12,168 | oos_daily |
+| 2 | 6752.T | MacdRci | +8,348 | 60d_actual (大上振れ) |
+| 3 | 3103.T | Breakout | +4,856 | oos_daily |
+| 4 | 8136.T | Pullback | +2,456 | oos_daily |
+| 5 | 6501.T | MicroScalp | +2,322 | oos_daily |
+| 6 | 1605.T | MicroScalp | +2,289 | oos_daily |
+| 7 | 6723.T | MacdRci | +2,154 | 60d_actual |
+| 8 | 8058.T | MacdRci | +1,792 | 60d_actual |
+| 9 | 9432.T | MacdRci | +1,771 | 60d_actual |
+| 10 | 6723.T | Breakout | +1,632 | oos_daily |
+
+**6752.T MacdRci が単独で +8,348 円/日 (実測)** = current universe 最強。
+6752.T への戦略追加 (BBShort/MicroScalp/Pullback) で更なる改善余地あり (D7 候補)。
+
+### Day 6 サマリ
+
+- ✅ 6 銘柄の構造的負け (実測 -3,414 円/日 流出) を観察モード化で構造的に阻止
+- ✅ universe 過大評価 (oos_daily) 問題を実測値で校正、真の期待値を確定
+- ✅ afternoon_late_long_block 機能追加 (将来の opt-in)
+- 残課題: 9700 円/日 (33%) のギャップ → 6752.T 重点活用、新銘柄 healthy 候補の発掘 (Day 7)
+

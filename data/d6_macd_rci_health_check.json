@@ -1,0 +1,165 @@
+{
+  "generated_at": "2026-05-01T20:03:10.925925+09:00",
+  "rows": [
+    {
+      "symbol": "6613.T",
+      "n_days": 38,
+      "trades": 493,
+      "total_pnl_60d": -56512.0,
+      "pnl_per_day": -1487.157894736842,
+      "oos_daily": 12464.0,
+      "ratio": -0.11931626241470171,
+      "status": "UNHEALTHY"
+    },
+    {
+      "symbol": "9984.T",
+      "n_days": 39,
+      "trades": 676,
+      "total_pnl_60d": 59818.0,
+      "pnl_per_day": 1533.7948717948718,
+      "oos_daily": 8936.9,
+      "ratio": 0.17162493390268124,
+      "status": "OVERESTIMATE"
+    },
+    {
+      "symbol": "6752.T",
+      "n_days": 39,
+      "trades": 660,
+      "total_pnl_60d": 325577.0,
+      "pnl_per_day": 8348.128205128205,
+      "oos_daily": 3072.2,
+      "ratio": 2.717312741725215,
+      "status": "OK"
+    },
+    {
+      "symbol": "9107.T",
+      "n_days": 39,
+      "trades": 664,
+      "total_pnl_60d": 45317.0,
+      "pnl_per_day": 1161.974358974359,
+      "oos_daily": 1953.7,
+      "ratio": 0.5947557756945073,
+      "status": "OK"
+    },
+    {
+      "symbol": "9468.T",
+      "n_days": 39,
+      "trades": 655,
+      "total_pnl_60d": 18820.0,
+      "pnl_per_day": 482.56410256410254,
+      "oos_daily": 1597.1,
+      "ratio": 0.3021502113606553,
+      "status": "OK"
+    },
+    {
+      "symbol": "8306.T",
+      "n_days": 39,
+      "trades": 660,
+      "total_pnl_60d": -26841.0,
+      "pnl_per_day": -688.2307692307693,
+      "oos_daily": 2207.5,
+      "ratio": -0.3117693178848332,
+      "status": "UNHEALTHY (obs_only)"
+    },
+    {
+      "symbol": "6723.T",
+      "n_days": 39,
+      "trades": 657,
+      "total_pnl_60d": 84023.0,
+      "pnl_per_day": 2154.4358974358975,
+      "oos_daily": 1471.4,
+      "ratio": 1.464208167348034,
+      "status": "OK"
+    },
+    {
+      "symbol": "3103.T",
+      "n_days": 39,
+      "trades": 465,
+      "total_pnl_60d": 59417.0,
+      "pnl_per_day": 1523.5128205128206,
+      "oos_daily": 18248.2,
+      "ratio": 0.0834883890198935,
+      "status": "OVERESTIMATE (obs_only)"
+    },
+    {
+      "symbol": "9433.T",
+      "n_days": 39,
+      "trades": 688,
+      "total_pnl_60d": -53478.0,
+      "pnl_per_day": -1371.2307692307693,
+      "oos_daily": 1016.3,
+      "ratio": -1.349238186786155,
+      "status": "UNHEALTHY (obs_only)"
+    },
+    {
+      "symbol": "6501.T",
+      "n_days": 39,
+      "trades": 666,
+      "total_pnl_60d": -17129.0,
+      "pnl_per_day": -439.20512820512823,
+      "oos_daily": 391.3,
+      "ratio": -1.1224255768084033,
+      "status": "UNHEALTHY"
+    },
+    {
+      "symbol": "8058.T",
+      "n_days": 39,
+      "trades": 687,
+      "total_pnl_60d": 69884.0,
+      "pnl_per_day": 1791.8974358974358,
+      "oos_daily": 446.7,
+      "ratio": 4.011411318328713,
+      "status": "OK"
+    },
+    {
+      "symbol": "9432.T",
+      "n_days": 39,
+      "trades": 748,
+      "total_pnl_60d": 69069.0,
+      "pnl_per_day": 1771.0,
+      "oos_daily": 187.1,
+      "ratio": 9.465526456440406,
+      "status": "OK"
+    },
+    {
+      "symbol": "4911.T",
+      "n_days": 39,
+      "trades": 690,
+      "total_pnl_60d": -5847.0,
+      "pnl_per_day": -149.92307692307693,
+      "oos_daily": 199.1,
+      "ratio": -0.753003902175173,
+      "status": "UNHEALTHY"
+    }
+  ],
+  "unhealthy": [
+    {
+      "symbol": "6613.T",
+      "pnl_per_day": -1487.157894736842,
+      "oos_daily": 12464.0,
+      "n_days": 38
+    },
+    {
+      "symbol": "6501.T",
+      "pnl_per_day": -439.20512820512823,
+      "oos_daily": 391.3,
+      "n_days": 39
+    },
+    {
+      "symbol": "4911.T",
+      "pnl_per_day": -149.92307692307693,
+      "oos_daily": 199.1,
+      "n_days": 39
+    }
+  ],
+  "caution": [
+    {
+      "symbol": "9984.T",
+      "pnl_per_day": 1533.7948717948718,
+      "oos_daily": 8936.9,
+      "ratio": 0.17162493390268124
+    }
+  ],
+  "n_unhealthy": 3,
+  "n_caution": 1
+}

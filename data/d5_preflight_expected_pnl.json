@@ -1,16 +1,16 @@
 {
-  "generated_at": "2026-05-01T19:27:43.801259+09:00",
-  "active_count": 32,
+  "generated_at": "2026-05-02T08:19:08.172308+09:00",
+  "active_count": 27,
   "total_count": 33,
-  "grand_total_oos": 64881.9,
+  "grand_total_oos": 48603.7,
   "realistic_compression": 0.4,
-  "realistic_pnl_per_day": 25952.760000000002,
+  "realistic_pnl_per_day": 19441.48,
   "target_pnl_per_day": 29700,
-  "achievement_pct": 87.38303030303031,
+  "achievement_pct": 65.45952861952861,
   "by_strategy": {
     "MacdRci": {
-      "n": 12,
-      "total_oos": 33943.3
+      "n": 7,
+      "total_oos": 17665.1
     },
     "EnhancedMacdRci": {
       "n": 1,
@@ -51,23 +51,9 @@
       "MicroScalp",
       "Pullback"
     ],
-    "8306.T": [
-      "MacdRci",
-      "Pullback"
-    ],
     "6723.T": [
       "MacdRci",
       "Breakout"
-    ],
-    "9433.T": [
-      "MacdRci",
-      "MicroScalp",
-      "BBShort"
-    ],
-    "6501.T": [
-      "MacdRci",
-      "MicroScalp",
-      "BBShort"
     ],
     "3103.T": [
       "Breakout",
@@ -76,6 +62,14 @@
     "1605.T": [
       "Pullback",
       "MicroScalp"
+    ],
+    "9433.T": [
+      "MicroScalp",
+      "BBShort"
+    ],
+    "6501.T": [
+      "MicroScalp",
+      "BBShort"
     ]
   },
   "d5_added_count": 9,

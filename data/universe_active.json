@@ -1,7 +1,7 @@
 {
   "updated": "2026-05-02",
-  "updated_at": "2026-05-01T19:27:10.202990+09:00",
-  "active_count": 33,
+  "updated_at": "2026-05-02T08:19:00.410364+09:00",
+  "active_count": 27,
   "symbols": [
     {
       "symbol": "6613.T",
@@ -15,7 +15,11 @@
       "robust": true,
       "is_oos_pass": true,
       "calmar": 4233.916,
-      "source": "macd_rci_params.robust_merge"
+      "source": "macd_rci_params.robust_merge",
+      "observation_only": true,
+      "force_paper": false,
+      "demote_note": "60d 5m: -56,512円 (-1,487円/日). oos_daily=12,464 と大乖離。直近相場では機能停止",
+      "demoted_at": "2026-05-02T08:19:00.410025+09:00"
     },
     {
       "symbol": "9984.T",
@@ -84,7 +88,11 @@
       "robust": true,
       "is_oos_pass": false,
       "calmar": 123.851,
-      "source": "macd_rci_params.robust_merge"
+      "source": "macd_rci_params.robust_merge",
+      "observation_only": true,
+      "force_paper": false,
+      "demote_note": "60d 5m: -26,841円 (-447円/日). BBShort + Pullback で代替",
+      "demoted_at": "2026-05-02T08:19:00.410312+09:00"
     },
     {
       "symbol": "6723.T",
@@ -129,7 +137,11 @@
       "is_trades": 122,
       "robust": true,
       "is_oos_pass": false,
-      "calmar": 0.0
+      "calmar": 0.0,
+      "observation_only": true,
+      "force_paper": false,
+      "demote_note": "60d 5m: -53,479円 (-891円/日). MicroScalp + BBShort で代替",
+      "demoted_at": "2026-05-02T08:19:00.410325+09:00"
     },
     {
       "symbol": "6501.T",
@@ -143,7 +155,11 @@
       "robust": true,
       "is_oos_pass": false,
       "calmar": 6.659,
-      "source": "macd_rci_params.robust_merge"
+      "source": "macd_rci_params.robust_merge",
+      "observation_only": true,
+      "force_paper": false,
+      "demote_note": "60d 5m: -17,129円 (-439円/日). MicroScalp + BBShort で代替",
+      "demoted_at": "2026-05-02T08:19:00.410333+09:00"
     },
     {
       "symbol": "8058.T",
@@ -185,7 +201,11 @@
       "robust": true,
       "is_oos_pass": false,
       "calmar": 0.0,
-      "source": "macd_rci_params.robust_merge"
+      "source": "macd_rci_params.robust_merge",
+      "observation_only": true,
+      "force_paper": false,
+      "demote_note": "60d 5m: -5,847円 (-150円/日). 構造的負け、観察のみ",
+      "demoted_at": "2026-05-02T08:19:00.410340+09:00"
     },
     {
       "symbol": "9984.T",
@@ -961,5 +981,77 @@
       "data/d4_alt_strategies_validation.json",
       "data/d4_universe_candidates_relaxed.json"
     ]
-  }
+  },
+  "d6_demote_log": [
+    {
+      "symbol": "6613.T",
+      "strategy": "MacdRci",
+      "before": {
+        "observation_only": null,
+        "force_paper": null
+      },
+      "after": {
+        "observation_only": true,
+        "force_paper": false
+      },
+      "reason": "60d 5m: -56,512円 (-1,487円/日). oos_daily=12,464 と大乖離。直近相場では機能停止",
+      "expected_loss_avoided_per_day": 1487
+    },
+    {
+      "symbol": "8306.T",
+      "strategy": "MacdRci",
+      "before": {
+        "observation_only": true,
+        "force_paper": false
+      },
+      "after": {
+        "observation_only": true,
+        "force_paper": false
+      },
+      "reason": "60d 5m: -26,841円 (-447円/日). BBShort + Pullback で代替",
+      "expected_loss_avoided_per_day": 447
+    },
+    {
+      "symbol": "9433.T",
+      "strategy": "MacdRci",
+      "before": {
+        "observation_only": true,
+        "force_paper": false
+      },
+      "after": {
+        "observation_only": true,
+        "force_paper": false
+      },
+      "reason": "60d 5m: -53,479円 (-891円/日). MicroScalp + BBShort で代替",
+      "expected_loss_avoided_per_day": 891
+    },
+    {
+      "symbol": "6501.T",
+      "strategy": "MacdRci",
+      "before": {
+        "observation_only": null,
+        "force_paper": null
+      },
+      "after": {
+        "observation_only": true,
+        "force_paper": false
+      },
+      "reason": "60d 5m: -17,129円 (-439円/日). MicroScalp + BBShort で代替",
+      "expected_loss_avoided_per_day": 439
+    },
+    {
+      "symbol": "4911.T",
+      "strategy": "MacdRci",
+      "before": {
+        "observation_only": null,
+        "force_paper": null
+      },
+      "after": {
+        "observation_only": true,
+        "force_paper": false
+      },
+      "reason": "60d 5m: -5,847円 (-150円/日). 構造的負け、観察のみ",
+      "expected_loss_avoided_per_day": 150
+    }
+  ]
 }

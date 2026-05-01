@@ -1,0 +1,36 @@
+{
+  "candidates": [
+    {
+      "symbol": "6613.T",
+      "window": "T_open",
+      "wr": 33.3,
+      "short_pnl": 1739.0,
+      "long_pnl": 112296.0,
+      "recommendation": "morning_block_until_min=30 (両方向)"
+    },
+    {
+      "symbol": "6752.T",
+      "window": "T_open",
+      "wr": 29.8,
+      "short_pnl": 837.0,
+      "long_pnl": -5675.0,
+      "recommendation": "morning_block_until_min=30 (両方向)"
+    },
+    {
+      "symbol": "9468.T",
+      "window": "T_open",
+      "wr": 39.1,
+      "short_pnl": -3853.0,
+      "long_pnl": 25425.0,
+      "recommendation": "morning_first_30min_short_block=1"
+    },
+    {
+      "symbol": "9432.T",
+      "window": "T_open",
+      "wr": 44.8,
+      "short_pnl": -3739.0,
+      "long_pnl": 30001.0,
+      "recommendation": "morning_first_30min_short_block=1"
+    }
+  ]
+}

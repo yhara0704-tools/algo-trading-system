@@ -1,0 +1,864 @@
+{
+  "generated_at": "2026-05-01T19:57:35.480965+09:00",
+  "n_symbols": 13,
+  "results": {
+    "6613.T": {
+      "n_days": 38,
+      "total_trades": 493,
+      "by_window": {
+        "T_morning_a": {
+          "n": 92,
+          "wr": 23.9,
+          "pf": 0.53,
+          "pnl": -245847.0,
+          "long_n": 72,
+          "short_n": 20,
+          "long_pnl": -244771.0,
+          "short_pnl": -1076.0
+        },
+        "T_morning_b": {
+          "n": 99,
+          "wr": 39.4,
+          "pf": 1.28,
+          "pnl": 98495.0,
+          "long_n": 75,
+          "short_n": 24,
+          "long_pnl": 92630.0,
+          "short_pnl": 5865.0
+        },
+        "T_afternoon_a": {
+          "n": 101,
+          "wr": 32.7,
+          "pf": 0.94,
+          "pnl": -22011.0,
+          "long_n": 82,
+          "short_n": 19,
+          "long_pnl": -17279.0,
+          "short_pnl": -4732.0
+        },
+        "T_afternoon_b": {
+          "n": 143,
+          "wr": 35.0,
+          "pf": 0.95,
+          "pnl": -23549.0,
+          "long_n": 121,
+          "short_n": 22,
+          "long_pnl": -32647.0,
+          "short_pnl": 9098.0
+        },
+        "T_other": {
+          "n": 31,
+          "wr": 41.9,
+          "pf": 1.07,
+          "pnl": 22364.0,
+          "long_n": 30,
+          "short_n": 1,
+          "long_pnl": 20600.0,
+          "short_pnl": 1764.0
+        },
+        "T_open": {
+          "n": 27,
+          "wr": 33.3,
+          "pf": 2.03,
+          "pnl": 114036.0,
+          "long_n": 24,
+          "short_n": 3,
+          "long_pnl": 112296.0,
+          "short_pnl": 1739.0
+        }
+      }
+    },
+    "9984.T": {
+      "n_days": 39,
+      "total_trades": 676,
+      "by_window": {
+        "T_open": {
+          "n": 45,
+          "wr": 42.2,
+          "pf": 2.0,
+          "pnl": 71414.0,
+          "long_n": 37,
+          "short_n": 8,
+          "long_pnl": 66549.0,
+          "short_pnl": 4866.0
+        },
+        "T_morning_a": {
+          "n": 116,
+          "wr": 39.7,
+          "pf": 1.17,
+          "pnl": 28028.0,
+          "long_n": 97,
+          "short_n": 19,
+          "long_pnl": 19109.0,
+          "short_pnl": 8920.0
+        },
+        "T_morning_b": {
+          "n": 146,
+          "wr": 36.3,
+          "pf": 0.65,
+          "pnl": -82167.0,
+          "long_n": 105,
+          "short_n": 41,
+          "long_pnl": -97357.0,
+          "short_pnl": 15190.0
+        },
+        "T_afternoon_a": {
+          "n": 119,
+          "wr": 38.7,
+          "pf": 1.15,
+          "pnl": 15808.0,
+          "long_n": 93,
+          "short_n": 26,
+          "long_pnl": 10561.0,
+          "short_pnl": 5246.0
+        },
+        "T_afternoon_b": {
+          "n": 197,
+          "wr": 38.6,
+          "pf": 0.93,
+          "pnl": -13299.0,
+          "long_n": 165,
+          "short_n": 32,
+          "long_pnl": -11779.0,
+          "short_pnl": -1520.0
+        },
+        "T_other": {
+          "n": 53,
+          "wr": 45.3,
+          "pf": 1.18,
+          "pnl": 40034.0,
+          "long_n": 51,
+          "short_n": 2,
+          "long_pnl": 38149.0,
+          "short_pnl": 1885.0
+        }
+      }
+    },
+    "6752.T": {
+      "n_days": 39,
+      "total_trades": 660,
+      "by_window": {
+        "T_open": {
+          "n": 47,
+          "wr": 29.8,
+          "pf": 0.92,
+          "pnl": -4839.0,
+          "long_n": 38,
+          "short_n": 9,
+          "long_pnl": -5675.0,
+          "short_pnl": 837.0
+        },
+        "T_morning_a": {
+          "n": 117,
+          "wr": 41.0,
+          "pf": 1.06,
+          "pnl": 9074.0,
+          "long_n": 98,
+          "short_n": 19,
+          "long_pnl": 8872.0,
+          "short_pnl": 202.0
+        },
+        "T_morning_b": {
+          "n": 118,
+          "wr": 46.6,
+          "pf": 1.11,
+          "pnl": 13268.0,
+          "long_n": 97,
+          "short_n": 21,
+          "long_pnl": -1347.0,
+          "short_pnl": 14615.0
+        },
+        "T_afternoon_a": {
+          "n": 133,
+          "wr": 48.9,
+          "pf": 1.65,
+          "pnl": 51118.0,
+          "long_n": 101,
+          "short_n": 32,
+          "long_pnl": 54494.0,
+          "short_pnl": -3376.0
+        },
+        "T_afternoon_b": {
+          "n": 193,
+          "wr": 43.0,
+          "pf": 1.48,
+          "pnl": 57864.0,
+          "long_n": 159,
+          "short_n": 34,
+          "long_pnl": 57202.0,
+          "short_pnl": 662.0
+        },
+        "T_other": {
+          "n": 52,
+          "wr": 57.7,
+          "pf": 2.7,
+          "pnl": 199092.0,
+          "long_n": 50,
+          "short_n": 2,
+          "long_pnl": 196562.0,
+          "short_pnl": 2530.0
+        }
+      }
+    },
+    "9107.T": {
+      "n_days": 39,
+      "total_trades": 664,
+      "by_window": {
+        "T_open": {
+          "n": 45,
+          "wr": 40.0,
+          "pf": 1.08,
+          "pnl": 5027.0,
+          "long_n": 36,
+          "short_n": 9,
+          "long_pnl": -1731.0,
+          "short_pnl": 6758.0
+        },
+        "T_morning_a": {
+          "n": 126,
+          "wr": 41.3,
+          "pf": 1.21,
+          "pnl": 28291.0,
+          "long_n": 101,
+          "short_n": 25,
+          "long_pnl": 31141.0,
+          "short_pnl": -2850.0
+        },
+        "T_morning_b": {
+          "n": 119,
+          "wr": 42.0,
+          "pf": 1.27,
+          "pnl": 22722.0,
+          "long_n": 92,
+          "short_n": 27,
+          "long_pnl": 15093.0,
+          "short_pnl": 7629.0
+        },
+        "T_other": {
+          "n": 58,
+          "wr": 43.1,
+          "pf": 0.79,
+          "pnl": -42903.0,
+          "long_n": 55,
+          "short_n": 3,
+          "long_pnl": -40550.0,
+          "short_pnl": -2353.0
+        },
+        "T_afternoon_a": {
+          "n": 128,
+          "wr": 39.8,
+          "pf": 1.17,
+          "pnl": 14619.0,
+          "long_n": 94,
+          "short_n": 34,
+          "long_pnl": 20052.0,
+          "short_pnl": -5433.0
+        },
+        "T_afternoon_b": {
+          "n": 188,
+          "wr": 44.1,
+          "pf": 1.17,
+          "pnl": 17561.0,
+          "long_n": 152,
+          "short_n": 36,
+          "long_pnl": 4364.0,
+          "short_pnl": 13197.0
+        }
+      }
+    },
+    "9468.T": {
+      "n_days": 39,
+      "total_trades": 655,
+      "by_window": {
+        "T_open": {
+          "n": 46,
+          "wr": 39.1,
+          "pf": 1.47,
+          "pnl": 21572.0,
+          "long_n": 35,
+          "short_n": 11,
+          "long_pnl": 25425.0,
+          "short_pnl": -3853.0
+        },
+        "T_morning_a": {
+          "n": 113,
+          "wr": 40.7,
+          "pf": 0.88,
+          "pnl": -13149.0,
+          "long_n": 93,
+          "short_n": 20,
+          "long_pnl": -17661.0,
+          "short_pnl": 4511.0
+        },
+        "T_morning_b": {
+          "n": 119,
+          "wr": 40.3,
+          "pf": 1.03,
+          "pnl": 2321.0,
+          "long_n": 97,
+          "short_n": 22,
+          "long_pnl": -6503.0,
+          "short_pnl": 8824.0
+        },
+        "T_afternoon_a": {
+          "n": 125,
+          "wr": 44.8,
+          "pf": 1.02,
+          "pnl": 1688.0,
+          "long_n": 95,
+          "short_n": 30,
+          "long_pnl": 2603.0,
+          "short_pnl": -914.0
+        },
+        "T_afternoon_b": {
+          "n": 198,
+          "wr": 40.9,
+          "pf": 0.9,
+          "pnl": -10288.0,
+          "long_n": 150,
+          "short_n": 48,
+          "long_pnl": -13423.0,
+          "short_pnl": 3135.0
+        },
+        "T_other": {
+          "n": 54,
+          "wr": 42.6,
+          "pf": 1.16,
+          "pnl": 16676.0,
+          "long_n": 50,
+          "short_n": 4,
+          "long_pnl": 19700.0,
+          "short_pnl": -3024.0
+        }
+      }
+    },
+    "8306.T": {
+      "n_days": 39,
+      "total_trades": 660,
+      "by_window": {
+        "T_open": {
+          "n": 42,
+          "wr": 35.7,
+          "pf": 1.24,
+          "pnl": 10826.0,
+          "long_n": 36,
+          "short_n": 6,
+          "long_pnl": 9413.0,
+          "short_pnl": 1413.0
+        },
+        "T_morning_a": {
+          "n": 116,
+          "wr": 36.2,
+          "pf": 0.88,
+          "pnl": -13885.0,
+          "long_n": 93,
+          "short_n": 23,
+          "long_pnl": -30614.0,
+          "short_pnl": 16730.0
+        },
+        "T_morning_b": {
+          "n": 127,
+          "wr": 33.1,
+          "pf": 0.78,
+          "pnl": -21279.0,
+          "long_n": 92,
+          "short_n": 35,
+          "long_pnl": -24256.0,
+          "short_pnl": 2977.0
+        },
+        "T_afternoon_a": {
+          "n": 114,
+          "wr": 46.5,
+          "pf": 1.34,
+          "pnl": 23149.0,
+          "long_n": 88,
+          "short_n": 26,
+          "long_pnl": 26602.0,
+          "short_pnl": -3453.0
+        },
+        "T_afternoon_b": {
+          "n": 204,
+          "wr": 41.2,
+          "pf": 1.04,
+          "pnl": 4642.0,
+          "long_n": 157,
+          "short_n": 47,
+          "long_pnl": 7607.0,
+          "short_pnl": -2965.0
+        },
+        "T_other": {
+          "n": 57,
+          "wr": 40.4,
+          "pf": 0.79,
+          "pnl": -30294.0,
+          "long_n": 55,
+          "short_n": 2,
+          "long_pnl": -32153.0,
+          "short_pnl": 1858.0
+        }
+      }
+    },
+    "6723.T": {
+      "n_days": 39,
+      "total_trades": 657,
+      "by_window": {
+        "T_open": {
+          "n": 49,
+          "wr": 42.9,
+          "pf": 1.03,
+          "pnl": 2586.0,
+          "long_n": 39,
+          "short_n": 10,
+          "long_pnl": -2774.0,
+          "short_pnl": 5359.0
+        },
+        "T_morning_a": {
+          "n": 98,
+          "wr": 27.6,
+          "pf": 0.55,
+          "pnl": -88515.0,
+          "long_n": 79,
+          "short_n": 19,
+          "long_pnl": -92761.0,
+          "short_pnl": 4246.0
+        },
+        "T_morning_b": {
+          "n": 141,
+          "wr": 42.6,
+          "pf": 1.4,
+          "pnl": 59763.0,
+          "long_n": 102,
+          "short_n": 39,
+          "long_pnl": 41441.0,
+          "short_pnl": 18322.0
+        },
+        "T_afternoon_a": {
+          "n": 120,
+          "wr": 34.2,
+          "pf": 1.07,
+          "pnl": 7371.0,
+          "long_n": 96,
+          "short_n": 24,
+          "long_pnl": 7089.0,
+          "short_pnl": 282.0
+        },
+        "T_afternoon_b": {
+          "n": 195,
+          "wr": 37.9,
+          "pf": 0.68,
+          "pnl": -70109.0,
+          "long_n": 164,
+          "short_n": 31,
+          "long_pnl": -70339.0,
+          "short_pnl": 230.0
+        },
+        "T_other": {
+          "n": 54,
+          "wr": 46.3,
+          "pf": 1.77,
+          "pnl": 172927.0,
+          "long_n": 52,
+          "short_n": 2,
+          "long_pnl": 174103.0,
+          "short_pnl": -1177.0
+        }
+      }
+    },
+    "3103.T": {
+      "n_days": 39,
+      "total_trades": 465,
+      "by_window": {
+        "T_open": {
+          "n": 29,
+          "wr": 37.9,
+          "pf": 1.14,
+          "pnl": 25389.0,
+          "long_n": 26,
+          "short_n": 3,
+          "long_pnl": 25296.0,
+          "short_pnl": 93.0
+        },
+        "T_morning_a": {
+          "n": 82,
+          "wr": 47.6,
+          "pf": 1.36,
+          "pnl": 96480.0,
+          "long_n": 65,
+          "short_n": 17,
+          "long_pnl": 79290.0,
+          "short_pnl": 17190.0
+        },
+        "T_morning_b": {
+          "n": 97,
+          "wr": 33.0,
+          "pf": 1.36,
+          "pnl": 114661.0,
+          "long_n": 70,
+          "short_n": 27,
+          "long_pnl": 107760.0,
+          "short_pnl": 6900.0
+        },
+        "T_other": {
+          "n": 31,
+          "wr": 45.2,
+          "pf": 1.1,
+          "pnl": 19100.0,
+          "long_n": 31,
+          "short_n": 0,
+          "long_pnl": 19100.0,
+          "short_pnl": 0
+        },
+        "T_afternoon_a": {
+          "n": 97,
+          "wr": 36.1,
+          "pf": 0.94,
+          "pnl": -21356.0,
+          "long_n": 77,
+          "short_n": 20,
+          "long_pnl": -26551.0,
+          "short_pnl": 5195.0
+        },
+        "T_afternoon_b": {
+          "n": 129,
+          "wr": 33.3,
+          "pf": 0.55,
+          "pnl": -174857.0,
+          "long_n": 109,
+          "short_n": 20,
+          "long_pnl": -187496.0,
+          "short_pnl": 12639.0
+        }
+      }
+    },
+    "9433.T": {
+      "n_days": 39,
+      "total_trades": 688,
+      "by_window": {
+        "T_open": {
+          "n": 49,
+          "wr": 53.1,
+          "pf": 2.41,
+          "pnl": 32211.0,
+          "long_n": 39,
+          "short_n": 10,
+          "long_pnl": 30050.0,
+          "short_pnl": 2161.0
+        },
+        "T_morning_a": {
+          "n": 118,
+          "wr": 41.5,
+          "pf": 1.39,
+          "pnl": 24625.0,
+          "long_n": 98,
+          "short_n": 20,
+          "long_pnl": 18290.0,
+          "short_pnl": 6335.0
+        },
+        "T_morning_b": {
+          "n": 137,
+          "wr": 30.7,
+          "pf": 0.51,
+          "pnl": -42757.0,
+          "long_n": 99,
+          "short_n": 38,
+          "long_pnl": -40472.0,
+          "short_pnl": -2285.0
+        },
+        "T_afternoon_a": {
+          "n": 136,
+          "wr": 44.1,
+          "pf": 1.14,
+          "pnl": 7140.0,
+          "long_n": 93,
+          "short_n": 43,
+          "long_pnl": 2222.0,
+          "short_pnl": 4917.0
+        },
+        "T_afternoon_b": {
+          "n": 198,
+          "wr": 43.4,
+          "pf": 1.03,
+          "pnl": 2678.0,
+          "long_n": 161,
+          "short_n": 37,
+          "long_pnl": -5945.0,
+          "short_pnl": 8623.0
+        },
+        "T_other": {
+          "n": 50,
+          "wr": 44.0,
+          "pf": 0.48,
+          "pnl": -77375.0,
+          "long_n": 47,
+          "short_n": 3,
+          "long_pnl": -78166.0,
+          "short_pnl": 791.0
+        }
+      }
+    },
+    "6501.T": {
+      "n_days": 39,
+      "total_trades": 666,
+      "by_window": {
+        "T_open": {
+          "n": 50,
+          "wr": 40.0,
+          "pf": 1.18,
+          "pnl": 5144.0,
+          "long_n": 35,
+          "short_n": 15,
+          "long_pnl": -1173.0,
+          "short_pnl": 6316.0
+        },
+        "T_morning_a": {
+          "n": 137,
+          "wr": 41.6,
+          "pf": 1.01,
+          "pnl": 1204.0,
+          "long_n": 109,
+          "short_n": 28,
+          "long_pnl": 8052.0,
+          "short_pnl": -6847.0
+        },
+        "T_morning_b": {
+          "n": 138,
+          "wr": 41.3,
+          "pf": 1.06,
+          "pnl": 4723.0,
+          "long_n": 99,
+          "short_n": 39,
+          "long_pnl": 4261.0,
+          "short_pnl": 462.0
+        },
+        "T_other": {
+          "n": 55,
+          "wr": 45.5,
+          "pf": 0.65,
+          "pnl": -48704.0,
+          "long_n": 55,
+          "short_n": 0,
+          "long_pnl": -48704.0,
+          "short_pnl": 0
+        },
+        "T_afternoon_a": {
+          "n": 110,
+          "wr": 40.9,
+          "pf": 1.41,
+          "pnl": 13171.0,
+          "long_n": 79,
+          "short_n": 31,
+          "long_pnl": 12460.0,
+          "short_pnl": 711.0
+        },
+        "T_afternoon_b": {
+          "n": 176,
+          "wr": 44.9,
+          "pf": 1.1,
+          "pnl": 7333.0,
+          "long_n": 151,
+          "short_n": 25,
+          "long_pnl": 3588.0,
+          "short_pnl": 3745.0
+        }
+      }
+    },
+    "8058.T": {
+      "n_days": 39,
+      "total_trades": 687,
+      "by_window": {
+        "T_open": {
+          "n": 44,
+          "wr": 40.9,
+          "pf": 1.09,
+          "pnl": 3741.0,
+          "long_n": 37,
+          "short_n": 7,
+          "long_pnl": -1612.0,
+          "short_pnl": 5353.0
+        },
+        "T_morning_a": {
+          "n": 115,
+          "wr": 36.5,
+          "pf": 1.02,
+          "pnl": 2186.0,
+          "long_n": 92,
+          "short_n": 23,
+          "long_pnl": -245.0,
+          "short_pnl": 2430.0
+        },
+        "T_morning_b": {
+          "n": 147,
+          "wr": 42.9,
+          "pf": 1.35,
+          "pnl": 29514.0,
+          "long_n": 104,
+          "short_n": 43,
+          "long_pnl": 13676.0,
+          "short_pnl": 15838.0
+        },
+        "T_afternoon_a": {
+          "n": 135,
+          "wr": 48.9,
+          "pf": 1.55,
+          "pnl": 39368.0,
+          "long_n": 101,
+          "short_n": 34,
+          "long_pnl": 32308.0,
+          "short_pnl": 7060.0
+        },
+        "T_afternoon_b": {
+          "n": 196,
+          "wr": 45.9,
+          "pf": 1.2,
+          "pnl": 21410.0,
+          "long_n": 155,
+          "short_n": 41,
+          "long_pnl": 13877.0,
+          "short_pnl": 7533.0
+        },
+        "T_other": {
+          "n": 50,
+          "wr": 36.0,
+          "pf": 0.8,
+          "pnl": -26335.0,
+          "long_n": 49,
+          "short_n": 1,
+          "long_pnl": -25790.0,
+          "short_pnl": -545.0
+        }
+      }
+    },
+    "9432.T": {
+      "n_days": 39,
+      "total_trades": 748,
+      "by_window": {
+        "T_open": {
+          "n": 58,
+          "wr": 44.8,
+          "pf": 1.66,
+          "pnl": 26262.0,
+          "long_n": 47,
+          "short_n": 11,
+          "long_pnl": 30001.0,
+          "short_pnl": -3739.0
+        },
+        "T_morning_a": {
+          "n": 108,
+          "wr": 41.7,
+          "pf": 1.46,
+          "pnl": 21028.0,
+          "long_n": 83,
+          "short_n": 25,
+          "long_pnl": 20388.0,
+          "short_pnl": 639.0
+        },
+        "T_morning_b": {
+          "n": 144,
+          "wr": 33.3,
+          "pf": 0.98,
+          "pnl": -918.0,
+          "long_n": 114,
+          "short_n": 30,
+          "long_pnl": -4739.0,
+          "short_pnl": 3821.0
+        },
+        "T_afternoon_a": {
+          "n": 161,
+          "wr": 37.3,
+          "pf": 0.87,
+          "pnl": -9206.0,
+          "long_n": 111,
+          "short_n": 50,
+          "long_pnl": -22237.0,
+          "short_pnl": 13031.0
+        },
+        "T_afternoon_b": {
+          "n": 218,
+          "wr": 33.5,
+          "pf": 1.18,
+          "pnl": 12570.0,
+          "long_n": 163,
+          "short_n": 55,
+          "long_pnl": 4354.0,
+          "short_pnl": 8216.0
+        },
+        "T_other": {
+          "n": 59,
+          "wr": 35.6,
+          "pf": 1.43,
+          "pnl": 19333.0,
+          "long_n": 55,
+          "short_n": 4,
+          "long_pnl": 17510.0,
+          "short_pnl": 1822.0
+        }
+      }
+    },
+    "4911.T": {
+      "n_days": 39,
+      "total_trades": 690,
+      "by_window": {
+        "T_open": {
+          "n": 51,
+          "wr": 37.3,
+          "pf": 0.78,
+          "pnl": -15767.0,
+          "long_n": 41,
+          "short_n": 10,
+          "long_pnl": -23100.0,
+          "short_pnl": 7333.0
+        },
+        "T_morning_a": {
+          "n": 115,
+          "wr": 35.7,
+          "pf": 1.15,
+          "pnl": 15411.0,
+          "long_n": 88,
+          "short_n": 27,
+          "long_pnl": 17916.0,
+          "short_pnl": -2505.0
+        },
+        "T_morning_b": {
+          "n": 145,
+          "wr": 37.2,
+          "pf": 1.06,
+          "pnl": 6052.0,
+          "long_n": 103,
+          "short_n": 42,
+          "long_pnl": -948.0,
+          "short_pnl": 7000.0
+        },
+        "T_afternoon_a": {
+          "n": 129,
+          "wr": 41.1,
+          "pf": 0.87,
+          "pnl": -9821.0,
+          "long_n": 101,
+          "short_n": 28,
+          "long_pnl": -12438.0,
+          "short_pnl": 2617.0
+        },
+        "T_afternoon_b": {
+          "n": 207,
+          "wr": 36.7,
+          "pf": 0.91,
+          "pnl": -11701.0,
+          "long_n": 162,
+          "short_n": 45,
+          "long_pnl": -24810.0,
+          "short_pnl": 13109.0
+        },
+        "T_other": {
+          "n": 43,
+          "wr": 48.8,
+          "pf": 1.09,
+          "pnl": 9979.0,
+          "long_n": 41,
+          "short_n": 2,
+          "long_pnl": 11444.0,
+          "short_pnl": -1465.0
+        }
+      }
+    }
+  }
+}
