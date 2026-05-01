@@ -1,0 +1,159 @@
+{
+  "ratio": 1.5,
+  "cap_limit": 1485000.0,
+  "blocked_count": 2,
+  "blocked_actual_pnl": -1400,
+  "accepted_trade_pnl": 2200,
+  "missed_captured_pnl": 1597,
+  "new_total": 3797,
+  "delta_vs_baseline": 2997,
+  "log": [
+    {
+      "ts": "09:39:51",
+      "result": "ENTRY OK",
+      "sym": "4911.T",
+      "side": "short",
+      "qty": 200,
+      "px": 3140.0,
+      "pnl_realized": -2800
+    },
+    {
+      "ts": "09:40:59",
+      "result": "BLOCK (hc)",
+      "sym": "9984.T",
+      "side": "short",
+      "qty": 100,
+      "px": 5356.0
+    },
+    {
+      "ts": "09:43:19",
+      "result": "BLOCK (hc)",
+      "sym": "9433.T",
+      "side": "short",
+      "qty": 200,
+      "px": 2547.5
+    },
+    {
+      "ts": "09:43:25",
+      "result": "EXIT",
+      "sym": "4911.T",
+      "side": "short",
+      "pnl": -2800
+    },
+    {
+      "ts": "09:46:29",
+      "result": "ENTRY OK",
+      "sym": "8316.T",
+      "side": "long",
+      "qty": 100,
+      "px": 5474.0,
+      "pnl_realized": 5500
+    },
+    {
+      "ts": "10:16:47",
+      "result": "ENTRY OK",
+      "sym": "4911.T",
+      "side": "long",
+      "qty": 100,
+      "px": 3138.0,
+      "pnl_realized": 300
+    },
+    {
+      "ts": "10:21:00",
+      "result": "MISSED-now-CAPTURED",
+      "sym": "9468.T",
+      "scenario": "MacdRci long signal 2回連続",
+      "cumulative": 861200.0,
+      "estimated_pnl": 1597
+    },
+    {
+      "ts": "10:22:00",
+      "result": "MISSED-still-blocked",
+      "sym": "9984.T",
+      "scenario": "MacdRci long signal 6回連続",
+      "cumulative": 1185200.0,
+      "new_cost": 535000.0,
+      "cap": 1485000.0
+    },
+    {
+      "ts": "11:04:00",
+      "result": "EXIT",
+      "sym": "8316.T",
+      "side": "long",
+      "pnl": 5500
+    },
+    {
+      "ts": "11:04:09",
+      "result": "ENTRY OK",
+      "sym": "9433.T",
+      "side": "long",
+      "qty": 200,
+      "px": 2534.5,
+      "pnl_realized": 700
+    },
+    {
+      "ts": "14:19:30",
+      "result": "EXIT",
+      "sym": "4911.T",
+      "side": "long",
+      "pnl": 300
+    },
+    {
+      "ts": "14:20:31",
+      "result": "ENTRY OK",
+      "sym": "6723.T",
+      "side": "long",
+      "qty": 100,
+      "px": 3217.0,
+      "pnl_realized": -1700
+    },
+    {
+      "ts": "14:38:02",
+      "result": "EXIT",
+      "sym": "6723.T",
+      "side": "long",
+      "pnl": -1700
+    },
+    {
+      "ts": "14:38:03",
+      "result": "ENTRY OK",
+      "sym": "4911.T",
+      "side": "long",
+      "qty": 100,
+      "px": 3144.0,
+      "pnl_realized": 200
+    },
+    {
+      "ts": "15:05:05",
+      "result": "EXIT",
+      "sym": "9433.T",
+      "side": "long",
+      "pnl": 700
+    },
+    {
+      "ts": "15:05:05",
+      "result": "EXIT",
+      "sym": "4911.T",
+      "side": "long",
+      "pnl": 200
+    }
+  ],
+  "blocked": [
+    {
+      "ts": "09:40:59",
+      "sym": "9984.T",
+      "side": "short",
+      "high_cost_n": 1,
+      "actual_pnl": -600,
+      "reason": "high_cost_concurrent_cap"
+    },
+    {
+      "ts": "09:43:19",
+      "sym": "9433.T",
+      "side": "short",
+      "high_cost_n": 1,
+      "actual_pnl": -800,
+      "reason": "high_cost_concurrent_cap"
+    }
+  ]
+}

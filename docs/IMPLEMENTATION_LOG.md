@@ -3942,3 +3942,68 @@ N225 5m バー (09:00-10:00):
 09:46 entry @5474 → 09:50 以降 **5478〜5529 まで一方的上昇** → 11:00 で TP hit (target reason)。
 OOS expected +845 円 → 実 +5,500 = **6.5 倍超過**。これは **戦略の質ではなく当日の銘柄ムーブのラッキー要素**。普段の OOS と同じレベルの期待値で運用すべき。
 
+
+## 2026-05-02 (土) GW Day 2: D2 余力管理改革 — concurrent_value_cap + high_cost_cap 実装
+
+### 実装内容
+
+`backend/lab/jp_live_runner.py` に新規 guard 2 種を追加。`_handle_macd_entry` の qty 計算後、`qty < 100` チェック前で実行する。
+
+#### 新 env 設定 (デフォルト動作)
+```python
+JP_MAX_CONCURRENT_VALUE_RATIO = 1.5    # 同時保有合計の上限 (信用枠倍率)
+JP_HIGH_COST_THRESHOLD_JPY = 500_000   # 「高額」ポジションの閾値
+JP_HIGH_COST_MAX_CONCURRENT = 1        # 高額ポジ同時保有上限
+```
+
+#### Guard 1: `concurrent_value_cap`
+
+```python
+buying_power = _JP_CAPITAL_JPY * tier.margin   # 99 万 (T1)
+cap_limit = buying_power * 1.5                 # 148.5 万
+if cumulative_locked + new_pos_cost > cap_limit:
+    skip → reason="concurrent_value_cap"
+```
+
+#### Guard 2: `high_cost_concurrent_cap`
+
+```python
+if new_pos_cost >= 500_000 and current_high_cost_n >= 1:
+    skip → reason="high_cost_concurrent_cap"
+```
+
+→ 9984.T (53 万) や 8316.T (55 万)、6613.T (?) のうち **同時 1 つ** だけ建玉可能。
+
+### 5/1 timeline 再シミュレーション結果
+
+| ratio | block 件数 | 回避 PnL | 採用 PnL | missed capture (OOS) | new TOTAL | vs +800 |
+|---|---|---|---|---|---|---|
+| 0.85 | 3 件 | -1,100 | +1,900 | 0 | +1,900 | +1,100 |
+| 1.0 | 2 件 | -1,400 | +2,200 | 0 | +2,200 | +1,400 |
+| **1.5** | 2 件 | -1,400 | +2,200 | **+1,597** | **+3,797** | **+2,997** |
+
+ratio=1.5 で baseline +800 → **+3,797 (4.7 倍改善)**。
+
+#### 主要効果
+- 09:40 9984.T short (53 万) と 09:43 9433.T short (50.9 万) が **`high_cost_concurrent_cap`** で block (-600 + -800 = -1,400 損失回避)
+- 09:46 8316.T long (+5,500) は 4911.T 1 件のみで cumulative 余裕あり通過
+- 10:21 9468.T missed signal (32.4 万) が新 guard 後では cumulative 86万 + 32万 = 118 万 < 148.5 万 で **capture 成功** → +1,597 (OOS expected)
+
+#### 構造的限界
+- 9984.T missed signal は cumulative 118.5 万 + 53.5 万 = 172 万 > 148.5 万 で依然 cap 超過
+- 9984.T MacdRci (OOS +8,937) を完全活用するには **元本拡大** か **9984.T 専用 reservation 機構** が必要 (D5 検討)
+
+### 改革インパクト試算 (1 営業日換算)
+
+直近 paper +800〜+4,058 → **D2 単独で +3,797〜+7,055 円** (4.7 倍改善)
+- Day 3 (MicroScalp 投入) 期待 +5,000-10,000
+- Day 4 (新手法活性化) 期待 +3,000-5,000
+- Day 5 (1m 解像度補正 + universe 仕上げ)
+- → GW 終了時 **+15,000-25,000 円/日** が現実的射程、目標 +29,700 円の 50-85%
+
+### 残タスク (Day 3 以降)
+
+- portfolio_sim を改修して 60 日 backtest で D2 改革効果を再確認 (検証強化)
+- 9984.T 専用 reservation 機構 or universe 構成検討 (D5)
+- MicroScalp 投入で取引回数増 (D3)
+

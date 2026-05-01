@@ -1,0 +1,283 @@
+{
+  "timeline": [
+    {
+      "ts": "09:39:51",
+      "event": "ENTRY 4911.T short 200@3140.0",
+      "cash_after": 362000.0,
+      "active_pos": [
+        "4911.T"
+      ],
+      "n_concurrent": 1,
+      "locked_cash": 628000.0
+    },
+    {
+      "ts": "09:40:59",
+      "event": "ENTRY 9984.T short 100@5356.0",
+      "cash_after": -173600.0,
+      "active_pos": [
+        "4911.T",
+        "9984.T"
+      ],
+      "n_concurrent": 2,
+      "locked_cash": 1163600.0
+    },
+    {
+      "ts": "09:43:19",
+      "event": "ENTRY 9433.T short 200@2547.5",
+      "cash_after": -683100.0,
+      "active_pos": [
+        "4911.T",
+        "9984.T",
+        "9433.T"
+      ],
+      "n_concurrent": 3,
+      "locked_cash": 1673100.0
+    },
+    {
+      "ts": "09:43:25",
+      "event": "EXIT  4911.T short pnl=-2800",
+      "cash_after": -57900.0,
+      "active_pos": [
+        "9984.T",
+        "9433.T"
+      ],
+      "n_concurrent": 2,
+      "locked_cash": 1045100.0
+    },
+    {
+      "ts": "09:46:29",
+      "event": "ENTRY 8316.T long 100@5474.0",
+      "cash_after": -605300.0,
+      "active_pos": [
+        "9984.T",
+        "9433.T",
+        "8316.T"
+      ],
+      "n_concurrent": 3,
+      "locked_cash": 1592500.0
+    },
+    {
+      "ts": "09:46:30",
+      "event": "EXIT  9433.T short pnl=-800",
+      "cash_after": -96600.0,
+      "active_pos": [
+        "9984.T",
+        "8316.T"
+      ],
+      "n_concurrent": 2,
+      "locked_cash": 1083000.0
+    },
+    {
+      "ts": "09:48:48",
+      "event": "EXIT  9984.T short pnl=-600",
+      "cash_after": 438400.0,
+      "active_pos": [
+        "8316.T"
+      ],
+      "n_concurrent": 1,
+      "locked_cash": 547400.0
+    },
+    {
+      "ts": "10:16:47",
+      "event": "ENTRY 4911.T long 100@3138.0",
+      "cash_after": 124600.0,
+      "active_pos": [
+        "8316.T",
+        "4911.T"
+      ],
+      "n_concurrent": 2,
+      "locked_cash": 861200.0
+    },
+    {
+      "ts": "10:21:00",
+      "event": "SKIP  9468.T (insufficient_lot)",
+      "cash_after": 124600.0,
+      "active_pos": [
+        "8316.T",
+        "4911.T"
+      ],
+      "n_concurrent": 2,
+      "locked_cash": 861200.0
+    },
+    {
+      "ts": "10:22:00",
+      "event": "SKIP  9468.T (insufficient_lot)",
+      "cash_after": 124600.0,
+      "active_pos": [
+        "8316.T",
+        "4911.T"
+      ],
+      "n_concurrent": 2,
+      "locked_cash": 861200.0
+    },
+    {
+      "ts": "10:22:00",
+      "event": "SKIP  9984.T (insufficient_lot)",
+      "cash_after": 124600.0,
+      "active_pos": [
+        "8316.T",
+        "4911.T"
+      ],
+      "n_concurrent": 2,
+      "locked_cash": 861200.0
+    },
+    {
+      "ts": "10:23:00",
+      "event": "SKIP  9984.T (insufficient_lot)",
+      "cash_after": 124600.0,
+      "active_pos": [
+        "8316.T",
+        "4911.T"
+      ],
+      "n_concurrent": 2,
+      "locked_cash": 861200.0
+    },
+    {
+      "ts": "10:24:00",
+      "event": "SKIP  9984.T (insufficient_lot)",
+      "cash_after": 124600.0,
+      "active_pos": [
+        "8316.T",
+        "4911.T"
+      ],
+      "n_concurrent": 2,
+      "locked_cash": 861200.0
+    },
+    {
+      "ts": "10:25:00",
+      "event": "SKIP  9984.T (insufficient_lot)",
+      "cash_after": 124600.0,
+      "active_pos": [
+        "8316.T",
+        "4911.T"
+      ],
+      "n_concurrent": 2,
+      "locked_cash": 861200.0
+    },
+    {
+      "ts": "10:29:00",
+      "event": "SKIP  9984.T (insufficient_lot)",
+      "cash_after": 124600.0,
+      "active_pos": [
+        "8316.T",
+        "4911.T"
+      ],
+      "n_concurrent": 2,
+      "locked_cash": 861200.0
+    },
+    {
+      "ts": "10:30:00",
+      "event": "SKIP  9984.T (insufficient_lot)",
+      "cash_after": 124600.0,
+      "active_pos": [
+        "8316.T",
+        "4911.T"
+      ],
+      "n_concurrent": 2,
+      "locked_cash": 861200.0
+    },
+    {
+      "ts": "11:01:00",
+      "event": "SKIP  9433.T (insufficient_lot)",
+      "cash_after": 124600.0,
+      "active_pos": [
+        "8316.T",
+        "4911.T"
+      ],
+      "n_concurrent": 2,
+      "locked_cash": 861200.0
+    },
+    {
+      "ts": "11:04:00",
+      "event": "EXIT  8316.T long pnl=+5500",
+      "cash_after": 677500.0,
+      "active_pos": [
+        "4911.T"
+      ],
+      "n_concurrent": 1,
+      "locked_cash": 313800.0
+    },
+    {
+      "ts": "11:04:09",
+      "event": "ENTRY 9433.T long 200@2534.5",
+      "cash_after": 170600.0,
+      "active_pos": [
+        "4911.T",
+        "9433.T"
+      ],
+      "n_concurrent": 2,
+      "locked_cash": 820700.0
+    },
+    {
+      "ts": "11:19:00",
+      "event": "SKIP  8316.T (insufficient_lot)",
+      "cash_after": 170600.0,
+      "active_pos": [
+        "4911.T",
+        "9433.T"
+      ],
+      "n_concurrent": 2,
+      "locked_cash": 820700.0
+    },
+    {
+      "ts": "14:19:30",
+      "event": "EXIT  4911.T long pnl=+300",
+      "cash_after": 484700.0,
+      "active_pos": [
+        "9433.T"
+      ],
+      "n_concurrent": 1,
+      "locked_cash": 506900.0
+    },
+    {
+      "ts": "14:20:31",
+      "event": "ENTRY 6723.T long 100@3217.0",
+      "cash_after": 163000.0,
+      "active_pos": [
+        "9433.T",
+        "6723.T"
+      ],
+      "n_concurrent": 2,
+      "locked_cash": 828600.0
+    },
+    {
+      "ts": "14:38:02",
+      "event": "EXIT  6723.T long pnl=-1700",
+      "cash_after": 483000.0,
+      "active_pos": [
+        "9433.T"
+      ],
+      "n_concurrent": 1,
+      "locked_cash": 506900.0
+    },
+    {
+      "ts": "14:38:03",
+      "event": "ENTRY 4911.T long 100@3144.0",
+      "cash_after": 168600.0,
+      "active_pos": [
+        "9433.T",
+        "4911.T"
+      ],
+      "n_concurrent": 2,
+      "locked_cash": 821300.0
+    },
+    {
+      "ts": "15:05:05",
+      "event": "EXIT  9433.T long pnl=+700",
+      "cash_after": 676200.0,
+      "active_pos": [
+        "4911.T"
+      ],
+      "n_concurrent": 1,
+      "locked_cash": 314400.0
+    },
+    {
+      "ts": "15:05:05",
+      "event": "EXIT  4911.T long pnl=+200",
+      "cash_after": 990800.0,
+      "active_pos": [],
+      "n_concurrent": 0,
+      "locked_cash": 0
+    }
+  ]
+}
