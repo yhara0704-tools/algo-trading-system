@@ -1,0 +1,158 @@
+{
+  "rows": [
+    {
+      "symbol": "1605.T",
+      "macd": 0,
+      "microscalp_pnl_day": 2289.0,
+      "alt_strategy": "BBShort",
+      "alt_pnl_day": 360.0,
+      "category": "高ボラ反転 (BB 3σ)"
+    },
+    {
+      "symbol": "3103.T",
+      "macd": 0,
+      "microscalp_pnl_day": 1722.0,
+      "alt_strategy": "BBShort",
+      "alt_pnl_day": 472.0,
+      "category": "高ボラ反転 (BB 3σ)"
+    },
+    {
+      "symbol": "4568.T",
+      "macd": 0,
+      "microscalp_pnl_day": 1342.0,
+      "alt_strategy": "BBShort",
+      "alt_pnl_day": 306.0,
+      "category": "高ボラ反転 (BB 3σ)"
+    },
+    {
+      "symbol": "4911.T",
+      "macd": 199.1,
+      "microscalp_pnl_day": 2356.0,
+      "alt_strategy": "",
+      "alt_pnl_day": 0,
+      "category": "MACD×RCI 主軸"
+    },
+    {
+      "symbol": "6501.T",
+      "macd": 391.3,
+      "microscalp_pnl_day": 2311.0,
+      "alt_strategy": "BBShort",
+      "alt_pnl_day": 351.0,
+      "category": "高ボラ反転 (BB 3σ)"
+    },
+    {
+      "symbol": "6613.T",
+      "macd": 12464.0,
+      "microscalp_pnl_day": 7589.0,
+      "alt_strategy": "SwingDonchian",
+      "alt_pnl_day": 207.0,
+      "category": "MACD×RCI 主軸"
+    },
+    {
+      "symbol": "6723.T",
+      "macd": 1471.4,
+      "microscalp_pnl_day": 3158.0,
+      "alt_strategy": "",
+      "alt_pnl_day": 0,
+      "category": "MACD×RCI 主軸"
+    },
+    {
+      "symbol": "6752.T",
+      "macd": 3072.2,
+      "microscalp_pnl_day": 1758.0,
+      "alt_strategy": "Pullback",
+      "alt_pnl_day": 217.0,
+      "category": "トレンド継続 (押し目)"
+    },
+    {
+      "symbol": "8058.T",
+      "macd": 446.7,
+      "microscalp_pnl_day": 1689.0,
+      "alt_strategy": "SwingDonchian",
+      "alt_pnl_day": 102.0,
+      "category": "MACD×RCI 主軸"
+    },
+    {
+      "symbol": "8136.T",
+      "macd": 0,
+      "microscalp_pnl_day": 1591.0,
+      "alt_strategy": "Pullback",
+      "alt_pnl_day": 499.0,
+      "category": "トレンド継続 (押し目)"
+    },
+    {
+      "symbol": "8306.T",
+      "macd": 2207.5,
+      "microscalp_pnl_day": 517.0,
+      "alt_strategy": "Pullback",
+      "alt_pnl_day": 382.0,
+      "category": "トレンド継続 (押し目)"
+    },
+    {
+      "symbol": "8316.T",
+      "macd": 0,
+      "microscalp_pnl_day": 1906.0,
+      "alt_strategy": "",
+      "alt_pnl_day": 0,
+      "category": "未分類"
+    },
+    {
+      "symbol": "9107.T",
+      "macd": 1953.7,
+      "microscalp_pnl_day": 0,
+      "alt_strategy": "SwingDonchian",
+      "alt_pnl_day": 255.0,
+      "category": "MACD×RCI 主軸"
+    },
+    {
+      "symbol": "9432.T",
+      "macd": 187.1,
+      "microscalp_pnl_day": 0,
+      "alt_strategy": "",
+      "alt_pnl_day": 0,
+      "category": "MACD×RCI 主軸"
+    },
+    {
+      "symbol": "9433.T",
+      "macd": 1016.3,
+      "microscalp_pnl_day": 1017.0,
+      "alt_strategy": "BBShort",
+      "alt_pnl_day": 512.0,
+      "category": "高ボラ反転 (BB 3σ)"
+    },
+    {
+      "symbol": "9468.T",
+      "macd": 1597.1,
+      "microscalp_pnl_day": 178.0,
+      "alt_strategy": "Pullback",
+      "alt_pnl_day": 295.0,
+      "category": "トレンド継続 (押し目)"
+    },
+    {
+      "symbol": "9984.T",
+      "macd": 12168.1,
+      "microscalp_pnl_day": 2872.0,
+      "alt_strategy": "SwingDonchian",
+      "alt_pnl_day": 220.0,
+      "category": "MACD×RCI 主軸"
+    }
+  ],
+  "grand_total": {
+    "MacdRci": 37174.5,
+    "MicroScalp": 32295.0,
+    "BBShort": 2001.0,
+    "Pullback": 1393.0,
+    "Donchian": 0
+  },
+  "cat_count": {
+    "高ボラ反転 (BB 3σ)": 5,
+    "MACD×RCI 主軸": 7,
+    "トレンド継続 (押し目)": 4,
+    "未分類": 1
+  },
+  "window_count": {
+    "12:30-15:00": 7,
+    "09:30-11:30": 4,
+    "09:00-09:30": 4
+  }
+}

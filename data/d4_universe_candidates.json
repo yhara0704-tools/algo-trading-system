@@ -1,0 +1,21 @@
+{
+  "BBShort": [
+    {
+      "trades": 15,
+      "wins": 11,
+      "wr": 73.3,
+      "pnl": 19963.0,
+      "pf": 5.33,
+      "n_bars": 2546,
+      "n_days": 39,
+      "pnl_per_day": 512.0,
+      "sharpe": 15.6,
+      "long_n": 0,
+      "short_n": 15,
+      "symbol": "9433.T",
+      "strategy": "BBShort"
+    }
+  ],
+  "Pullback": [],
+  "SwingDonchian": []
+}
