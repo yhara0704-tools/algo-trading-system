@@ -40,6 +40,9 @@ STRATEGY_DEFAULTS = {
         "rci_danger_high": 80.0,
         "volume_surge_max_ratio": 0.0,
         "volume_surge_lookback": 5,
+        # F8 (2026-05-01): 寄付直後 short 禁止 (デフォルト OFF、PoC で個別 ON)
+        "morning_first_30min_short_block": 0,
+        "morning_block_until_min": 30,
     },
     "Breakout": {
         "interval": "5m",
@@ -381,6 +384,8 @@ def create(strategy_name: str, symbol: str, name: str = "",
             rci_danger_high=float(p.get("rci_danger_high", 80.0)),
             volume_surge_max_ratio=float(p.get("volume_surge_max_ratio", 0.0)),
             volume_surge_lookback=int(p.get("volume_surge_lookback", 5)),
+            morning_first_30min_short_block=int(p.get("morning_first_30min_short_block", 0)),
+            morning_block_until_min=int(p.get("morning_block_until_min", 30)),
             max_pyramid=int(p.get("max_pyramid", 0)),
         )
     elif strategy_name == "Breakout":

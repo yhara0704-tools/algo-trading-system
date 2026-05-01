@@ -140,8 +140,20 @@ class MTFRADetector:
               "aggressive" (1m+3m+15m+60m), "per_symbol" (銘柄別最適)
     """
 
-    def __init__(self, mode: Mode = "default") -> None:
+    def __init__(
+        self,
+        mode: Mode = "default",
+        custom_combo: tuple[str, ...] | None = None,
+    ) -> None:
+        """
+        Args:
+            mode: "off" / "default" / "aggressive" / "per_symbol" / "custom"
+            custom_combo: mode="custom" のときのみ使用。例: ("30m", "60m")
+        """
         self.mode = mode
+        self.custom_combo: tuple[str, ...] | None = (
+            tuple(custom_combo) if custom_combo else None
+        )
         self._per_symbol: dict[str, dict] = {}
         if mode == "per_symbol":
             self._load_per_symbol()
@@ -167,6 +179,10 @@ class MTFRADetector:
         """
         if self.mode == "off":
             return (), "off"
+        if self.mode == "custom":
+            if not self.custom_combo:
+                return DEFAULT_TF_COMBO, "custom_fallback_default"
+            return self.custom_combo, "custom"
         if self.mode == "default":
             return DEFAULT_TF_COMBO, "default"
         if self.mode == "aggressive":

@@ -1,0 +1,307 @@
+{
+  "computed_at": "2026-05-01T15:48:48.963844+09:00",
+  "macd_params_path": "/Users/himanosuke/algo-trading-system/data/macd_rci_params.json",
+  "universe_path": "/Users/himanosuke/algo-trading-system/data/universe_active.json",
+  "robust_total": 1,
+  "prev_universe_size": 18,
+  "new_universe_size": 24,
+  "added": [
+    {
+      "symbol": "6723.T",
+      "name": "Renesas",
+      "strategy": "MacdRci",
+      "score": 1457.3,
+      "is_daily": 757.7,
+      "oos_daily": 1471.4,
+      "is_pf": 1.294,
+      "is_trades": 29,
+      "robust": true,
+      "is_oos_pass": true,
+      "calmar": 65.294,
+      "source": "macd_rci_params.robust_merge"
+    }
+  ],
+  "promoted": [],
+  "rejected_low_quality": [
+    {
+      "symbol": "6758.T",
+      "oos_daily": 81.82487179491756,
+      "oos_trades": 424,
+      "oos_pf": 1.022689819810064,
+      "is_oos_pass": false,
+      "reasons": [
+        "is_oos_pass=False",
+        "oos_pf<1.1"
+      ]
+    },
+    {
+      "symbol": "3103.T",
+      "oos_daily": 27977.641990349894,
+      "oos_trades": 15,
+      "oos_pf": 4.714127540341662,
+      "is_oos_pass": true,
+      "reasons": [
+        "oos_trades<30"
+      ]
+    },
+    {
+      "symbol": "9107.T",
+      "oos_daily": 1953.6994411897701,
+      "oos_trades": 12,
+      "oos_pf": 4.2526981480409045,
+      "is_oos_pass": false,
+      "reasons": [
+        "is_oos_pass=False",
+        "oos_trades<30"
+      ]
+    },
+    {
+      "symbol": "3382.T",
+      "oos_daily": 1057.142857142857,
+      "oos_trades": 185,
+      "oos_pf": 1.2617924528301887,
+      "is_oos_pass": false,
+      "reasons": [
+        "is_oos_pass=False"
+      ]
+    },
+    {
+      "symbol": "8306.T",
+      "oos_daily": 2207.4861687349444,
+      "oos_trades": 14,
+      "oos_pf": 12.97019430756282,
+      "is_oos_pass": false,
+      "reasons": [
+        "is_oos_pass=False",
+        "oos_trades<30"
+      ]
+    },
+    {
+      "symbol": "9432.T",
+      "oos_daily": 187.07070098157817,
+      "oos_trades": 250,
+      "oos_pf": 1.0690271094782875,
+      "is_oos_pass": false,
+      "reasons": [
+        "is_oos_pass=False",
+        "oos_pf<1.1"
+      ]
+    },
+    {
+      "symbol": "6752.T",
+      "oos_daily": 3072.212224591474,
+      "oos_trades": 16,
+      "oos_pf": 5.859583984269635,
+      "is_oos_pass": true,
+      "reasons": [
+        "oos_trades<30"
+      ]
+    },
+    {
+      "symbol": "9433.T",
+      "oos_daily": 1016.2647833333484,
+      "oos_trades": 125,
+      "oos_pf": 1.6849367541578486,
+      "is_oos_pass": false,
+      "reasons": [
+        "is_oos_pass=False"
+      ]
+    },
+    {
+      "symbol": "4689.T",
+      "oos_daily": 243.228002432105,
+      "oos_trades": 43,
+      "oos_pf": 1.1340548184546477,
+      "is_oos_pass": false,
+      "reasons": [
+        "is_oos_pass=False"
+      ]
+    },
+    {
+      "symbol": "4568.T",
+      "oos_daily": 542.5,
+      "oos_trades": 213,
+      "oos_pf": 1.1944444444444444,
+      "is_oos_pass": false,
+      "reasons": [
+        "is_oos_pass=False"
+      ]
+    },
+    {
+      "symbol": "6613.T",
+      "oos_daily": 12463.985620475263,
+      "oos_trades": 22,
+      "oos_pf": 2.7221441740910093,
+      "is_oos_pass": true,
+      "reasons": [
+        "oos_trades<30"
+      ]
+    },
+    {
+      "symbol": "9468.T",
+      "oos_daily": 1597.1253499999966,
+      "oos_trades": 40,
+      "oos_pf": 2.161356226432116,
+      "is_oos_pass": false,
+      "reasons": [
+        "is_oos_pass=False"
+      ]
+    },
+    {
+      "symbol": "4911.T",
+      "oos_daily": 199.12195121953846,
+      "oos_trades": 294,
+      "oos_pf": 1.0709446813539807,
+      "is_oos_pass": false,
+      "reasons": [
+        "is_oos_pass=False",
+        "oos_pf<1.1"
+      ]
+    },
+    {
+      "symbol": "9984.T",
+      "oos_daily": 9932.362552289356,
+      "oos_trades": 47,
+      "oos_pf": 4.791533163097789,
+      "is_oos_pass": false,
+      "reasons": [
+        "is_oos_pass=False"
+      ]
+    },
+    {
+      "symbol": "4385.T",
+      "oos_daily": 1028.0807846153853,
+      "oos_trades": 314,
+      "oos_pf": 1.2385127540526504,
+      "is_oos_pass": false,
+      "reasons": [
+        "is_oos_pass=False"
+      ]
+    },
+    {
+      "symbol": "8058.T",
+      "oos_daily": 446.7094377575566,
+      "oos_trades": 6,
+      "oos_pf": 6.9584703706908835,
+      "is_oos_pass": true,
+      "reasons": [
+        "oos_trades<30"
+      ]
+    },
+    {
+      "symbol": "1605.T",
+      "oos_daily": 1220.7058025641036,
+      "oos_trades": 113,
+      "oos_pf": 1.3059757658445148,
+      "is_oos_pass": false,
+      "reasons": [
+        "is_oos_pass=False"
+      ]
+    },
+    {
+      "symbol": "6501.T",
+      "oos_daily": 8233.866230560128,
+      "oos_trades": 12,
+      "oos_pf": 31.199616563237857,
+      "is_oos_pass": false,
+      "reasons": [
+        "is_oos_pass=False",
+        "oos_trades<30"
+      ]
+    }
+  ],
+  "removed_by_nightly_wf": [],
+  "observed_nightly_wf_demote": [],
+  "nightly_wf_demote_total": 0,
+  "nightly_wf_path": "/Users/himanosuke/algo-trading-system/data/nightly_walkforward_latest.json",
+  "nightly_wf_ignored": false,
+  "nightly_wf_enforce_removal": false,
+  "observation_added": [
+    {
+      "symbol": "5985.T",
+      "strategy": "ORB",
+      "reason": "WF 5/5 OOS positive (avg +2,570円/日, trades=6.8/split)。strong sector (産業機械・精密部品 med_5d=+4.68%)。"
+    },
+    {
+      "symbol": "6522.T",
+      "strategy": "ORB",
+      "reason": "WF 5/5 OOS positive (avg +5,098円/日, trades=6.2/split)。strong sector (小売IT・RFID med_5d=+9.69%)。寄り後 9:30-15:00 全帯ブル × 高ボラ。"
+    },
+    {
+      "symbol": "6433.T",
+      "strategy": "ORB",
+      "reason": "提案2巡目: WF 5/5 OOS positive (avg +1,476円/日, trades=6.6/split)。strong sector (フィジカルAI・ロボティクス med_5d=+2.81%, med_10d=+13.5%)。time_pattern: 9:00-15:00 高ボラ・11:30 ブル偏重。"
+    },
+    {
+      "symbol": "247A.T",
+      "strategy": "Momentum5Min",
+      "reason": "提案2巡目: WF 5/5 OOS positive (avg +1,034円/日, trades=37.6/split)。社名は『ロボティクス』だが実体は自社AIを用いた美容家電・化粧品の企画開発で東証業種は『化学』、株探テーマは『化粧品』『美容家電』『人工知能』『D2C』『eコマース』。sector_strength では業種混在のため当該銘柄に直接マッピングされる sector がなく weak gate 発動しない。trades 数も多くサンプル健全。Scalp/Breakout は同銘柄でも NG だったため Momentum5Min を選択。"
+    },
+    {
+      "symbol": "5243.T",
+      "strategy": "Momentum5Min",
+      "reason": "提案2巡目: WF 4/5 OOS positive (avg +411円/日, trades=51.0/split)。サンプル健全だがセクター (新興ITメディア) は weak のため、sector_strength gate と併せて慎重観察。"
+    }
+  ],
+  "observation_skipped": [],
+  "observation_pairs_path": "/Users/himanosuke/algo-trading-system/data/universe_observation_pairs.json",
+  "observation_ignored": false,
+  "untouched_robust_in_universe": [],
+  "outside_robust_in_universe": [
+    "1605.T",
+    "3103.T",
+    "4911.T",
+    "6501.T",
+    "6613.T",
+    "6752.T",
+    "6758.T",
+    "8058.T",
+    "8136.T",
+    "8306.T",
+    "9107.T",
+    "9432.T",
+    "9433.T",
+    "9468.T",
+    "9984.T"
+  ],
+  "protected_observation": [],
+  "protected_alt_strategy": [
+    {
+      "symbol": "1605.T",
+      "strategy": "Pullback",
+      "observation_only": false
+    },
+    {
+      "symbol": "3103.T",
+      "strategy": "Breakout",
+      "observation_only": false
+    },
+    {
+      "symbol": "6723.T",
+      "strategy": "Breakout",
+      "observation_only": false
+    },
+    {
+      "symbol": "6758.T",
+      "strategy": "Breakout",
+      "observation_only": false
+    },
+    {
+      "symbol": "8136.T",
+      "strategy": "Pullback",
+      "observation_only": false
+    },
+    {
+      "symbol": "9984.T",
+      "strategy": "EnhancedMacdRci",
+      "observation_only": false
+    }
+  ],
+  "thresholds": {
+    "min_oos_daily": 0.0,
+    "require_is_oos_pass": true,
+    "min_oos_trades": 30,
+    "min_oos_pf": 1.1
+  },
+  "dry_run": false
+}

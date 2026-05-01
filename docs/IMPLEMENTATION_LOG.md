@@ -3773,3 +3773,102 @@ entry_boost: signal=1 で score >= 0.7 のみ通す
 
 D9 Phase 4 では **案 B (2 軸整合)** から着手する予定。3 軸希少性は確認済、
 2 軸なら整合状態がどれくらいの頻度で発生するか測定する。
+
+## 2026-05-01 (夕) F8 + Phase 4 PoC + merge_robust_into_universe バグ修正
+
+### Critical Bug Fix: `merge_robust_into_universe.py` が consolidate 結果を毎朝破壊していた
+
+**症状**: 5/1 朝に consolidate_universe_active.py で 18 ペアに整理 + observation_only マーク + 9984.T 並走 (MacdRci + EnhancedMacdRci) 構成にしたが、**VPS 8:50 cron** で `merge_robust_into_universe.py --no-backup` が走り、すべて吹き飛んだ。
+
+#### 根本原因
+
+`existing_by_sym: dict[str, dict]` で **symbol を単一キー**として使用していた:
+```python
+for row in existing_symbols:
+    existing_by_sym[row["symbol"]] = row  # 同一 symbol 複数 strategy が潰される
+```
+
+加えて MacdRci 強制 promote ロジック:
+```python
+if cur_strat != "MacdRci" or macd_oos > cur_oos + 0.5:
+    # EnhancedMacdRci, Breakout, Pullback 全て MacdRci に上書き
+```
+
+`observation_only` フラグも保護ロジックなし。
+
+#### 修正内容
+
+1. **キーを `(symbol, strategy)` ペアに変更**: 同一 symbol 複数 strategy 並走を許容
+2. **observation_only=True を絶対保護**: cron 上書き完全防止
+3. **MacdRci 以外の戦略は一切上書き禁止**: EnhancedMacdRci/Breakout/Pullback の consolidate 結果が保持される
+4. **MacdRci 同士の置換も oos_daily 改善時のみ メトリクス更新**: 強制 promote 廃止
+
+修正後 dry-run: 既存 18 ペア完全保持 + robust 新規 (6723.T MacdRci) 1 件追加 + observation_pairs 5 件 (ORB/Momentum5Min) で 24 ペア。9984.T MacdRci + 9984.T EnhancedMacdRci の並走、3103.T MacdRci [OBS] + 3103.T Breakout の並走、いずれも維持を確認。
+
+#### 影響範囲
+
+- 5/1 paper の divergence (-94.98%) の **構造的原因の一つ** だった。9984.T EnhancedMacdRci が paper に未採用だったのは universe からの消失が原因 (期待 +12,168 JPY/日 を機会逸失)
+- 月曜以降は cron で破壊されない
+- 月曜のための universe を再生成済 (24 ペア構成、3103.T [OBS], 9984.T 並走復活)
+
+### F8: `morning_first_30min_short_block` (新規 opt-in パラメータ)
+
+#### 動機
+
+5/1 paper で 9:39-9:43 に 9432.T MacdRci short が **連続 3 stop で -4,200 JPY** (損失 70%)。4/30 にも類似事象あり再現性高い。寄付直後はボラ高く short SL/TP が不利に動きやすい仮説。
+
+#### 実装
+
+`backend/strategies/jp_stock/jp_macd_rci.py` に追加:
+```python
+morning_first_30min_short_block: int = 0,  # off
+morning_block_until_min: int = 30,
+```
+9:00 ≤ time < 9:00+morning_block_until_min の short エントリーのみ block (long は据え置き)。
+
+#### Backtest 検証 (12 銘柄 × 59 日 = 全 universe MacdRci)
+
+| Config | L_n | S_n | L_pnl% | S_pnl% | **Total%** | morn_S_n | morn_S_pnl% |
+|---|---|---|---|---|---|---|---|
+| off | 5866 | 286 | -1.10 | -7.14 | **-8.24** | 19 | -0.32 |
+| block_15min | 5896 | 272 | -2.97 | -7.35 | -10.32 | 6 | -0.23 |
+| block_30min | 5916 | 264 | -6.47 | -6.72 | -13.19 | 0 | 0.00 |
+| block_60min | 5955 | 250 | -2.30 | -6.76 | -9.06 | 0 | 0.00 |
+
+**結論**: morning short の損失は 59 日で全銘柄合計 -0.32% (微小) であり、F8 を一律 ON にすると long 側のノイズで総合 PnL が悪化する。**frame は実装したが デフォルト OFF**、5/4 以降の paper で類似損失が再発した銘柄に対して **個別 opt-in** で適用する運用方針に決定。
+
+### D9 Phase 4 PoC: 緩和整合 (2 軸) で頻度・効果検証
+
+`scripts/analyze_mtfra_phase4_relaxed_alignment.py` で 12 銘柄 × 59 日 5m データで 6 combo を比較。MTFRADetector に `mode="custom"` + `custom_combo` オプションを追加して任意の TF 組合せを試せるよう拡張。
+
+#### 全銘柄合計 (n_total ≈ 2415 評価点)
+
+| Combo | aligned_up | aligned_down | aligned_total | 平均 fwd_up_wr | 平均 fwd_down_wr |
+|---|---|---|---|---|---|
+| default 3axis (3m+30m+60m) | 15.5% | 30.7% | 46.2% | ~45% | ~45% |
+| 2axis (15m+60m) | 27.5% | 38.0% | 65.5% | ~48% | ~48% |
+| **2axis (30m+60m)** | 44.9% | 39.1% | **84.0%** | ~46% | ~45% |
+| 2axis (15m+30m) | 26.0% | 37.6% | 63.6% | ~48% | ~48% |
+| 2axis (5m+15m) | 12.8% | 41.7% | 54.5% | ~45% | ~48% |
+| single (60m) | 53.6% | 46.1% | 99.7% | ~46% | ~47% |
+
+#### Insight
+
+1. **頻度問題は解決**: 3 軸でも整合率 46% (Phase 3 の transition 検出で稀少だったのは「連続変化」のため)。2 軸 30m+60m で 84%、15m+60m で 65.5%
+2. **forward return 予測力が無い**: WR 40-50% 帯に偏らず、整合方向と価格方向が一致しない
+3. **per-symbol で機能する銘柄あり**: 6752.T (up_wr 55-57% 以上)、9468.T (up_wr 50-61%) — 銘柄選定として再利用可能性
+
+#### 結論
+
+- MTFRA は **直接 entry filter には不十分** (Phase 2-4 全フェーズで否定的結果)
+- 今後は **(a) per-symbol 適用銘柄の特定**、または **(b) regime-aware position sizing** (整合方向に sizing 加重) など別用途で再活用
+- 月曜の paper には MTFRA 関連 toggle は **入れない** (D9 全フェーズの結論)
+
+### 月曜 5/4 paper 投入準備
+
+VPS deploy 内容:
+1. `merge_robust_into_universe.py` 改修版 (並走/observation 保護)
+2. `jp_macd_rci.py` F8 パラメータ追加 (デフォルト OFF)
+3. `multi_timeframe_regime.py` custom_combo オプション追加
+4. `data/universe_active.json` 24 ペア (新形)
+

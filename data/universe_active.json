@@ -1,27 +1,104 @@
 {
-  "updated": "2026-04-30",
-  "updated_at": "2026-04-30T16:30:00.000000+09:00",
-  "active_count": 18,
+  "updated": "2026-05-01",
+  "updated_at": "2026-05-01T15:48:48.963844+09:00",
+  "active_count": 24,
   "symbols": [
     {
-      "symbol": "1605.T",
-      "name": "INPEX",
-      "strategy": "Pullback",
-      "score": 73.9,
-      "is_daily": 23.1,
-      "oos_daily": 1080.6,
-      "is_pf": 1.045,
-      "is_trades": 35,
+      "symbol": "6613.T",
+      "name": "QD Laser",
+      "strategy": "MacdRci",
+      "score": 9900.5,
+      "is_daily": 3252.4,
+      "oos_daily": 12464.0,
+      "is_pf": 1.197,
+      "is_trades": 67,
       "robust": true,
       "is_oos_pass": true,
-      "calmar": 0.0,
-      "source": "augment_alt_strategies",
-      "alt_meta": {
-        "experiment_id": 208970,
-        "oos_trades": 13,
-        "oos_pf": 4.482538059689375,
-        "oos_win_rate": 61.53846153846154
-      }
+      "calmar": 4233.916,
+      "source": "macd_rci_params.robust_merge"
+    },
+    {
+      "symbol": "9984.T",
+      "name": "SoftBank Group",
+      "strategy": "MacdRci",
+      "score": 7509.2,
+      "is_daily": 3511.1,
+      "oos_daily": 8936.9,
+      "is_pf": 1.899,
+      "is_trades": 97,
+      "robust": true,
+      "is_oos_pass": false,
+      "calmar": 1243.949,
+      "source": "macd_rci_params.robust_merge"
+    },
+    {
+      "symbol": "6752.T",
+      "name": "Panasonic",
+      "strategy": "MacdRci",
+      "score": 2683.3,
+      "is_daily": 1109.2,
+      "oos_daily": 3072.2,
+      "is_pf": 1.415,
+      "is_trades": 66,
+      "robust": true,
+      "is_oos_pass": true,
+      "calmar": 206.656,
+      "source": "macd_rci_params.robust_merge"
+    },
+    {
+      "symbol": "9107.T",
+      "name": "Kawasaki Kisen",
+      "strategy": "MacdRci",
+      "score": 1923.7,
+      "is_daily": 1186.9,
+      "oos_daily": 1953.7,
+      "is_pf": 1.68,
+      "is_trades": 41,
+      "robust": true,
+      "is_oos_pass": false,
+      "calmar": 104.211,
+      "source": "macd_rci_params.robust_merge"
+    },
+    {
+      "symbol": "9468.T",
+      "name": "Kadokawa",
+      "strategy": "MacdRci",
+      "score": 1917.4,
+      "is_daily": 1997.9,
+      "oos_daily": 1597.1,
+      "is_pf": 4.232,
+      "is_trades": 40,
+      "robust": true,
+      "is_oos_pass": false,
+      "calmar": 0.0
+    },
+    {
+      "symbol": "8306.T",
+      "name": "MUFG",
+      "strategy": "MacdRci",
+      "score": 1832.6,
+      "is_daily": 291.1,
+      "oos_daily": 2207.5,
+      "is_pf": 1.166,
+      "is_trades": 40,
+      "robust": true,
+      "is_oos_pass": false,
+      "calmar": 123.851,
+      "source": "macd_rci_params.robust_merge"
+    },
+    {
+      "symbol": "6723.T",
+      "name": "Renesas",
+      "strategy": "MacdRci",
+      "score": 1457.3,
+      "is_daily": 757.7,
+      "oos_daily": 1471.4,
+      "is_pf": 1.294,
+      "is_trades": 29,
+      "robust": true,
+      "is_oos_pass": true,
+      "calmar": 65.294,
+      "source": "macd_rci_params.robust_merge"
     },
     {
       "symbol": "3103.T",
@@ -42,38 +119,17 @@
       "observed_since": "2026-05-01T07:58:23.118639"
     },
     {
-      "symbol": "3103.T",
-      "name": "Unitika",
-      "strategy": "Breakout",
-      "score": 114.8,
-      "is_daily": 291.0,
-      "oos_daily": 4856.5,
-      "is_pf": 1.197,
-      "is_trades": 36,
-      "robust": true,
-      "is_oos_pass": true,
-      "calmar": 0.0,
-      "source": "augment_alt_strategies",
-      "alt_meta": {
-        "experiment_id": 215514,
-        "oos_trades": 11,
-        "oos_pf": 12.660527870984788,
-        "oos_win_rate": 54.54545454545454
-      }
-    },
-    {
-      "symbol": "4911.T",
-      "name": "Shiseido",
+      "symbol": "9433.T",
+      "name": "KDDI",
       "strategy": "MacdRci",
-      "score": 357.0,
-      "is_daily": 58.7,
-      "oos_daily": 199.1,
-      "is_pf": 1.016,
-      "is_trades": 450,
+      "score": 1069.3,
+      "is_daily": 526.4,
+      "oos_daily": 1016.3,
+      "is_pf": 1.369,
+      "is_trades": 122,
       "robust": true,
       "is_oos_pass": false,
-      "calmar": 0.0,
-      "source": "macd_rci_params.robust_merge"
+      "calmar": 0.0
     },
     {
       "symbol": "6501.T",
@@ -90,65 +146,6 @@
       "source": "macd_rci_params.robust_merge"
     },
     {
-      "symbol": "6613.T",
-      "name": "QD Laser",
-      "strategy": "MacdRci",
-      "score": 9900.5,
-      "is_daily": 3252.4,
-      "oos_daily": 12464.0,
-      "is_pf": 1.197,
-      "is_trades": 67,
-      "robust": true,
-      "is_oos_pass": true,
-      "calmar": 4233.916,
-      "source": "macd_rci_params.robust_merge"
-    },
-    {
-      "symbol": "6723.T",
-      "name": "Renesas",
-      "strategy": "Breakout",
-      "oos_daily": 1632.0,
-      "oos_pf": 5.99,
-      "oos_win_rate": 58.8,
-      "robust": true,
-      "is_oos_pass": true,
-      "source": "manual_robust_promotion_2026-04-30"
-    },
-    {
-      "symbol": "6752.T",
-      "name": "Panasonic",
-      "strategy": "MacdRci",
-      "score": 2683.3,
-      "is_daily": 1109.2,
-      "oos_daily": 3072.2,
-      "is_pf": 1.415,
-      "is_trades": 66,
-      "robust": true,
-      "is_oos_pass": true,
-      "calmar": 206.656,
-      "source": "macd_rci_params.robust_merge"
-    },
-    {
-      "symbol": "6758.T",
-      "name": "Sony Group",
-      "strategy": "Breakout",
-      "score": 76.0,
-      "is_daily": 222.2,
-      "oos_daily": 602.4,
-      "is_pf": 1.784,
-      "is_trades": 39,
-      "robust": true,
-      "is_oos_pass": true,
-      "calmar": 0.0,
-      "source": "augment_alt_strategies",
-      "alt_meta": {
-        "experiment_id": 170131,
-        "oos_trades": 9,
-        "oos_pf": 7.518246191843626,
-        "oos_win_rate": 66.66666666666666
-      }
-    },
-    {
       "symbol": "8058.T",
       "name": "Mitsubishi Corp",
       "strategy": "MacdRci",
@@ -160,45 +157,6 @@
       "robust": true,
       "is_oos_pass": true,
       "calmar": 17.735,
-      "source": "macd_rci_params.robust_merge"
-    },
-    {
-      "symbol": "8136.T",
-      "name": "Sanrio",
-      "strategy": "Pullback",
-      "oos_daily": 2456.0,
-      "oos_pf": 3.1,
-      "oos_win_rate": 66.7,
-      "robust": true,
-      "is_oos_pass": true,
-      "source": "manual_robust_promotion_2026-04-30"
-    },
-    {
-      "symbol": "8306.T",
-      "name": "MUFG",
-      "strategy": "MacdRci",
-      "score": 1832.6,
-      "is_daily": 291.1,
-      "oos_daily": 2207.5,
-      "is_pf": 1.166,
-      "is_trades": 40,
-      "robust": true,
-      "is_oos_pass": false,
-      "calmar": 123.851,
-      "source": "macd_rci_params.robust_merge"
-    },
-    {
-      "symbol": "9107.T",
-      "name": "Kawasaki Kisen",
-      "strategy": "MacdRci",
-      "score": 1923.7,
-      "is_daily": 1186.9,
-      "oos_daily": 1953.7,
-      "is_pf": 1.68,
-      "is_trades": 41,
-      "robust": true,
-      "is_oos_pass": false,
-      "calmar": 104.211,
       "source": "macd_rci_params.robust_merge"
     },
     {
@@ -216,30 +174,18 @@
       "source": "macd_rci_params.robust_merge"
     },
     {
-      "symbol": "9433.T",
-      "name": "KDDI",
+      "symbol": "4911.T",
+      "name": "Shiseido",
       "strategy": "MacdRci",
-      "score": 1069.3,
-      "is_daily": 526.4,
-      "oos_daily": 1016.3,
-      "is_pf": 1.369,
-      "is_trades": 122,
+      "score": 357.0,
+      "is_daily": 58.7,
+      "oos_daily": 199.1,
+      "is_pf": 1.016,
+      "is_trades": 450,
       "robust": true,
       "is_oos_pass": false,
-      "calmar": 0.0
-    },
-    {
-      "symbol": "9468.T",
-      "name": "Kadokawa",
-      "strategy": "MacdRci",
-      "score": 1917.4,
-      "is_daily": 1997.9,
-      "oos_daily": 1597.1,
-      "is_pf": 4.232,
-      "is_trades": 40,
-      "robust": true,
-      "is_oos_pass": false,
-      "calmar": 0.0
+      "calmar": 0.0,
+      "source": "macd_rci_params.robust_merge"
     },
     {
       "symbol": "9984.T",
@@ -262,31 +208,196 @@
       }
     },
     {
-      "symbol": "9984.T",
-      "name": "SoftBank Group",
-      "strategy": "MacdRci",
-      "score": 7509.2,
-      "is_daily": 3511.1,
-      "oos_daily": 8936.9,
-      "is_pf": 1.899,
-      "is_trades": 97,
+      "symbol": "3103.T",
+      "name": "Unitika",
+      "strategy": "Breakout",
+      "score": 114.8,
+      "is_daily": 291.0,
+      "oos_daily": 4856.5,
+      "is_pf": 1.197,
+      "is_trades": 36,
       "robust": true,
+      "is_oos_pass": true,
+      "calmar": 0.0,
+      "source": "augment_alt_strategies",
+      "alt_meta": {
+        "experiment_id": 215514,
+        "oos_trades": 11,
+        "oos_pf": 12.660527870984788,
+        "oos_win_rate": 54.54545454545454
+      }
+    },
+    {
+      "symbol": "6758.T",
+      "name": "Sony Group",
+      "strategy": "Breakout",
+      "score": 76.0,
+      "is_daily": 222.2,
+      "oos_daily": 602.4,
+      "is_pf": 1.784,
+      "is_trades": 39,
+      "robust": true,
+      "is_oos_pass": true,
+      "calmar": 0.0,
+      "source": "augment_alt_strategies",
+      "alt_meta": {
+        "experiment_id": 170131,
+        "oos_trades": 9,
+        "oos_pf": 7.518246191843626,
+        "oos_win_rate": 66.66666666666666
+      }
+    },
+    {
+      "symbol": "1605.T",
+      "name": "INPEX",
+      "strategy": "Pullback",
+      "score": 73.9,
+      "is_daily": 23.1,
+      "oos_daily": 1080.6,
+      "is_pf": 1.045,
+      "is_trades": 35,
+      "robust": true,
+      "is_oos_pass": true,
+      "calmar": 0.0,
+      "source": "augment_alt_strategies",
+      "alt_meta": {
+        "experiment_id": 208970,
+        "oos_trades": 13,
+        "oos_pf": 4.482538059689375,
+        "oos_win_rate": 61.53846153846154
+      }
+    },
+    {
+      "symbol": "6723.T",
+      "name": "Renesas",
+      "strategy": "Breakout",
+      "oos_daily": 1632.0,
+      "oos_pf": 5.99,
+      "oos_win_rate": 58.8,
+      "robust": true,
+      "is_oos_pass": true,
+      "source": "manual_robust_promotion_2026-04-30"
+    },
+    {
+      "symbol": "8136.T",
+      "name": "Sanrio",
+      "strategy": "Pullback",
+      "oos_daily": 2456.0,
+      "oos_pf": 3.1,
+      "oos_win_rate": 66.7,
+      "robust": true,
+      "is_oos_pass": true,
+      "source": "manual_robust_promotion_2026-04-30"
+    },
+    {
+      "symbol": "5985.T",
+      "name": "サンコール",
+      "strategy": "ORB",
+      "score": 0.0,
+      "is_daily": 0.0,
+      "oos_daily": 0.0,
+      "is_pf": 0.0,
+      "is_trades": 0,
+      "robust": false,
       "is_oos_pass": false,
-      "calmar": 1243.949,
-      "source": "macd_rci_params.robust_merge"
+      "calmar": 0.0,
+      "source": "manual_observation",
+      "observation_meta": {
+        "reason": "WF 5/5 OOS positive (avg +2,570円/日, trades=6.8/split)。strong sector (産業機械・精密部品 med_5d=+4.68%)。",
+        "evidence": "data/snapshots/walkforward_candidate_robust.json",
+        "added_at": "2026-04-28",
+        "force_paper": false
+      }
+    },
+    {
+      "symbol": "6522.T",
+      "name": "アスタリスク",
+      "strategy": "ORB",
+      "score": 0.0,
+      "is_daily": 0.0,
+      "oos_daily": 0.0,
+      "is_pf": 0.0,
+      "is_trades": 0,
+      "robust": false,
+      "is_oos_pass": false,
+      "calmar": 0.0,
+      "source": "manual_observation",
+      "observation_meta": {
+        "reason": "WF 5/5 OOS positive (avg +5,098円/日, trades=6.2/split)。strong sector (小売IT・RFID med_5d=+9.69%)。寄り後 9:30-15:00 全帯ブル × 高ボラ。",
+        "evidence": "data/snapshots/walkforward_candidate_robust.json",
+        "added_at": "2026-04-28",
+        "force_paper": false
+      }
+    },
+    {
+      "symbol": "6433.T",
+      "name": "ヒーハイスト",
+      "strategy": "ORB",
+      "score": 0.0,
+      "is_daily": 0.0,
+      "oos_daily": 0.0,
+      "is_pf": 0.0,
+      "is_trades": 0,
+      "robust": false,
+      "is_oos_pass": false,
+      "calmar": 0.0,
+      "source": "manual_observation",
+      "observation_meta": {
+        "reason": "提案2巡目: WF 5/5 OOS positive (avg +1,476円/日, trades=6.6/split)。strong sector (フィジカルAI・ロボティクス med_5d=+2.81%, med_10d=+13.5%)。time_pattern: 9:00-15:00 高ボラ・11:30 ブル偏重。",
+        "evidence": "data/snapshots/wf_proposed_round2.json",
+        "added_at": "2026-04-28",
+        "force_paper": false
+      }
+    },
+    {
+      "symbol": "247A.T",
+      "name": "AIロボティクス",
+      "strategy": "Momentum5Min",
+      "score": 0.0,
+      "is_daily": 0.0,
+      "oos_daily": 0.0,
+      "is_pf": 0.0,
+      "is_trades": 0,
+      "robust": false,
+      "is_oos_pass": false,
+      "calmar": 0.0,
+      "source": "manual_observation",
+      "observation_meta": {
+        "reason": "提案2巡目: WF 5/5 OOS positive (avg +1,034円/日, trades=37.6/split)。社名は『ロボティクス』だが実体は自社AIを用いた美容家電・化粧品の企画開発で東証業種は『化学』、株探テーマは『化粧品』『美容家電』『人工知能』『D2C』『eコマース』。sector_strength では業種混在のため当該銘柄に直接マッピングされる sector がなく weak gate 発動しない。trades 数も多くサンプル健全。Scalp/Breakout は同銘柄でも NG だったため Momentum5Min を選択。",
+        "evidence": "data/snapshots/wf_proposed_round2.json",
+        "added_at": "2026-04-28",
+        "force_paper": false
+      }
+    },
+    {
+      "symbol": "5243.T",
+      "name": "note",
+      "strategy": "Momentum5Min",
+      "score": 0.0,
+      "is_daily": 0.0,
+      "oos_daily": 0.0,
+      "is_pf": 0.0,
+      "is_trades": 0,
+      "robust": false,
+      "is_oos_pass": false,
+      "calmar": 0.0,
+      "source": "manual_observation",
+      "observation_meta": {
+        "reason": "提案2巡目: WF 4/5 OOS positive (avg +411円/日, trades=51.0/split)。サンプル健全だがセクター (新興ITメディア) は weak のため、sector_strength gate と併せて慎重観察。",
+        "evidence": "data/snapshots/wf_proposed_round2.json",
+        "added_at": "2026-04-28",
+        "force_paper": false
+      }
     }
   ],
   "last_merge": {
-    "at": "2026-04-25T07:44:19.461836+09:00",
+    "at": "2026-05-01T15:48:48.963844+09:00",
     "source": "macd_rci_params.robust",
     "added": [
-      "6501.T"
+      "6723.T"
     ],
-    "promoted": [
-      "3103.T",
-      "9984.T"
-    ],
-    "robust_count": 18
+    "promoted": [],
+    "robust_count": 1
   },
   "last_low_yield_prune": {
     "computed_at": "2026-04-25T09:56:40.105671+09:00",
