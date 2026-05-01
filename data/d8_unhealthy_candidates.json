@@ -1,0 +1,82 @@
+{
+  "unhealthy": [
+    {
+      "symbol": "3103.T",
+      "strategy": "Breakout",
+      "oos_daily": 4856.5,
+      "n_days": 39,
+      "n_trades": 55,
+      "wr": 34.5,
+      "pf": 0.89,
+      "total_pnl": -9513.0,
+      "long_pnl": -9513.0,
+      "short_pnl": 0,
+      "pnl_per_day": -244.0,
+      "ratio": -0.05,
+      "status": "UNHEALTHY"
+    },
+    {
+      "symbol": "6758.T",
+      "strategy": "Breakout",
+      "oos_daily": 602.4,
+      "n_days": 39,
+      "n_trades": 26,
+      "wr": 46.2,
+      "pf": 0.81,
+      "total_pnl": -4387.0,
+      "long_pnl": -4387.0,
+      "short_pnl": 0,
+      "pnl_per_day": -112.0,
+      "ratio": -0.19,
+      "status": "UNHEALTHY"
+    },
+    {
+      "symbol": "1605.T",
+      "strategy": "Pullback",
+      "oos_daily": 1080.6,
+      "n_days": 39,
+      "n_trades": 89,
+      "wr": 42.7,
+      "pf": 0.96,
+      "total_pnl": -4186.0,
+      "long_pnl": -4186.0,
+      "short_pnl": 0,
+      "pnl_per_day": -107.0,
+      "ratio": -0.1,
+      "status": "UNHEALTHY"
+    },
+    {
+      "symbol": "8306.T",
+      "strategy": "Pullback",
+      "oos_daily": 382.0,
+      "n_days": 39,
+      "n_trades": 48,
+      "wr": 37.5,
+      "pf": 0.93,
+      "total_pnl": -4162.0,
+      "long_pnl": -4162.0,
+      "short_pnl": 0,
+      "pnl_per_day": -107.0,
+      "ratio": -0.28,
+      "status": "UNHEALTHY"
+    }
+  ],
+  "overestimate": [
+    {
+      "symbol": "6723.T",
+      "strategy": "Breakout",
+      "oos_daily": 1632.0,
+      "n_days": 39,
+      "n_trades": 55,
+      "wr": 45.5,
+      "pf": 1.08,
+      "total_pnl": 5176.0,
+      "long_pnl": 5176.0,
+      "short_pnl": 0,
+      "pnl_per_day": 133.0,
+      "ratio": 0.08,
+      "status": "OVERESTIMATE"
+    }
+  ],
+  "underestimate": []
+}

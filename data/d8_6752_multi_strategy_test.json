@@ -1,0 +1,49 @@
+{
+  "generated_at": "2026-05-02T08:53:25.624488+09:00",
+  "symbol": "6752.T",
+  "n_days": 39,
+  "results": {
+    "BbShort": {
+      "n_trades": 17,
+      "wr": 58.8,
+      "pf": 0.54,
+      "total_pnl": -28776.0,
+      "pnl_per_day": -738.0,
+      "verdict": "LOW_PERFORMANCE"
+    },
+    "Pullback": {
+      "n_trades": 48,
+      "wr": 43.8,
+      "pf": 1.02,
+      "total_pnl": 2042.0,
+      "pnl_per_day": 52.0,
+      "verdict": "LOW_PERFORMANCE"
+    },
+    "Breakout": {
+      "n_trades": 50,
+      "wr": 40.0,
+      "pf": 0.92,
+      "total_pnl": -6754.0,
+      "pnl_per_day": -173.0,
+      "verdict": "LOW_PERFORMANCE"
+    },
+    "EnhancedMacdRci": {
+      "n_trades": 222,
+      "wr": 40.1,
+      "pf": 1.38,
+      "total_pnl": 79324.0,
+      "pnl_per_day": 2034.0,
+      "verdict": "OK"
+    }
+  },
+  "add_candidates": [
+    {
+      "symbol": "6752.T",
+      "strategy": "EnhancedMacdRci",
+      "params": {
+        "interval": "5m"
+      },
+      "expected_value_per_day": 2034.0
+    }
+  ]
+}

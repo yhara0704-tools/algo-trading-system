@@ -1,7 +1,7 @@
 {
   "updated": "2026-05-02",
-  "updated_at": "2026-05-02T08:31:47.105482+09:00",
-  "active_count": 27,
+  "updated_at": "2026-05-02T08:54:38.896042+09:00",
+  "active_count": 19,
   "symbols": [
     {
       "symbol": "6613.T",
@@ -34,7 +34,7 @@
       "is_oos_pass": false,
       "calmar": 1243.949,
       "source": "macd_rci_params.robust_merge",
-      "lot_multiplier": 0.86,
+      "lot_multiplier": 0.91,
       "expected_value_per_day": 1534.0
     },
     {
@@ -66,7 +66,7 @@
       "is_oos_pass": false,
       "calmar": 104.211,
       "source": "macd_rci_params.robust_merge",
-      "lot_multiplier": 0.65,
+      "lot_multiplier": 0.69,
       "expected_value_per_day": 1162.0
     },
     {
@@ -115,7 +115,7 @@
       "is_oos_pass": true,
       "calmar": 65.294,
       "source": "macd_rci_params.robust_merge",
-      "lot_multiplier": 1.21,
+      "lot_multiplier": 1.28,
       "expected_value_per_day": 2154.0
     },
     {
@@ -184,7 +184,7 @@
       "is_oos_pass": true,
       "calmar": 17.735,
       "source": "macd_rci_params.robust_merge",
-      "lot_multiplier": 1.0,
+      "lot_multiplier": 1.06,
       "expected_value_per_day": 1792.0
     },
     {
@@ -200,7 +200,7 @@
       "is_oos_pass": false,
       "calmar": 0.0,
       "source": "macd_rci_params.robust_merge",
-      "lot_multiplier": 0.99,
+      "lot_multiplier": 1.05,
       "expected_value_per_day": 1771.0
     },
     {
@@ -240,8 +240,8 @@
         "oos_pf": 8.491156721659536,
         "oos_win_rate": 48.93617021276596
       },
-      "lot_multiplier": 3.0,
-      "expected_value_per_day": 12168.0
+      "lot_multiplier": 2.18,
+      "expected_value_per_day": 3661.0
     },
     {
       "symbol": "3103.T",
@@ -263,7 +263,11 @@
         "oos_win_rate": 54.54545454545454
       },
       "lot_multiplier": 2.72,
-      "expected_value_per_day": 4856.0
+      "expected_value_per_day": 4856.0,
+      "observation_only": true,
+      "force_paper": false,
+      "d8_demote_reason": "60d 5m: -244 円/日 (UNHEALTHY)",
+      "d8_demoted_at": "2026-05-02T08:51:58.251974+09:00"
     },
     {
       "symbol": "6758.T",
@@ -285,7 +289,11 @@
         "oos_win_rate": 66.66666666666666
       },
       "lot_multiplier": 0.5,
-      "expected_value_per_day": 602.0
+      "expected_value_per_day": 602.0,
+      "observation_only": true,
+      "force_paper": false,
+      "d8_demote_reason": "60d 5m: -112 円/日 (UNHEALTHY)",
+      "d8_demoted_at": "2026-05-02T08:51:58.252397+09:00"
     },
     {
       "symbol": "1605.T",
@@ -307,7 +315,11 @@
         "oos_win_rate": 61.53846153846154
       },
       "lot_multiplier": 0.61,
-      "expected_value_per_day": 1081.0
+      "expected_value_per_day": 1081.0,
+      "observation_only": true,
+      "force_paper": false,
+      "d8_demote_reason": "60d 5m: -107 円/日 (UNHEALTHY)",
+      "d8_demoted_at": "2026-05-02T08:51:58.252408+09:00"
     },
     {
       "symbol": "6723.T",
@@ -319,8 +331,8 @@
       "robust": true,
       "is_oos_pass": true,
       "source": "manual_robust_promotion_2026-04-30",
-      "lot_multiplier": 0.91,
-      "expected_value_per_day": 1632.0
+      "lot_multiplier": 0.5,
+      "expected_value_per_day": 133.0
     },
     {
       "symbol": "8136.T",
@@ -332,8 +344,8 @@
       "robust": true,
       "is_oos_pass": true,
       "source": "manual_robust_promotion_2026-04-30",
-      "lot_multiplier": 1.38,
-      "expected_value_per_day": 2456.0
+      "lot_multiplier": 0.54,
+      "expected_value_per_day": 905.0
     },
     {
       "symbol": "5985.T",
@@ -355,7 +367,11 @@
         "force_paper": false
       },
       "lot_multiplier": 0.5,
-      "expected_value_per_day": 0.0
+      "expected_value_per_day": 0.0,
+      "observation_only": true,
+      "force_paper": false,
+      "demote_note": "strategy_factory 未登録 (ORB)。oos_daily=0 のため実 paper trade 不可。",
+      "demoted_at": "2026-05-02T08:49:52.440250+09:00"
     },
     {
       "symbol": "6522.T",
@@ -377,7 +393,11 @@
         "force_paper": false
       },
       "lot_multiplier": 0.5,
-      "expected_value_per_day": 0.0
+      "expected_value_per_day": 0.0,
+      "observation_only": true,
+      "force_paper": false,
+      "demote_note": "strategy_factory 未登録 (ORB)。oos_daily=0 のため実 paper trade 不可。",
+      "demoted_at": "2026-05-02T08:49:52.440435+09:00"
     },
     {
       "symbol": "6433.T",
@@ -399,7 +419,11 @@
         "force_paper": false
       },
       "lot_multiplier": 0.5,
-      "expected_value_per_day": 0.0
+      "expected_value_per_day": 0.0,
+      "observation_only": true,
+      "force_paper": false,
+      "demote_note": "strategy_factory 未登録 (ORB)。oos_daily=0 のため実 paper trade 不可。",
+      "demoted_at": "2026-05-02T08:49:52.440442+09:00"
     },
     {
       "symbol": "247A.T",
@@ -421,7 +445,11 @@
         "force_paper": false
       },
       "lot_multiplier": 0.5,
-      "expected_value_per_day": 0.0
+      "expected_value_per_day": 0.0,
+      "observation_only": true,
+      "force_paper": false,
+      "demote_note": "strategy_factory 未登録 (Momentum5Min)。oos_daily=0 のため実 paper trade 不可。",
+      "demoted_at": "2026-05-02T08:49:52.440445+09:00"
     },
     {
       "symbol": "5243.T",
@@ -443,7 +471,11 @@
         "force_paper": false
       },
       "lot_multiplier": 0.5,
-      "expected_value_per_day": 0.0
+      "expected_value_per_day": 0.0,
+      "observation_only": true,
+      "force_paper": false,
+      "demote_note": "strategy_factory 未登録 (Momentum5Min)。oos_daily=0 のため実 paper trade 不可。",
+      "demoted_at": "2026-05-02T08:49:52.440448+09:00"
     },
     {
       "symbol": "1605.T",
@@ -471,7 +503,7 @@
         "added_at": "2026-05-02",
         "force_paper": true
       },
-      "lot_multiplier": 1.28,
+      "lot_multiplier": 1.36,
       "expected_value_per_day": 2289.0
     },
     {
@@ -504,7 +536,7 @@
         "added_at": "2026-05-02",
         "force_paper": true
       },
-      "lot_multiplier": 0.58,
+      "lot_multiplier": 0.62,
       "expected_value_per_day": 1042.0
     },
     {
@@ -568,13 +600,13 @@
         "added_at": "2026-05-02",
         "force_paper": true
       },
-      "lot_multiplier": 1.3,
+      "lot_multiplier": 1.38,
       "expected_value_per_day": 2322.0
     },
     {
       "symbol": "9433.T",
       "name": "KDDI BBShort",
-      "strategy": "BBShort",
+      "strategy": "BbShort",
       "score": 512,
       "is_daily": 0.0,
       "oos_daily": 512,
@@ -604,7 +636,7 @@
     {
       "symbol": "3103.T",
       "name": "ユニチカ BBShort",
-      "strategy": "BBShort",
+      "strategy": "BbShort",
       "score": 472,
       "is_daily": 0.0,
       "oos_daily": 472,
@@ -634,7 +666,7 @@
     {
       "symbol": "6501.T",
       "name": "日立 BBShort",
-      "strategy": "BBShort",
+      "strategy": "BbShort",
       "score": 351,
       "is_daily": 0.0,
       "oos_daily": 351,
@@ -674,7 +706,7 @@
       "is_oos_pass": true,
       "calmar": 0.0,
       "source": "d4_pullback_validation",
-      "observation_only": false,
+      "observation_only": true,
       "params": {
         "ema_fast": 20,
         "ema_slow": 50,
@@ -688,7 +720,10 @@
         "force_paper": true
       },
       "lot_multiplier": 0.5,
-      "expected_value_per_day": 382.0
+      "expected_value_per_day": 382.0,
+      "force_paper": false,
+      "d8_demote_reason": "60d 5m: -107 円/日 (UNHEALTHY)",
+      "d8_demoted_at": "2026-05-02T08:51:58.252419+09:00"
     },
     {
       "symbol": "9468.T",
@@ -717,7 +752,29 @@
         "force_paper": true
       },
       "lot_multiplier": 0.5,
-      "expected_value_per_day": 295.0
+      "expected_value_per_day": 531.0
+    },
+    {
+      "symbol": "6752.T",
+      "name": "Panasonic EnhancedMacdRci",
+      "strategy": "EnhancedMacdRci",
+      "score": 2034,
+      "is_daily": 0.0,
+      "oos_daily": 2034,
+      "is_pf": 1.38,
+      "is_trades": 222,
+      "robust": true,
+      "is_oos_pass": true,
+      "calmar": 0.0,
+      "source": "d8_6752_multi_strategy_test",
+      "observation_only": false,
+      "force_paper": true,
+      "params": {
+        "interval": "5m"
+      },
+      "added_at": "2026-05-02T08:54:38.895540+09:00",
+      "lot_multiplier": 1.21,
+      "expected_value_per_day": 2034.0
     }
   ],
   "last_merge": {
@@ -1325,6 +1382,190 @@
       "share": 0.61,
       "lot_multiplier": 0.5,
       "source": "oos_daily"
+    }
+  ],
+  "d8_demote_log": [
+    {
+      "symbol": "3103.T",
+      "strategy": "Breakout",
+      "before": {
+        "observation_only": null,
+        "force_paper": null
+      },
+      "actual_pnl_per_day": -244.0
+    },
+    {
+      "symbol": "6758.T",
+      "strategy": "Breakout",
+      "before": {
+        "observation_only": null,
+        "force_paper": null
+      },
+      "actual_pnl_per_day": -112.0
+    },
+    {
+      "symbol": "1605.T",
+      "strategy": "Pullback",
+      "before": {
+        "observation_only": null,
+        "force_paper": null
+      },
+      "actual_pnl_per_day": -107.0
+    },
+    {
+      "symbol": "8306.T",
+      "strategy": "Pullback",
+      "before": {
+        "observation_only": false,
+        "force_paper": null
+      },
+      "actual_pnl_per_day": -107.0
+    }
+  ],
+  "d8_lot_multiplier_log": [
+    {
+      "symbol": "6752.T",
+      "strategy": "MacdRci",
+      "expected_value": 8348.0,
+      "share": 27.88,
+      "lot_multiplier": 3.0,
+      "source": "60d_actual"
+    },
+    {
+      "symbol": "9984.T",
+      "strategy": "EnhancedMacdRci",
+      "expected_value": 3661.0,
+      "share": 12.23,
+      "lot_multiplier": 2.2,
+      "source": "60d_actual"
+    },
+    {
+      "symbol": "6501.T",
+      "strategy": "MicroScalp",
+      "expected_value": 2322.0,
+      "share": 7.76,
+      "lot_multiplier": 1.4,
+      "source": "oos_daily"
+    },
+    {
+      "symbol": "1605.T",
+      "strategy": "MicroScalp",
+      "expected_value": 2289.0,
+      "share": 7.65,
+      "lot_multiplier": 1.38,
+      "source": "oos_daily"
+    },
+    {
+      "symbol": "6723.T",
+      "strategy": "MacdRci",
+      "expected_value": 2154.0,
+      "share": 7.2,
+      "lot_multiplier": 1.3,
+      "source": "60d_actual"
+    },
+    {
+      "symbol": "8058.T",
+      "strategy": "MacdRci",
+      "expected_value": 1792.0,
+      "share": 5.99,
+      "lot_multiplier": 1.08,
+      "source": "60d_actual"
+    },
+    {
+      "symbol": "9432.T",
+      "strategy": "MacdRci",
+      "expected_value": 1771.0,
+      "share": 5.92,
+      "lot_multiplier": 1.06,
+      "source": "60d_actual"
+    },
+    {
+      "symbol": "9984.T",
+      "strategy": "MacdRci",
+      "expected_value": 1534.0,
+      "share": 5.12,
+      "lot_multiplier": 0.92,
+      "source": "60d_actual"
+    },
+    {
+      "symbol": "9107.T",
+      "strategy": "MacdRci",
+      "expected_value": 1162.0,
+      "share": 3.88,
+      "lot_multiplier": 0.7,
+      "source": "60d_actual"
+    },
+    {
+      "symbol": "9433.T",
+      "strategy": "MicroScalp",
+      "expected_value": 1042.0,
+      "share": 3.48,
+      "lot_multiplier": 0.63,
+      "source": "oos_daily"
+    },
+    {
+      "symbol": "8136.T",
+      "strategy": "Pullback",
+      "expected_value": 905.0,
+      "share": 3.02,
+      "lot_multiplier": 0.54,
+      "source": "60d_actual"
+    },
+    {
+      "symbol": "9468.T",
+      "strategy": "MacdRci",
+      "expected_value": 483.0,
+      "share": 1.61,
+      "lot_multiplier": 0.5,
+      "source": "60d_actual"
+    },
+    {
+      "symbol": "6723.T",
+      "strategy": "Breakout",
+      "expected_value": 133.0,
+      "share": 0.44,
+      "lot_multiplier": 0.5,
+      "source": "60d_actual"
+    },
+    {
+      "symbol": "9468.T",
+      "strategy": "MicroScalp",
+      "expected_value": 478.0,
+      "share": 1.6,
+      "lot_multiplier": 0.5,
+      "source": "oos_daily"
+    },
+    {
+      "symbol": "9433.T",
+      "strategy": "BbShort",
+      "expected_value": 512.0,
+      "share": 1.71,
+      "lot_multiplier": 0.5,
+      "source": "60d_actual"
+    },
+    {
+      "symbol": "3103.T",
+      "strategy": "BbShort",
+      "expected_value": 472.0,
+      "share": 1.58,
+      "lot_multiplier": 0.5,
+      "source": "60d_actual"
+    },
+    {
+      "symbol": "6501.T",
+      "strategy": "BbShort",
+      "expected_value": 351.0,
+      "share": 1.17,
+      "lot_multiplier": 0.5,
+      "source": "60d_actual"
+    },
+    {
+      "symbol": "9468.T",
+      "strategy": "Pullback",
+      "expected_value": 531.0,
+      "share": 1.77,
+      "lot_multiplier": 0.5,
+      "source": "60d_actual"
     }
   ]
 }
