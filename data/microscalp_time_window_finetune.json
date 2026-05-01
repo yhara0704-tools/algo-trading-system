@@ -1,0 +1,1393 @@
+{
+  "generated_at": "2026-05-01T18:56:40.586954+09:00",
+  "n_symbols": 15,
+  "n_windows": 6,
+  "results": [
+    {
+      "trades": 265,
+      "wr": 44.2,
+      "pnl": 136600.0,
+      "pf": 1.36,
+      "symbol": "6613.T",
+      "time_window": "all_default",
+      "base": {
+        "tp_jpy": 8,
+        "sl_jpy": 4,
+        "entry_dev_jpy": 8
+      },
+      "n_days": 18,
+      "pnl_per_day": 7589.0
+    },
+    {
+      "trades": 148,
+      "wr": 40.5,
+      "pnl": 30400.0,
+      "pf": 1.15,
+      "symbol": "6613.T",
+      "time_window": "afternoon_only",
+      "base": {
+        "tp_jpy": 8,
+        "sl_jpy": 4,
+        "entry_dev_jpy": 8
+      },
+      "n_days": 18,
+      "pnl_per_day": 1689.0
+    },
+    {
+      "trades": 14,
+      "wr": 28.6,
+      "pnl": -9700.0,
+      "pf": 0.62,
+      "symbol": "6613.T",
+      "time_window": "morning_open_only",
+      "base": {
+        "tp_jpy": 8,
+        "sl_jpy": 4,
+        "entry_dev_jpy": 8
+      },
+      "n_days": 18,
+      "pnl_per_day": -539.0
+    },
+    {
+      "trades": 107,
+      "wr": 41.1,
+      "pnl": 30700.0,
+      "pf": 1.19,
+      "symbol": "6613.T",
+      "time_window": "morning_session_only",
+      "base": {
+        "tp_jpy": 8,
+        "sl_jpy": 4,
+        "entry_dev_jpy": 8
+      },
+      "n_days": 18,
+      "pnl_per_day": 1706.0
+    },
+    {
+      "trades": 162,
+      "wr": 39.5,
+      "pnl": 20000.0,
+      "pf": 1.09,
+      "symbol": "6613.T",
+      "time_window": "open_plus_afternoon",
+      "base": {
+        "tp_jpy": 8,
+        "sl_jpy": 4,
+        "entry_dev_jpy": 8
+      },
+      "n_days": 18,
+      "pnl_per_day": 1111.0
+    },
+    {
+      "trades": 257,
+      "wr": 42.4,
+      "pnl": 84100.0,
+      "pf": 1.23,
+      "symbol": "6613.T",
+      "time_window": "session_plus_afternoon",
+      "base": {
+        "tp_jpy": 8,
+        "sl_jpy": 4,
+        "entry_dev_jpy": 8
+      },
+      "n_days": 18,
+      "pnl_per_day": 4672.0
+    },
+    {
+      "trades": 585,
+      "wr": 42.9,
+      "pnl": 56850.0,
+      "pf": 1.22,
+      "symbol": "6723.T",
+      "time_window": "all_default",
+      "base": {
+        "tp_jpy": 5,
+        "sl_jpy": 3,
+        "entry_dev_jpy": 6
+      },
+      "n_days": 18,
+      "pnl_per_day": 3158.0
+    },
+    {
+      "trades": 231,
+      "wr": 41.6,
+      "pnl": 7150.0,
+      "pf": 1.08,
+      "symbol": "6723.T",
+      "time_window": "afternoon_only",
+      "base": {
+        "tp_jpy": 5,
+        "sl_jpy": 3,
+        "entry_dev_jpy": 6
+      },
+      "n_days": 18,
+      "pnl_per_day": 397.0
+    },
+    {
+      "trades": 60,
+      "wr": 36.7,
+      "pnl": 1450.0,
+      "pf": 1.05,
+      "symbol": "6723.T",
+      "time_window": "morning_open_only",
+      "base": {
+        "tp_jpy": 5,
+        "sl_jpy": 3,
+        "entry_dev_jpy": 6
+      },
+      "n_days": 18,
+      "pnl_per_day": 81.0
+    },
+    {
+      "trades": 304,
+      "wr": 38.5,
+      "pnl": 2700.0,
+      "pf": 1.02,
+      "symbol": "6723.T",
+      "time_window": "morning_session_only",
+      "base": {
+        "tp_jpy": 5,
+        "sl_jpy": 3,
+        "entry_dev_jpy": 6
+      },
+      "n_days": 18,
+      "pnl_per_day": 150.0
+    },
+    {
+      "trades": 291,
+      "wr": 40.5,
+      "pnl": 6400.0,
+      "pf": 1.05,
+      "symbol": "6723.T",
+      "time_window": "open_plus_afternoon",
+      "base": {
+        "tp_jpy": 5,
+        "sl_jpy": 3,
+        "entry_dev_jpy": 6
+      },
+      "n_days": 18,
+      "pnl_per_day": 356.0
+    },
+    {
+      "trades": 535,
+      "wr": 41.1,
+      "pnl": 23900.0,
+      "pf": 1.1,
+      "symbol": "6723.T",
+      "time_window": "session_plus_afternoon",
+      "base": {
+        "tp_jpy": 5,
+        "sl_jpy": 3,
+        "entry_dev_jpy": 6
+      },
+      "n_days": 18,
+      "pnl_per_day": 1328.0
+    },
+    {
+      "trades": 775,
+      "wr": 38.3,
+      "pnl": 51700.0,
+      "pf": 1.16,
+      "symbol": "9984.T",
+      "time_window": "all_default",
+      "base": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10
+      },
+      "n_days": 18,
+      "pnl_per_day": 2872.0
+    },
+    {
+      "trades": 394,
+      "wr": 40.4,
+      "pnl": 29800.0,
+      "pf": 1.2,
+      "symbol": "9984.T",
+      "time_window": "afternoon_only",
+      "base": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10
+      },
+      "n_days": 18,
+      "pnl_per_day": 1656.0
+    },
+    {
+      "trades": 62,
+      "wr": 22.6,
+      "pnl": -19200.0,
+      "pf": 0.48,
+      "symbol": "9984.T",
+      "time_window": "morning_open_only",
+      "base": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10
+      },
+      "n_days": 18,
+      "pnl_per_day": -1067.0
+    },
+    {
+      "trades": 326,
+      "wr": 35.6,
+      "pnl": 4800.0,
+      "pf": 1.03,
+      "symbol": "9984.T",
+      "time_window": "morning_session_only",
+      "base": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10
+      },
+      "n_days": 18,
+      "pnl_per_day": 267.0
+    },
+    {
+      "trades": 456,
+      "wr": 37.9,
+      "pnl": 9800.0,
+      "pf": 1.05,
+      "symbol": "9984.T",
+      "time_window": "open_plus_afternoon",
+      "base": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10
+      },
+      "n_days": 18,
+      "pnl_per_day": 544.0
+    },
+    {
+      "trades": 704,
+      "wr": 36.9,
+      "pnl": 10300.0,
+      "pf": 1.03,
+      "symbol": "9984.T",
+      "time_window": "session_plus_afternoon",
+      "base": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10
+      },
+      "n_days": 18,
+      "pnl_per_day": 572.0
+    },
+    {
+      "trades": 265,
+      "wr": 43.4,
+      "pnl": 42400.0,
+      "pf": 1.4,
+      "symbol": "4911.T",
+      "time_window": "all_default",
+      "base": {
+        "tp_jpy": 8,
+        "sl_jpy": 4,
+        "entry_dev_jpy": 8
+      },
+      "n_days": 18,
+      "pnl_per_day": 2356.0
+    },
+    {
+      "trades": 56,
+      "wr": 46.4,
+      "pnl": 12800.0,
+      "pf": 1.74,
+      "symbol": "4911.T",
+      "time_window": "afternoon_only",
+      "base": {
+        "tp_jpy": 8,
+        "sl_jpy": 4,
+        "entry_dev_jpy": 8
+      },
+      "n_days": 18,
+      "pnl_per_day": 711.0
+    },
+    {
+      "trades": 36,
+      "wr": 47.2,
+      "pnl": 13200.0,
+      "pf": 1.92,
+      "symbol": "4911.T",
+      "time_window": "morning_open_only",
+      "base": {
+        "tp_jpy": 8,
+        "sl_jpy": 4,
+        "entry_dev_jpy": 8
+      },
+      "n_days": 18,
+      "pnl_per_day": 733.0
+    },
+    {
+      "trades": 180,
+      "wr": 37.8,
+      "pnl": -300.0,
+      "pf": 1.0,
+      "symbol": "4911.T",
+      "time_window": "morning_session_only",
+      "base": {
+        "tp_jpy": 8,
+        "sl_jpy": 4,
+        "entry_dev_jpy": 8
+      },
+      "n_days": 18,
+      "pnl_per_day": -17.0
+    },
+    {
+      "trades": 92,
+      "wr": 46.7,
+      "pnl": 26400.0,
+      "pf": 1.83,
+      "symbol": "4911.T",
+      "time_window": "open_plus_afternoon",
+      "base": {
+        "tp_jpy": 8,
+        "sl_jpy": 4,
+        "entry_dev_jpy": 8
+      },
+      "n_days": 18,
+      "pnl_per_day": 1467.0
+    },
+    {
+      "trades": 232,
+      "wr": 40.1,
+      "pnl": 8600.0,
+      "pf": 1.09,
+      "symbol": "4911.T",
+      "time_window": "session_plus_afternoon",
+      "base": {
+        "tp_jpy": 8,
+        "sl_jpy": 4,
+        "entry_dev_jpy": 8
+      },
+      "n_days": 18,
+      "pnl_per_day": 478.0
+    },
+    {
+      "trades": 584,
+      "wr": 45.7,
+      "pnl": 41600.0,
+      "pf": 1.29,
+      "symbol": "6501.T",
+      "time_window": "all_default",
+      "base": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10,
+        "open_bias_mode": true
+      },
+      "n_days": 18,
+      "pnl_per_day": 2311.0
+    },
+    {
+      "trades": 264,
+      "wr": 47.3,
+      "pnl": 18800.0,
+      "pf": 1.39,
+      "symbol": "6501.T",
+      "time_window": "afternoon_only",
+      "base": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10,
+        "open_bias_mode": true
+      },
+      "n_days": 18,
+      "pnl_per_day": 1044.0
+    },
+    {
+      "trades": 35,
+      "wr": 17.1,
+      "pnl": -9200.0,
+      "pf": 0.39,
+      "symbol": "6501.T",
+      "time_window": "morning_open_only",
+      "base": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10,
+        "open_bias_mode": true
+      },
+      "n_days": 18,
+      "pnl_per_day": -511.0
+    },
+    {
+      "trades": 293,
+      "wr": 43.3,
+      "pnl": 16300.0,
+      "pf": 1.21,
+      "symbol": "6501.T",
+      "time_window": "morning_session_only",
+      "base": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10,
+        "open_bias_mode": true
+      },
+      "n_days": 18,
+      "pnl_per_day": 906.0
+    },
+    {
+      "trades": 299,
+      "wr": 43.8,
+      "pnl": 9600.0,
+      "pf": 1.15,
+      "symbol": "6501.T",
+      "time_window": "open_plus_afternoon",
+      "base": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10,
+        "open_bias_mode": true
+      },
+      "n_days": 18,
+      "pnl_per_day": 533.0
+    },
+    {
+      "trades": 549,
+      "wr": 45.9,
+      "pnl": 41800.0,
+      "pf": 1.33,
+      "symbol": "6501.T",
+      "time_window": "session_plus_afternoon",
+      "base": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10,
+        "open_bias_mode": true
+      },
+      "n_days": 18,
+      "pnl_per_day": 2322.0
+    },
+    {
+      "trades": 585,
+      "wr": 43.1,
+      "pnl": 41200.0,
+      "pf": 1.16,
+      "symbol": "1605.T",
+      "time_window": "all_default",
+      "base": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10,
+        "open_bias_mode": true
+      },
+      "n_days": 18,
+      "pnl_per_day": 2289.0
+    },
+    {
+      "trades": 277,
+      "wr": 42.2,
+      "pnl": -2400.0,
+      "pf": 0.98,
+      "symbol": "1605.T",
+      "time_window": "afternoon_only",
+      "base": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10,
+        "open_bias_mode": true
+      },
+      "n_days": 18,
+      "pnl_per_day": -133.0
+    },
+    {
+      "trades": 38,
+      "wr": 42.1,
+      "pnl": 6000.0,
+      "pf": 1.29,
+      "symbol": "1605.T",
+      "time_window": "morning_open_only",
+      "base": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10,
+        "open_bias_mode": true
+      },
+      "n_days": 18,
+      "pnl_per_day": 333.0
+    },
+    {
+      "trades": 278,
+      "wr": 43.5,
+      "pnl": 33000.0,
+      "pf": 1.25,
+      "symbol": "1605.T",
+      "time_window": "morning_session_only",
+      "base": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10,
+        "open_bias_mode": true
+      },
+      "n_days": 18,
+      "pnl_per_day": 1833.0
+    },
+    {
+      "trades": 315,
+      "wr": 42.2,
+      "pnl": 3600.0,
+      "pf": 1.03,
+      "symbol": "1605.T",
+      "time_window": "open_plus_afternoon",
+      "base": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10,
+        "open_bias_mode": true
+      },
+      "n_days": 18,
+      "pnl_per_day": 200.0
+    },
+    {
+      "trades": 549,
+      "wr": 42.3,
+      "pnl": 22200.0,
+      "pf": 1.09,
+      "symbol": "1605.T",
+      "time_window": "session_plus_afternoon",
+      "base": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10,
+        "open_bias_mode": true
+      },
+      "n_days": 18,
+      "pnl_per_day": 1233.0
+    },
+    {
+      "trades": 608,
+      "wr": 43.8,
+      "pnl": 34300.0,
+      "pf": 1.29,
+      "symbol": "8316.T",
+      "time_window": "all_default",
+      "base": {
+        "tp_jpy": 8,
+        "sl_jpy": 4,
+        "entry_dev_jpy": 8
+      },
+      "n_days": 18,
+      "pnl_per_day": 1906.0
+    },
+    {
+      "trades": 243,
+      "wr": 43.6,
+      "pnl": 8300.0,
+      "pf": 1.19,
+      "symbol": "8316.T",
+      "time_window": "afternoon_only",
+      "base": {
+        "tp_jpy": 8,
+        "sl_jpy": 4,
+        "entry_dev_jpy": 8
+      },
+      "n_days": 18,
+      "pnl_per_day": 461.0
+    },
+    {
+      "trades": 55,
+      "wr": 43.6,
+      "pnl": 5300.0,
+      "pf": 1.43,
+      "symbol": "8316.T",
+      "time_window": "morning_open_only",
+      "base": {
+        "tp_jpy": 8,
+        "sl_jpy": 4,
+        "entry_dev_jpy": 8
+      },
+      "n_days": 18,
+      "pnl_per_day": 294.0
+    },
+    {
+      "trades": 320,
+      "wr": 40.6,
+      "pnl": 13200.0,
+      "pf": 1.19,
+      "symbol": "8316.T",
+      "time_window": "morning_session_only",
+      "base": {
+        "tp_jpy": 8,
+        "sl_jpy": 4,
+        "entry_dev_jpy": 8
+      },
+      "n_days": 18,
+      "pnl_per_day": 733.0
+    },
+    {
+      "trades": 298,
+      "wr": 43.6,
+      "pnl": 13600.0,
+      "pf": 1.25,
+      "symbol": "8316.T",
+      "time_window": "open_plus_afternoon",
+      "base": {
+        "tp_jpy": 8,
+        "sl_jpy": 4,
+        "entry_dev_jpy": 8
+      },
+      "n_days": 18,
+      "pnl_per_day": 756.0
+    },
+    {
+      "trades": 559,
+      "wr": 43.3,
+      "pnl": 24000.0,
+      "pf": 1.22,
+      "symbol": "8316.T",
+      "time_window": "session_plus_afternoon",
+      "base": {
+        "tp_jpy": 8,
+        "sl_jpy": 4,
+        "entry_dev_jpy": 8
+      },
+      "n_days": 18,
+      "pnl_per_day": 1333.0
+    },
+    {
+      "trades": 326,
+      "wr": 44.2,
+      "pnl": 31650.0,
+      "pf": 1.16,
+      "symbol": "6752.T",
+      "time_window": "all_default",
+      "base": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10
+      },
+      "n_days": 18,
+      "pnl_per_day": 1758.0
+    },
+    {
+      "trades": 99,
+      "wr": 46.5,
+      "pnl": 8000.0,
+      "pf": 1.16,
+      "symbol": "6752.T",
+      "time_window": "afternoon_only",
+      "base": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10
+      },
+      "n_days": 18,
+      "pnl_per_day": 444.0
+    },
+    {
+      "trades": 39,
+      "wr": 53.8,
+      "pnl": 28350.0,
+      "pf": 2.17,
+      "symbol": "6752.T",
+      "time_window": "morning_open_only",
+      "base": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10
+      },
+      "n_days": 18,
+      "pnl_per_day": 1575.0
+    },
+    {
+      "trades": 185,
+      "wr": 43.8,
+      "pnl": 5800.0,
+      "pf": 1.05,
+      "symbol": "6752.T",
+      "time_window": "morning_session_only",
+      "base": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10
+      },
+      "n_days": 18,
+      "pnl_per_day": 322.0
+    },
+    {
+      "trades": 143,
+      "wr": 47.6,
+      "pnl": 33150.0,
+      "pf": 1.4,
+      "symbol": "6752.T",
+      "time_window": "open_plus_afternoon",
+      "base": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10
+      },
+      "n_days": 18,
+      "pnl_per_day": 1842.0
+    },
+    {
+      "trades": 283,
+      "wr": 43.5,
+      "pnl": 6100.0,
+      "pf": 1.04,
+      "symbol": "6752.T",
+      "time_window": "session_plus_afternoon",
+      "base": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10
+      },
+      "n_days": 18,
+      "pnl_per_day": 339.0
+    },
+    {
+      "trades": 360,
+      "wr": 36.1,
+      "pnl": 31000.0,
+      "pf": 1.07,
+      "symbol": "3103.T",
+      "time_window": "all_default",
+      "base": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10,
+        "open_bias_mode": true
+      },
+      "n_days": 18,
+      "pnl_per_day": 1722.0
+    },
+    {
+      "trades": 166,
+      "wr": 33.1,
+      "pnl": -26100.0,
+      "pf": 0.87,
+      "symbol": "3103.T",
+      "time_window": "afternoon_only",
+      "base": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10,
+        "open_bias_mode": true
+      },
+      "n_days": 18,
+      "pnl_per_day": -1450.0
+    },
+    {
+      "trades": 20,
+      "wr": 50.0,
+      "pnl": 26800.0,
+      "pf": 2.25,
+      "symbol": "3103.T",
+      "time_window": "morning_open_only",
+      "base": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10,
+        "open_bias_mode": true
+      },
+      "n_days": 18,
+      "pnl_per_day": 1489.0
+    },
+    {
+      "trades": 162,
+      "wr": 32.7,
+      "pnl": -30200.0,
+      "pf": 0.86,
+      "symbol": "3103.T",
+      "time_window": "morning_session_only",
+      "base": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10,
+        "open_bias_mode": true
+      },
+      "n_days": 18,
+      "pnl_per_day": -1678.0
+    },
+    {
+      "trades": 192,
+      "wr": 35.9,
+      "pnl": 10900.0,
+      "pf": 1.05,
+      "symbol": "3103.T",
+      "time_window": "open_plus_afternoon",
+      "base": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10,
+        "open_bias_mode": true
+      },
+      "n_days": 18,
+      "pnl_per_day": 606.0
+    },
+    {
+      "trades": 331,
+      "wr": 32.6,
+      "pnl": -47600.0,
+      "pf": 0.88,
+      "symbol": "3103.T",
+      "time_window": "session_plus_afternoon",
+      "base": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10,
+        "open_bias_mode": true
+      },
+      "n_days": 18,
+      "pnl_per_day": -2644.0
+    },
+    {
+      "trades": 604,
+      "wr": 41.6,
+      "pnl": 30400.0,
+      "pf": 1.21,
+      "symbol": "8058.T",
+      "time_window": "all_default",
+      "base": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10,
+        "open_bias_mode": true
+      },
+      "n_days": 18,
+      "pnl_per_day": 1689.0
+    },
+    {
+      "trades": 271,
+      "wr": 43.2,
+      "pnl": 18200.0,
+      "pf": 1.32,
+      "symbol": "8058.T",
+      "time_window": "afternoon_only",
+      "base": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10,
+        "open_bias_mode": true
+      },
+      "n_days": 18,
+      "pnl_per_day": 1011.0
+    },
+    {
+      "trades": 33,
+      "wr": 45.5,
+      "pnl": 5900.0,
+      "pf": 1.69,
+      "symbol": "8058.T",
+      "time_window": "morning_open_only",
+      "base": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10,
+        "open_bias_mode": true
+      },
+      "n_days": 18,
+      "pnl_per_day": 328.0
+    },
+    {
+      "trades": 305,
+      "wr": 37.4,
+      "pnl": 3600.0,
+      "pf": 1.05,
+      "symbol": "8058.T",
+      "time_window": "morning_session_only",
+      "base": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10,
+        "open_bias_mode": true
+      },
+      "n_days": 18,
+      "pnl_per_day": 200.0
+    },
+    {
+      "trades": 304,
+      "wr": 43.4,
+      "pnl": 24300.0,
+      "pf": 1.36,
+      "symbol": "8058.T",
+      "time_window": "open_plus_afternoon",
+      "base": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10,
+        "open_bias_mode": true
+      },
+      "n_days": 18,
+      "pnl_per_day": 1350.0
+    },
+    {
+      "trades": 574,
+      "wr": 40.8,
+      "pnl": 26000.0,
+      "pf": 1.19,
+      "symbol": "8058.T",
+      "time_window": "session_plus_afternoon",
+      "base": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10,
+        "open_bias_mode": true
+      },
+      "n_days": 18,
+      "pnl_per_day": 1444.0
+    },
+    {
+      "trades": 35,
+      "wr": 48.6,
+      "pnl": 28640.0,
+      "pf": 1.78,
+      "symbol": "8136.T",
+      "time_window": "all_default",
+      "base": {
+        "tp_jpy": 5,
+        "sl_jpy": 3,
+        "entry_dev_jpy": 6
+      },
+      "n_days": 18,
+      "pnl_per_day": 1591.0
+    },
+    {
+      "trades": 3,
+      "wr": 33.3,
+      "pnl": 1600.0,
+      "pf": 1.8,
+      "symbol": "8136.T",
+      "time_window": "afternoon_only",
+      "base": {
+        "tp_jpy": 5,
+        "sl_jpy": 3,
+        "entry_dev_jpy": 6
+      },
+      "n_days": 18,
+      "pnl_per_day": 89.0
+    },
+    {
+      "trades": 14,
+      "wr": 64.3,
+      "pnl": 26870.0,
+      "pf": 3.61,
+      "symbol": "8136.T",
+      "time_window": "morning_open_only",
+      "base": {
+        "tp_jpy": 5,
+        "sl_jpy": 3,
+        "entry_dev_jpy": 6
+      },
+      "n_days": 18,
+      "pnl_per_day": 1493.0
+    },
+    {
+      "trades": 18,
+      "wr": 38.9,
+      "pnl": -880.0,
+      "pf": 0.96,
+      "symbol": "8136.T",
+      "time_window": "morning_session_only",
+      "base": {
+        "tp_jpy": 5,
+        "sl_jpy": 3,
+        "entry_dev_jpy": 6
+      },
+      "n_days": 18,
+      "pnl_per_day": -49.0
+    },
+    {
+      "trades": 17,
+      "wr": 58.8,
+      "pnl": 28670.0,
+      "pf": 3.29,
+      "symbol": "8136.T",
+      "time_window": "open_plus_afternoon",
+      "base": {
+        "tp_jpy": 5,
+        "sl_jpy": 3,
+        "entry_dev_jpy": 6
+      },
+      "n_days": 18,
+      "pnl_per_day": 1593.0
+    },
+    {
+      "trades": 21,
+      "wr": 38.1,
+      "pnl": 720.0,
+      "pf": 1.03,
+      "symbol": "8136.T",
+      "time_window": "session_plus_afternoon",
+      "base": {
+        "tp_jpy": 5,
+        "sl_jpy": 3,
+        "entry_dev_jpy": 6
+      },
+      "n_days": 18,
+      "pnl_per_day": 40.0
+    },
+    {
+      "trades": 268,
+      "wr": 42.5,
+      "pnl": 24150.0,
+      "pf": 1.2,
+      "symbol": "4568.T",
+      "time_window": "all_default",
+      "base": {
+        "tp_jpy": 5,
+        "sl_jpy": 3,
+        "entry_dev_jpy": 6
+      },
+      "n_days": 18,
+      "pnl_per_day": 1342.0
+    },
+    {
+      "trades": 64,
+      "wr": 54.7,
+      "pnl": 17100.0,
+      "pf": 1.76,
+      "symbol": "4568.T",
+      "time_window": "afternoon_only",
+      "base": {
+        "tp_jpy": 5,
+        "sl_jpy": 3,
+        "entry_dev_jpy": 6
+      },
+      "n_days": 18,
+      "pnl_per_day": 950.0
+    },
+    {
+      "trades": 57,
+      "wr": 35.1,
+      "pnl": -1800.0,
+      "pf": 0.94,
+      "symbol": "4568.T",
+      "time_window": "morning_open_only",
+      "base": {
+        "tp_jpy": 5,
+        "sl_jpy": 3,
+        "entry_dev_jpy": 6
+      },
+      "n_days": 18,
+      "pnl_per_day": -100.0
+    },
+    {
+      "trades": 152,
+      "wr": 40.1,
+      "pnl": 5700.0,
+      "pf": 1.08,
+      "symbol": "4568.T",
+      "time_window": "morning_session_only",
+      "base": {
+        "tp_jpy": 5,
+        "sl_jpy": 3,
+        "entry_dev_jpy": 6
+      },
+      "n_days": 18,
+      "pnl_per_day": 317.0
+    },
+    {
+      "trades": 121,
+      "wr": 45.5,
+      "pnl": 15300.0,
+      "pf": 1.29,
+      "symbol": "4568.T",
+      "time_window": "open_plus_afternoon",
+      "base": {
+        "tp_jpy": 5,
+        "sl_jpy": 3,
+        "entry_dev_jpy": 6
+      },
+      "n_days": 18,
+      "pnl_per_day": 850.0
+    },
+    {
+      "trades": 215,
+      "wr": 42.3,
+      "pnl": 11700.0,
+      "pf": 1.12,
+      "symbol": "4568.T",
+      "time_window": "session_plus_afternoon",
+      "base": {
+        "tp_jpy": 5,
+        "sl_jpy": 3,
+        "entry_dev_jpy": 6
+      },
+      "n_days": 18,
+      "pnl_per_day": 650.0
+    },
+    {
+      "trades": 69,
+      "wr": 49.3,
+      "pnl": 16800.0,
+      "pf": 1.71,
+      "symbol": "9433.T",
+      "time_window": "all_default",
+      "base": {
+        "tp_jpy": 5,
+        "sl_jpy": 3,
+        "entry_dev_jpy": 5,
+        "avoid_open_min": 0
+      },
+      "n_days": 18,
+      "pnl_per_day": 933.0
+    },
+    {
+      "trades": 4,
+      "wr": 50.0,
+      "pnl": 450.0,
+      "pf": 1.27,
+      "symbol": "9433.T",
+      "time_window": "afternoon_only",
+      "base": {
+        "tp_jpy": 5,
+        "sl_jpy": 3,
+        "entry_dev_jpy": 5,
+        "avoid_open_min": 0
+      },
+      "n_days": 18,
+      "pnl_per_day": 25.0
+    },
+    {
+      "trades": 40,
+      "wr": 60.0,
+      "pnl": 18300.0,
+      "pf": 2.65,
+      "symbol": "9433.T",
+      "time_window": "morning_open_only",
+      "base": {
+        "tp_jpy": 5,
+        "sl_jpy": 3,
+        "entry_dev_jpy": 5,
+        "avoid_open_min": 0
+      },
+      "n_days": 18,
+      "pnl_per_day": 1017.0
+    },
+    {
+      "trades": 29,
+      "wr": 24.1,
+      "pnl": -8850.0,
+      "pf": 0.46,
+      "symbol": "9433.T",
+      "time_window": "morning_session_only",
+      "base": {
+        "tp_jpy": 5,
+        "sl_jpy": 3,
+        "entry_dev_jpy": 5,
+        "avoid_open_min": 0
+      },
+      "n_days": 18,
+      "pnl_per_day": -492.0
+    },
+    {
+      "trades": 44,
+      "wr": 59.1,
+      "pnl": 18750.0,
+      "pf": 2.47,
+      "symbol": "9433.T",
+      "time_window": "open_plus_afternoon",
+      "base": {
+        "tp_jpy": 5,
+        "sl_jpy": 3,
+        "entry_dev_jpy": 5,
+        "avoid_open_min": 0
+      },
+      "n_days": 18,
+      "pnl_per_day": 1042.0
+    },
+    {
+      "trades": 33,
+      "wr": 27.3,
+      "pnl": -8400.0,
+      "pf": 0.53,
+      "symbol": "9433.T",
+      "time_window": "session_plus_afternoon",
+      "base": {
+        "tp_jpy": 5,
+        "sl_jpy": 3,
+        "entry_dev_jpy": 5,
+        "avoid_open_min": 0
+      },
+      "n_days": 18,
+      "pnl_per_day": -467.0
+    },
+    {
+      "trades": 137,
+      "wr": 46.7,
+      "pnl": 9300.0,
+      "pf": 1.12,
+      "symbol": "8306.T",
+      "time_window": "all_default",
+      "base": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10
+      },
+      "n_days": 18,
+      "pnl_per_day": 517.0
+    },
+    {
+      "trades": 27,
+      "wr": 44.4,
+      "pnl": -1050.0,
+      "pf": 0.94,
+      "symbol": "8306.T",
+      "time_window": "afternoon_only",
+      "base": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10
+      },
+      "n_days": 18,
+      "pnl_per_day": -58.0
+    },
+    {
+      "trades": 19,
+      "wr": 26.3,
+      "pnl": -8850.0,
+      "pf": 0.52,
+      "symbol": "8306.T",
+      "time_window": "morning_open_only",
+      "base": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10
+      },
+      "n_days": 18,
+      "pnl_per_day": -492.0
+    },
+    {
+      "trades": 91,
+      "wr": 48.4,
+      "pnl": 9450.0,
+      "pf": 1.22,
+      "symbol": "8306.T",
+      "time_window": "morning_session_only",
+      "base": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10
+      },
+      "n_days": 18,
+      "pnl_per_day": 525.0
+    },
+    {
+      "trades": 46,
+      "wr": 37.0,
+      "pnl": -9900.0,
+      "pf": 0.72,
+      "symbol": "8306.T",
+      "time_window": "open_plus_afternoon",
+      "base": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10
+      },
+      "n_days": 18,
+      "pnl_per_day": -550.0
+    },
+    {
+      "trades": 118,
+      "wr": 47.5,
+      "pnl": 8400.0,
+      "pf": 1.14,
+      "symbol": "8306.T",
+      "time_window": "session_plus_afternoon",
+      "base": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10
+      },
+      "n_days": 18,
+      "pnl_per_day": 467.0
+    },
+    {
+      "trades": 151,
+      "wr": 41.1,
+      "pnl": 3200.0,
+      "pf": 1.05,
+      "symbol": "9468.T",
+      "time_window": "all_default",
+      "base": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10,
+        "open_bias_mode": true
+      },
+      "n_days": 18,
+      "pnl_per_day": 178.0
+    },
+    {
+      "trades": 57,
+      "wr": 33.3,
+      "pnl": -11800.0,
+      "pf": 0.55,
+      "symbol": "9468.T",
+      "time_window": "afternoon_only",
+      "base": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10,
+        "open_bias_mode": true
+      },
+      "n_days": 18,
+      "pnl_per_day": -656.0
+    },
+    {
+      "trades": 16,
+      "wr": 56.2,
+      "pnl": 7200.0,
+      "pf": 2.09,
+      "symbol": "9468.T",
+      "time_window": "morning_open_only",
+      "base": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10,
+        "open_bias_mode": true
+      },
+      "n_days": 18,
+      "pnl_per_day": 400.0
+    },
+    {
+      "trades": 81,
+      "wr": 44.4,
+      "pnl": 8600.0,
+      "pf": 1.29,
+      "symbol": "9468.T",
+      "time_window": "morning_session_only",
+      "base": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10,
+        "open_bias_mode": true
+      },
+      "n_days": 18,
+      "pnl_per_day": 478.0
+    },
+    {
+      "trades": 73,
+      "wr": 38.4,
+      "pnl": -4600.0,
+      "pf": 0.86,
+      "symbol": "9468.T",
+      "time_window": "open_plus_afternoon",
+      "base": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10,
+        "open_bias_mode": true
+      },
+      "n_days": 18,
+      "pnl_per_day": -256.0
+    },
+    {
+      "trades": 134,
+      "wr": 39.6,
+      "pnl": -3800.0,
+      "pf": 0.93,
+      "symbol": "9468.T",
+      "time_window": "session_plus_afternoon",
+      "base": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10,
+        "open_bias_mode": true
+      },
+      "n_days": 18,
+      "pnl_per_day": -211.0
+    }
+  ]
+}

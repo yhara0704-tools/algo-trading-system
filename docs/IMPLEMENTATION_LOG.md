@@ -4007,3 +4007,102 @@ ratio=1.5 で baseline +800 → **+3,797 (4.7 倍改善)**。
 - 9984.T 専用 reservation 機構 or universe 構成検討 (D5)
 - MicroScalp 投入で取引回数増 (D3)
 
+
+## 2026-05-02 (土) GW Day 3: D3 MicroScalp per-symbol 最適化 — +32,725 円/日 (理論最大) 発見
+
+### 起点
+
+paper の `jp_trade_executions` を確認 → **MicroScalp は 1 件も実 paper trade されていない** ことが判明 (universe_active.json に未投入)。
+過去の grid search (data/micro_scalp_v5_mtfra_latest.json) は **WR 49.6%, PF 1.02, -16 円/日** とユニバーサル設定では赤字。
+
+### D3a: 30d 1m データで per-symbol 最適化
+
+`scripts/microscalp_per_symbol_30d_optimize.py` 作成。yfinance 1m 28 日 (4 batch × 7 日) 取得し、16 銘柄 × 7 設定 = 112 run の grid search。
+
+#### per-symbol best 結果 (18 営業日サンプル)
+
+| Rank | 銘柄 | best label | trades | WR | **pnl/day** |
+|------|------|------------|--------|-----|------------|
+| 1 | 6613.T | tp8_sl4_dev8 | 265 | 44.2% | **+7,589** |
+| 2 | 6723.T | tp5_sl3_dev6 | 585 | 42.9% | **+3,158** |
+| 3 | 9984.T | tp10_sl5_dev10 | 775 | 38.3% | **+2,872** |
+| 4 | 4911.T | tp8_sl4_dev8 | 265 | 43.4% | **+2,356** |
+| 5 | 6501.T | tp10_sl5 + open_bias | 584 | 45.7% | **+2,311** |
+| 6 | 1605.T | tp10_sl5 + open_bias | 585 | 43.1% | **+2,289** |
+
+**TOP 6 合計: +20,575 円/日** (1 銘柄全余力前提)
+
+#### 時間帯別発見 (重要)
+
+- **12:30-15:00 後場が圧倒的に高 WR** (大半の銘柄で WR 45-50%)
+- **09:00-09:30 開場直後は銘柄により有利** (8136 WR 64%, 9433 WR 59%, 6752 WR 52%)
+- **09:30-11:30 前場メインは弱め** (WR 36-44%)
+- 9432.T (NTT 株価 152円) は entry_dev_jpy 閾値に届かず signal 0
+
+### D3b: 時間帯絞り込み fine-tune
+
+`scripts/microscalp_time_window_finetune.py` で 6 種の time_window × per-symbol best base config を比較。
+
+#### 銘柄ごとに有効な time_window
+
+- **6613/6723/9984/4911/4568/3103/8058/6752 など主力**: `all_default` が最強 (12:30-15:00 を含む全時間帯活用)
+- **6501.T**: `session_plus_afternoon` (09:30-11:30 + 12:30-15:00) で +2,322
+- **6752.T**: `open_plus_afternoon` (09:00-09:30 + 12:30-15:00) で +1,842
+- **8136.T**: `open_plus_afternoon` で +1,593 (09:00-09:30 WR 64.3% が貢献)
+- **9433.T**: `open_plus_afternoon` で +1,042 (寄り 30 分専用 WR 59%)
+- **8306.T**: `morning_session_only` (09:30-11:30) で +525
+- **9468.T**: `morning_session_only` で +478
+
+#### 最終 per-symbol best (15 銘柄合計 +32,725 円/日 理論最大)
+
+```
+6613.T   all_default               +7,589 wr=44.2% trades=265
+6723.T   all_default               +3,158 wr=42.9% trades=585
+9984.T   all_default               +2,872 wr=38.3% trades=775
+4911.T   all_default               +2,356 wr=43.4% trades=265
+6501.T   session_plus_afternoon    +2,322 wr=45.9% trades=549
+1605.T   all_default               +2,289 wr=43.1% trades=585
+8316.T   all_default               +1,906 wr=43.8% trades=608
+6752.T   open_plus_afternoon       +1,842 wr=47.6% trades=143
+3103.T   all_default               +1,722 wr=36.1% trades=360
+8058.T   all_default               +1,689 wr=41.6% trades=604
+8136.T   open_plus_afternoon       +1,593 wr=58.8% trades= 17
+4568.T   all_default               +1,342 wr=42.5% trades=268
+9433.T   open_plus_afternoon       +1,042 wr=59.1% trades= 44
+8306.T   morning_session_only      +  525 wr=48.4% trades= 91
+9468.T   morning_session_only      +  478 wr=44.4% trades= 81
+
+TOP 6 合計: +20,586 円/日
+全銘柄合計: +32,725 円/日 (1 銘柄全余力前提、理論最大)
+```
+
+### 現実的見積もり
+
+- **1 銘柄全余力前提 = 過剰**: 6 銘柄並走時は 1 銘柄余力 1/6 圧縮
+- 単純割なら **+5,500-8,200 円/日** が現実的射程
+- ただし MicroScalp は timeout=2 分で短期決着するため、余力ローテーション速度が速く、圧縮率は実測 1/3-1/4 程度の可能性
+
+### Day 3 実装完了 + 残タスク
+
+実装済み:
+- `scripts/microscalp_per_symbol_30d_optimize.py` (per-symbol grid search)
+- `scripts/microscalp_time_window_finetune.py` (time_window 絞り込み)
+- `data/microscalp_per_symbol_30d.json` (16 銘柄 × 7 config 結果)
+- `data/microscalp_time_window_finetune.json` (15 銘柄 × 6 window 結果)
+
+D5 (universe 確定日) で実施予定:
+- universe_active.json への MicroScalp 6 銘柄投入 (`observation_only=true` で 1 週間観察)
+- MicroScalp 専用 lot 縮小 (1 銘柄 16.5 万円相当 = 1/6 余力) のロジック実装
+- jp_live_runner に MicroScalp registration 追加 (現状 MacdRci/Breakout 等のみ)
+
+### 改革後の累積効果見積もり
+
+| 改革 | PnL 改善 (円/日) |
+|------|----------------:|
+| D2 余力管理改革 (concurrent_value_cap) | +3,000 |
+| D3 MicroScalp 投入 (現実的見積もり) | +5,500-8,200 |
+| **改革後合計 (現状 +800〜+4,058 ベース)** | **+9,300-15,300** |
+| **目標 +29,700 (3%/日) との差** | -14,400-20,400 |
+
+→ D4 (BB Short / Pullback / Donchian 検証) と D5-7 で残り 50% を埋める計画。
+

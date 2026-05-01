@@ -1,0 +1,4075 @@
+{
+  "generated_at": "2026-05-01T18:52:49.503245+09:00",
+  "n_symbols": 16,
+  "n_configs": 7,
+  "results": [
+    {
+      "trades": 206,
+      "wins": 85,
+      "wr": 41.3,
+      "pnl": 10950.0,
+      "pf": 1.08,
+      "n_bars": 5780,
+      "long_n": 59,
+      "short_n": 147,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 26,
+          "wr": 50.0,
+          "pnl": 10500.0
+        },
+        "09:30-11:30": {
+          "n": 123,
+          "wr": 35.8,
+          "pnl": -14400.0
+        },
+        "12:30-15:00": {
+          "n": 57,
+          "wr": 49.1,
+          "pnl": 14850.0
+        }
+      },
+      "symbol": "4568.T",
+      "label": "tp10_sl5_dev10",
+      "params": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10
+      },
+      "n_days": 18,
+      "pnl_per_day": 608.0
+    },
+    {
+      "trades": 235,
+      "wins": 94,
+      "wr": 40.0,
+      "pnl": 12900.0,
+      "pf": 1.09,
+      "n_bars": 5780,
+      "long_n": 78,
+      "short_n": 157,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 41,
+          "wr": 43.9,
+          "pnl": 9450.0
+        },
+        "09:30-11:30": {
+          "n": 140,
+          "wr": 35.7,
+          "pnl": -7500.0
+        },
+        "12:30-15:00": {
+          "n": 54,
+          "wr": 48.1,
+          "pnl": 10950.0
+        }
+      },
+      "symbol": "4568.T",
+      "label": "tp8_sl4_dev8",
+      "params": {
+        "tp_jpy": 8,
+        "sl_jpy": 4,
+        "entry_dev_jpy": 8
+      },
+      "n_days": 18,
+      "pnl_per_day": 717.0
+    },
+    {
+      "trades": 268,
+      "wins": 114,
+      "wr": 42.5,
+      "pnl": 24150.0,
+      "pf": 1.2,
+      "n_bars": 5780,
+      "long_n": 94,
+      "short_n": 174,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 53,
+          "wr": 37.7,
+          "pnl": 1050.0
+        },
+        "09:30-11:30": {
+          "n": 153,
+          "wr": 39.9,
+          "pnl": 8850.0
+        },
+        "12:30-15:00": {
+          "n": 62,
+          "wr": 53.2,
+          "pnl": 14250.0
+        }
+      },
+      "symbol": "4568.T",
+      "label": "tp5_sl3_dev6",
+      "params": {
+        "tp_jpy": 5,
+        "sl_jpy": 3,
+        "entry_dev_jpy": 6
+      },
+      "n_days": 18,
+      "pnl_per_day": 1342.0
+    },
+    {
+      "trades": 197,
+      "wins": 77,
+      "wr": 39.1,
+      "pnl": -1200.0,
+      "pf": 0.99,
+      "n_bars": 5780,
+      "long_n": 51,
+      "short_n": 146,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 17,
+          "wr": 35.3,
+          "pnl": 0.0
+        },
+        "09:30-11:30": {
+          "n": 123,
+          "wr": 35.0,
+          "pnl": -16050.0
+        },
+        "12:30-15:00": {
+          "n": 57,
+          "wr": 49.1,
+          "pnl": 14850.0
+        }
+      },
+      "symbol": "4568.T",
+      "label": "tp10_sl5_bias",
+      "params": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10,
+        "open_bias_mode": true
+      },
+      "n_days": 18,
+      "pnl_per_day": -67.0
+    },
+    {
+      "trades": 139,
+      "wins": 50,
+      "wr": 36.0,
+      "pnl": -9000.0,
+      "pf": 0.9,
+      "n_bars": 5780,
+      "long_n": 40,
+      "short_n": 99,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 0,
+          "wr": 0,
+          "pnl": 0
+        },
+        "09:30-11:30": {
+          "n": 139,
+          "wr": 36.0,
+          "pnl": -9000.0
+        },
+        "12:30-15:00": {
+          "n": 0,
+          "wr": 0,
+          "pnl": 0
+        }
+      },
+      "symbol": "4568.T",
+      "label": "morning_only_tp8_sl4",
+      "params": {
+        "tp_jpy": 8,
+        "sl_jpy": 4,
+        "entry_dev_jpy": 8,
+        "allowed_time_windows": [
+          "09:30-11:30"
+        ]
+      },
+      "n_days": 18,
+      "pnl_per_day": -500.0
+    },
+    {
+      "trades": 59,
+      "wins": 29,
+      "wr": 49.2,
+      "pnl": 8550.0,
+      "pf": 1.26,
+      "n_bars": 5780,
+      "long_n": 15,
+      "short_n": 44,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 0,
+          "wr": 0,
+          "pnl": 0
+        },
+        "09:30-11:30": {
+          "n": 0,
+          "wr": 0,
+          "pnl": 0
+        },
+        "12:30-15:00": {
+          "n": 59,
+          "wr": 49.2,
+          "pnl": 8550.0
+        }
+      },
+      "symbol": "4568.T",
+      "label": "afternoon_only_tp10_sl5",
+      "params": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10,
+        "allowed_time_windows": [
+          "12:30-15:00"
+        ]
+      },
+      "n_days": 18,
+      "pnl_per_day": 475.0
+    },
+    {
+      "trades": 63,
+      "wins": 27,
+      "wr": 42.9,
+      "pnl": 5250.0,
+      "pf": 1.16,
+      "n_bars": 5780,
+      "long_n": 33,
+      "short_n": 30,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 59,
+          "wr": 45.8,
+          "pnl": 8700.0
+        },
+        "09:30-11:30": {
+          "n": 4,
+          "wr": 0.0,
+          "pnl": -3450.0
+        },
+        "12:30-15:00": {
+          "n": 0,
+          "wr": 0,
+          "pnl": 0
+        }
+      },
+      "symbol": "4568.T",
+      "label": "open_30min_only_tp5_sl3",
+      "params": {
+        "tp_jpy": 5,
+        "sl_jpy": 3,
+        "entry_dev_jpy": 5,
+        "avoid_open_min": 0,
+        "allowed_time_windows": [
+          "09:00-09:30"
+        ]
+      },
+      "n_days": 18,
+      "pnl_per_day": 292.0
+    },
+    {
+      "trades": 137,
+      "wins": 64,
+      "wr": 46.7,
+      "pnl": 9300.0,
+      "pf": 1.12,
+      "n_bars": 5788,
+      "long_n": 63,
+      "short_n": 74,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 17,
+          "wr": 29.4,
+          "pnl": -6150.0
+        },
+        "09:30-11:30": {
+          "n": 93,
+          "wr": 50.5,
+          "pnl": 16500.0
+        },
+        "12:30-15:00": {
+          "n": 27,
+          "wr": 44.4,
+          "pnl": -1050.0
+        }
+      },
+      "symbol": "8306.T",
+      "label": "tp10_sl5_dev10",
+      "params": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10
+      },
+      "n_days": 18,
+      "pnl_per_day": 517.0
+    },
+    {
+      "trades": 171,
+      "wins": 71,
+      "wr": 41.5,
+      "pnl": 1650.0,
+      "pf": 1.02,
+      "n_bars": 5788,
+      "long_n": 75,
+      "short_n": 96,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 27,
+          "wr": 40.7,
+          "pnl": 1800.0
+        },
+        "09:30-11:30": {
+          "n": 111,
+          "wr": 40.5,
+          "pnl": -2700.0
+        },
+        "12:30-15:00": {
+          "n": 33,
+          "wr": 45.5,
+          "pnl": 2550.0
+        }
+      },
+      "symbol": "8306.T",
+      "label": "tp8_sl4_dev8",
+      "params": {
+        "tp_jpy": 8,
+        "sl_jpy": 4,
+        "entry_dev_jpy": 8
+      },
+      "n_days": 18,
+      "pnl_per_day": 92.0
+    },
+    {
+      "trades": 205,
+      "wins": 76,
+      "wr": 37.1,
+      "pnl": -7500.0,
+      "pf": 0.93,
+      "n_bars": 5788,
+      "long_n": 91,
+      "short_n": 114,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 41,
+          "wr": 36.6,
+          "pnl": 300.0
+        },
+        "09:30-11:30": {
+          "n": 128,
+          "wr": 37.5,
+          "pnl": -7800.0
+        },
+        "12:30-15:00": {
+          "n": 36,
+          "wr": 36.1,
+          "pnl": 0.0
+        }
+      },
+      "symbol": "8306.T",
+      "label": "tp5_sl3_dev6",
+      "params": {
+        "tp_jpy": 5,
+        "sl_jpy": 3,
+        "entry_dev_jpy": 6
+      },
+      "n_days": 18,
+      "pnl_per_day": -417.0
+    },
+    {
+      "trades": 131,
+      "wins": 61,
+      "wr": 46.6,
+      "pnl": 6600.0,
+      "pf": 1.09,
+      "n_bars": 5788,
+      "long_n": 59,
+      "short_n": 72,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 12,
+          "wr": 33.3,
+          "pnl": -5250.0
+        },
+        "09:30-11:30": {
+          "n": 92,
+          "wr": 48.9,
+          "pnl": 12900.0
+        },
+        "12:30-15:00": {
+          "n": 27,
+          "wr": 44.4,
+          "pnl": -1050.0
+        }
+      },
+      "symbol": "8306.T",
+      "label": "tp10_sl5_bias",
+      "params": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10,
+        "open_bias_mode": true
+      },
+      "n_days": 18,
+      "pnl_per_day": 367.0
+    },
+    {
+      "trades": 109,
+      "wins": 44,
+      "wr": 40.4,
+      "pnl": -9300.0,
+      "pf": 0.85,
+      "n_bars": 5788,
+      "long_n": 58,
+      "short_n": 51,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 0,
+          "wr": 0,
+          "pnl": 0
+        },
+        "09:30-11:30": {
+          "n": 109,
+          "wr": 40.4,
+          "pnl": -9300.0
+        },
+        "12:30-15:00": {
+          "n": 0,
+          "wr": 0,
+          "pnl": 0
+        }
+      },
+      "symbol": "8306.T",
+      "label": "morning_only_tp8_sl4",
+      "params": {
+        "tp_jpy": 8,
+        "sl_jpy": 4,
+        "entry_dev_jpy": 8,
+        "allowed_time_windows": [
+          "09:30-11:30"
+        ]
+      },
+      "n_days": 18,
+      "pnl_per_day": -517.0
+    },
+    {
+      "trades": 27,
+      "wins": 12,
+      "wr": 44.4,
+      "pnl": -1050.0,
+      "pf": 0.94,
+      "n_bars": 5788,
+      "long_n": 7,
+      "short_n": 20,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 0,
+          "wr": 0,
+          "pnl": 0
+        },
+        "09:30-11:30": {
+          "n": 0,
+          "wr": 0,
+          "pnl": 0
+        },
+        "12:30-15:00": {
+          "n": 27,
+          "wr": 44.4,
+          "pnl": -1050.0
+        }
+      },
+      "symbol": "8306.T",
+      "label": "afternoon_only_tp10_sl5",
+      "params": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10,
+        "allowed_time_windows": [
+          "12:30-15:00"
+        ]
+      },
+      "n_days": 18,
+      "pnl_per_day": -58.0
+    },
+    {
+      "trades": 51,
+      "wins": 23,
+      "wr": 45.1,
+      "pnl": 7500.0,
+      "pf": 1.3,
+      "n_bars": 5788,
+      "long_n": 21,
+      "short_n": 30,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 51,
+          "wr": 45.1,
+          "pnl": 7500.0
+        },
+        "09:30-11:30": {
+          "n": 0,
+          "wr": 0,
+          "pnl": 0
+        },
+        "12:30-15:00": {
+          "n": 0,
+          "wr": 0,
+          "pnl": 0
+        }
+      },
+      "symbol": "8306.T",
+      "label": "open_30min_only_tp5_sl3",
+      "params": {
+        "tp_jpy": 5,
+        "sl_jpy": 3,
+        "entry_dev_jpy": 5,
+        "avoid_open_min": 0,
+        "allowed_time_windows": [
+          "09:00-09:30"
+        ]
+      },
+      "n_days": 18,
+      "pnl_per_day": 417.0
+    },
+    {
+      "trades": 362,
+      "wins": 133,
+      "wr": 36.7,
+      "pnl": 20400.0,
+      "pf": 1.05,
+      "n_bars": 4672,
+      "long_n": 178,
+      "short_n": 184,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 26,
+          "wr": 61.5,
+          "pnl": 47400.0
+        },
+        "09:30-11:30": {
+          "n": 163,
+          "wr": 33.1,
+          "pnl": -32400.0
+        },
+        "12:30-15:00": {
+          "n": 171,
+          "wr": 36.8,
+          "pnl": 11200.0
+        }
+      },
+      "symbol": "3103.T",
+      "label": "tp10_sl5_dev10",
+      "params": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10
+      },
+      "n_days": 18,
+      "pnl_per_day": 1133.0
+    },
+    {
+      "trades": 383,
+      "wins": 134,
+      "wr": 35.0,
+      "pnl": -24900.0,
+      "pf": 0.93,
+      "n_bars": 4672,
+      "long_n": 184,
+      "short_n": 199,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 27,
+          "wr": 59.3,
+          "pnl": 37700.0
+        },
+        "09:30-11:30": {
+          "n": 168,
+          "wr": 32.1,
+          "pnl": -37900.0
+        },
+        "12:30-15:00": {
+          "n": 186,
+          "wr": 34.4,
+          "pnl": -20400.0
+        }
+      },
+      "symbol": "3103.T",
+      "label": "tp8_sl4_dev8",
+      "params": {
+        "tp_jpy": 8,
+        "sl_jpy": 4,
+        "entry_dev_jpy": 8
+      },
+      "n_days": 18,
+      "pnl_per_day": -1383.0
+    },
+    {
+      "trades": 399,
+      "wins": 128,
+      "wr": 32.1,
+      "pnl": -62800.0,
+      "pf": 0.79,
+      "n_bars": 4672,
+      "long_n": 190,
+      "short_n": 209,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 31,
+          "wr": 48.4,
+          "pnl": 11700.0
+        },
+        "09:30-11:30": {
+          "n": 169,
+          "wr": 29.6,
+          "pnl": -39200.0
+        },
+        "12:30-15:00": {
+          "n": 198,
+          "wr": 31.8,
+          "pnl": -32900.0
+        }
+      },
+      "symbol": "3103.T",
+      "label": "tp5_sl3_dev6",
+      "params": {
+        "tp_jpy": 5,
+        "sl_jpy": 3,
+        "entry_dev_jpy": 6
+      },
+      "n_days": 18,
+      "pnl_per_day": -3489.0
+    },
+    {
+      "trades": 360,
+      "wins": 130,
+      "wr": 36.1,
+      "pnl": 31000.0,
+      "pf": 1.07,
+      "n_bars": 4672,
+      "long_n": 176,
+      "short_n": 184,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 20,
+          "wr": 50.0,
+          "pnl": 27600.0
+        },
+        "09:30-11:30": {
+          "n": 163,
+          "wr": 33.7,
+          "pnl": -18000.0
+        },
+        "12:30-15:00": {
+          "n": 175,
+          "wr": 37.1,
+          "pnl": 27200.0
+        }
+      },
+      "symbol": "3103.T",
+      "label": "tp10_sl5_bias",
+      "params": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10,
+        "open_bias_mode": true
+      },
+      "n_days": 18,
+      "pnl_per_day": 1722.0
+    },
+    {
+      "trades": 171,
+      "wins": 52,
+      "wr": 30.4,
+      "pnl": -49400.0,
+      "pf": 0.74,
+      "n_bars": 4672,
+      "long_n": 72,
+      "short_n": 99,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 0,
+          "wr": 0,
+          "pnl": 0
+        },
+        "09:30-11:30": {
+          "n": 170,
+          "wr": 30.6,
+          "pnl": -46600.0
+        },
+        "12:30-15:00": {
+          "n": 0,
+          "wr": 0,
+          "pnl": 0
+        }
+      },
+      "symbol": "3103.T",
+      "label": "morning_only_tp8_sl4",
+      "params": {
+        "tp_jpy": 8,
+        "sl_jpy": 4,
+        "entry_dev_jpy": 8,
+        "allowed_time_windows": [
+          "09:30-11:30"
+        ]
+      },
+      "n_days": 18,
+      "pnl_per_day": -2744.0
+    },
+    {
+      "trades": 166,
+      "wins": 55,
+      "wr": 33.1,
+      "pnl": -26100.0,
+      "pf": 0.87,
+      "n_bars": 4672,
+      "long_n": 85,
+      "short_n": 81,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 0,
+          "wr": 0,
+          "pnl": 0
+        },
+        "09:30-11:30": {
+          "n": 0,
+          "wr": 0,
+          "pnl": 0
+        },
+        "12:30-15:00": {
+          "n": 166,
+          "wr": 33.1,
+          "pnl": -26100.0
+        }
+      },
+      "symbol": "3103.T",
+      "label": "afternoon_only_tp10_sl5",
+      "params": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10,
+        "allowed_time_windows": [
+          "12:30-15:00"
+        ]
+      },
+      "n_days": 18,
+      "pnl_per_day": -1450.0
+    },
+    {
+      "trades": 39,
+      "wins": 18,
+      "wr": 46.2,
+      "pnl": 10100.0,
+      "pf": 1.32,
+      "n_bars": 4672,
+      "long_n": 20,
+      "short_n": 19,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 36,
+          "wr": 50.0,
+          "pnl": 14700.0
+        },
+        "09:30-11:30": {
+          "n": 3,
+          "wr": 0.0,
+          "pnl": -4600.0
+        },
+        "12:30-15:00": {
+          "n": 0,
+          "wr": 0,
+          "pnl": 0
+        }
+      },
+      "symbol": "3103.T",
+      "label": "open_30min_only_tp5_sl3",
+      "params": {
+        "tp_jpy": 5,
+        "sl_jpy": 3,
+        "entry_dev_jpy": 5,
+        "avoid_open_min": 0,
+        "allowed_time_windows": [
+          "09:00-09:30"
+        ]
+      },
+      "n_days": 18,
+      "pnl_per_day": 561.0
+    },
+    {
+      "trades": 501,
+      "wins": 203,
+      "wr": 40.5,
+      "pnl": 850.0,
+      "pf": 1.0,
+      "n_bars": 5772,
+      "long_n": 247,
+      "short_n": 254,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 46,
+          "wr": 30.4,
+          "pnl": -7800.0
+        },
+        "09:30-11:30": {
+          "n": 241,
+          "wr": 39.4,
+          "pnl": 1700.0
+        },
+        "12:30-15:00": {
+          "n": 211,
+          "wr": 43.6,
+          "pnl": 3100.0
+        }
+      },
+      "symbol": "6723.T",
+      "label": "tp10_sl5_dev10",
+      "params": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10
+      },
+      "n_days": 18,
+      "pnl_per_day": 47.0
+    },
+    {
+      "trades": 546,
+      "wins": 226,
+      "wr": 41.4,
+      "pnl": 38650.0,
+      "pf": 1.12,
+      "n_bars": 5772,
+      "long_n": 271,
+      "short_n": 275,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 50,
+          "wr": 30.0,
+          "pnl": -5550.0
+        },
+        "09:30-11:30": {
+          "n": 271,
+          "wr": 41.0,
+          "pnl": 24800.0
+        },
+        "12:30-15:00": {
+          "n": 223,
+          "wr": 43.9,
+          "pnl": 14000.0
+        }
+      },
+      "symbol": "6723.T",
+      "label": "tp8_sl4_dev8",
+      "params": {
+        "tp_jpy": 8,
+        "sl_jpy": 4,
+        "entry_dev_jpy": 8
+      },
+      "n_days": 18,
+      "pnl_per_day": 2147.0
+    },
+    {
+      "trades": 585,
+      "wins": 251,
+      "wr": 42.9,
+      "pnl": 56850.0,
+      "pf": 1.22,
+      "n_bars": 5772,
+      "long_n": 284,
+      "short_n": 301,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 55,
+          "wr": 34.5,
+          "pnl": -4400.0
+        },
+        "09:30-11:30": {
+          "n": 298,
+          "wr": 40.9,
+          "pnl": 29000.0
+        },
+        "12:30-15:00": {
+          "n": 230,
+          "wr": 47.8,
+          "pnl": 33900.0
+        }
+      },
+      "symbol": "6723.T",
+      "label": "tp5_sl3_dev6",
+      "params": {
+        "tp_jpy": 5,
+        "sl_jpy": 3,
+        "entry_dev_jpy": 6
+      },
+      "n_days": 18,
+      "pnl_per_day": 3158.0
+    },
+    {
+      "trades": 486,
+      "wins": 201,
+      "wr": 41.4,
+      "pnl": 3900.0,
+      "pf": 1.01,
+      "n_bars": 5772,
+      "long_n": 235,
+      "short_n": 251,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 25,
+          "wr": 24.0,
+          "pnl": -10850.0
+        },
+        "09:30-11:30": {
+          "n": 248,
+          "wr": 41.1,
+          "pnl": 12200.0
+        },
+        "12:30-15:00": {
+          "n": 211,
+          "wr": 43.6,
+          "pnl": 900.0
+        }
+      },
+      "symbol": "6723.T",
+      "label": "tp10_sl5_bias",
+      "params": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10,
+        "open_bias_mode": true
+      },
+      "n_days": 18,
+      "pnl_per_day": 217.0
+    },
+    {
+      "trades": 277,
+      "wins": 115,
+      "wr": 41.5,
+      "pnl": 26500.0,
+      "pf": 1.16,
+      "n_bars": 5772,
+      "long_n": 144,
+      "short_n": 133,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 0,
+          "wr": 0,
+          "pnl": 0
+        },
+        "09:30-11:30": {
+          "n": 276,
+          "wr": 41.3,
+          "pnl": 23800.0
+        },
+        "12:30-15:00": {
+          "n": 0,
+          "wr": 0,
+          "pnl": 0
+        }
+      },
+      "symbol": "6723.T",
+      "label": "morning_only_tp8_sl4",
+      "params": {
+        "tp_jpy": 8,
+        "sl_jpy": 4,
+        "entry_dev_jpy": 8,
+        "allowed_time_windows": [
+          "09:30-11:30"
+        ]
+      },
+      "n_days": 18,
+      "pnl_per_day": 1472.0
+    },
+    {
+      "trades": 208,
+      "wins": 97,
+      "wr": 46.6,
+      "pnl": 21600.0,
+      "pf": 1.19,
+      "n_bars": 5772,
+      "long_n": 99,
+      "short_n": 109,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 0,
+          "wr": 0,
+          "pnl": 0
+        },
+        "09:30-11:30": {
+          "n": 0,
+          "wr": 0,
+          "pnl": 0
+        },
+        "12:30-15:00": {
+          "n": 208,
+          "wr": 46.6,
+          "pnl": 21600.0
+        }
+      },
+      "symbol": "6723.T",
+      "label": "afternoon_only_tp10_sl5",
+      "params": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10,
+        "allowed_time_windows": [
+          "12:30-15:00"
+        ]
+      },
+      "n_days": 18,
+      "pnl_per_day": 1200.0
+    },
+    {
+      "trades": 63,
+      "wins": 22,
+      "wr": 34.9,
+      "pnl": -1100.0,
+      "pf": 0.97,
+      "n_bars": 5772,
+      "long_n": 27,
+      "short_n": 36,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 59,
+          "wr": 32.2,
+          "pnl": -5400.0
+        },
+        "09:30-11:30": {
+          "n": 4,
+          "wr": 75.0,
+          "pnl": 4300.0
+        },
+        "12:30-15:00": {
+          "n": 0,
+          "wr": 0,
+          "pnl": 0
+        }
+      },
+      "symbol": "6723.T",
+      "label": "open_30min_only_tp5_sl3",
+      "params": {
+        "tp_jpy": 5,
+        "sl_jpy": 3,
+        "entry_dev_jpy": 5,
+        "avoid_open_min": 0,
+        "allowed_time_windows": [
+          "09:00-09:30"
+        ]
+      },
+      "n_days": 18,
+      "pnl_per_day": -61.0
+    },
+    {
+      "trades": 24,
+      "wins": 11,
+      "wr": 45.8,
+      "pnl": -1350.0,
+      "pf": 0.87,
+      "n_bars": 5787,
+      "long_n": 20,
+      "short_n": 4,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 5,
+          "wr": 40.0,
+          "pnl": -1200.0
+        },
+        "09:30-11:30": {
+          "n": 16,
+          "wr": 37.5,
+          "pnl": -2550.0
+        },
+        "12:30-15:00": {
+          "n": 3,
+          "wr": 100.0,
+          "pnl": 2400.0
+        }
+      },
+      "symbol": "9433.T",
+      "label": "tp10_sl5_dev10",
+      "params": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10
+      },
+      "n_days": 18,
+      "pnl_per_day": -75.0
+    },
+    {
+      "trades": 30,
+      "wins": 11,
+      "wr": 36.7,
+      "pnl": -900.0,
+      "pf": 0.92,
+      "n_bars": 5787,
+      "long_n": 23,
+      "short_n": 7,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 7,
+          "wr": 28.6,
+          "pnl": -1200.0
+        },
+        "09:30-11:30": {
+          "n": 20,
+          "wr": 30.0,
+          "pnl": -2100.0
+        },
+        "12:30-15:00": {
+          "n": 3,
+          "wr": 100.0,
+          "pnl": 2400.0
+        }
+      },
+      "symbol": "9433.T",
+      "label": "tp8_sl4_dev8",
+      "params": {
+        "tp_jpy": 8,
+        "sl_jpy": 4,
+        "entry_dev_jpy": 8
+      },
+      "n_days": 18,
+      "pnl_per_day": -50.0
+    },
+    {
+      "trades": 57,
+      "wins": 29,
+      "wr": 50.9,
+      "pnl": 17850.0,
+      "pf": 2.03,
+      "n_bars": 5787,
+      "long_n": 40,
+      "short_n": 17,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 29,
+          "wr": 62.1,
+          "pnl": 16950.0
+        },
+        "09:30-11:30": {
+          "n": 24,
+          "wr": 33.3,
+          "pnl": -900.0
+        },
+        "12:30-15:00": {
+          "n": 4,
+          "wr": 75.0,
+          "pnl": 1800.0
+        }
+      },
+      "symbol": "9433.T",
+      "label": "tp5_sl3_dev6",
+      "params": {
+        "tp_jpy": 5,
+        "sl_jpy": 3,
+        "entry_dev_jpy": 6
+      },
+      "n_days": 18,
+      "pnl_per_day": 992.0
+    },
+    {
+      "trades": 24,
+      "wins": 11,
+      "wr": 45.8,
+      "pnl": -1350.0,
+      "pf": 0.87,
+      "n_bars": 5787,
+      "long_n": 20,
+      "short_n": 4,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 5,
+          "wr": 40.0,
+          "pnl": -1200.0
+        },
+        "09:30-11:30": {
+          "n": 16,
+          "wr": 37.5,
+          "pnl": -2550.0
+        },
+        "12:30-15:00": {
+          "n": 3,
+          "wr": 100.0,
+          "pnl": 2400.0
+        }
+      },
+      "symbol": "9433.T",
+      "label": "tp10_sl5_bias",
+      "params": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10,
+        "open_bias_mode": true
+      },
+      "n_days": 18,
+      "pnl_per_day": -75.0
+    },
+    {
+      "trades": 21,
+      "wins": 5,
+      "wr": 23.8,
+      "pnl": -4200.0,
+      "pf": 0.62,
+      "n_bars": 5787,
+      "long_n": 17,
+      "short_n": 4,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 0,
+          "wr": 0,
+          "pnl": 0
+        },
+        "09:30-11:30": {
+          "n": 21,
+          "wr": 23.8,
+          "pnl": -4200.0
+        },
+        "12:30-15:00": {
+          "n": 0,
+          "wr": 0,
+          "pnl": 0
+        }
+      },
+      "symbol": "9433.T",
+      "label": "morning_only_tp8_sl4",
+      "params": {
+        "tp_jpy": 8,
+        "sl_jpy": 4,
+        "entry_dev_jpy": 8,
+        "allowed_time_windows": [
+          "09:30-11:30"
+        ]
+      },
+      "n_days": 18,
+      "pnl_per_day": -233.0
+    },
+    {
+      "trades": 3,
+      "wins": 3,
+      "wr": 100.0,
+      "pnl": 2400.0,
+      "pf": 2400000000.0,
+      "n_bars": 5787,
+      "long_n": 2,
+      "short_n": 1,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 0,
+          "wr": 0,
+          "pnl": 0
+        },
+        "09:30-11:30": {
+          "n": 0,
+          "wr": 0,
+          "pnl": 0
+        },
+        "12:30-15:00": {
+          "n": 3,
+          "wr": 100.0,
+          "pnl": 2400.0
+        }
+      },
+      "symbol": "9433.T",
+      "label": "afternoon_only_tp10_sl5",
+      "params": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10,
+        "allowed_time_windows": [
+          "12:30-15:00"
+        ]
+      },
+      "n_days": 18,
+      "pnl_per_day": 133.0
+    },
+    {
+      "trades": 40,
+      "wins": 24,
+      "wr": 60.0,
+      "pnl": 18300.0,
+      "pf": 2.65,
+      "n_bars": 5787,
+      "long_n": 21,
+      "short_n": 19,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 39,
+          "wr": 59.0,
+          "pnl": 18000.0
+        },
+        "09:30-11:30": {
+          "n": 1,
+          "wr": 100.0,
+          "pnl": 300.0
+        },
+        "12:30-15:00": {
+          "n": 0,
+          "wr": 0,
+          "pnl": 0
+        }
+      },
+      "symbol": "9433.T",
+      "label": "open_30min_only_tp5_sl3",
+      "params": {
+        "tp_jpy": 5,
+        "sl_jpy": 3,
+        "entry_dev_jpy": 5,
+        "avoid_open_min": 0,
+        "allowed_time_windows": [
+          "09:00-09:30"
+        ]
+      },
+      "n_days": 18,
+      "pnl_per_day": 1017.0
+    },
+    {
+      "trades": 16,
+      "wins": 9,
+      "wr": 56.2,
+      "pnl": 13310.0,
+      "pf": 1.59,
+      "n_bars": 5788,
+      "long_n": 1,
+      "short_n": 15,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 1,
+          "wr": 100.0,
+          "pnl": 4950.0
+        },
+        "09:30-11:30": {
+          "n": 12,
+          "wr": 58.3,
+          "pnl": 9210.0
+        },
+        "12:30-15:00": {
+          "n": 3,
+          "wr": 33.3,
+          "pnl": -850.0
+        }
+      },
+      "symbol": "8136.T",
+      "label": "tp10_sl5_dev10",
+      "params": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10
+      },
+      "n_days": 18,
+      "pnl_per_day": 739.0
+    },
+    {
+      "trades": 24,
+      "wins": 11,
+      "wr": 45.8,
+      "pnl": -1030.0,
+      "pf": 0.97,
+      "n_bars": 5788,
+      "long_n": 3,
+      "short_n": 21,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 6,
+          "wr": 50.0,
+          "pnl": 990.0
+        },
+        "09:30-11:30": {
+          "n": 15,
+          "wr": 46.7,
+          "pnl": -2420.0
+        },
+        "12:30-15:00": {
+          "n": 3,
+          "wr": 33.3,
+          "pnl": 400.0
+        }
+      },
+      "symbol": "8136.T",
+      "label": "tp8_sl4_dev8",
+      "params": {
+        "tp_jpy": 8,
+        "sl_jpy": 4,
+        "entry_dev_jpy": 8
+      },
+      "n_days": 18,
+      "pnl_per_day": -57.0
+    },
+    {
+      "trades": 35,
+      "wins": 17,
+      "wr": 48.6,
+      "pnl": 28640.0,
+      "pf": 1.78,
+      "n_bars": 5788,
+      "long_n": 8,
+      "short_n": 27,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 14,
+          "wr": 64.3,
+          "pnl": 27920.0
+        },
+        "09:30-11:30": {
+          "n": 18,
+          "wr": 38.9,
+          "pnl": -1080.0
+        },
+        "12:30-15:00": {
+          "n": 3,
+          "wr": 33.3,
+          "pnl": 1800.0
+        }
+      },
+      "symbol": "8136.T",
+      "label": "tp5_sl3_dev6",
+      "params": {
+        "tp_jpy": 5,
+        "sl_jpy": 3,
+        "entry_dev_jpy": 6
+      },
+      "n_days": 18,
+      "pnl_per_day": 1591.0
+    },
+    {
+      "trades": 16,
+      "wins": 9,
+      "wr": 56.2,
+      "pnl": 13310.0,
+      "pf": 1.59,
+      "n_bars": 5788,
+      "long_n": 1,
+      "short_n": 15,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 1,
+          "wr": 100.0,
+          "pnl": 4950.0
+        },
+        "09:30-11:30": {
+          "n": 12,
+          "wr": 58.3,
+          "pnl": 9210.0
+        },
+        "12:30-15:00": {
+          "n": 3,
+          "wr": 33.3,
+          "pnl": -850.0
+        }
+      },
+      "symbol": "8136.T",
+      "label": "tp10_sl5_bias",
+      "params": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10,
+        "open_bias_mode": true
+      },
+      "n_days": 18,
+      "pnl_per_day": 739.0
+    },
+    {
+      "trades": 15,
+      "wins": 7,
+      "wr": 46.7,
+      "pnl": -2820.0,
+      "pf": 0.87,
+      "n_bars": 5788,
+      "long_n": 1,
+      "short_n": 14,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 0,
+          "wr": 0,
+          "pnl": 0
+        },
+        "09:30-11:30": {
+          "n": 15,
+          "wr": 46.7,
+          "pnl": -2820.0
+        },
+        "12:30-15:00": {
+          "n": 0,
+          "wr": 0,
+          "pnl": 0
+        }
+      },
+      "symbol": "8136.T",
+      "label": "morning_only_tp8_sl4",
+      "params": {
+        "tp_jpy": 8,
+        "sl_jpy": 4,
+        "entry_dev_jpy": 8,
+        "allowed_time_windows": [
+          "09:30-11:30"
+        ]
+      },
+      "n_days": 18,
+      "pnl_per_day": -157.0
+    },
+    {
+      "trades": 3,
+      "wins": 1,
+      "wr": 33.3,
+      "pnl": -400.0,
+      "pf": 0.89,
+      "n_bars": 5788,
+      "long_n": 0,
+      "short_n": 3,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 0,
+          "wr": 0,
+          "pnl": 0
+        },
+        "09:30-11:30": {
+          "n": 0,
+          "wr": 0,
+          "pnl": 0
+        },
+        "12:30-15:00": {
+          "n": 3,
+          "wr": 33.3,
+          "pnl": -400.0
+        }
+      },
+      "symbol": "8136.T",
+      "label": "afternoon_only_tp10_sl5",
+      "params": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10,
+        "allowed_time_windows": [
+          "12:30-15:00"
+        ]
+      },
+      "n_days": 18,
+      "pnl_per_day": -22.0
+    },
+    {
+      "trades": 16,
+      "wins": 10,
+      "wr": 62.5,
+      "pnl": 17270.0,
+      "pf": 2.02,
+      "n_bars": 5788,
+      "long_n": 7,
+      "short_n": 9,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 15,
+          "wr": 66.7,
+          "pnl": 19880.0
+        },
+        "09:30-11:30": {
+          "n": 1,
+          "wr": 0.0,
+          "pnl": -2610.0
+        },
+        "12:30-15:00": {
+          "n": 0,
+          "wr": 0,
+          "pnl": 0
+        }
+      },
+      "symbol": "8136.T",
+      "label": "open_30min_only_tp5_sl3",
+      "params": {
+        "tp_jpy": 5,
+        "sl_jpy": 3,
+        "entry_dev_jpy": 5,
+        "avoid_open_min": 0,
+        "allowed_time_windows": [
+          "09:00-09:30"
+        ]
+      },
+      "n_days": 18,
+      "pnl_per_day": 959.0
+    },
+    {
+      "trades": 775,
+      "wins": 297,
+      "wr": 38.3,
+      "pnl": 51700.0,
+      "pf": 1.16,
+      "n_bars": 5775,
+      "long_n": 325,
+      "short_n": 450,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 60,
+          "wr": 21.7,
+          "pnl": -18400.0
+        },
+        "09:30-11:30": {
+          "n": 323,
+          "wr": 36.2,
+          "pnl": 20400.0
+        },
+        "12:30-15:00": {
+          "n": 389,
+          "wr": 42.4,
+          "pnl": 47900.0
+        }
+      },
+      "symbol": "9984.T",
+      "label": "tp10_sl5_dev10",
+      "params": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10
+      },
+      "n_days": 18,
+      "pnl_per_day": 2872.0
+    },
+    {
+      "trades": 791,
+      "wins": 299,
+      "wr": 37.8,
+      "pnl": 35200.0,
+      "pf": 1.12,
+      "n_bars": 5775,
+      "long_n": 334,
+      "short_n": 457,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 60,
+          "wr": 23.3,
+          "pnl": -11500.0
+        },
+        "09:30-11:30": {
+          "n": 327,
+          "wr": 36.7,
+          "pnl": 18000.0
+        },
+        "12:30-15:00": {
+          "n": 401,
+          "wr": 40.9,
+          "pnl": 29500.0
+        }
+      },
+      "symbol": "9984.T",
+      "label": "tp8_sl4_dev8",
+      "params": {
+        "tp_jpy": 8,
+        "sl_jpy": 4,
+        "entry_dev_jpy": 8
+      },
+      "n_days": 18,
+      "pnl_per_day": 1956.0
+    },
+    {
+      "trades": 820,
+      "wins": 315,
+      "wr": 38.4,
+      "pnl": 11500.0,
+      "pf": 1.05,
+      "n_bars": 5775,
+      "long_n": 351,
+      "short_n": 469,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 61,
+          "wr": 27.9,
+          "pnl": -6700.0
+        },
+        "09:30-11:30": {
+          "n": 337,
+          "wr": 37.4,
+          "pnl": -1700.0
+        },
+        "12:30-15:00": {
+          "n": 418,
+          "wr": 40.7,
+          "pnl": 19600.0
+        }
+      },
+      "symbol": "9984.T",
+      "label": "tp5_sl3_dev6",
+      "params": {
+        "tp_jpy": 5,
+        "sl_jpy": 3,
+        "entry_dev_jpy": 6
+      },
+      "n_days": 18,
+      "pnl_per_day": 639.0
+    },
+    {
+      "trades": 748,
+      "wins": 278,
+      "wr": 37.2,
+      "pnl": 20300.0,
+      "pf": 1.06,
+      "n_bars": 5775,
+      "long_n": 310,
+      "short_n": 438,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 42,
+          "wr": 23.8,
+          "pnl": -12200.0
+        },
+        "09:30-11:30": {
+          "n": 324,
+          "wr": 35.8,
+          "pnl": 10000.0
+        },
+        "12:30-15:00": {
+          "n": 380,
+          "wr": 39.7,
+          "pnl": 22500.0
+        }
+      },
+      "symbol": "9984.T",
+      "label": "tp10_sl5_bias",
+      "params": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10,
+        "open_bias_mode": true
+      },
+      "n_days": 18,
+      "pnl_per_day": 1128.0
+    },
+    {
+      "trades": 335,
+      "wins": 124,
+      "wr": 37.0,
+      "pnl": 18600.0,
+      "pf": 1.15,
+      "n_bars": 5775,
+      "long_n": 156,
+      "short_n": 179,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 0,
+          "wr": 0,
+          "pnl": 0
+        },
+        "09:30-11:30": {
+          "n": 333,
+          "wr": 37.2,
+          "pnl": 20200.0
+        },
+        "12:30-15:00": {
+          "n": 0,
+          "wr": 0,
+          "pnl": 0
+        }
+      },
+      "symbol": "9984.T",
+      "label": "morning_only_tp8_sl4",
+      "params": {
+        "tp_jpy": 8,
+        "sl_jpy": 4,
+        "entry_dev_jpy": 8,
+        "allowed_time_windows": [
+          "09:30-11:30"
+        ]
+      },
+      "n_days": 18,
+      "pnl_per_day": 1033.0
+    },
+    {
+      "trades": 394,
+      "wins": 159,
+      "wr": 40.4,
+      "pnl": 29800.0,
+      "pf": 1.2,
+      "n_bars": 5775,
+      "long_n": 146,
+      "short_n": 248,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 0,
+          "wr": 0,
+          "pnl": 0
+        },
+        "09:30-11:30": {
+          "n": 0,
+          "wr": 0,
+          "pnl": 0
+        },
+        "12:30-15:00": {
+          "n": 394,
+          "wr": 40.4,
+          "pnl": 29800.0
+        }
+      },
+      "symbol": "9984.T",
+      "label": "afternoon_only_tp10_sl5",
+      "params": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10,
+        "allowed_time_windows": [
+          "12:30-15:00"
+        ]
+      },
+      "n_days": 18,
+      "pnl_per_day": 1656.0
+    },
+    {
+      "trades": 65,
+      "wins": 20,
+      "wr": 30.8,
+      "pnl": -4000.0,
+      "pf": 0.8,
+      "n_bars": 5775,
+      "long_n": 33,
+      "short_n": 32,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 63,
+          "wr": 28.6,
+          "pnl": -5600.0
+        },
+        "09:30-11:30": {
+          "n": 2,
+          "wr": 100.0,
+          "pnl": 1600.0
+        },
+        "12:30-15:00": {
+          "n": 0,
+          "wr": 0,
+          "pnl": 0
+        }
+      },
+      "symbol": "9984.T",
+      "label": "open_30min_only_tp5_sl3",
+      "params": {
+        "tp_jpy": 5,
+        "sl_jpy": 3,
+        "entry_dev_jpy": 5,
+        "avoid_open_min": 0,
+        "allowed_time_windows": [
+          "09:00-09:30"
+        ]
+      },
+      "n_days": 18,
+      "pnl_per_day": -222.0
+    },
+    {
+      "trades": 546,
+      "wins": 222,
+      "wr": 40.7,
+      "pnl": 9200.0,
+      "pf": 1.07,
+      "n_bars": 5788,
+      "long_n": 282,
+      "short_n": 264,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 45,
+          "wr": 31.1,
+          "pnl": -2600.0
+        },
+        "09:30-11:30": {
+          "n": 283,
+          "wr": 38.2,
+          "pnl": 3200.0
+        },
+        "12:30-15:00": {
+          "n": 215,
+          "wr": 46.5,
+          "pnl": 10000.0
+        }
+      },
+      "symbol": "8316.T",
+      "label": "tp10_sl5_dev10",
+      "params": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10
+      },
+      "n_days": 18,
+      "pnl_per_day": 511.0
+    },
+    {
+      "trades": 608,
+      "wins": 266,
+      "wr": 43.8,
+      "pnl": 34300.0,
+      "pf": 1.29,
+      "n_bars": 5788,
+      "long_n": 311,
+      "short_n": 297,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 53,
+          "wr": 45.3,
+          "pnl": 6000.0
+        },
+        "09:30-11:30": {
+          "n": 313,
+          "wr": 41.9,
+          "pnl": 18500.0
+        },
+        "12:30-15:00": {
+          "n": 238,
+          "wr": 46.2,
+          "pnl": 10500.0
+        }
+      },
+      "symbol": "8316.T",
+      "label": "tp8_sl4_dev8",
+      "params": {
+        "tp_jpy": 8,
+        "sl_jpy": 4,
+        "entry_dev_jpy": 8
+      },
+      "n_days": 18,
+      "pnl_per_day": 1906.0
+    },
+    {
+      "trades": 649,
+      "wins": 260,
+      "wr": 40.1,
+      "pnl": 9500.0,
+      "pf": 1.09,
+      "n_bars": 5788,
+      "long_n": 334,
+      "short_n": 315,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 63,
+          "wr": 41.3,
+          "pnl": 1500.0
+        },
+        "09:30-11:30": {
+          "n": 327,
+          "wr": 36.1,
+          "pnl": -2600.0
+        },
+        "12:30-15:00": {
+          "n": 256,
+          "wr": 45.3,
+          "pnl": 11600.0
+        }
+      },
+      "symbol": "8316.T",
+      "label": "tp5_sl3_dev6",
+      "params": {
+        "tp_jpy": 5,
+        "sl_jpy": 3,
+        "entry_dev_jpy": 6
+      },
+      "n_days": 18,
+      "pnl_per_day": 528.0
+    },
+    {
+      "trades": 540,
+      "wins": 226,
+      "wr": 41.9,
+      "pnl": 18000.0,
+      "pf": 1.15,
+      "n_bars": 5788,
+      "long_n": 274,
+      "short_n": 266,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 37,
+          "wr": 35.1,
+          "pnl": -300.0
+        },
+        "09:30-11:30": {
+          "n": 285,
+          "wr": 39.6,
+          "pnl": 9700.0
+        },
+        "12:30-15:00": {
+          "n": 215,
+          "wr": 46.5,
+          "pnl": 10000.0
+        }
+      },
+      "symbol": "8316.T",
+      "label": "tp10_sl5_bias",
+      "params": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10,
+        "open_bias_mode": true
+      },
+      "n_days": 18,
+      "pnl_per_day": 1000.0
+    },
+    {
+      "trades": 320,
+      "wins": 130,
+      "wr": 40.6,
+      "pnl": 13200.0,
+      "pf": 1.19,
+      "n_bars": 5788,
+      "long_n": 167,
+      "short_n": 153,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 0,
+          "wr": 0,
+          "pnl": 0
+        },
+        "09:30-11:30": {
+          "n": 316,
+          "wr": 40.8,
+          "pnl": 13900.0
+        },
+        "12:30-15:00": {
+          "n": 0,
+          "wr": 0,
+          "pnl": 0
+        }
+      },
+      "symbol": "8316.T",
+      "label": "morning_only_tp8_sl4",
+      "params": {
+        "tp_jpy": 8,
+        "sl_jpy": 4,
+        "entry_dev_jpy": 8,
+        "allowed_time_windows": [
+          "09:30-11:30"
+        ]
+      },
+      "n_days": 18,
+      "pnl_per_day": 733.0
+    },
+    {
+      "trades": 221,
+      "wins": 100,
+      "wr": 45.2,
+      "pnl": 8200.0,
+      "pf": 1.2,
+      "n_bars": 5788,
+      "long_n": 122,
+      "short_n": 99,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 0,
+          "wr": 0,
+          "pnl": 0
+        },
+        "09:30-11:30": {
+          "n": 0,
+          "wr": 0,
+          "pnl": 0
+        },
+        "12:30-15:00": {
+          "n": 221,
+          "wr": 45.2,
+          "pnl": 8200.0
+        }
+      },
+      "symbol": "8316.T",
+      "label": "afternoon_only_tp10_sl5",
+      "params": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10,
+        "allowed_time_windows": [
+          "12:30-15:00"
+        ]
+      },
+      "n_days": 18,
+      "pnl_per_day": 456.0
+    },
+    {
+      "trades": 70,
+      "wins": 25,
+      "wr": 35.7,
+      "pnl": -2600.0,
+      "pf": 0.81,
+      "n_bars": 5788,
+      "long_n": 32,
+      "short_n": 38,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 68,
+          "wr": 36.8,
+          "pnl": -2100.0
+        },
+        "09:30-11:30": {
+          "n": 2,
+          "wr": 0.0,
+          "pnl": -500.0
+        },
+        "12:30-15:00": {
+          "n": 0,
+          "wr": 0,
+          "pnl": 0
+        }
+      },
+      "symbol": "8316.T",
+      "label": "open_30min_only_tp5_sl3",
+      "params": {
+        "tp_jpy": 5,
+        "sl_jpy": 3,
+        "entry_dev_jpy": 5,
+        "avoid_open_min": 0,
+        "allowed_time_windows": [
+          "09:00-09:30"
+        ]
+      },
+      "n_days": 18,
+      "pnl_per_day": -144.0
+    },
+    {
+      "trades": 243,
+      "wins": 110,
+      "wr": 45.3,
+      "pnl": 123700.0,
+      "pf": 1.32,
+      "n_bars": 5782,
+      "long_n": 165,
+      "short_n": 78,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 10,
+          "wr": 40.0,
+          "pnl": 9500.0
+        },
+        "09:30-11:30": {
+          "n": 101,
+          "wr": 41.6,
+          "pnl": 17500.0
+        },
+        "12:30-15:00": {
+          "n": 131,
+          "wr": 48.9,
+          "pnl": 100200.0
+        }
+      },
+      "symbol": "6613.T",
+      "label": "tp10_sl5_dev10",
+      "params": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10
+      },
+      "n_days": 18,
+      "pnl_per_day": 6872.0
+    },
+    {
+      "trades": 265,
+      "wins": 117,
+      "wr": 44.2,
+      "pnl": 136600.0,
+      "pf": 1.36,
+      "n_bars": 5782,
+      "long_n": 172,
+      "short_n": 93,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 12,
+          "wr": 25.0,
+          "pnl": -12100.0
+        },
+        "09:30-11:30": {
+          "n": 102,
+          "wr": 44.1,
+          "pnl": 67800.0
+        },
+        "12:30-15:00": {
+          "n": 151,
+          "wr": 45.7,
+          "pnl": 80900.0
+        }
+      },
+      "symbol": "6613.T",
+      "label": "tp8_sl4_dev8",
+      "params": {
+        "tp_jpy": 8,
+        "sl_jpy": 4,
+        "entry_dev_jpy": 8
+      },
+      "n_days": 18,
+      "pnl_per_day": 7589.0
+    },
+    {
+      "trades": 296,
+      "wins": 120,
+      "wr": 40.5,
+      "pnl": 25000.0,
+      "pf": 1.08,
+      "n_bars": 5782,
+      "long_n": 177,
+      "short_n": 119,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 19,
+          "wr": 31.6,
+          "pnl": -5500.0
+        },
+        "09:30-11:30": {
+          "n": 119,
+          "wr": 36.1,
+          "pnl": -13500.0
+        },
+        "12:30-15:00": {
+          "n": 158,
+          "wr": 44.9,
+          "pnl": 44000.0
+        }
+      },
+      "symbol": "6613.T",
+      "label": "tp5_sl3_dev6",
+      "params": {
+        "tp_jpy": 5,
+        "sl_jpy": 3,
+        "entry_dev_jpy": 6
+      },
+      "n_days": 18,
+      "pnl_per_day": 1389.0
+    },
+    {
+      "trades": 248,
+      "wins": 114,
+      "wr": 46.0,
+      "pnl": 135800.0,
+      "pf": 1.34,
+      "n_bars": 5782,
+      "long_n": 165,
+      "short_n": 83,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 5,
+          "wr": 40.0,
+          "pnl": 4000.0
+        },
+        "09:30-11:30": {
+          "n": 102,
+          "wr": 43.1,
+          "pnl": 27300.0
+        },
+        "12:30-15:00": {
+          "n": 140,
+          "wr": 48.6,
+          "pnl": 108000.0
+        }
+      },
+      "symbol": "6613.T",
+      "label": "tp10_sl5_bias",
+      "params": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10,
+        "open_bias_mode": true
+      },
+      "n_days": 18,
+      "pnl_per_day": 7544.0
+    },
+    {
+      "trades": 107,
+      "wins": 44,
+      "wr": 41.1,
+      "pnl": 30700.0,
+      "pf": 1.19,
+      "n_bars": 5782,
+      "long_n": 64,
+      "short_n": 43,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 0,
+          "wr": 0,
+          "pnl": 0
+        },
+        "09:30-11:30": {
+          "n": 107,
+          "wr": 41.1,
+          "pnl": 30700.0
+        },
+        "12:30-15:00": {
+          "n": 0,
+          "wr": 0,
+          "pnl": 0
+        }
+      },
+      "symbol": "6613.T",
+      "label": "morning_only_tp8_sl4",
+      "params": {
+        "tp_jpy": 8,
+        "sl_jpy": 4,
+        "entry_dev_jpy": 8,
+        "allowed_time_windows": [
+          "09:30-11:30"
+        ]
+      },
+      "n_days": 18,
+      "pnl_per_day": 1706.0
+    },
+    {
+      "trades": 137,
+      "wins": 62,
+      "wr": 45.3,
+      "pnl": 82500.0,
+      "pf": 1.42,
+      "n_bars": 5782,
+      "long_n": 92,
+      "short_n": 45,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 0,
+          "wr": 0,
+          "pnl": 0
+        },
+        "09:30-11:30": {
+          "n": 0,
+          "wr": 0,
+          "pnl": 0
+        },
+        "12:30-15:00": {
+          "n": 137,
+          "wr": 45.3,
+          "pnl": 82500.0
+        }
+      },
+      "symbol": "6613.T",
+      "label": "afternoon_only_tp10_sl5",
+      "params": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10,
+        "allowed_time_windows": [
+          "12:30-15:00"
+        ]
+      },
+      "n_days": 18,
+      "pnl_per_day": 4583.0
+    },
+    {
+      "trades": 23,
+      "wins": 8,
+      "wr": 34.8,
+      "pnl": -2200.0,
+      "pf": 0.92,
+      "n_bars": 5782,
+      "long_n": 16,
+      "short_n": 7,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 22,
+          "wr": 36.4,
+          "pnl": -400.0
+        },
+        "09:30-11:30": {
+          "n": 1,
+          "wr": 0.0,
+          "pnl": -1800.0
+        },
+        "12:30-15:00": {
+          "n": 0,
+          "wr": 0,
+          "pnl": 0
+        }
+      },
+      "symbol": "6613.T",
+      "label": "open_30min_only_tp5_sl3",
+      "params": {
+        "tp_jpy": 5,
+        "sl_jpy": 3,
+        "entry_dev_jpy": 5,
+        "avoid_open_min": 0,
+        "allowed_time_windows": [
+          "09:00-09:30"
+        ]
+      },
+      "n_days": 18,
+      "pnl_per_day": -122.0
+    },
+    {
+      "trades": 594,
+      "wins": 253,
+      "wr": 42.6,
+      "pnl": 37800.0,
+      "pf": 1.14,
+      "n_bars": 5770,
+      "long_n": 309,
+      "short_n": 285,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 46,
+          "wr": 39.1,
+          "pnl": 4200.0
+        },
+        "09:30-11:30": {
+          "n": 276,
+          "wr": 43.5,
+          "pnl": 35400.0
+        },
+        "12:30-15:00": {
+          "n": 271,
+          "wr": 42.1,
+          "pnl": -4000.0
+        }
+      },
+      "symbol": "1605.T",
+      "label": "tp10_sl5_dev10",
+      "params": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10
+      },
+      "n_days": 18,
+      "pnl_per_day": 2100.0
+    },
+    {
+      "trades": 642,
+      "wins": 257,
+      "wr": 40.0,
+      "pnl": 28300.0,
+      "pf": 1.11,
+      "n_bars": 5770,
+      "long_n": 334,
+      "short_n": 308,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 57,
+          "wr": 38.6,
+          "pnl": 5900.0
+        },
+        "09:30-11:30": {
+          "n": 300,
+          "wr": 38.3,
+          "pnl": 11400.0
+        },
+        "12:30-15:00": {
+          "n": 284,
+          "wr": 42.3,
+          "pnl": 11600.0
+        }
+      },
+      "symbol": "1605.T",
+      "label": "tp8_sl4_dev8",
+      "params": {
+        "tp_jpy": 8,
+        "sl_jpy": 4,
+        "entry_dev_jpy": 8
+      },
+      "n_days": 18,
+      "pnl_per_day": 1572.0
+    },
+    {
+      "trades": 678,
+      "wins": 280,
+      "wr": 41.3,
+      "pnl": 30700.0,
+      "pf": 1.14,
+      "n_bars": 5770,
+      "long_n": 351,
+      "short_n": 327,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 60,
+          "wr": 36.7,
+          "pnl": -2800.0
+        },
+        "09:30-11:30": {
+          "n": 318,
+          "wr": 40.9,
+          "pnl": 18300.0
+        },
+        "12:30-15:00": {
+          "n": 298,
+          "wr": 43.0,
+          "pnl": 16200.0
+        }
+      },
+      "symbol": "1605.T",
+      "label": "tp5_sl3_dev6",
+      "params": {
+        "tp_jpy": 5,
+        "sl_jpy": 3,
+        "entry_dev_jpy": 6
+      },
+      "n_days": 18,
+      "pnl_per_day": 1706.0
+    },
+    {
+      "trades": 585,
+      "wins": 252,
+      "wr": 43.1,
+      "pnl": 41200.0,
+      "pf": 1.16,
+      "n_bars": 5770,
+      "long_n": 300,
+      "short_n": 285,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 37,
+          "wr": 40.5,
+          "pnl": 4000.0
+        },
+        "09:30-11:30": {
+          "n": 276,
+          "wr": 44.2,
+          "pnl": 39000.0
+        },
+        "12:30-15:00": {
+          "n": 271,
+          "wr": 42.1,
+          "pnl": -4000.0
+        }
+      },
+      "symbol": "1605.T",
+      "label": "tp10_sl5_bias",
+      "params": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10,
+        "open_bias_mode": true
+      },
+      "n_days": 18,
+      "pnl_per_day": 2289.0
+    },
+    {
+      "trades": 301,
+      "wins": 114,
+      "wr": 37.9,
+      "pnl": 9700.0,
+      "pf": 1.07,
+      "n_bars": 5770,
+      "long_n": 175,
+      "short_n": 126,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 0,
+          "wr": 0,
+          "pnl": 0
+        },
+        "09:30-11:30": {
+          "n": 300,
+          "wr": 38.0,
+          "pnl": 10300.0
+        },
+        "12:30-15:00": {
+          "n": 0,
+          "wr": 0,
+          "pnl": 0
+        }
+      },
+      "symbol": "1605.T",
+      "label": "morning_only_tp8_sl4",
+      "params": {
+        "tp_jpy": 8,
+        "sl_jpy": 4,
+        "entry_dev_jpy": 8,
+        "allowed_time_windows": [
+          "09:30-11:30"
+        ]
+      },
+      "n_days": 18,
+      "pnl_per_day": 539.0
+    },
+    {
+      "trades": 277,
+      "wins": 117,
+      "wr": 42.2,
+      "pnl": -2400.0,
+      "pf": 0.98,
+      "n_bars": 5770,
+      "long_n": 120,
+      "short_n": 157,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 0,
+          "wr": 0,
+          "pnl": 0
+        },
+        "09:30-11:30": {
+          "n": 0,
+          "wr": 0,
+          "pnl": 0
+        },
+        "12:30-15:00": {
+          "n": 277,
+          "wr": 42.2,
+          "pnl": -2400.0
+        }
+      },
+      "symbol": "1605.T",
+      "label": "afternoon_only_tp10_sl5",
+      "params": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10,
+        "allowed_time_windows": [
+          "12:30-15:00"
+        ]
+      },
+      "n_days": 18,
+      "pnl_per_day": -133.0
+    },
+    {
+      "trades": 70,
+      "wins": 24,
+      "wr": 34.3,
+      "pnl": -4500.0,
+      "pf": 0.84,
+      "n_bars": 5770,
+      "long_n": 39,
+      "short_n": 31,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 67,
+          "wr": 35.8,
+          "pnl": -3100.0
+        },
+        "09:30-11:30": {
+          "n": 3,
+          "wr": 0.0,
+          "pnl": -1400.0
+        },
+        "12:30-15:00": {
+          "n": 0,
+          "wr": 0,
+          "pnl": 0
+        }
+      },
+      "symbol": "1605.T",
+      "label": "open_30min_only_tp5_sl3",
+      "params": {
+        "tp_jpy": 5,
+        "sl_jpy": 3,
+        "entry_dev_jpy": 5,
+        "avoid_open_min": 0,
+        "allowed_time_windows": [
+          "09:00-09:30"
+        ]
+      },
+      "n_days": 18,
+      "pnl_per_day": -250.0
+    },
+    {
+      "trades": 157,
+      "wins": 63,
+      "wr": 40.1,
+      "pnl": 2200.0,
+      "pf": 1.03,
+      "n_bars": 4958,
+      "long_n": 98,
+      "short_n": 59,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 20,
+          "wr": 50.0,
+          "pnl": 6400.0
+        },
+        "09:30-11:30": {
+          "n": 82,
+          "wr": 42.7,
+          "pnl": 8600.0
+        },
+        "12:30-15:00": {
+          "n": 55,
+          "wr": 32.7,
+          "pnl": -12800.0
+        }
+      },
+      "symbol": "9468.T",
+      "label": "tp10_sl5_dev10",
+      "params": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10
+      },
+      "n_days": 18,
+      "pnl_per_day": 122.0
+    },
+    {
+      "trades": 174,
+      "wins": 68,
+      "wr": 39.1,
+      "pnl": 800.0,
+      "pf": 1.01,
+      "n_bars": 4958,
+      "long_n": 111,
+      "short_n": 63,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 26,
+          "wr": 34.6,
+          "pnl": 800.0
+        },
+        "09:30-11:30": {
+          "n": 89,
+          "wr": 43.8,
+          "pnl": 9200.0
+        },
+        "12:30-15:00": {
+          "n": 59,
+          "wr": 33.9,
+          "pnl": -9200.0
+        }
+      },
+      "symbol": "9468.T",
+      "label": "tp8_sl4_dev8",
+      "params": {
+        "tp_jpy": 8,
+        "sl_jpy": 4,
+        "entry_dev_jpy": 8
+      },
+      "n_days": 18,
+      "pnl_per_day": 44.0
+    },
+    {
+      "trades": 192,
+      "wins": 73,
+      "wr": 38.0,
+      "pnl": -1200.0,
+      "pf": 0.98,
+      "n_bars": 4958,
+      "long_n": 124,
+      "short_n": 68,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 30,
+          "wr": 33.3,
+          "pnl": -1600.0
+        },
+        "09:30-11:30": {
+          "n": 98,
+          "wr": 41.8,
+          "pnl": 5200.0
+        },
+        "12:30-15:00": {
+          "n": 63,
+          "wr": 34.9,
+          "pnl": -4200.0
+        }
+      },
+      "symbol": "9468.T",
+      "label": "tp5_sl3_dev6",
+      "params": {
+        "tp_jpy": 5,
+        "sl_jpy": 3,
+        "entry_dev_jpy": 6
+      },
+      "n_days": 18,
+      "pnl_per_day": -67.0
+    },
+    {
+      "trades": 151,
+      "wins": 62,
+      "wr": 41.1,
+      "pnl": 3200.0,
+      "pf": 1.05,
+      "n_bars": 4958,
+      "long_n": 92,
+      "short_n": 59,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 16,
+          "wr": 56.2,
+          "pnl": 7200.0
+        },
+        "09:30-11:30": {
+          "n": 80,
+          "wr": 43.8,
+          "pnl": 8800.0
+        },
+        "12:30-15:00": {
+          "n": 55,
+          "wr": 32.7,
+          "pnl": -12800.0
+        }
+      },
+      "symbol": "9468.T",
+      "label": "tp10_sl5_bias",
+      "params": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10,
+        "open_bias_mode": true
+      },
+      "n_days": 18,
+      "pnl_per_day": 178.0
+    },
+    {
+      "trades": 86,
+      "wins": 35,
+      "wr": 40.7,
+      "pnl": 2200.0,
+      "pf": 1.07,
+      "n_bars": 4958,
+      "long_n": 50,
+      "short_n": 36,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 0,
+          "wr": 0,
+          "pnl": 0
+        },
+        "09:30-11:30": {
+          "n": 86,
+          "wr": 40.7,
+          "pnl": 2200.0
+        },
+        "12:30-15:00": {
+          "n": 0,
+          "wr": 0,
+          "pnl": 0
+        }
+      },
+      "symbol": "9468.T",
+      "label": "morning_only_tp8_sl4",
+      "params": {
+        "tp_jpy": 8,
+        "sl_jpy": 4,
+        "entry_dev_jpy": 8,
+        "allowed_time_windows": [
+          "09:30-11:30"
+        ]
+      },
+      "n_days": 18,
+      "pnl_per_day": 122.0
+    },
+    {
+      "trades": 57,
+      "wins": 19,
+      "wr": 33.3,
+      "pnl": -11800.0,
+      "pf": 0.55,
+      "n_bars": 4958,
+      "long_n": 38,
+      "short_n": 19,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 0,
+          "wr": 0,
+          "pnl": 0
+        },
+        "09:30-11:30": {
+          "n": 0,
+          "wr": 0,
+          "pnl": 0
+        },
+        "12:30-15:00": {
+          "n": 57,
+          "wr": 33.3,
+          "pnl": -11800.0
+        }
+      },
+      "symbol": "9468.T",
+      "label": "afternoon_only_tp10_sl5",
+      "params": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10,
+        "allowed_time_windows": [
+          "12:30-15:00"
+        ]
+      },
+      "n_days": 18,
+      "pnl_per_day": -656.0
+    },
+    {
+      "trades": 35,
+      "wins": 13,
+      "wr": 37.1,
+      "pnl": -600.0,
+      "pf": 0.95,
+      "n_bars": 4958,
+      "long_n": 23,
+      "short_n": 12,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 34,
+          "wr": 35.3,
+          "pnl": -1400.0
+        },
+        "09:30-11:30": {
+          "n": 1,
+          "wr": 100.0,
+          "pnl": 800.0
+        },
+        "12:30-15:00": {
+          "n": 0,
+          "wr": 0,
+          "pnl": 0
+        }
+      },
+      "symbol": "9468.T",
+      "label": "open_30min_only_tp5_sl3",
+      "params": {
+        "tp_jpy": 5,
+        "sl_jpy": 3,
+        "entry_dev_jpy": 5,
+        "avoid_open_min": 0,
+        "allowed_time_windows": [
+          "09:00-09:30"
+        ]
+      },
+      "n_days": 18,
+      "pnl_per_day": -33.0
+    },
+    {
+      "trades": 234,
+      "wins": 108,
+      "wr": 46.2,
+      "pnl": 18800.0,
+      "pf": 1.18,
+      "n_bars": 5722,
+      "long_n": 186,
+      "short_n": 48,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 25,
+          "wr": 40.0,
+          "pnl": 500.0
+        },
+        "09:30-11:30": {
+          "n": 157,
+          "wr": 43.9,
+          "pnl": 1500.0
+        },
+        "12:30-15:00": {
+          "n": 52,
+          "wr": 55.8,
+          "pnl": 16800.0
+        }
+      },
+      "symbol": "4911.T",
+      "label": "tp10_sl5_dev10",
+      "params": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10
+      },
+      "n_days": 18,
+      "pnl_per_day": 1044.0
+    },
+    {
+      "trades": 265,
+      "wins": 115,
+      "wr": 43.4,
+      "pnl": 42400.0,
+      "pf": 1.4,
+      "n_bars": 5722,
+      "long_n": 206,
+      "short_n": 59,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 33,
+          "wr": 48.5,
+          "pnl": 15100.0
+        },
+        "09:30-11:30": {
+          "n": 174,
+          "wr": 40.2,
+          "pnl": 8000.0
+        },
+        "12:30-15:00": {
+          "n": 58,
+          "wr": 50.0,
+          "pnl": 19300.0
+        }
+      },
+      "symbol": "4911.T",
+      "label": "tp8_sl4_dev8",
+      "params": {
+        "tp_jpy": 8,
+        "sl_jpy": 4,
+        "entry_dev_jpy": 8
+      },
+      "n_days": 18,
+      "pnl_per_day": 2356.0
+    },
+    {
+      "trades": 299,
+      "wins": 133,
+      "wr": 44.5,
+      "pnl": 34000.0,
+      "pf": 1.32,
+      "n_bars": 5722,
+      "long_n": 226,
+      "short_n": 73,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 42,
+          "wr": 35.7,
+          "pnl": -3300.0
+        },
+        "09:30-11:30": {
+          "n": 193,
+          "wr": 47.2,
+          "pnl": 31000.0
+        },
+        "12:30-15:00": {
+          "n": 63,
+          "wr": 42.9,
+          "pnl": 6900.0
+        }
+      },
+      "symbol": "4911.T",
+      "label": "tp5_sl3_dev6",
+      "params": {
+        "tp_jpy": 5,
+        "sl_jpy": 3,
+        "entry_dev_jpy": 6
+      },
+      "n_days": 18,
+      "pnl_per_day": 1889.0
+    },
+    {
+      "trades": 227,
+      "wins": 103,
+      "wr": 45.4,
+      "pnl": 14500.0,
+      "pf": 1.14,
+      "n_bars": 5722,
+      "long_n": 179,
+      "short_n": 48,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 19,
+          "wr": 42.1,
+          "pnl": 2200.0
+        },
+        "09:30-11:30": {
+          "n": 156,
+          "wr": 42.3,
+          "pnl": -4500.0
+        },
+        "12:30-15:00": {
+          "n": 52,
+          "wr": 55.8,
+          "pnl": 16800.0
+        }
+      },
+      "symbol": "4911.T",
+      "label": "tp10_sl5_bias",
+      "params": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10,
+        "open_bias_mode": true
+      },
+      "n_days": 18,
+      "pnl_per_day": 806.0
+    },
+    {
+      "trades": 180,
+      "wins": 68,
+      "wr": 37.8,
+      "pnl": -300.0,
+      "pf": 1.0,
+      "n_bars": 5722,
+      "long_n": 145,
+      "short_n": 35,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 0,
+          "wr": 0,
+          "pnl": 0
+        },
+        "09:30-11:30": {
+          "n": 180,
+          "wr": 37.8,
+          "pnl": -300.0
+        },
+        "12:30-15:00": {
+          "n": 0,
+          "wr": 0,
+          "pnl": 0
+        }
+      },
+      "symbol": "4911.T",
+      "label": "morning_only_tp8_sl4",
+      "params": {
+        "tp_jpy": 8,
+        "sl_jpy": 4,
+        "entry_dev_jpy": 8,
+        "allowed_time_windows": [
+          "09:30-11:30"
+        ]
+      },
+      "n_days": 18,
+      "pnl_per_day": -17.0
+    },
+    {
+      "trades": 50,
+      "wins": 26,
+      "wr": 52.0,
+      "pnl": 9700.0,
+      "pf": 1.72,
+      "n_bars": 5722,
+      "long_n": 34,
+      "short_n": 16,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 0,
+          "wr": 0,
+          "pnl": 0
+        },
+        "09:30-11:30": {
+          "n": 0,
+          "wr": 0,
+          "pnl": 0
+        },
+        "12:30-15:00": {
+          "n": 50,
+          "wr": 52.0,
+          "pnl": 9700.0
+        }
+      },
+      "symbol": "4911.T",
+      "label": "afternoon_only_tp10_sl5",
+      "params": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10,
+        "allowed_time_windows": [
+          "12:30-15:00"
+        ]
+      },
+      "n_days": 18,
+      "pnl_per_day": 539.0
+    },
+    {
+      "trades": 48,
+      "wins": 21,
+      "wr": 43.8,
+      "pnl": 2000.0,
+      "pf": 1.1,
+      "n_bars": 5722,
+      "long_n": 40,
+      "short_n": 8,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 46,
+          "wr": 43.5,
+          "pnl": 1100.0
+        },
+        "09:30-11:30": {
+          "n": 2,
+          "wr": 50.0,
+          "pnl": 900.0
+        },
+        "12:30-15:00": {
+          "n": 0,
+          "wr": 0,
+          "pnl": 0
+        }
+      },
+      "symbol": "4911.T",
+      "label": "open_30min_only_tp5_sl3",
+      "params": {
+        "tp_jpy": 5,
+        "sl_jpy": 3,
+        "entry_dev_jpy": 5,
+        "avoid_open_min": 0,
+        "allowed_time_windows": [
+          "09:00-09:30"
+        ]
+      },
+      "n_days": 18,
+      "pnl_per_day": 111.0
+    },
+    {
+      "trades": 0,
+      "wr": 0,
+      "pnl": 0,
+      "pf": 0,
+      "n_bars": 5788,
+      "symbol": "9432.T",
+      "label": "tp10_sl5_dev10",
+      "params": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10
+      },
+      "n_days": 18,
+      "pnl_per_day": 0.0
+    },
+    {
+      "trades": 0,
+      "wr": 0,
+      "pnl": 0,
+      "pf": 0,
+      "n_bars": 5788,
+      "symbol": "9432.T",
+      "label": "tp8_sl4_dev8",
+      "params": {
+        "tp_jpy": 8,
+        "sl_jpy": 4,
+        "entry_dev_jpy": 8
+      },
+      "n_days": 18,
+      "pnl_per_day": 0.0
+    },
+    {
+      "trades": 0,
+      "wr": 0,
+      "pnl": 0,
+      "pf": 0,
+      "n_bars": 5788,
+      "symbol": "9432.T",
+      "label": "tp5_sl3_dev6",
+      "params": {
+        "tp_jpy": 5,
+        "sl_jpy": 3,
+        "entry_dev_jpy": 6
+      },
+      "n_days": 18,
+      "pnl_per_day": 0.0
+    },
+    {
+      "trades": 0,
+      "wr": 0,
+      "pnl": 0,
+      "pf": 0,
+      "n_bars": 5788,
+      "symbol": "9432.T",
+      "label": "tp10_sl5_bias",
+      "params": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10,
+        "open_bias_mode": true
+      },
+      "n_days": 18,
+      "pnl_per_day": 0.0
+    },
+    {
+      "trades": 0,
+      "wr": 0,
+      "pnl": 0,
+      "pf": 0,
+      "n_bars": 5788,
+      "symbol": "9432.T",
+      "label": "morning_only_tp8_sl4",
+      "params": {
+        "tp_jpy": 8,
+        "sl_jpy": 4,
+        "entry_dev_jpy": 8,
+        "allowed_time_windows": [
+          "09:30-11:30"
+        ]
+      },
+      "n_days": 18,
+      "pnl_per_day": 0.0
+    },
+    {
+      "trades": 0,
+      "wr": 0,
+      "pnl": 0,
+      "pf": 0,
+      "n_bars": 5788,
+      "symbol": "9432.T",
+      "label": "afternoon_only_tp10_sl5",
+      "params": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10,
+        "allowed_time_windows": [
+          "12:30-15:00"
+        ]
+      },
+      "n_days": 18,
+      "pnl_per_day": 0.0
+    },
+    {
+      "trades": 0,
+      "wr": 0,
+      "pnl": 0,
+      "pf": 0,
+      "n_bars": 5788,
+      "symbol": "9432.T",
+      "label": "open_30min_only_tp5_sl3",
+      "params": {
+        "tp_jpy": 5,
+        "sl_jpy": 3,
+        "entry_dev_jpy": 5,
+        "avoid_open_min": 0,
+        "allowed_time_windows": [
+          "09:00-09:30"
+        ]
+      },
+      "n_days": 18,
+      "pnl_per_day": 0.0
+    },
+    {
+      "trades": 597,
+      "wins": 269,
+      "wr": 45.1,
+      "pnl": 36700.0,
+      "pf": 1.25,
+      "n_bars": 5785,
+      "long_n": 256,
+      "short_n": 341,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 47,
+          "wr": 21.3,
+          "pnl": -11400.0
+        },
+        "09:30-11:30": {
+          "n": 290,
+          "wr": 44.5,
+          "pnl": 20600.0
+        },
+        "12:30-15:00": {
+          "n": 259,
+          "wr": 50.2,
+          "pnl": 27900.0
+        }
+      },
+      "symbol": "6501.T",
+      "label": "tp10_sl5_dev10",
+      "params": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10
+      },
+      "n_days": 18,
+      "pnl_per_day": 2039.0
+    },
+    {
+      "trades": 645,
+      "wins": 272,
+      "wr": 42.2,
+      "pnl": 36100.0,
+      "pf": 1.26,
+      "n_bars": 5785,
+      "long_n": 281,
+      "short_n": 364,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 54,
+          "wr": 22.2,
+          "pnl": -6800.0
+        },
+        "09:30-11:30": {
+          "n": 312,
+          "wr": 42.0,
+          "pnl": 22000.0
+        },
+        "12:30-15:00": {
+          "n": 278,
+          "wr": 46.0,
+          "pnl": 20100.0
+        }
+      },
+      "symbol": "6501.T",
+      "label": "tp8_sl4_dev8",
+      "params": {
+        "tp_jpy": 8,
+        "sl_jpy": 4,
+        "entry_dev_jpy": 8
+      },
+      "n_days": 18,
+      "pnl_per_day": 2006.0
+    },
+    {
+      "trades": 685,
+      "wins": 279,
+      "wr": 40.7,
+      "pnl": 13300.0,
+      "pf": 1.12,
+      "n_bars": 5785,
+      "long_n": 301,
+      "short_n": 384,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 63,
+          "wr": 27.0,
+          "pnl": -6100.0
+        },
+        "09:30-11:30": {
+          "n": 329,
+          "wr": 39.2,
+          "pnl": 3200.0
+        },
+        "12:30-15:00": {
+          "n": 292,
+          "wr": 45.5,
+          "pnl": 16500.0
+        }
+      },
+      "symbol": "6501.T",
+      "label": "tp5_sl3_dev6",
+      "params": {
+        "tp_jpy": 5,
+        "sl_jpy": 3,
+        "entry_dev_jpy": 6
+      },
+      "n_days": 18,
+      "pnl_per_day": 739.0
+    },
+    {
+      "trades": 584,
+      "wins": 267,
+      "wr": 45.7,
+      "pnl": 41600.0,
+      "pf": 1.29,
+      "n_bars": 5785,
+      "long_n": 246,
+      "short_n": 338,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 33,
+          "wr": 18.2,
+          "pnl": -9800.0
+        },
+        "09:30-11:30": {
+          "n": 291,
+          "wr": 45.0,
+          "pnl": 25400.0
+        },
+        "12:30-15:00": {
+          "n": 259,
+          "wr": 50.2,
+          "pnl": 26400.0
+        }
+      },
+      "symbol": "6501.T",
+      "label": "tp10_sl5_bias",
+      "params": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10,
+        "open_bias_mode": true
+      },
+      "n_days": 18,
+      "pnl_per_day": 2311.0
+    },
+    {
+      "trades": 314,
+      "wins": 121,
+      "wr": 38.5,
+      "pnl": 7300.0,
+      "pf": 1.1,
+      "n_bars": 5785,
+      "long_n": 135,
+      "short_n": 179,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 0,
+          "wr": 0,
+          "pnl": 0
+        },
+        "09:30-11:30": {
+          "n": 314,
+          "wr": 38.5,
+          "pnl": 7300.0
+        },
+        "12:30-15:00": {
+          "n": 0,
+          "wr": 0,
+          "pnl": 0
+        }
+      },
+      "symbol": "6501.T",
+      "label": "morning_only_tp8_sl4",
+      "params": {
+        "tp_jpy": 8,
+        "sl_jpy": 4,
+        "entry_dev_jpy": 8,
+        "allowed_time_windows": [
+          "09:30-11:30"
+        ]
+      },
+      "n_days": 18,
+      "pnl_per_day": 406.0
+    },
+    {
+      "trades": 264,
+      "wins": 125,
+      "wr": 47.3,
+      "pnl": 18800.0,
+      "pf": 1.39,
+      "n_bars": 5785,
+      "long_n": 109,
+      "short_n": 155,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 0,
+          "wr": 0,
+          "pnl": 0
+        },
+        "09:30-11:30": {
+          "n": 0,
+          "wr": 0,
+          "pnl": 0
+        },
+        "12:30-15:00": {
+          "n": 264,
+          "wr": 47.3,
+          "pnl": 18800.0
+        }
+      },
+      "symbol": "6501.T",
+      "label": "afternoon_only_tp10_sl5",
+      "params": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10,
+        "allowed_time_windows": [
+          "12:30-15:00"
+        ]
+      },
+      "n_days": 18,
+      "pnl_per_day": 1044.0
+    },
+    {
+      "trades": 71,
+      "wins": 18,
+      "wr": 25.4,
+      "pnl": -7000.0,
+      "pf": 0.55,
+      "n_bars": 5785,
+      "long_n": 39,
+      "short_n": 32,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 68,
+          "wr": 25.0,
+          "pnl": -7000.0
+        },
+        "09:30-11:30": {
+          "n": 3,
+          "wr": 33.3,
+          "pnl": 0.0
+        },
+        "12:30-15:00": {
+          "n": 0,
+          "wr": 0,
+          "pnl": 0
+        }
+      },
+      "symbol": "6501.T",
+      "label": "open_30min_only_tp5_sl3",
+      "params": {
+        "tp_jpy": 5,
+        "sl_jpy": 3,
+        "entry_dev_jpy": 5,
+        "avoid_open_min": 0,
+        "allowed_time_windows": [
+          "09:00-09:30"
+        ]
+      },
+      "n_days": 18,
+      "pnl_per_day": -389.0
+    },
+    {
+      "trades": 326,
+      "wins": 144,
+      "wr": 44.2,
+      "pnl": 31650.0,
+      "pf": 1.16,
+      "n_bars": 5781,
+      "long_n": 140,
+      "short_n": 186,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 38,
+          "wr": 52.6,
+          "pnl": 25500.0
+        },
+        "09:30-11:30": {
+          "n": 187,
+          "wr": 44.4,
+          "pnl": 10250.0
+        },
+        "12:30-15:00": {
+          "n": 101,
+          "wr": 40.6,
+          "pnl": -4100.0
+        }
+      },
+      "symbol": "6752.T",
+      "label": "tp10_sl5_dev10",
+      "params": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10
+      },
+      "n_days": 18,
+      "pnl_per_day": 1758.0
+    },
+    {
+      "trades": 367,
+      "wins": 143,
+      "wr": 39.0,
+      "pnl": 4550.0,
+      "pf": 1.02,
+      "n_bars": 5781,
+      "long_n": 162,
+      "short_n": 205,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 45,
+          "wr": 42.2,
+          "pnl": 10000.0
+        },
+        "09:30-11:30": {
+          "n": 212,
+          "wr": 38.2,
+          "pnl": 2600.0
+        },
+        "12:30-15:00": {
+          "n": 110,
+          "wr": 39.1,
+          "pnl": -8050.0
+        }
+      },
+      "symbol": "6752.T",
+      "label": "tp8_sl4_dev8",
+      "params": {
+        "tp_jpy": 8,
+        "sl_jpy": 4,
+        "entry_dev_jpy": 8
+      },
+      "n_days": 18,
+      "pnl_per_day": 253.0
+    },
+    {
+      "trades": 404,
+      "wins": 172,
+      "wr": 42.6,
+      "pnl": 24550.0,
+      "pf": 1.14,
+      "n_bars": 5781,
+      "long_n": 178,
+      "short_n": 226,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 51,
+          "wr": 35.3,
+          "pnl": -2650.0
+        },
+        "09:30-11:30": {
+          "n": 233,
+          "wr": 42.9,
+          "pnl": 18800.0
+        },
+        "12:30-15:00": {
+          "n": 120,
+          "wr": 45.0,
+          "pnl": 8400.0
+        }
+      },
+      "symbol": "6752.T",
+      "label": "tp5_sl3_dev6",
+      "params": {
+        "tp_jpy": 5,
+        "sl_jpy": 3,
+        "entry_dev_jpy": 6
+      },
+      "n_days": 18,
+      "pnl_per_day": 1364.0
+    },
+    {
+      "trades": 317,
+      "wins": 139,
+      "wr": 43.8,
+      "pnl": 18850.0,
+      "pf": 1.1,
+      "n_bars": 5781,
+      "long_n": 134,
+      "short_n": 183,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 29,
+          "wr": 48.3,
+          "pnl": 12300.0
+        },
+        "09:30-11:30": {
+          "n": 187,
+          "wr": 44.9,
+          "pnl": 11150.0
+        },
+        "12:30-15:00": {
+          "n": 101,
+          "wr": 40.6,
+          "pnl": -4600.0
+        }
+      },
+      "symbol": "6752.T",
+      "label": "tp10_sl5_bias",
+      "params": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10,
+        "open_bias_mode": true
+      },
+      "n_days": 18,
+      "pnl_per_day": 1047.0
+    },
+    {
+      "trades": 212,
+      "wins": 82,
+      "wr": 38.7,
+      "pnl": 6950.0,
+      "pf": 1.06,
+      "n_bars": 5781,
+      "long_n": 105,
+      "short_n": 107,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 0,
+          "wr": 0,
+          "pnl": 0
+        },
+        "09:30-11:30": {
+          "n": 212,
+          "wr": 38.7,
+          "pnl": 6950.0
+        },
+        "12:30-15:00": {
+          "n": 0,
+          "wr": 0,
+          "pnl": 0
+        }
+      },
+      "symbol": "6752.T",
+      "label": "morning_only_tp8_sl4",
+      "params": {
+        "tp_jpy": 8,
+        "sl_jpy": 4,
+        "entry_dev_jpy": 8,
+        "allowed_time_windows": [
+          "09:30-11:30"
+        ]
+      },
+      "n_days": 18,
+      "pnl_per_day": 386.0
+    },
+    {
+      "trades": 99,
+      "wins": 46,
+      "wr": 46.5,
+      "pnl": 8000.0,
+      "pf": 1.16,
+      "n_bars": 5781,
+      "long_n": 35,
+      "short_n": 64,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 0,
+          "wr": 0,
+          "pnl": 0
+        },
+        "09:30-11:30": {
+          "n": 0,
+          "wr": 0,
+          "pnl": 0
+        },
+        "12:30-15:00": {
+          "n": 99,
+          "wr": 46.5,
+          "pnl": 8000.0
+        }
+      },
+      "symbol": "6752.T",
+      "label": "afternoon_only_tp10_sl5",
+      "params": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10,
+        "allowed_time_windows": [
+          "12:30-15:00"
+        ]
+      },
+      "n_days": 18,
+      "pnl_per_day": 444.0
+    },
+    {
+      "trades": 60,
+      "wins": 26,
+      "wr": 43.3,
+      "pnl": 7700.0,
+      "pf": 1.26,
+      "n_bars": 5781,
+      "long_n": 24,
+      "short_n": 36,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 59,
+          "wr": 44.1,
+          "pnl": 8300.0
+        },
+        "09:30-11:30": {
+          "n": 1,
+          "wr": 0.0,
+          "pnl": -600.0
+        },
+        "12:30-15:00": {
+          "n": 0,
+          "wr": 0,
+          "pnl": 0
+        }
+      },
+      "symbol": "6752.T",
+      "label": "open_30min_only_tp5_sl3",
+      "params": {
+        "tp_jpy": 5,
+        "sl_jpy": 3,
+        "entry_dev_jpy": 5,
+        "avoid_open_min": 0,
+        "allowed_time_windows": [
+          "09:00-09:30"
+        ]
+      },
+      "n_days": 18,
+      "pnl_per_day": 428.0
+    },
+    {
+      "trades": 614,
+      "wins": 250,
+      "wr": 40.7,
+      "pnl": 18800.0,
+      "pf": 1.13,
+      "n_bars": 5776,
+      "long_n": 388,
+      "short_n": 226,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 41,
+          "wr": 41.5,
+          "pnl": 4100.0
+        },
+        "09:30-11:30": {
+          "n": 301,
+          "wr": 37.9,
+          "pnl": 800.0
+        },
+        "12:30-15:00": {
+          "n": 266,
+          "wr": 44.4,
+          "pnl": 15300.0
+        }
+      },
+      "symbol": "8058.T",
+      "label": "tp10_sl5_dev10",
+      "params": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10
+      },
+      "n_days": 18,
+      "pnl_per_day": 1044.0
+    },
+    {
+      "trades": 645,
+      "wins": 261,
+      "wr": 40.5,
+      "pnl": 19500.0,
+      "pf": 1.15,
+      "n_bars": 5776,
+      "long_n": 404,
+      "short_n": 241,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 51,
+          "wr": 47.1,
+          "pnl": 6900.0
+        },
+        "09:30-11:30": {
+          "n": 313,
+          "wr": 38.3,
+          "pnl": 600.0
+        },
+        "12:30-15:00": {
+          "n": 275,
+          "wr": 42.5,
+          "pnl": 14100.0
+        }
+      },
+      "symbol": "8058.T",
+      "label": "tp8_sl4_dev8",
+      "params": {
+        "tp_jpy": 8,
+        "sl_jpy": 4,
+        "entry_dev_jpy": 8
+      },
+      "n_days": 18,
+      "pnl_per_day": 1083.0
+    },
+    {
+      "trades": 688,
+      "wins": 271,
+      "wr": 39.4,
+      "pnl": 5500.0,
+      "pf": 1.05,
+      "n_bars": 5776,
+      "long_n": 428,
+      "short_n": 260,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 56,
+          "wr": 41.1,
+          "pnl": 1400.0
+        },
+        "09:30-11:30": {
+          "n": 332,
+          "wr": 37.0,
+          "pnl": -3100.0
+        },
+        "12:30-15:00": {
+          "n": 294,
+          "wr": 42.2,
+          "pnl": 8000.0
+        }
+      },
+      "symbol": "8058.T",
+      "label": "tp5_sl3_dev6",
+      "params": {
+        "tp_jpy": 5,
+        "sl_jpy": 3,
+        "entry_dev_jpy": 6
+      },
+      "n_days": 18,
+      "pnl_per_day": 306.0
+    },
+    {
+      "trades": 604,
+      "wins": 251,
+      "wr": 41.6,
+      "pnl": 30400.0,
+      "pf": 1.21,
+      "n_bars": 5776,
+      "long_n": 378,
+      "short_n": 226,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 30,
+          "wr": 46.7,
+          "pnl": 6400.0
+        },
+        "09:30-11:30": {
+          "n": 302,
+          "wr": 38.1,
+          "pnl": 1800.0
+        },
+        "12:30-15:00": {
+          "n": 267,
+          "wr": 45.3,
+          "pnl": 23300.0
+        }
+      },
+      "symbol": "8058.T",
+      "label": "tp10_sl5_bias",
+      "params": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10,
+        "open_bias_mode": true
+      },
+      "n_days": 18,
+      "pnl_per_day": 1689.0
+    },
+    {
+      "trades": 319,
+      "wins": 116,
+      "wr": 36.4,
+      "pnl": -7100.0,
+      "pf": 0.91,
+      "n_bars": 5776,
+      "long_n": 204,
+      "short_n": 115,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 0,
+          "wr": 0,
+          "pnl": 0
+        },
+        "09:30-11:30": {
+          "n": 317,
+          "wr": 36.6,
+          "pnl": -6300.0
+        },
+        "12:30-15:00": {
+          "n": 0,
+          "wr": 0,
+          "pnl": 0
+        }
+      },
+      "symbol": "8058.T",
+      "label": "morning_only_tp8_sl4",
+      "params": {
+        "tp_jpy": 8,
+        "sl_jpy": 4,
+        "entry_dev_jpy": 8,
+        "allowed_time_windows": [
+          "09:30-11:30"
+        ]
+      },
+      "n_days": 18,
+      "pnl_per_day": -394.0
+    },
+    {
+      "trades": 271,
+      "wins": 117,
+      "wr": 43.2,
+      "pnl": 18200.0,
+      "pf": 1.32,
+      "n_bars": 5776,
+      "long_n": 171,
+      "short_n": 100,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 0,
+          "wr": 0,
+          "pnl": 0
+        },
+        "09:30-11:30": {
+          "n": 0,
+          "wr": 0,
+          "pnl": 0
+        },
+        "12:30-15:00": {
+          "n": 271,
+          "wr": 43.2,
+          "pnl": 18200.0
+        }
+      },
+      "symbol": "8058.T",
+      "label": "afternoon_only_tp10_sl5",
+      "params": {
+        "tp_jpy": 10,
+        "sl_jpy": 5,
+        "entry_dev_jpy": 10,
+        "allowed_time_windows": [
+          "12:30-15:00"
+        ]
+      },
+      "n_days": 18,
+      "pnl_per_day": 1011.0
+    },
+    {
+      "trades": 67,
+      "wins": 25,
+      "wr": 37.3,
+      "pnl": 600.0,
+      "pf": 1.05,
+      "n_bars": 5776,
+      "long_n": 35,
+      "short_n": 32,
+      "by_window": {
+        "09:00-09:30": {
+          "n": 63,
+          "wr": 38.1,
+          "pnl": 900.0
+        },
+        "09:30-11:30": {
+          "n": 4,
+          "wr": 25.0,
+          "pnl": -300.0
+        },
+        "12:30-15:00": {
+          "n": 0,
+          "wr": 0,
+          "pnl": 0
+        }
+      },
+      "symbol": "8058.T",
+      "label": "open_30min_only_tp5_sl3",
+      "params": {
+        "tp_jpy": 5,
+        "sl_jpy": 3,
+        "entry_dev_jpy": 5,
+        "avoid_open_min": 0,
+        "allowed_time_windows": [
+          "09:00-09:30"
+        ]
+      },
+      "n_days": 18,
+      "pnl_per_day": 33.0
+    }
+  ]
+}
