@@ -1,7 +1,7 @@
 {
   "updated": "2026-05-02",
-  "updated_at": "2026-05-02T08:54:38.896042+09:00",
-  "active_count": 19,
+  "updated_at": "2026-05-02T15:49:45.974229+09:00",
+  "active_count": 20,
   "symbols": [
     {
       "symbol": "6613.T",
@@ -503,7 +503,7 @@
         "added_at": "2026-05-02",
         "force_paper": true
       },
-      "lot_multiplier": 1.36,
+      "lot_multiplier": 1.0,
       "expected_value_per_day": 2289.0
     },
     {
@@ -600,7 +600,7 @@
         "added_at": "2026-05-02",
         "force_paper": true
       },
-      "lot_multiplier": 1.38,
+      "lot_multiplier": 1.0,
       "expected_value_per_day": 2322.0
     },
     {
@@ -775,6 +775,55 @@
       "added_at": "2026-05-02T08:54:38.895540+09:00",
       "lot_multiplier": 1.21,
       "expected_value_per_day": 2034.0
+    },
+    {
+      "symbol": "8411.T",
+      "name": "Mizuho FG MacdRci (慎重投入)",
+      "strategy": "MacdRci",
+      "score": 4747.0,
+      "is_daily": 69.6,
+      "oos_daily": 4746.5,
+      "is_pf": 1.0136284763816297,
+      "is_trades": 63,
+      "oos_trades": 17,
+      "is_win_rate": 30.158730158730158,
+      "oos_pf": 2.556573126190216,
+      "oos_win_rate": 70.58823529411765,
+      "robust": true,
+      "is_oos_pass": true,
+      "wf_window_total": 1,
+      "wf_window_pass_ratio": 1.0,
+      "source": "n1_macd_rci_params_2026-05-02",
+      "observation_only": false,
+      "force_paper": true,
+      "lot_multiplier": 0.5,
+      "expected_value_per_day": 4747.0,
+      "params": {
+        "hist_exit_delay_bars": 1,
+        "rci_exit_min_agree": 3,
+        "rci_gc_slope_min": 24.781091,
+        "rci_gc_slope_max": -16.889613,
+        "volume_surge_max_ratio": 1.761801,
+        "sl_pct": 0.005,
+        "rci_gc_slope_enabled": 1,
+        "entry_profile": 1,
+        "rci_min_agree": 2,
+        "macd_slow": 6,
+        "rci_danger_high": -33.049525,
+        "tp_pct": 0.0066,
+        "macd_fast": 2,
+        "rci_danger_zone_enabled": 1,
+        "require_macd_above_signal": 0,
+        "rci_entry_mode": 2,
+        "rci_gc_slope_lookback": 4,
+        "macd_signal": 5,
+        "exit_profile": 2,
+        "disable_lunch_session_entry": 1,
+        "rci_danger_low": -13.708953,
+        "interval": "5m"
+      },
+      "added_at": "2026-05-02T15:48:52.319494+09:00",
+      "caveat": "IS_pf=1.01 / IS_wr=30% / wf_window=1 で再現性疑念。paper 検証中は lot_multiplier=0.5 で抑制、再現性確認後に拡大判断。"
     }
   ],
   "last_merge": {

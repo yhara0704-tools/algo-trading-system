@@ -1,0 +1,232 @@
+{
+  "generated_at": "2026-05-02T15:49:45.975384+09:00",
+  "rows": [
+    {
+      "symbol": "9984.T",
+      "strategy": "MacdRci",
+      "wf_oos_daily": 16027.188822026563,
+      "actual_60d_per_day": 1533.7948717948718,
+      "quadrant": "Q1_both_positive",
+      "current_mult": 0.91,
+      "recommended_mult": 0.91,
+      "note": "Q1: keep (実測値で算出済)"
+    },
+    {
+      "symbol": "6752.T",
+      "strategy": "MacdRci",
+      "wf_oos_daily": 3072.212224591474,
+      "actual_60d_per_day": 8348.128205128205,
+      "quadrant": "Q1_both_positive",
+      "current_mult": 3.0,
+      "recommended_mult": 3.0,
+      "note": "Q1: keep (実測値で算出済)"
+    },
+    {
+      "symbol": "9107.T",
+      "strategy": "MacdRci",
+      "wf_oos_daily": 1953.6994411897701,
+      "actual_60d_per_day": 1161.974358974359,
+      "quadrant": "Q1_both_positive",
+      "current_mult": 0.69,
+      "recommended_mult": 0.69,
+      "note": "Q1: keep (実測値で算出済)"
+    },
+    {
+      "symbol": "9468.T",
+      "strategy": "MacdRci",
+      "wf_oos_daily": 1597.1253499999966,
+      "actual_60d_per_day": 482.56410256410254,
+      "quadrant": "Q1_both_positive",
+      "current_mult": 0.5,
+      "recommended_mult": 0.5,
+      "note": "Q1: keep (実測値で算出済)"
+    },
+    {
+      "symbol": "6723.T",
+      "strategy": "MacdRci",
+      "wf_oos_daily": 5233.595733212601,
+      "actual_60d_per_day": 2154.4358974358975,
+      "quadrant": "Q1_both_positive",
+      "current_mult": 1.28,
+      "recommended_mult": 1.28,
+      "note": "Q1: keep (実測値で算出済)"
+    },
+    {
+      "symbol": "8058.T",
+      "strategy": "MacdRci",
+      "wf_oos_daily": 446.7094377575566,
+      "actual_60d_per_day": 1791.8974358974358,
+      "quadrant": "Q1_both_positive",
+      "current_mult": 1.06,
+      "recommended_mult": 1.06,
+      "note": "Q1: keep (実測値で算出済)"
+    },
+    {
+      "symbol": "9432.T",
+      "strategy": "MacdRci",
+      "wf_oos_daily": 187.07070098157817,
+      "actual_60d_per_day": 1771.0,
+      "quadrant": "Q1_both_positive",
+      "current_mult": 1.05,
+      "recommended_mult": 1.05,
+      "note": "Q1: keep (実測値で算出済)"
+    },
+    {
+      "symbol": "9984.T",
+      "strategy": "EnhancedMacdRci",
+      "wf_oos_daily": 12168.1,
+      "actual_60d_per_day": 3661.0,
+      "quadrant": "Q1_both_positive",
+      "current_mult": 2.18,
+      "recommended_mult": 2.18,
+      "note": "Q1: keep (実測値で算出済)"
+    },
+    {
+      "symbol": "6723.T",
+      "strategy": "Breakout",
+      "wf_oos_daily": 1632.0,
+      "actual_60d_per_day": 133.0,
+      "quadrant": "Q1_both_positive",
+      "current_mult": 0.5,
+      "recommended_mult": 0.5,
+      "note": "Q1: keep (実測値で算出済)"
+    },
+    {
+      "symbol": "8136.T",
+      "strategy": "Pullback",
+      "wf_oos_daily": 2456.0,
+      "actual_60d_per_day": 905.0,
+      "quadrant": "Q1_both_positive",
+      "current_mult": 0.54,
+      "recommended_mult": 0.54,
+      "note": "Q1: keep (実測値で算出済)"
+    },
+    {
+      "symbol": "1605.T",
+      "strategy": "MicroScalp",
+      "wf_oos_daily": 2289.0,
+      "actual_60d_per_day": null,
+      "quadrant": "Q2_wf_only",
+      "current_mult": 1.36,
+      "recommended_mult": 1.0,
+      "note": "Q2: cap=1.0 (WF のみ+、直近 60d で確認できず)"
+    },
+    {
+      "symbol": "9433.T",
+      "strategy": "MicroScalp",
+      "wf_oos_daily": 1042.0,
+      "actual_60d_per_day": null,
+      "quadrant": "Q2_wf_only",
+      "current_mult": 0.62,
+      "recommended_mult": 0.62,
+      "note": "Q2: cap=1.0 (WF のみ+、直近 60d で確認できず)"
+    },
+    {
+      "symbol": "9468.T",
+      "strategy": "MicroScalp",
+      "wf_oos_daily": 478.0,
+      "actual_60d_per_day": null,
+      "quadrant": "Q2_wf_only",
+      "current_mult": 0.5,
+      "recommended_mult": 0.5,
+      "note": "Q2: cap=1.0 (WF のみ+、直近 60d で確認できず)"
+    },
+    {
+      "symbol": "6501.T",
+      "strategy": "MicroScalp",
+      "wf_oos_daily": 2322.0,
+      "actual_60d_per_day": null,
+      "quadrant": "Q2_wf_only",
+      "current_mult": 1.38,
+      "recommended_mult": 1.0,
+      "note": "Q2: cap=1.0 (WF のみ+、直近 60d で確認できず)"
+    },
+    {
+      "symbol": "9433.T",
+      "strategy": "BbShort",
+      "wf_oos_daily": 512.0,
+      "actual_60d_per_day": 512.0,
+      "quadrant": "Q1_both_positive",
+      "current_mult": 0.5,
+      "recommended_mult": 0.5,
+      "note": "Q1: keep (実測値で算出済)"
+    },
+    {
+      "symbol": "3103.T",
+      "strategy": "BbShort",
+      "wf_oos_daily": 472.0,
+      "actual_60d_per_day": 472.0,
+      "quadrant": "Q1_both_positive",
+      "current_mult": 0.5,
+      "recommended_mult": 0.5,
+      "note": "Q1: keep (実測値で算出済)"
+    },
+    {
+      "symbol": "6501.T",
+      "strategy": "BbShort",
+      "wf_oos_daily": 351.0,
+      "actual_60d_per_day": 351.0,
+      "quadrant": "Q1_both_positive",
+      "current_mult": 0.5,
+      "recommended_mult": 0.5,
+      "note": "Q1: keep (実測値で算出済)"
+    },
+    {
+      "symbol": "9468.T",
+      "strategy": "Pullback",
+      "wf_oos_daily": 295.0,
+      "actual_60d_per_day": 531.0,
+      "quadrant": "Q1_both_positive",
+      "current_mult": 0.5,
+      "recommended_mult": 0.5,
+      "note": "Q1: keep (実測値で算出済)"
+    },
+    {
+      "symbol": "6752.T",
+      "strategy": "EnhancedMacdRci",
+      "wf_oos_daily": 2034.0,
+      "actual_60d_per_day": 2034.0,
+      "quadrant": "Q1_both_positive",
+      "current_mult": 1.21,
+      "recommended_mult": 1.21,
+      "note": "Q1: keep (実測値で算出済)"
+    },
+    {
+      "symbol": "8411.T",
+      "strategy": "MacdRci",
+      "wf_oos_daily": 4746.523802977371,
+      "actual_60d_per_day": null,
+      "quadrant": "Q2_wf_only",
+      "current_mult": 0.5,
+      "recommended_mult": 0.5,
+      "note": "Q2: cap=1.0 (WF のみ+、直近 60d で確認できず)"
+    }
+  ],
+  "changes": [
+    {
+      "symbol": "1605.T",
+      "strategy": "MicroScalp",
+      "before": 1.36,
+      "after": 1.0,
+      "quadrant": "Q2_wf_only",
+      "note": "Q2: cap=1.0 (WF のみ+、直近 60d で確認できず)"
+    },
+    {
+      "symbol": "6501.T",
+      "strategy": "MicroScalp",
+      "before": 1.38,
+      "after": 1.0,
+      "quadrant": "Q2_wf_only",
+      "note": "Q2: cap=1.0 (WF のみ+、直近 60d で確認できず)"
+    }
+  ],
+  "by_quadrant_count": {
+    "Q1_both_positive": 15,
+    "Q2_wf_only": 5
+  },
+  "grand_real_per_day": 36720.31867477224,
+  "weighted_pnl_per_day": 53799.44343995023,
+  "compressed_real": 17688.127469908897,
+  "compressed_weighted": 24519.77737598009,
+  "target": 29700
+}
