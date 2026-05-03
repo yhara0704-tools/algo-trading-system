@@ -1,0 +1,181 @@
+{
+  "computed_at": "2026-05-03T21:48:47.627106+09:00",
+  "fetch_days_requested": 30,
+  "jquants_5m_max_days_cap": 14,
+  "effective_5m_fetch_days": 14,
+  "jp_capital_jpy": 300000.0,
+  "margin_ratio": 3.3,
+  "simulate_starting_cash_jpy": 990000.0,
+  "end_equity_jpy": 1157817.01,
+  "total_pnl_jpy": 167817.01,
+  "total_return_pct": 16.9512,
+  "trading_days_with_pnl": 10,
+  "first_pnl_date": "2026-04-16",
+  "last_pnl_date": "2026-05-01",
+  "avg_daily_pnl_jpy": 16781.7,
+  "implied_geom_daily_return_pct": 1.578191,
+  "sharpe": 11.4712,
+  "max_drawdown_pct": -4.9502,
+  "total_trades": 157,
+  "configs_used": [
+    {
+      "symbol": "9984.T",
+      "strategy": "EnhancedMacdRci"
+    },
+    {
+      "symbol": "9984.T",
+      "strategy": "MacdRci"
+    },
+    {
+      "symbol": "6954.T",
+      "strategy": "MacdRci"
+    },
+    {
+      "symbol": "6752.T",
+      "strategy": "MacdRci"
+    },
+    {
+      "symbol": "1605.T",
+      "strategy": "MicroScalp"
+    },
+    {
+      "symbol": "9468.T",
+      "strategy": "MacdRci"
+    },
+    {
+      "symbol": "6723.T",
+      "strategy": "MacdRci"
+    },
+    {
+      "symbol": "9433.T",
+      "strategy": "MicroScalp"
+    },
+    {
+      "symbol": "9433.T",
+      "strategy": "BbShort"
+    },
+    {
+      "symbol": "9468.T",
+      "strategy": "MicroScalp"
+    },
+    {
+      "symbol": "9468.T",
+      "strategy": "Pullback"
+    },
+    {
+      "symbol": "9432.T",
+      "strategy": "MacdRci"
+    }
+  ],
+  "ohlcv_fetch_report": [
+    {
+      "symbol": "9984.T",
+      "strategy": "EnhancedMacdRci",
+      "interval": "5m",
+      "days_requested": 30,
+      "api_days_used_when_fallback": 14,
+      "bars": 1111,
+      "span_calendar_days_approx": 24.26736111111111
+    },
+    {
+      "symbol": "9984.T",
+      "strategy": "MacdRci",
+      "interval": "5m",
+      "days_requested": 30,
+      "api_days_used_when_fallback": 14,
+      "bars": 1111,
+      "span_calendar_days_approx": 24.26736111111111
+    },
+    {
+      "symbol": "6954.T",
+      "strategy": "MacdRci",
+      "interval": "5m",
+      "days_requested": 30,
+      "api_days_used_when_fallback": 14,
+      "bars": 1079,
+      "span_calendar_days_approx": 24.26388888888889
+    },
+    {
+      "symbol": "6752.T",
+      "strategy": "MacdRci",
+      "interval": "5m",
+      "days_requested": 30,
+      "api_days_used_when_fallback": 14,
+      "bars": 1110,
+      "span_calendar_days_approx": 24.26388888888889
+    },
+    {
+      "symbol": "1605.T",
+      "strategy": "MicroScalp",
+      "interval": "1m",
+      "days_requested": 30,
+      "api_days_used_when_fallback": 30,
+      "bars": 1287,
+      "span_calendar_days_approx": 4.264583333333333
+    },
+    {
+      "symbol": "9468.T",
+      "strategy": "MacdRci",
+      "interval": "5m",
+      "days_requested": 30,
+      "api_days_used_when_fallback": 14,
+      "bars": 1115,
+      "span_calendar_days_approx": 24.26388888888889
+    },
+    {
+      "symbol": "6723.T",
+      "strategy": "MacdRci",
+      "interval": "5m",
+      "days_requested": 30,
+      "api_days_used_when_fallback": 14,
+      "bars": 1109,
+      "span_calendar_days_approx": 24.26388888888889
+    },
+    {
+      "symbol": "9433.T",
+      "strategy": "MicroScalp",
+      "interval": "1m",
+      "days_requested": 30,
+      "api_days_used_when_fallback": 30,
+      "bars": 1290,
+      "span_calendar_days_approx": 4.266666666666667
+    },
+    {
+      "symbol": "9433.T",
+      "strategy": "BbShort",
+      "interval": "5m",
+      "days_requested": 30,
+      "api_days_used_when_fallback": 14,
+      "bars": 1109,
+      "span_calendar_days_approx": 24.26736111111111
+    },
+    {
+      "symbol": "9468.T",
+      "strategy": "MicroScalp",
+      "interval": "1m",
+      "days_requested": 30,
+      "api_days_used_when_fallback": 30,
+      "bars": 1101,
+      "span_calendar_days_approx": 4.266666666666667
+    },
+    {
+      "symbol": "9468.T",
+      "strategy": "Pullback",
+      "interval": "5m",
+      "days_requested": 30,
+      "api_days_used_when_fallback": 14,
+      "bars": 1115,
+      "span_calendar_days_approx": 24.26388888888889
+    },
+    {
+      "symbol": "9432.T",
+      "strategy": "MacdRci",
+      "interval": "5m",
+      "days_requested": 30,
+      "api_days_used_when_fallback": 14,
+      "bars": 1108,
+      "span_calendar_days_approx": 24.26388888888889
+    }
+  ],
+  "sample_filter": true
+}

@@ -316,6 +316,9 @@ def collect_universe_specs(
             "wf_window_total": wf_total,
             "wf_window_pass_ratio": wf_ratio,
             "params": params,
+            # N5 (2026-05-03): lot_multiplier を spec に伝搬。portfolio_sim と
+            # jp_live_runner で 1 銘柄あたりのポジションサイズに乗じる。
+            "lot_multiplier": float(row.get("lot_multiplier", 1.0) or 1.0),
         }
         if apply_sample_filter and min_oos_trades > 0 and (oos_trades is not None):
             # WF 再現性が担保されている銘柄は閾値を緩和（pass_ratio=1.0 かつ windows>=N）

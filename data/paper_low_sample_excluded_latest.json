@@ -1,0 +1,238 @@
+{
+  "generated_at": "2026-05-03T21:48:44.577929+09:00",
+  "min_oos_trades_for_live": 30,
+  "min_oos_trades_for_live_wf_relaxed": 15,
+  "wf_relax_min_windows": 2,
+  "kept_count": 12,
+  "excluded_count": 12,
+  "wf_relaxed_hits": [
+    {
+      "symbol": "6752.T",
+      "strategy_name": "MacdRci",
+      "oos_trades": 16,
+      "wf_window_total": 2,
+      "wf_window_pass_ratio": 1.0,
+      "effective_threshold": 15
+    },
+    {
+      "symbol": "6723.T",
+      "strategy_name": "MacdRci",
+      "oos_trades": 15,
+      "wf_window_total": 2,
+      "wf_window_pass_ratio": 1.0,
+      "effective_threshold": 15
+    }
+  ],
+  "excluded": [
+    {
+      "strategy_name": "MacdRci",
+      "symbol": "9107.T",
+      "name": "Kawasaki Kisen",
+      "oos_daily_pnl": 1953.7,
+      "oos_trades": 12,
+      "wf_window_total": 2,
+      "wf_window_pass_ratio": 0.5,
+      "effective_threshold": 30,
+      "reason": "oos_trades<30"
+    },
+    {
+      "strategy_name": "MacdRci",
+      "symbol": "8058.T",
+      "name": "Mitsubishi Corp",
+      "oos_daily_pnl": 446.7,
+      "oos_trades": 6,
+      "wf_window_total": 1,
+      "wf_window_pass_ratio": 1.0,
+      "effective_threshold": 30,
+      "reason": "oos_trades<30"
+    },
+    {
+      "strategy_name": "Breakout",
+      "symbol": "6723.T",
+      "name": "Renesas",
+      "oos_daily_pnl": 1632.0,
+      "oos_trades": 15,
+      "wf_window_total": 2,
+      "wf_window_pass_ratio": 0.5,
+      "effective_threshold": 30,
+      "reason": "oos_trades<30"
+    },
+    {
+      "strategy_name": "Pullback",
+      "symbol": "8136.T",
+      "name": "Sanrio",
+      "oos_daily_pnl": 2456.0,
+      "oos_trades": 12,
+      "wf_window_total": 2,
+      "wf_window_pass_ratio": 0.5,
+      "effective_threshold": 30,
+      "reason": "oos_trades<30"
+    },
+    {
+      "strategy_name": "MicroScalp",
+      "symbol": "6501.T",
+      "name": "日立 MicroScalp",
+      "oos_daily_pnl": 2322.0,
+      "oos_trades": 12,
+      "wf_window_total": 0,
+      "wf_window_pass_ratio": 0.0,
+      "effective_threshold": 30,
+      "reason": "oos_trades<30"
+    },
+    {
+      "strategy_name": "BbShort",
+      "symbol": "3103.T",
+      "name": "ユニチカ BBShort",
+      "oos_daily_pnl": 472.0,
+      "oos_trades": 14,
+      "wf_window_total": 0,
+      "wf_window_pass_ratio": 0.0,
+      "effective_threshold": 30,
+      "reason": "oos_trades<30"
+    },
+    {
+      "strategy_name": "BbShort",
+      "symbol": "6501.T",
+      "name": "日立 BBShort",
+      "oos_daily_pnl": 351.0,
+      "oos_trades": 12,
+      "wf_window_total": 0,
+      "wf_window_pass_ratio": 0.0,
+      "effective_threshold": 30,
+      "reason": "oos_trades<30"
+    },
+    {
+      "strategy_name": "EnhancedMacdRci",
+      "symbol": "6752.T",
+      "name": "Panasonic EnhancedMacdRci",
+      "oos_daily_pnl": 2034.0,
+      "oos_trades": 16,
+      "wf_window_total": 0,
+      "wf_window_pass_ratio": 0.0,
+      "effective_threshold": 30,
+      "reason": "oos_trades<30"
+    },
+    {
+      "strategy_name": "MacdRci",
+      "symbol": "8411.T",
+      "name": "Mizuho FG MacdRci (慎重投入)",
+      "oos_daily_pnl": 4746.5,
+      "oos_trades": 17,
+      "wf_window_total": 1,
+      "wf_window_pass_ratio": 1.0,
+      "effective_threshold": 30,
+      "reason": "oos_trades<30"
+    },
+    {
+      "strategy_name": "MacdRci",
+      "symbol": "4568.T",
+      "name": "4568.T",
+      "oos_daily_pnl": 46.51086936937385,
+      "oos_trades": 17,
+      "wf_window_total": 1,
+      "wf_window_pass_ratio": 1.0,
+      "effective_threshold": 30,
+      "reason": "oos_trades<30 (macd_rci_params direct, not in universe_active)"
+    },
+    {
+      "strategy_name": "MacdRci",
+      "symbol": "8604.T",
+      "name": "8604.T",
+      "oos_daily_pnl": 2348.4750025628205,
+      "oos_trades": 8,
+      "wf_window_total": 2,
+      "wf_window_pass_ratio": 0.5,
+      "effective_threshold": 30,
+      "reason": "oos_trades<30 (macd_rci_params direct, not in universe_active)"
+    },
+    {
+      "strategy_name": "MacdRci",
+      "symbol": "8316.T",
+      "name": "8316.T",
+      "oos_daily_pnl": 4130.425143160695,
+      "oos_trades": 28,
+      "wf_window_total": 2,
+      "wf_window_pass_ratio": 0.5,
+      "effective_threshold": 30,
+      "reason": "oos_trades<30 (macd_rci_params direct, not in universe_active)"
+    }
+  ],
+  "observation_skipped_count": 15,
+  "observation_skipped": [
+    {
+      "symbol": "6613.T",
+      "strategy_name": "MacdRci",
+      "reason": "observation_only=True"
+    },
+    {
+      "symbol": "8306.T",
+      "strategy_name": "MacdRci",
+      "reason": "observation_only=True"
+    },
+    {
+      "symbol": "3103.T",
+      "strategy_name": "MacdRci",
+      "reason": "oos_trades=14 (paper_low_sample 閾値 20 未満)、IS_pf=1.00 / IS_daily=+27円/日 で 本体未機能。OOS の偶発当たりだけでの Robust 化疑い。paper_low_sample_excluded で除外済 = paper では既に使われない。OOS trades が 20+ に増えるまで実弾候補から除外。"
+    },
+    {
+      "symbol": "9433.T",
+      "strategy_name": "MacdRci",
+      "reason": "observation_only=True"
+    },
+    {
+      "symbol": "6501.T",
+      "strategy_name": "MacdRci",
+      "reason": "observation_only=True"
+    },
+    {
+      "symbol": "4911.T",
+      "strategy_name": "MacdRci",
+      "reason": "observation_only=True"
+    },
+    {
+      "symbol": "3103.T",
+      "strategy_name": "Breakout",
+      "reason": "observation_only=True"
+    },
+    {
+      "symbol": "6758.T",
+      "strategy_name": "Breakout",
+      "reason": "observation_only=True"
+    },
+    {
+      "symbol": "1605.T",
+      "strategy_name": "Pullback",
+      "reason": "observation_only=True"
+    },
+    {
+      "symbol": "5985.T",
+      "strategy_name": "ORB",
+      "reason": "observation_only=True"
+    },
+    {
+      "symbol": "6522.T",
+      "strategy_name": "ORB",
+      "reason": "observation_only=True"
+    },
+    {
+      "symbol": "6433.T",
+      "strategy_name": "ORB",
+      "reason": "observation_only=True"
+    },
+    {
+      "symbol": "247A.T",
+      "strategy_name": "Momentum5Min",
+      "reason": "observation_only=True"
+    },
+    {
+      "symbol": "5243.T",
+      "strategy_name": "Momentum5Min",
+      "reason": "observation_only=True"
+    },
+    {
+      "symbol": "8306.T",
+      "strategy_name": "Pullback",
+      "reason": "observation_only=True"
+    }
+  ]
+}
