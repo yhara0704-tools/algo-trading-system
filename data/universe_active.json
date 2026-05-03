@@ -1,7 +1,7 @@
 {
   "updated": "2026-05-02",
-  "updated_at": "2026-05-02T15:49:45.974229+09:00",
-  "active_count": 20,
+  "updated_at": "2026-05-03T21:33:47.530114+09:00",
+  "active_count": 21,
   "symbols": [
     {
       "symbol": "6613.T",
@@ -34,7 +34,7 @@
       "is_oos_pass": false,
       "calmar": 1243.949,
       "source": "macd_rci_params.robust_merge",
-      "lot_multiplier": 0.91,
+      "lot_multiplier": 0.78,
       "expected_value_per_day": 1534.0
     },
     {
@@ -66,7 +66,7 @@
       "is_oos_pass": false,
       "calmar": 104.211,
       "source": "macd_rci_params.robust_merge",
-      "lot_multiplier": 0.69,
+      "lot_multiplier": 0.59,
       "expected_value_per_day": 1162.0
     },
     {
@@ -115,7 +115,7 @@
       "is_oos_pass": true,
       "calmar": 65.294,
       "source": "macd_rci_params.robust_merge",
-      "lot_multiplier": 1.28,
+      "lot_multiplier": 1.1,
       "expected_value_per_day": 2154.0
     },
     {
@@ -184,7 +184,7 @@
       "is_oos_pass": true,
       "calmar": 17.735,
       "source": "macd_rci_params.robust_merge",
-      "lot_multiplier": 1.06,
+      "lot_multiplier": 0.92,
       "expected_value_per_day": 1792.0
     },
     {
@@ -200,7 +200,7 @@
       "is_oos_pass": false,
       "calmar": 0.0,
       "source": "macd_rci_params.robust_merge",
-      "lot_multiplier": 1.05,
+      "lot_multiplier": 0.9,
       "expected_value_per_day": 1771.0
     },
     {
@@ -240,7 +240,7 @@
         "oos_pf": 8.491156721659536,
         "oos_win_rate": 48.93617021276596
       },
-      "lot_multiplier": 2.18,
+      "lot_multiplier": 1.87,
       "expected_value_per_day": 3661.0
     },
     {
@@ -344,7 +344,7 @@
       "robust": true,
       "is_oos_pass": true,
       "source": "manual_robust_promotion_2026-04-30",
-      "lot_multiplier": 0.54,
+      "lot_multiplier": 0.5,
       "expected_value_per_day": 905.0
     },
     {
@@ -536,7 +536,7 @@
         "added_at": "2026-05-02",
         "force_paper": true
       },
-      "lot_multiplier": 0.62,
+      "lot_multiplier": 0.53,
       "expected_value_per_day": 1042.0
     },
     {
@@ -773,7 +773,7 @@
         "interval": "5m"
       },
       "added_at": "2026-05-02T08:54:38.895540+09:00",
-      "lot_multiplier": 1.21,
+      "lot_multiplier": 1.04,
       "expected_value_per_day": 2034.0
     },
     {
@@ -796,8 +796,8 @@
       "source": "n1_macd_rci_params_2026-05-02",
       "observation_only": false,
       "force_paper": true,
-      "lot_multiplier": 0.5,
-      "expected_value_per_day": 4747.0,
+      "lot_multiplier": 1.0,
+      "expected_value_per_day": 4746.0,
       "params": {
         "hist_exit_delay_bars": 1,
         "rci_exit_min_agree": 3,
@@ -824,6 +824,55 @@
       },
       "added_at": "2026-05-02T15:48:52.319494+09:00",
       "caveat": "IS_pf=1.01 / IS_wr=30% / wf_window=1 で再現性疑念。paper 検証中は lot_multiplier=0.5 で抑制、再現性確認後に拡大判断。"
+    },
+    {
+      "symbol": "6954.T",
+      "name": "FANUC MacdRci (Q1 確定投入)",
+      "strategy": "MacdRci",
+      "score": 4267.0,
+      "is_daily": 233.1,
+      "oos_daily": 4267.2,
+      "is_pf": 1.0541184552088878,
+      "is_trades": 37,
+      "oos_trades": 30,
+      "is_win_rate": 35.13513513513514,
+      "oos_pf": 2.2829660718484517,
+      "oos_win_rate": 53.333333333333336,
+      "robust": true,
+      "is_oos_pass": true,
+      "wf_window_total": 1,
+      "wf_window_pass_ratio": 1.0,
+      "source": "n4_macd_rci_params_2026-05-03",
+      "observation_only": false,
+      "force_paper": true,
+      "lot_multiplier": 2.24,
+      "expected_value_per_day": 4375.0,
+      "params": {
+        "rci_gc_slope_max": -3.106588,
+        "exit_profile": 2,
+        "entry_profile": 1,
+        "macd_signal": 5,
+        "rci_entry_mode": 1,
+        "rci_min_agree": 2,
+        "rci_exit_min_agree": 3,
+        "rci_gc_slope_lookback": 4,
+        "rci_gc_slope_min": -30.0,
+        "rci_gc_slope_enabled": 1,
+        "hist_exit_delay_bars": 3,
+        "macd_fast": 3,
+        "macd_slow": 12,
+        "sl_pct": 0.005,
+        "tp_pct": 0.010357,
+        "interval": "5m"
+      },
+      "added_at": "2026-05-03T21:33:47.527147+09:00",
+      "n4_validation": {
+        "wf_oos_daily": 4267.198840590456,
+        "actual_60d_per_day": 4375,
+        "ratio": 1.03,
+        "verdict": "Q1",
+        "note": "60d 実測=+4,375 / WF=+4,267 / ratio=1.03 = Q1 確定。8411.T (Q2 慎重) と異なり、期待値シェア配分で本格投入。"
+      }
     }
   ],
   "last_merge": {
@@ -1616,5 +1665,6 @@
       "lot_multiplier": 0.5,
       "source": "60d_actual"
     }
-  ]
+  ],
+  "n4_recomputed_at": "2026-05-03T21:33:47.530122+09:00"
 }
