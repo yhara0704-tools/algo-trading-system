@@ -319,8 +319,14 @@ def collect_universe_specs(
             # N5 (2026-05-03): lot_multiplier を spec に伝搬。portfolio_sim と
             # jp_live_runner で 1 銘柄あたりのポジションサイズに乗じる。
             "lot_multiplier": float(row.get("lot_multiplier", 1.0) or 1.0),
+            # N6 (2026-05-06): force_paper を spec に伝搬 (sample_filter バイパス監査用)
+            "force_paper": bool(row.get("force_paper", False)),
         }
-        if apply_sample_filter and min_oos_trades > 0 and (oos_trades is not None):
+        # N6 (2026-05-06): force_paper=true は研究判断で慎重投入が決まっている entry。
+        # sample_filter をバイパスして paper に必ず乗せる (lot_multiplier で抑制済の前提)。
+        force_paper = bool(row.get("force_paper", False))
+
+        if apply_sample_filter and min_oos_trades > 0 and (oos_trades is not None) and not force_paper:
             # WF 再現性が担保されている銘柄は閾値を緩和（pass_ratio=1.0 かつ windows>=N）
             wf_relaxed = (
                 wf_relaxed_threshold > 0
@@ -353,6 +359,17 @@ def collect_universe_specs(
                     "wf_window_pass_ratio": wf_ratio,
                     "effective_threshold": effective_threshold,
                 })
+        elif force_paper and apply_sample_filter:
+            # force_paper の entry は wf_relaxed_hits に記録 (監査用)
+            spec["force_paper_bypass"] = True
+            wf_relaxed_hits.append({
+                "symbol": symbol,
+                "strategy_name": strategy,
+                "oos_trades": oos_trades,
+                "wf_window_total": wf_total,
+                "wf_window_pass_ratio": wf_ratio,
+                "effective_threshold": "bypass(force_paper=true)",
+            })
         kept.append(spec)
 
     kept.sort(key=lambda x: float(x.get("oos_daily_pnl", 0.0)), reverse=True)

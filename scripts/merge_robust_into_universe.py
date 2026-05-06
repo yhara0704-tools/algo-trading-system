@@ -81,7 +81,34 @@ def _symbol_row_from_macd(symbol: str, p: dict, name: str = "") -> dict:
         "is_oos_pass": bool(p.get("is_oos_pass", False)),
         "calmar": round(float(p.get("calmar") or 0.0), 3),
         "source": "macd_rci_params.robust_merge",
+        # N7 (2026-05-06): 新規 MacdRci 行に lot_multiplier 既定値 1.0 を付与。
+        # 既存値は後段の merge ループで保護される。
+        "lot_multiplier": 1.0,
+        "force_paper": False,
     }
+
+
+# N7 (2026-05-06): 既存 universe entry のうち、merge_robust の metric 更新時にも
+# 引き継ぐべきフィールド一覧。N1/N4 で投入した銘柄の lot_multiplier、force_paper、
+# caveat、expected_value_per_day、検証メタ (n1_validation, n4_validation) などは
+# 朝 cron で自動消失すると Phase D gate 試算が崩れるため、必ず保護する。
+PROTECTED_FIELDS = (
+    "observation_only",
+    "observation_reason",
+    "halted",
+    "halt_reason",
+    "lot_multiplier",
+    "force_paper",
+    "expected_value_per_day",
+    "caveat",
+    "added_at",
+    "n1_validation",
+    "n4_validation",
+    "n1_updated_at",
+    "n4_updated_at",
+    "n4_recomputed_at",
+    "params",
+)
 
 
 def _load_nightly_wf_demote(path: Path) -> tuple[set[tuple[str, str]], dict[tuple[str, str], dict]]:
@@ -325,8 +352,8 @@ def main() -> None:
             if macd_oos > cur_oos + 0.5:
                 new_row = _symbol_row_from_macd(sym, p, cur.get("name") or names.get(sym, sym))
                 new_row["name"] = cur.get("name") or new_row["name"]
-                # 既存の保護フラグ類は維持
-                for keep_field in ("observation_only", "observation_reason", "halted", "halt_reason"):
+                # N7: 既存の保護フィールド全部を維持 (lot_multiplier/force_paper/caveat/params 等)
+                for keep_field in PROTECTED_FIELDS:
                     if keep_field in cur:
                         new_row[keep_field] = cur[keep_field]
                 existing_by_pair[macd_key] = new_row
